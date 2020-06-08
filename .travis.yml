@@ -1,0 +1,134 @@
+sudo: false
+language: cpp
+branches:
+  only:
+    - master
+
+jobs:
+  include:
+    - os: linux
+      dist: xenial
+      sudo: require
+      compiler: gcc
+      addons:
+        apt:
+          sources:
+            - sourceline: ppa:ubuntu-toolchain-r/test
+            - sourceline: ppa:beineri/opt-qt-5.13.2-xenial
+          update: true  
+          packages:
+            - binutils
+            - cimg-dev
+            - g++-7
+            - git
+            - libgl1-mesa-dev
+            - libjpeg-dev
+            - libmagic-dev
+            - libpng-dev
+            - libxkbcommon-x11-0
+            - libzstd-dev
+            - p7zip-full  
+            - zlib1g-dev
+      env:
+        - APPIMAGE="true"
+        - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
+        - QTV="qt513"
+
+    - os: linux
+      dist: xenial
+      sudo: require
+      services: docker
+      env: 
+        - WEBASM="true"
+        - QT_WASM_VER="5.13_latest"
+    - os: osx
+      osx_image: xcode11.0
+      compiler: clang
+      env:
+        - DMG="true"
+        - MATRIX_EVAL="COMPILER=clang++"
+
+before_install:
+    - if [ -z "${BIN_PRO_RES_NAME+x}" ]; then echo -e "Add BIN_PRO_RES_NAME to your Travis Settings Environment Variable with a value from Github value for Binary, pro, and resource Name"; exit 1; fi
+    - if [ -z "${GITHUB_TOKEN+x}" ]; then echo -e "Add GITHUB_TOKEN to your Travis Settings Environment Variable with a value from Github Settings Developer Personal access tolkens"; exit 1; fi
+    - if [ -z "${GITHUB_EMAIL+x}" ]; then echo -e "Add GITHUB_EMAIL to your Travis Settings Environment Variable with your Github email address"; exit 1; fi    
+    - if [ -z "${GITHUB_USERNAME+x}" ] || [ -z "${GITHUB_PROJECT}" ]; then  
+            OLD_IFS="$IFS"; IFS='/'; read -ra repo_parts <<< "$TRAVIS_REPO_SLUG"; IFS="$OLD_IFS";
+            GITHUB_USERNAME="${repo_parts[0]}";  GITHUB_PROJECT="${repo_parts[1]}";
+      fi
+
+install:
+    - if [ -n "${APPIMAGE}" ]; then 
+        echo "Install qt libraries for Linux";
+        sudo apt-get update --yes -q; 
+        sudo apt-get install --yes -q "${QTV}base" "${QTV}quickcontrols" "${QTV}quickcontrols2" "${QTV}graphicaleffects" "${QTV}svg" "${QTV}scxml" "${QTV}script" "${QTV}tools" "${QTV}translations" "${QTV}x11extras" "${QTV}declarative";
+        sudo apt-get autoremove; sudo apt-get -f install; sudo apt-get autoclean;
+        source /opt/qt*/bin/qt*-env.sh;
+        export ARTIFACT_APPIMAGE="${BIN_PRO_RES_NAME}-x86_64.AppImage"; 
+        export ARTIFACT_ZSYNC="${BIN_PRO_RES_NAME}-x86_64.AppImage.zsync"; 
+        export ARTIFACT_APPIMAGE_LDQT="${BIN_PRO_RES_NAME}-travis-x86_64.AppImage"; 
+        export ARTIFACT_ZSYNC_LDQT="${BIN_PRO_RES_NAME}-travis-x86_64.AppImage.zsync"; 
+        export ARTIFACT_QIF="${BIN_PRO_RES_NAME}-Installer";
+      fi
+    - if [ -n "${DMG}" ]; then 
+        echo "Download last version of Qt with brew for Mac";
+        brew update > /dev/null; 
+        brew install qt5 p7zip; 
+        chmod -R 755 /usr/local/opt/qt5/*; 
+        export QTDIR="/usr/local/opt/qt5"; 
+        export PATH="${QTDIR}/bin:$PATH"; 
+      fi
+      
+script:
+    - eval "${MATRIX_EVAL}"
+    - if [ -n "${APPIMAGE}" ]; then 
+        bash tools/build-with-qmake.sh; 
+      fi
+    - if [ -n "${DMG}" ]; then
+        echo "Build project for Mac in /home/travis/build/[secure]/${BIN_PRO_RES_NAME}";
+        mkdir build && cd build;
+        qmake ..;
+        make;
+        echo "Run macdeployqt";
+        macdeployqt "${BIN_PRO_RES_NAME}.app/" -qmldir=../qml -dmg;
+        find . | grep dmg;
+        export ARTIFACT_MAC="${BIN_PRO_RES_NAME}.dmg"; 
+        export ARTIFACT_MAC_QIF="${BIN_PRO_RES_NAME}-Mac-Installer";
+        export QTIFWVER="3.2.2";
+        export QTIFW_MAC="QtInstallerFramework-mac-x64.dmg";
+      fi
+    - if [ -n "${WEBASM}" ]; then
+        echo "Build WEBASM in /home/travis/build/[secure]/${BIN_PRO_RES_NAME}";
+        git remote set-url origin https://${GITHUB_TOKEN}@github.com/${GITHUB_USERNAME}/${BIN_PRO_RES_NAME};
+        git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*";
+        git fetch --all;
+        git config --global user.email "${GITHUB_EMAIL}";
+        git config --global user.name "${GITHUB_USERNAME}";
+        echo "WEBASM make build folder and run docker";
+        mkdir -p build;
+        docker run --rm -v "${PWD}:/project/source" -v "${PWD}/build:/project/build" "maukalinow/qtwasm_builder:${QT_WASM_VER}";
+        sudo rm -rf build/{Makefile,*.o,*.cpp};
+        git checkout --track origin/gh-pages;
+        sudo mv -v build/* .;
+        sudo rm -rf build;
+        sudo mv -v "${BIN_PRO_RES_NAME}.html" index.html;
+        echo "Created WEBASM";
+        ls -lh;
+        git add --all;
+        git commit -sm "Update WebAssembly";
+      fi    
+
+after_success:
+    - if [ "${TRAVIS_PULL_REQUEST}" != false ] || [ "${TRAVIS_BRANCH}" != "master" ]; then
+        echo "This is not the master branch, no deploy will be done"; travis_terminate 0;
+      fi
+    - wget -c https://raw.githubusercontent.com/${GITHUB_USERNAME}/${BIN_PRO_RES_NAME}/master/tools/upload.sh;
+    - if [ -n "${APPIMAGE}" ] && [ -f "${ARTIFACT_APPIMAGE}" ];      then bash ./upload.sh "${ARTIFACT_APPIMAGE}"; fi
+    - if [ -n "${APPIMAGE}" ] && [ -f "${ARTIFACT_ZSYNC}" ];         then bash ./upload.sh "${ARTIFACT_ZSYNC}"; fi
+    - if [ -n "${APPIMAGE}" ] && [ -f "${ARTIFACT_APPIMAGE_LDQT}" ]; then bash ./upload.sh "${ARTIFACT_APPIMAGE_LDQT}"; fi
+    - if [ -n "${APPIMAGE}" ] && [ -f "${ARTIFACT_ZSYNC_LDQT}" ];    then bash ./upload.sh "${ARTIFACT_ZSYNC_LDQT}"; fi
+    - if [ -n "${APPIMAGE}" ] && [ -f "${ARTIFACT_QIF}" ];           then bash ./upload.sh "${ARTIFACT_QIF}"; fi
+    - if [ -n "${DMG}" ]      && [ -f "${ARTIFACT_MAC_QIF}" ];       then bash ./upload.sh "${ARTIFACT_MAC_QIF}"; fi
+    - if [ -n "${DMG}" ]      && [ -f "${ARTIFACT_MAC}" ];           then bash ./upload.sh "${ARTIFACT_MAC}"; fi
+    - if [ -n "${WEBASM}" ]; then git push origin gh-pages; fi
+    

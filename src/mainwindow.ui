@@ -1,0 +1,1056 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>866</width>
+    <height>734</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QTabWidget" name="widgetTab">
+      <property name="currentIndex">
+       <number>4</number>
+      </property>
+      <widget class="QWidget" name="tabSettings">
+       <attribute name="title">
+        <string>Settings</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <widget class="QGroupBox" name="groupBoxSettingsGlobals">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="title">
+           <string>Globals</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_4">
+           <item>
+            <layout class="QFormLayout" name="formLayoutSg">
+             <property name="sizeConstraint">
+              <enum>QLayout::SetNoConstraint</enum>
+             </property>
+             <item row="0" column="0">
+              <widget class="QLabel" name="labelSettingsIniFileName">
+               <property name="text">
+                <string>Ini File Name</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QLineEdit" name="editSettingsIniFileName"/>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="labelSettingsApplicationName">
+               <property name="text">
+                <string>Application Name</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="editSettingsApplicationName"/>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="labelSettingsOrgName">
+               <property name="text">
+                <string>Organization Name</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="editSettingsOrgName"/>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLabel" name="labelSettingsOrgDomain">
+               <property name="text">
+                <string>Oranization Domain</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QLineEdit" name="editSettingsOrgDomain"/>
+             </item>
+             <item row="4" column="0">
+              <widget class="QLabel" name="labelSettingsTravisURL">
+               <property name="text">
+                <string>Travis URL</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="QLineEdit" name="editSettingsTravisURL"/>
+             </item>
+             <item row="5" column="0">
+              <widget class="QLabel" name="labelSettingsAppVeyorURL">
+               <property name="text">
+                <string>AppVeyor URL</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="1">
+              <widget class="QLineEdit" name="editSettingsAppVeyorURL"/>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButtonSgSave">
+             <property name="text">
+              <string>Save</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tabConnectionMan">
+       <attribute name="title">
+        <string>Connect</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_6">
+        <item>
+         <widget class="QGroupBox" name="groupBoxConnectionManLocal">
+          <property name="title">
+           <string>Local</string>
+          </property>
+          <layout class="QFormLayout" name="formLayout_2">
+           <item row="0" column="0">
+            <widget class="QPushButton" name="pushButtonConnectionManLocalPath">
+             <property name="text">
+              <string>Local Path...</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QLineEdit" name="editConnectionManLocalPath"/>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBoxConnectionManVPS">
+          <property name="title">
+           <string>VPS</string>
+          </property>
+          <layout class="QFormLayout" name="formLayout">
+           <property name="horizontalSpacing">
+            <number>6</number>
+           </property>
+           <property name="verticalSpacing">
+            <number>6</number>
+           </property>
+           <property name="leftMargin">
+            <number>8</number>
+           </property>
+           <property name="topMargin">
+            <number>8</number>
+           </property>
+           <property name="rightMargin">
+            <number>8</number>
+           </property>
+           <property name="bottomMargin">
+            <number>8</number>
+           </property>
+           <item row="0" column="0">
+            <widget class="QLabel" name="labelConnectionManVpsIP">
+             <property name="text">
+              <string>IP Address</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QLineEdit" name="editConnectionManVpsIP"/>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="labelConnectionManVpsPort">
+             <property name="text">
+              <string>Port</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QSpinBox" name="spinBoxConnectionManVpsPort"/>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="labelConnectionManVpsUsername">
+             <property name="text">
+              <string>&amp;Username:</string>
+             </property>
+             <property name="buddy">
+              <cstring>editConnectionManVpsUsername</cstring>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QLineEdit" name="editConnectionManVpsUsername"/>
+           </item>
+           <item row="3" column="0">
+            <widget class="QLabel" name="labelConnectionManVpsPassword">
+             <property name="text">
+              <string>&amp;Password:</string>
+             </property>
+             <property name="buddy">
+              <cstring>editConnectionManVpsPassword</cstring>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QLineEdit" name="editConnectionManVpsPassword">
+             <property name="echoMode">
+              <enum>QLineEdit::Password</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0">
+            <widget class="QLabel" name="labelConnectionManVpsDomainNameList">
+             <property name="text">
+              <string>Domain Name List</string>
+             </property>
+             <property name="buddy">
+              <cstring>editConnectionManVpsDomainNameList</cstring>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1">
+            <widget class="QLineEdit" name="editConnectionManVpsDomainNameList"/>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBoxConnectionManDC">
+          <property name="title">
+           <string>Domain Controller (DC)</string>
+          </property>
+          <layout class="QFormLayout" name="formLayout_3">
+           <item row="0" column="0">
+            <widget class="QLabel" name="labelConnectionManDcIP">
+             <property name="text">
+              <string>IP Address</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QLineEdit" name="editConnectionManDcIP"/>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="labelConnectionManDcPort">
+             <property name="text">
+              <string>Port</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QSpinBox" name="spinBoxConnectionManDcPort"/>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="labelConnectionManDcUsername">
+             <property name="text">
+              <string>&amp;Username:</string>
+             </property>
+             <property name="buddy">
+              <cstring>editConnectionManVpsUsername</cstring>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QLineEdit" name="editConnectionNameDcUsername"/>
+           </item>
+           <item row="3" column="0">
+            <widget class="QLabel" name="labelConnectionManDcPassword">
+             <property name="text">
+              <string>&amp;Password:</string>
+             </property>
+             <property name="buddy">
+              <cstring>editConnectionManVpsPassword</cstring>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QLineEdit" name="editConnectionManDcPassword">
+             <property name="echoMode">
+              <enum>QLineEdit::Password</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0">
+            <widget class="QLabel" name="labelConnectionManDcDomainNameList">
+             <property name="text">
+              <string>Domain Name List</string>
+             </property>
+             <property name="buddy">
+              <cstring>editConnectionManVpsDomainNameList</cstring>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1">
+            <widget class="QLineEdit" name="editConnectionManDcDomainNameList"/>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="checkBoxConnectionManDC">
+          <property name="text">
+           <string>Domain Controller (DC)</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="checkBoxConnectionManVPS">
+          <property name="text">
+           <string>VPS</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tabWeBookMan">
+       <attribute name="title">
+        <string>Books</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_8">
+        <item row="0" column="0">
+         <layout class="QGridLayout" name="gridLayoutWeBookMan">
+          <property name="leftMargin">
+           <number>9</number>
+          </property>
+          <property name="topMargin">
+           <number>9</number>
+          </property>
+          <property name="rightMargin">
+           <number>9</number>
+          </property>
+          <property name="bottomMargin">
+           <number>9</number>
+          </property>
+          <item row="0" column="0">
+           <widget class="QGroupBox" name="groupBoxWeBook">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="title">
+             <string>WeBook Manager</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+            </property>
+            <layout class="QVBoxLayout" name="groupBoxWeBookLayout">
+             <property name="spacing">
+              <number>6</number>
+             </property>
+             <property name="leftMargin">
+              <number>9</number>
+             </property>
+             <property name="topMargin">
+              <number>9</number>
+             </property>
+             <property name="rightMargin">
+              <number>9</number>
+             </property>
+             <property name="bottomMargin">
+              <number>9</number>
+             </property>
+             <item>
+              <widget class="QListView" name="listViewWeBookMan"/>
+             </item>
+             <item>
+              <widget class="QGroupBox" name="groupBoxWeDetails">
+               <property name="title">
+                <string>Details</string>
+               </property>
+               <layout class="QFormLayout" name="_6">
+                <item row="0" column="0">
+                 <widget class="QLabel" name="labelWeBookManTitle">
+                  <property name="text">
+                   <string>&lt;b&gt;Title:&lt;/b&gt;</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QLineEdit" name="editWeBookManTitle">
+                  <property name="enabled">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <widget class="QGroupBox" name="groupBoxControls">
+               <property name="title">
+                <string>Controls</string>
+               </property>
+               <layout class="QHBoxLayout" name="horizontalLayout">
+                <item>
+                 <widget class="QPushButton" name="pushButtonWeBookManAdd">
+                  <property name="text">
+                   <string>Add</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="pushButtonWeBookManDelete">
+                  <property name="text">
+                   <string>Delete</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tabTOC">
+       <attribute name="title">
+        <string>TOC</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_9">
+        <item row="0" column="0">
+         <widget class="QTreeView" name="treeViewTocView">
+          <property name="alternatingRowColors">
+           <bool>true</bool>
+          </property>
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectItems</enum>
+          </property>
+          <property name="horizontalScrollMode">
+           <enum>QAbstractItemView::ScrollPerPixel</enum>
+          </property>
+          <property name="animated">
+           <bool>false</bool>
+          </property>
+          <property name="allColumnsShowFocus">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tabEditor">
+       <attribute name="title">
+        <string>Editor</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="QTextEdit" name="textEdit"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tabContacts">
+       <attribute name="title">
+        <string>Contacts</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_5"/>
+      </widget>
+      <widget class="QWidget" name="tabFileMan">
+       <attribute name="title">
+        <string>Files</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_2"/>
+      </widget>
+      <widget class="QWidget" name="tabCalendarMan">
+       <attribute name="title">
+        <string>Calendar</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_7">
+        <item row="0" column="0">
+         <widget class="QCalendarWidget" name="calendarWidget"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tabCalculator">
+       <attribute name="title">
+        <string>Calculator</string>
+       </attribute>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>866</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuChapter">
+    <property name="toolTip">
+     <string>Chapter</string>
+    </property>
+    <property name="title">
+     <string>&amp;Chapter</string>
+    </property>
+    <addaction name="actionNew"/>
+    <addaction name="separator"/>
+    <addaction name="actionSave"/>
+    <addaction name="separator"/>
+    <addaction name="actionPrint"/>
+    <addaction name="separator"/>
+    <addaction name="actionPDF"/>
+    <addaction name="separator"/>
+    <addaction name="actionQuit"/>
+   </widget>
+   <widget class="QMenu" name="menuEdit">
+    <property name="title">
+     <string>&amp;Edit</string>
+    </property>
+    <addaction name="actionRedo"/>
+    <addaction name="actionUndo"/>
+    <addaction name="separator"/>
+    <addaction name="actionCut"/>
+    <addaction name="actionCopy"/>
+    <addaction name="actionPaste"/>
+   </widget>
+   <widget class="QMenu" name="menuFormat">
+    <property name="title">
+     <string>&amp;Format</string>
+    </property>
+    <addaction name="actionTextBold"/>
+    <addaction name="actionTextItalic"/>
+    <addaction name="actionTextUnderline"/>
+    <addaction name="separator"/>
+    <addaction name="actionAlignLeft"/>
+    <addaction name="actionAlignCenter"/>
+    <addaction name="actionAlignRight"/>
+    <addaction name="actionAlignJustify"/>
+    <addaction name="separator"/>
+    <addaction name="actionIndentMore"/>
+    <addaction name="actionIndentLess"/>
+    <addaction name="separator"/>
+    <addaction name="actionTextColor"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionAbout"/>
+    <addaction name="actionQt"/>
+   </widget>
+   <widget class="QMenu" name="menuInsert">
+    <property name="title">
+     <string>Insert</string>
+    </property>
+    <addaction name="actionToggleCheckState"/>
+   </widget>
+   <widget class="QMenu" name="menuTOC">
+    <property name="title">
+     <string>TOC</string>
+    </property>
+    <addaction name="actionTocInsertRowAction"/>
+    <addaction name="actionTocRemoveRowAction"/>
+    <addaction name="actionTocInsertColumnAction"/>
+    <addaction name="actionTocRemoveColumnAction"/>
+    <addaction name="actionTocInsertChildAction"/>
+   </widget>
+   <addaction name="menuChapter"/>
+   <addaction name="menuEdit"/>
+   <addaction name="menuFormat"/>
+   <addaction name="menuInsert"/>
+   <addaction name="menuTOC"/>
+   <addaction name="menuHelp"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>WeBook Tabs</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionNew"/>
+   <addaction name="separator"/>
+   <addaction name="actionSave"/>
+   <addaction name="separator"/>
+   <addaction name="actionPrint"/>
+   <addaction name="separator"/>
+   <addaction name="actionPDF"/>
+   <addaction name="separator"/>
+   <addaction name="actionRedo"/>
+   <addaction name="actionUndo"/>
+   <addaction name="separator"/>
+   <addaction name="actionCut"/>
+   <addaction name="actionCopy"/>
+   <addaction name="actionPaste"/>
+   <addaction name="separator"/>
+   <addaction name="actionTextBold"/>
+   <addaction name="actionTextItalic"/>
+   <addaction name="actionTextUnderline"/>
+   <addaction name="separator"/>
+   <addaction name="actionAlignLeft"/>
+   <addaction name="actionAlignCenter"/>
+   <addaction name="actionAlignRight"/>
+   <addaction name="actionAlignJustify"/>
+   <addaction name="separator"/>
+   <addaction name="actionIndentLess"/>
+   <addaction name="actionIndentMore"/>
+   <addaction name="separator"/>
+   <addaction name="actionToggleCheckState"/>
+   <addaction name="separator"/>
+   <addaction name="actionTextColor"/>
+   <addaction name="separator"/>
+   <addaction name="actionQuit"/>
+  </widget>
+  <action name="actionNew">
+   <property name="icon">
+    <iconset theme="document-new">
+     <normalon>:/images/win/filenew.png</normalon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>&amp;New</string>
+   </property>
+   <property name="toolTip">
+    <string>New Chapter</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
+   </property>
+  </action>
+  <action name="actionSave">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset theme="document-save">
+     <normalon>:/images/win/filesave.png</normalon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Save</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="actionPrint">
+   <property name="icon">
+    <iconset theme="document-print">
+     <normalon>:/images/win/fileprint.png</normalon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Print</string>
+   </property>
+   <property name="toolTip">
+    <string>Print</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+P</string>
+   </property>
+  </action>
+  <action name="actionPDF">
+   <property name="icon">
+    <iconset theme="exportpdf">
+     <normalon>:/images/win/exportpdf.png</normalon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>PDF</string>
+   </property>
+   <property name="toolTip">
+    <string>Create PDF</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+P</string>
+   </property>
+  </action>
+  <action name="actionQuit">
+   <property name="icon">
+    <iconset theme="application-exit">
+     <normalon>:/images/win/exit.png</normalon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Quit</string>
+   </property>
+   <property name="toolTip">
+    <string>Quit</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
+  </action>
+  <action name="actionUndo">
+   <property name="icon">
+    <iconset theme="edit-undo">
+     <normalon>:/images/win/editundo.png</normalon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Undo</string>
+   </property>
+   <property name="toolTip">
+    <string>Undo</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Z</string>
+   </property>
+  </action>
+  <action name="actionRedo">
+   <property name="icon">
+    <iconset theme="edit-redo">
+     <normalon>:/images/win/editredo.png</normalon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Redo</string>
+   </property>
+   <property name="toolTip">
+    <string>Redo</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+Z</string>
+   </property>
+  </action>
+  <action name="actionCut">
+   <property name="icon">
+    <iconset theme="edit-cut">
+     <normalon>:/images/win/editcut.png</normalon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>Cut</string>
+   </property>
+   <property name="toolTip">
+    <string>Cut</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+X</string>
+   </property>
+  </action>
+  <action name="actionCopy">
+   <property name="icon">
+    <iconset theme="edit-copy">
+     <normalon>:/images/win/editcopy.png</normalon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Copy</string>
+   </property>
+   <property name="toolTip">
+    <string>Copy</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+C</string>
+   </property>
+  </action>
+  <action name="actionPaste">
+   <property name="icon">
+    <iconset theme="edit-paste">
+     <normalon>:/images/win/editpaste.png</normalon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>Paste</string>
+   </property>
+   <property name="toolTip">
+    <string>Paste</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+V</string>
+   </property>
+  </action>
+  <action name="actionTextBold">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset theme="format-text-bold">
+     <normalon>:/images/win/textbold.png</normalon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Bold</string>
+   </property>
+   <property name="toolTip">
+    <string>Bold</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+B</string>
+   </property>
+  </action>
+  <action name="actionTextItalic">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset theme="format-text-italic">
+     <normalon>:/images/win/textitalic.png</normalon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Italic</string>
+   </property>
+   <property name="toolTip">
+    <string>Italic</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+I</string>
+   </property>
+  </action>
+  <action name="actionTextUnderline">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset theme="format-text-underline">
+     <normalon>:/images/win/textunder.png</normalon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Underline</string>
+   </property>
+   <property name="toolTip">
+    <string>Underline</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+U</string>
+   </property>
+  </action>
+  <action name="actionAlignLeft">
+   <property name="icon">
+    <iconset theme="format-justify-left">
+     <normalon>:/images/win/textleft.png</normalon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>Align &amp;Left</string>
+   </property>
+   <property name="toolTip">
+    <string>Justify Left</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+L</string>
+   </property>
+  </action>
+  <action name="actionAlignCenter">
+   <property name="icon">
+    <iconset theme="format-justify-center">
+     <normalon>:/images/win/textcenter.png</normalon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>Align C&amp;enter</string>
+   </property>
+   <property name="toolTip">
+    <string>Justify Center</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+E</string>
+   </property>
+  </action>
+  <action name="actionAlignRight">
+   <property name="icon">
+    <iconset theme="format-justify-right">
+     <normalon>:/images/win/textright.png</normalon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>Align &amp;Right</string>
+   </property>
+   <property name="toolTip">
+    <string>Justify Right</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+R</string>
+   </property>
+  </action>
+  <action name="actionAlignJustify">
+   <property name="icon">
+    <iconset theme="format-justify-fill">
+     <normalon>:/images/win/textjustify.png</normalon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>Justify</string>
+   </property>
+   <property name="toolTip">
+    <string>Justify Fill</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+J</string>
+   </property>
+  </action>
+  <action name="actionIndentMore">
+   <property name="icon">
+    <iconset theme="format-indent-more">
+     <normalon>:/images/win/format-indent-more.png</normalon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>Indent More</string>
+   </property>
+   <property name="toolTip">
+    <string>Indent More</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+]</string>
+   </property>
+  </action>
+  <action name="actionIndentLess">
+   <property name="icon">
+    <iconset theme="format-indent-less">
+     <normalon>:/images/win/format-indent-less.png</normalon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>Indent Less</string>
+   </property>
+   <property name="toolTip">
+    <string>Indent Less</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+[</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="icon">
+    <iconset theme="help-about">
+     <normaloff>.</normaloff>.</iconset>
+   </property>
+   <property name="text">
+    <string>About</string>
+   </property>
+   <property name="toolTip">
+    <string>About</string>
+   </property>
+  </action>
+  <action name="actionQt">
+   <property name="icon">
+    <iconset theme="help-contents">
+     <normaloff>.</normaloff>.</iconset>
+   </property>
+   <property name="text">
+    <string>Qt</string>
+   </property>
+   <property name="toolTip">
+    <string>About Qt</string>
+   </property>
+  </action>
+  <action name="actionToggleCheckState">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset theme="status-checkbox-checked">
+     <normalon>:/images/win/checkbox-checked.png</normalon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>Chech Box Chec&amp;ked</string>
+   </property>
+   <property name="toolTip">
+    <string>Chech Box Checked</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+K</string>
+   </property>
+  </action>
+  <action name="actionTextColor">
+   <property name="icon">
+    <iconset>
+     <normalon>:/images/win/colorwheel.png</normalon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>Text Color</string>
+   </property>
+   <property name="toolTip">
+    <string>Text Color</string>
+   </property>
+  </action>
+  <action name="actionTocInsertRowAction">
+   <property name="icon">
+    <iconset>
+     <normalon>:/images/win/filenew.png</normalon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>Insert Row</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+I, R</string>
+   </property>
+  </action>
+  <action name="actionTocRemoveRowAction">
+   <property name="icon">
+    <iconset>
+     <normalon>:/images/win/remove_from_basket.png</normalon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>Remove Row</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+R, R</string>
+   </property>
+  </action>
+  <action name="actionTocInsertColumnAction">
+   <property name="icon">
+    <iconset>
+     <normalon>:/images/win/lists.png</normalon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>Insert Column</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+I, C</string>
+   </property>
+  </action>
+  <action name="actionTocRemoveColumnAction">
+   <property name="icon">
+    <iconset>
+     <normalon>:/images/win/disconnect.png</normalon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>Remove Column</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+R, C</string>
+   </property>
+  </action>
+  <action name="actionTocInsertChildAction">
+   <property name="icon">
+    <iconset>
+     <normalon>:/images/win/hierarchy.png</normalon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>Insert Child</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

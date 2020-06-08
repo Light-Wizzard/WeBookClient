@@ -1,0 +1,74 @@
+
+
+aix-g++/qmake.conf:		QMAKE_PLATFORM          = aix
+aix-g++-64/qmake.conf:		QMAKE_PLATFORM          = aix
+aix-xlc/qmake.conf:		QMAKE_PLATFORM          = aix
+aix-xlc-64/qmake.conf:		QMAKE_PLATFORM          = aix
+android-g++/qmake.conf:		QMAKE_PLATFORM          = android
+blackberry-armle-v7-qcc/qmake.conf:		QMAKE_PLATFORM += blackberry
+blackberry-x86-qcc/qmake.conf:		QMAKE_PLATFORM += blackberry
+common/ios.conf:		QMAKE_PLATFORM         += ios
+common/linux-android.conf:		QMAKE_PLATFORM         += android
+common/linux.conf:		QMAKE_PLATFORM         += linux
+common/mac.conf:		QMAKE_PLATFORM         += mac darwin
+common/macx.conf:		QMAKE_PLATFORM         += osx macx
+common/msvc-desktop.conf:		QMAKE_PLATFORM          = win32
+common/nacl/nacl-base.conf:		QMAKE_PLATFORM          = nacl $$QMAKE_PLATFORM
+common/qcc-base-qnx.conf:		QMAKE_PLATFORM         += qnx
+common/unix.conf:		QMAKE_PLATFORM         += unix posix
+common/wince/qmake.conf:		QMAKE_PLATFORM         += wince win32
+common/winrt_winphone/qmake.conf:		QMAKE_PLATFORM          = winrt win32
+cygwin-g++/qmake.conf:		QMAKE_PLATFORM          = cygwin unix posix
+darwin-g++/qmake.conf:		QMAKE_PLATFORM          = osx macx mac darwin
+features/spec_post.prf:		QMAKE_PLATFORM) {
+features/spec_post.prf:		QMAKE_PLATFORM = unix
+features/spec_post.prf:		QMAKE_PLATFORM = osx macx mac darwin unix
+features/spec_post.prf:		QMAKE_PLATFORM = win32
+features/spec_post.prf:		QMAKE_PLATFORM, macx):!contains(QMAKE_PLATFORM, osx) {
+features/spec_post.prf:		QMAKE_PLATFORM = osx $$QMAKE_PLATFORM
+features/spec_post.prf:		QMAKE_PLATFORM
+freebsd-g++/qmake.conf:		QMAKE_PLATFORM          = freebsd bsd
+freebsd-g++46/qmake.conf:		QMAKE_PLATFORM          = freebsd bsd
+freebsd-icc/qmake.conf:		QMAKE_PLATFORM          = freebsd bsd
+haiku-g++/qmake.conf:		QMAKE_PLATFORM          = haiku
+hpux-acc/qmake.conf:		QMAKE_PLATFORM          = hpux
+hpux-acc-64/qmake.conf:		QMAKE_PLATFORM          = hpux
+hpux-acc-o64/qmake.conf:		QMAKE_PLATFORM          = hpux
+hpux-g++/qmake.conf:		QMAKE_PLATFORM          = hpux
+hpux-g++-64/qmake.conf:		QMAKE_PLATFORM          = hpux
+hpuxi-acc-32/qmake.conf:		QMAKE_PLATFORM          = hpux
+hpuxi-acc-64/qmake.conf:		QMAKE_PLATFORM          = hpux
+hpuxi-g++-64/qmake.conf:		QMAKE_PLATFORM          = hpux
+hurd-g++/qmake.conf:		QMAKE_PLATFORM         += hurd
+irix-cc/qmake.conf:		QMAKE_PLATFORM          = irix
+irix-cc-64/qmake.conf:		QMAKE_PLATFORM          = irix
+irix-g++/qmake.conf:		QMAKE_PLATFORM          = irix
+irix-g++-64/qmake.conf:		QMAKE_PLATFORM          = irix
+linux-cxx/qmake.conf:		QMAKE_PLATFORM          = linux
+linux-kcc/qmake.conf:		QMAKE_PLATFORM          = linux
+linux-pgcc/qmake.conf:		QMAKE_PLATFORM          = linux
+lynxos-g++/qmake.conf:		QMAKE_PLATFORM          = lynxos
+netbsd-g++/qmake.conf:		QMAKE_PLATFORM          = netbsd bsd
+openbsd-g++/qmake.conf:		QMAKE_PLATFORM          = openbsd bsd
+sco-cc/qmake.conf:		QMAKE_PLATFORM          = sco
+sco-g++/qmake.conf:		QMAKE_PLATFORM          = sco
+solaris-cc/qmake.conf:		QMAKE_PLATFORM          = solaris
+solaris-cc-64/qmake.conf:		QMAKE_PLATFORM          = solaris
+solaris-g++/qmake.conf:		QMAKE_PLATFORM          = solaris
+solaris-g++-64/qmake.conf:		QMAKE_PLATFORM          = solaris
+tru64-cxx/qmake.conf:		QMAKE_PLATFORM          = tru64
+tru64-g++/qmake.conf:		QMAKE_PLATFORM          = tru64
+unixware-cc/qmake.conf:		QMAKE_PLATFORM          = unixware
+unixware-g++/qmake.conf:		QMAKE_PLATFORM          = unixware
+unsupported/freebsd-clang/qmake.conf:		QMAKE_PLATFORM          = freebsd bsd
+unsupported/linux-host-g++/qmake.conf:		QMAKE_PLATFORM          = linux
+unsupported/qnx-X11-g++/qmake.conf:		QMAKE_PLATFORM          = qnx
+unsupported/vxworks-ppc-dcc/qmake.conf:		QMAKE_PLATFORM          = vxworks
+unsupported/vxworks-ppc-g++/qmake.conf:		QMAKE_PLATFORM          = vxworks
+unsupported/vxworks-simpentium-dcc/qmake.conf:		QMAKE_PLATFORM          = vxworks
+unsupported/vxworks-simpentium-g++/qmake.conf:		QMAKE_PLATFORM          = vxworks
+win32-g++/qmake.conf:		QMAKE_PLATFORM          = win32 mingw
+win32-icc/qmake.conf:		QMAKE_PLATFORM          = win32
+winphone-arm-msvc2013/qmake.conf:		QMAKE_PLATFORM          = winphone $$QMAKE_PLATFORM
+winphone-x86-msvc2013/qmake.conf:		QMAKE_PLATFORM          = winphone $$QMAKE_PLATFORM
+

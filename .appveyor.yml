@@ -1,0 +1,162 @@
+# Galaxy Calculator appveyor configuration files
+version: '{branch}-{build}'
+
+os:
+  - Visual Studio 2015
+
+branches:
+  only:
+    - master
+
+init:
+  # Create our AppVeyor version
+  - ps: $env:commit = $env:appveyor_repo_commit.SubString(0,7)
+  - ps: Update-AppveyorBuild -Version ("{0}-{1}-{2}" -f $env:appveyor_repo_branch,$env:appveyor_build_number,$env:commit )
+
+image:
+  - Visual Studio 2015
+
+environment:
+  VSVER: 14.0
+  matrix:
+    - MSVC_VERSION: 15
+      RUNTIME_LINKAGE: static
+      QT_VERSION: 5.13
+      QT_LINKAGE: static
+      COVERITY_BUILD_CANDIDATE: True
+      #https://www.appveyor.com/docs/build-environment/#qt
+      QTDIR: C:\Qt\5.13\msvc2015_64
+      QT_IF_VERSION: '3.0.1'
+      PRJLIBS: VCRUNTIME140.dll MSVCP140.dll
+      BIN: Galaxy-Calculator
+      MY_ENV: AppVeyor
+      QIF_PACKAGE_URI: 'packages\com.lightwizzard.galaxycalculator\data'
+
+configuration:
+    - release
+#    - debug
+#platform:
+#    - Win32
+#    - x64
+
+install:
+  - echo install
+  # Set some vars
+  # C:\projects\galaxy-calculator
+  #- cmd: echo '%QTDIR%'
+  #- dir C:\Qt\5.12
+  # - dir 'C:\Program Files (x86)\Windows Kits\10\bin'
+  # 10.0.14393.0
+  # 10.0.15063.0
+  # 10.0.16299.0
+  # 10.0.17134.0
+  # 10.0.17763.0
+  # 10.0.18362.0
+  # arm
+  # arm64
+  #- dir "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\BIN"
+  - echo Copy rc files
+  - xcopy /f "C:\Program Files (x86)\Windows Kits\10\bin\10.0.18362.0\x86\rc.exe" "%ProgramFiles(x86)%\Microsoft Visual Studio %VSVER%\VC\BIN\"
+  - xcopy /f "C:\Program Files (x86)\Windows Kits\10\bin\10.0.18362.0\x86\rcdll.dll" "%ProgramFiles(x86)%\Microsoft Visual Studio %VSVER%\VC\BIN\"
+  - xcopy /f "C:\Program Files (x86)\Windows Kits\10\bin\10.0.18362.0\x86\rc.exe" "%ProgramFiles(x86)%\Microsoft Visual Studio %VSVER%\VC\BIN\amd64_x86"
+  - xcopy /f "C:\Program Files (x86)\Windows Kits\10\bin\10.0.18362.0\x86\rcdll.dll" "%ProgramFiles(x86)%\Microsoft Visual Studio %VSVER%\VC\BIN\amd64_x86"
+  - xcopy /f "C:\Program Files (x86)\Windows Kits\10\bin\10.0.18362.0\x86\rc.exe" "%ProgramFiles(x86)%\Microsoft Visual Studio %VSVER%\VC\BIN\amd64"
+  - xcopy /f "C:\Program Files (x86)\Windows Kits\10\bin\10.0.18362.0\x86\rcdll.dll" "%ProgramFiles(x86)%\Microsoft Visual Studio %VSVER%\VC\BIN\amd64"
+  - '%QTDIR%\bin\qtenv2.bat'
+  - echo Qt Version
+  - qmake -v
+  - set PRJLIBDIR=%WINDIR%\SysWOW64 # Find vclibs
+  - set QTDIR
+  - if %QTDIR:_64=%==%QTDIR% ( set ARCH=x86 ) else set ARCH=x64
+  - if %QTDIR:msvc=%==%QTDIR% g++ --version
+  - if %QTDIR:msvc=%==%QTDIR% set make=mingw32-make.exe
+  - if %QTDIR:msvc=%==%QTDIR% %make% --version
+  - if not %QTDIR:msvc=%==%QTDIR% call "%ProgramFiles(x86)%\Microsoft Visual Studio %VSVER%\VC\vcvarsall.bat" %ARCH%
+  - if not %QTDIR:msvc=%==%QTDIR% set make=nmake.exe
+  - if not %QTDIR:msvc=%==%QTDIR% %make% /? > nul
+  - echo QTDIR=%QTDIR%
+  #- dir %QTDIR%
+  #- dir %QTDIR%\bin
+  #- dir %QTDIR%\plugins
+  #- echo C:\Qt
+  #- dir C:\Qt
+
+before_build:
+  # Prepare the out-of-source build directory.
+  - echo before_build ~ APPVEYOR_BUILD_FOLDER=%APPVEYOR_BUILD_FOLDER%
+  #- dir
+  - cd %APPVEYOR_BUILD_FOLDER%
+  - mkdir %APPVEYOR_BUILD_FOLDER%-build
+  #- dir %APPVEYOR_BUILD_FOLDER%
+  - qmake -o %APPVEYOR_BUILD_FOLDER%-build -r -Wall -Wlogic -Wparser CONFIG+=%CONFIGURATION% %APPVEYOR_BUILD_FOLDER%
+  #- dir %APPVEYOR_BUILD_FOLDER%-build
+
+build_script:
+  # Compile it and check for .exe
+  - echo build_script
+  - cd %APPVEYOR_BUILD_FOLDER%-build
+  - '%make%'
+  - dir /b /s *.exe
+  - echo Current Path is %cd%
+
+after_build:
+  # Add a link to the build output within the source directory. This is needed because AppVeyor does
+  # not support extracting artifacts from out-of-source build directories. See 'artifacts' below.
+  - echo after_build
+  - echo Current Path is %cd%
+  #- dir
+  - dir /b /s *.exe
+  - mkdir deploy
+  - copy "%APPVEYOR_BUILD_FOLDER%-build\%CONFIGURATION%\%BIN%.exe" "deploy\%BIN%.exe"
+  - windeployqt --qmldir "%APPVEYOR_BUILD_FOLDER%/qml" --%CONFIGURATION% "deploy/%BIN%.exe" --verbose=2
+  - for %%I in (%PRJLIBS%) do copy %PRJLIBDIR%\%%I deploy\
+  - 7z a -tzip "%BIN%-%CONFIGURATION%.zip" deploy -r
+  - copy "%APPVEYOR_BUILD_FOLDER%-build\%BIN%-%CONFIGURATION%.zip" "%APPVEYOR_BUILD_FOLDER%\%BIN%-%CONFIGURATION%.zip"
+  - echo APPVEYOR_BUILD_FOLDER=%APPVEYOR_BUILD_FOLDER%
+  - if exist C:\projects\ (echo C:\projects exists)
+  - if exist C:\projects\ (dir )
+  - if exist C:\projects\ (dir C:\projects\)
+  - if exist C:\projects\ (dir "%APPVEYOR_BUILD_FOLDER%-build\")
+  - if exist C:\projects\ (dir "%APPVEYOR_BUILD_FOLDER%-build\deploy\")
+  - if exist C:\Qt\QtIFW-3.0.1\ (dir C:\Qt\QtIFW-3.0.1)
+  - if exist C:\Qt\QtIFW-3.0.1\bin\ (dir C:\Qt\QtIFW-3.0.1\bin\)
+  - if exist C:\Qt\QtIFW-3.0.1\bin\binarycreator.exe (echo C:\Qt\QtIFW-3.0.1\bin\binarycreator.exe exists) else (echo C:\Qt\QtIFW-3.0.1\bin\binarycreator.exe does not exists)
+  - xcopy /s /e /f "%APPVEYOR_BUILD_FOLDER%-build\deploy" "%APPVEYOR_BUILD_FOLDER%\%QIF_PACKAGE_URI%"
+  - C:\Qt\QtIFW-3.0.1\bin\binarycreator.exe --offline-only -c "%APPVEYOR_BUILD_FOLDER%\config\config.xml" -p "%APPVEYOR_BUILD_FOLDER%\packages" "%BIN%-Installer.exe"
+  - 7z a -tzip "%BIN%-Installer.zip" "%BIN%-Installer.exe"
+  - dir /b /s *.zip
+  - dir /b /s *.exe
+  - dir
+  - echo Completed-Build
+  
+artifacts:
+  - path: '%BIN%-%CONFIGURATION%.zip'
+    name: 'Zip-%CONFIGURATION%'
+  - path: '%BIN%-Installer.zip'  
+    name: 'ZipInstaller'
+  - path: '%BIN%-Installer.exe'
+    name: 'ExecutableFile'
+
+deploy:
+  - provider: GitHub
+    release: continuous
+    artifact: 'Zip-%CONFIGURATION%'
+    draft: false
+    prerelease: true
+    auth_token:
+      secure: zhMbBtnPhVjygBTfOpQniE0jUPWOLewzUCFmEQIqZ/VSfFGpdzh+ZPeDU03rP1yD
+  - provider: GitHub
+    release: continuous
+    artifact: 'ZipInstaller'
+    draft: false
+    prerelease: true
+    auth_token:
+      secure: zhMbBtnPhVjygBTfOpQniE0jUPWOLewzUCFmEQIqZ/VSfFGpdzh+ZPeDU03rP1yD
+  - provider: GitHub
+    release: continuous
+    artifact: 'ExecutableFile'
+    draft: false
+    prerelease: true
+    auth_token:
+      secure: zhMbBtnPhVjygBTfOpQniE0jUPWOLewzUCFmEQIqZ/VSfFGpdzh+ZPeDU03rP1yD
+############################################## End of File ####################

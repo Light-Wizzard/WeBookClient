@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=WeBook
+GenericName=WeBook
+Comment=WeBook is Pronounced Web Book and its by the Light Wizzard in the Flesh
+Icon=WeBook
+Exec=WeBook
+Terminal=false
+Categories=Office;
+Keywords=office;
+Name[en_US]=WeBook.desktop
