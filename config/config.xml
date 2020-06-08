@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Installer>
-    <Name>Galaxy Calculator</Name>
+    <Name>WeBookClient</Name>
     <Version>1.0.0</Version>
-    <Title>Galaxy Calculator by Light Wizzard</Title>
+    <Title>WeBookClient is Pronounce Web-Book-Clienct by Light Wizzard</Title>
     <Publisher>Light-Wizzard</Publisher>
     <!-- Directory name is used in component.xml -->
-    <StartMenuDir>Galaxy-Calculator</StartMenuDir>
-    <TargetDir>@HomeDir@/Galaxy-Calculator</TargetDir>
+    <StartMenuDir>WeBookClient</StartMenuDir>
+    <TargetDir>@HomeDir@/WeBookClient</TargetDir>
 </Installer>

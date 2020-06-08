@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=WeBook
+GenericName=WeBookClient
+Comment=WeBookClient is Pronounced Web-Book-Client and its by the Light Wizzard in the Flesh
+Icon=WeBookClient
+Exec=bin/WeBookClient
+Terminal=false
+Categories=Office;
+Keywords=calculator;
+Name[en_US]=WeBookClient.desktop

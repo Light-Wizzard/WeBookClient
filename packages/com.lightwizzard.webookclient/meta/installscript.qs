@@ -41,7 +41,7 @@ Component.prototype.createOperations = function()
     */    
     if (systemInfo.productType === "windows") 
     {
-        component.addOperation("CreateShortcut", "@TargetDir@/Galaxy-Calculator.exe", "@StartMenuDir@/Galaxy-Calculator.lnk",
+        component.addOperation("CreateShortcut", "@TargetDir@/WeBookClient.exe", "@StartMenuDir@/WeBookClient.lnk",
             "workingDirectory=@TargetDir@", "iconPath=%SystemRoot%/system32/SHELL32.dll", "iconId=2", 
             "description=Galaxy Calculator by the Light Wizzard");
     }
@@ -53,14 +53,14 @@ Component.prototype.createOperations = function()
     if (systemInfo.kernelType === "linux")
     {
 	    component.addOperation( "InstallIcons", "@TargetDir@/icons" );
-        component.addOperation("CreateDesktopEntry", "@TargetDir@/Galaxy-Calculator.desktop", "Version=1.0\nType=Application\nTerminal=false\nExec=@TargetDir@/Galaxy-Calculator-x86_64.AppImage\nName=Galaxy-Calculator\nIcon=@TargetDir@/Galaxy-Calculator.svg\nName[en_US]=Galaxy-Calculator.desktop");
-        component.addElevatedOperation("Copy", "@TargetDir@/Galaxy-Calculator.desktop", "@HomeDir@/Desktop/Galaxy-Calculator.desktop");
+        component.addOperation("CreateDesktopEntry", "@TargetDir@/WeBookClient.desktop", "Version=1.0\nType=Application\nTerminal=false\nExec=@TargetDir@/WeBookClient-x86_64.AppImage\nName=WeBookClient\nIcon=@TargetDir@/WeBookClient.svg\nName[en_US]=WeBookClient.desktop");
+        component.addElevatedOperation("Copy", "@TargetDir@/WeBookClient.desktop", "@HomeDir@/Desktop/WeBookClient.desktop");
     }
     if (systemInfo.kernelType === "darwin")
     {
 	    component.addOperation( "InstallIcons", "@TargetDir@/icons" );
-        component.addOperation("CreateDesktopEntry", "@TargetDir@/Galaxy-Calculator.desktop", "Version=1.0\nType=Application\nTerminal=false\nExec=@TargetDir@/Galaxy-Calculator-x86_64.AppImage\nName=Galaxy-Calculator\nIcon=@TargetDir@/Galaxy-Calculator.svg\nName[en_US]=Galaxy-Calculator.desktop");
-        component.addElevatedOperation("Copy", "@TargetDir@/Galaxy-Calculator.desktop", "@HomeDir@/Desktop/Galaxy-Calculator.desktop");
+        component.addOperation("CreateDesktopEntry", "@TargetDir@/WeBookClient.desktop", "Version=1.0\nType=Application\nTerminal=false\nExec=@TargetDir@/WeBookClient-x86_64.AppImage\nName=WeBookClient\nIcon=@TargetDir@/WeBookClient.svg\nName[en_US]=WeBookClient.desktop");
+        component.addElevatedOperation("Copy", "@TargetDir@/WeBookClient.desktop", "@HomeDir@/Desktop/WeBookClient.desktop");
     }
 } // end createOperations
 // End of File

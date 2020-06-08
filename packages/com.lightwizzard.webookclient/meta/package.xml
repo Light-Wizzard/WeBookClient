@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package>
-    <DisplayName>Galaxy Calculator</DisplayName>
-    <Description>Galaxy Calculator by Light Wizzard</Description>
+    <DisplayName>WeBookClient</DisplayName>
+    <Description>WeBookClient is Pronounce Web-Book-Client by Light Wizzard</Description>
     <Version>1.0.0</Version>
     <ReleaseDate>2020-04-02</ReleaseDate>
     <Default>true</Default>
