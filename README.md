@@ -26,12 +26,17 @@ I used the Qt Rich Text Editor Project and documentation.
 
 ## Status
 
+Linux: [![Travis Build Status](https://travis-ci.org/Light-Wizzard/WeBookClient.svg?branch=master)](https://travis-ci.org/Light-Wizzard/WeBookClient)
+
 I am posting this only so I can get the Travis and AppVeyor Builds to work.
 
 Currently it works somewhat, and missing a lot of features,
 it currently does not talk with the WeBookServer.
 
 ## Downloads
+
+- :penguin: [Linux](https://github.com/Light-Wizzard/WeBookClient/releases/download/continuous/WeBookClient-travis-x86_64.AppImage)
+- :penguin: :inbox_tray: [Linux ZSync](https://github.com/Light-Wizzard/WeBookClient/releases/download/continuous/WeBookClient-travis-x86_64.AppImage.zsync)
 
 ## Concept
 
