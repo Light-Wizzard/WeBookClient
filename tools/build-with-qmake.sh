@@ -1,6 +1,10 @@
 #! /bin/bash
 #
-# Last Update: 18 April 2020
+# WeBookClient 
+#
+# Last Update: 8 June 2020
+#
+#
 #
 # Original Code is from: https://github.com/linuxdeploy/QtQuickApp TheAssassin
 #

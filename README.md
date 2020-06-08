@@ -1,4 +1,4 @@
-# WeBookClient is Pronounced Web-Book
+# WeBookClient is Pronounced Web-Book-Client
 
 WeBookClient is a Client/Server based Web-Book Content Management System
 
