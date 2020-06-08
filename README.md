@@ -1,4 +1,6 @@
-# WeBookClient is Pronounced Web-Book, and its a Client based Web-Book Content Management System
+# WeBookClient is Pronounced Web-Book
+
+WeBookClient is a Client/Server based Web-Book Content Management System
 
 This is WeBookClient, it is meant to work with WeBookServer.
 The documentation is spread out between [WeBook](https://github.com/Light-Wizzard/WeBook) and
