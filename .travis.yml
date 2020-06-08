@@ -29,6 +29,111 @@ jobs:
             - libzstd-dev
             - p7zip-full  
             - zlib1g-dev
+            - bison 
+            - build-essential
+            - flex
+            - gperf
+            - ibgstreamer-plugins-base0.10-dev
+            - libasound2-dev
+            - libatkmm-1.6-dev
+            - libbz2-dev
+            - libcap-dev
+            - libcups2-dev
+            - libdrm-dev
+            - libegl1-mesa-dev
+            - libfontconfig1-dev
+            - libfreetype6-dev
+            - libgcrypt11-dev
+            - libglu1-mesa-dev
+            - libgstreamer0.10-dev
+            - libicu-dev
+            - libnss3-dev
+            - libpci-dev
+            - libpulse-dev
+            - libssl-dev
+            - libudev-dev
+            - libx11-dev
+            - libx11-xcb-dev
+            - libxcb-composite0
+            - libxcb-composite0-dev
+            - libxcb-cursor-dev
+            - libxcb-cursor0
+            - libxcb-damage0
+            - libxcb-damage0-dev
+            - libxcb-dpms0
+            - libxcb-dpms0-dev
+            - libxcb-dri2-0
+            - libxcb-dri2-0-dev
+            - libxcb-dri3-0
+            - libxcb-dri3-dev
+            - libxcb-ewmh-dev
+            - libxcb-ewmh2
+            - libxcb-glx0
+            - libxcb-glx0-dev
+            - libxcb-icccm4
+            - libxcb-icccm4-dev
+            - libxcb-image0
+            - libxcb-image0-dev
+            - libxcb-keysyms1
+            - libxcb-keysyms1-dev
+            - libxcb-present-dev
+            - libxcb-present0
+            - libxcb-randr0
+            - libxcb-randr0-dev
+            - libxcb-record0
+            - libxcb-record0-dev
+            - libxcb-render-util0
+            - libxcb-render-util0-dev
+            - libxcb-render0
+            - libxcb-render0-dev
+            - libxcb-res0
+            - libxcb-res0-dev
+            - libxcb-screensaver0
+            - libxcb-screensaver0-dev
+            - libxcb-shape0
+            - libxcb-shape0-dev
+            - libxcb-shm0
+            - libxcb-shm0-dev
+            - libxcb-sync-dev
+            - libxcb-sync0-dev
+            - libxcb-sync1
+            - libxcb-util-dev
+            - libxcb-util0-dev
+            - libxcb-util1
+            - libxcb-xevie0
+            - libxcb-xevie0-dev
+            - libxcb-xf86dri0
+            - libxcb-xf86dri0-dev
+            - libxcb-xfixes0
+            - libxcb-xfixes0-dev
+            - libxcb-xinerama0
+            - libxcb-xinerama0-dev
+            - libxcb-xkb-dev
+            - libxcb-xkb1
+            - libxcb-xprint0
+            - libxcb-xprint0-dev
+            - libxcb-xtest0
+            - libxcb-xtest0-dev
+            - libxcb-xv0
+            - libxcb-xv0-dev
+            - libxcb-xvmc0
+            - libxcb-xvmc0-dev
+            - libxcb1
+            - libxcb1-dev
+            - libxcomposite-dev
+            - libxcursor-dev
+            - libxdamage-dev
+            - libxext-dev
+            - libxfixes-dev
+            - libxi-dev
+            - libxrandr-dev
+            - libxrender-dev
+            - libxslt-dev
+            - libxss-dev
+            - libxtst-dev
+            - perl
+            - python
+            - ruby
       env:
         - APPIMAGE="true"
         - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
@@ -41,6 +146,7 @@ jobs:
       env: 
         - WEBASM="true"
         - QT_WASM_VER="5.13_latest"
+        
     - os: osx
       osx_image: xcode11.0
       compiler: clang
@@ -48,6 +154,13 @@ jobs:
         - DMG="true"
         - MATRIX_EVAL="COMPILER=clang++"
 
+deploy:
+  provider: releases
+  api_key: "${GITHUB_TOKEN}"
+  on:
+    tags: true
+    rvm: continuous
+    
 before_install:
     - if [ -z "${BIN_PRO_RES_NAME+x}" ]; then echo -e "Add BIN_PRO_RES_NAME to your Travis Settings Environment Variable with a value from Github value for Binary, pro, and resource Name"; exit 1; fi
     - if [ -z "${GITHUB_TOKEN+x}" ]; then echo -e "Add GITHUB_TOKEN to your Travis Settings Environment Variable with a value from Github Settings Developer Personal access tolkens"; exit 1; fi
@@ -60,10 +173,10 @@ before_install:
 install:
     - if [ -n "${APPIMAGE}" ]; then 
         echo "Install qt libraries for Linux";
+        echo "Install qt libraries for Linux";
         sudo apt-get update --yes -q; 
-        sudo apt-get install --yes -q "${QTV}base" "${QTV}quickcontrols" "${QTV}quickcontrols2" "${QTV}graphicaleffects" "${QTV}svg" "${QTV}scxml" "${QTV}script" "${QTV}tools" "${QTV}translations" "${QTV}x11extras" "${QTV}declarative";
         sudo apt-get autoremove; sudo apt-get -f install; sudo apt-get autoclean;
-        source /opt/qt*/bin/qt*-env.sh;
+        sudo apt-get install --yes -q "${QTV}-meta-full";
         export ARTIFACT_APPIMAGE="${BIN_PRO_RES_NAME}-x86_64.AppImage"; 
         export ARTIFACT_ZSYNC="${BIN_PRO_RES_NAME}-x86_64.AppImage.zsync"; 
         export ARTIFACT_APPIMAGE_LDQT="${BIN_PRO_RES_NAME}-travis-x86_64.AppImage"; 
@@ -90,7 +203,7 @@ script:
         qmake ..;
         make;
         echo "Run macdeployqt";
-        macdeployqt "${BIN_PRO_RES_NAME}.app/" -qmldir=../qml -dmg;
+        macdeployqt "${BIN_PRO_RES_NAME}.app/" -dmg;
         find . | grep dmg;
         export ARTIFACT_MAC="${BIN_PRO_RES_NAME}.dmg"; 
         export ARTIFACT_MAC_QIF="${BIN_PRO_RES_NAME}-Mac-Installer";
