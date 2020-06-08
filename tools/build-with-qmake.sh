@@ -261,7 +261,7 @@ if [ "${LINUX_DEPLOY_USING}" -eq 1 ]; then
     # Move our executable into the bin folder
     if [ -f "${PWD}/AppDir${MY_TARGET_PATH}/${BIN_PRO_RES_NAME}" ]; then
         cp -pv "${PWD}/AppDir${MY_TARGET_PATH}/${BIN_PRO_RES_NAME}" "${TRAVIS_BUILD_DIR}${MY_TARGET_PATH}";
-        if [ -f "${TRAVIS_BUILD_DIR}${MY_TARGET_PATH}" ]; then
+        if [ -f "${TRAVIS_BUILD_DIR}${MY_TARGET_PATH}/${BIN_PRO_RES_NAME}" ]; then
             echo "FINDME Exe found";
         else
             echo "FINDME Error Exe not found AppDir${MY_TARGET_PATH}/";
@@ -296,7 +296,6 @@ if [ "${LINUX_DEPLOY_USING}" -eq 1 ]; then
     #
     echo "FINDME Starting linuxdeployqt-continuous-x86_64.AppImage";
     ./linuxdeployqt-continuous-x86_64.AppImage "${TRAVIS_BUILD_DIR}/usr/share/applications/${BIN_PRO_RES_NAME}.desktop" -extra-plugins=iconengines,imageformats -verbose=2 -appimage;
-    chmod +x "${BIN_PRO_RES_NAME}"*.AppImage*;
     ls;
     # Move them
     chmod +x "${BIN_PRO_RES_NAME}"*.AppImage*;

@@ -132,8 +132,8 @@ macos:QMAKE_INFO_PLIST = macos/Info.plist
 ios:QMAKE_INFO_PLIST = ios/Info.plist
 #
 DESTDIR = "$${OUT_PWD}"
-#release: DESTDIR = "$${OUT_PWD}/build-webookclient/release"
-#debug:   DESTDIR = "$${OUT_PWD}/build-webookclient/debug"
+release: DESTDIR = "$${OUT_PWD}/build/release"
+debug:   DESTDIR = "$${OUT_PWD}/build/debug"
 
 OBJECTS_DIR = "$${DESTDIR}/obj"
 MOC_DIR     = "$${DESTDIR}/moc"
