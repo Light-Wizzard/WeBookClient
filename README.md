@@ -113,6 +113,8 @@ without effecting Clients.
 
 ## Windows
 
+Not Working.
+
 Of all days for Qt Download server to go down,
 I need to compile this on Windows, but cannot download Qt today.
 
