@@ -16,6 +16,7 @@ I used the Qt Rich Text Editor Project and documentation.
 [Status](#Status)
 [Downloads](#Downloads)
 [Concept](#Concept)
+[Windows](#Windows)
 [QTextEdit](#QTextEdit)
 [Font and Paragraph Styles](#Font-and-Paragraph-Styles)
 [Lists](#Lists)
@@ -109,6 +110,11 @@ and invite the World to try to Hack in,
 and just let it go, with no adnormal admitistration,
 just normal useage, to prove it can sussain a DoS or Brute Force attacks,
 without effecting Clients.
+
+## Windows
+
+Of all days for Qt Download server to go down,
+I need to compile this on Windows, but cannot download Qt today.
 
 ## QTextEdit
 
