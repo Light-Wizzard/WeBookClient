@@ -1,6 +1,7 @@
 # WeBookServerClient.pro
 #DEFINES         *= QT_PRINTSUPPORT_LIB
-qtHaveModule(printsupport): QT *= printsupport
+#qtHaveModule(printsupport): QT *= printsupport
+QT *= printsupport
 # Specifies the name of the template to use when generating the project.
 # The allowed values are: app, lib, subdirs, aux, vcapp or vclib
 TEMPLATE     = "app"
