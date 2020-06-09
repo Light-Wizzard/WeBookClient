@@ -139,14 +139,6 @@ jobs:
         - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
         - QTV="qt514"
 
-    - os: linux
-      dist: xenial
-      sudo: require
-      services: docker
-      env: 
-        - WEBASM="true"
-        - QT_WASM_VER="5.13_latest"
-        
     - os: osx
       osx_image: xcode11.0
       compiler: clang
@@ -210,26 +202,6 @@ script:
         export QTIFWVER="3.2.2";
         export QTIFW_MAC="QtInstallerFramework-mac-x64.dmg";
       fi
-    - if [ -n "${WEBASM}" ]; then
-        echo "Build WEBASM in /home/travis/build/[secure]/${BIN_PRO_RES_NAME}";
-        git remote set-url origin https://${GITHUB_TOKEN}@github.com/${GITHUB_USERNAME}/${BIN_PRO_RES_NAME};
-        git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*";
-        git fetch --all;
-        git config --global user.email "${GITHUB_EMAIL}";
-        git config --global user.name "${GITHUB_USERNAME}";
-        echo "WEBASM make build folder and run docker";
-        mkdir -p build;
-        docker run --rm -v "${PWD}:/project/source" -v "${PWD}/build:/project/build" "maukalinow/qtwasm_builder:${QT_WASM_VER}";
-        sudo rm -rf build/{Makefile,*.o,*.cpp};
-        git checkout --track origin/gh-pages;
-        sudo mv -v build/* .;
-        sudo rm -rf build;
-        sudo mv -v "${BIN_PRO_RES_NAME}.html" index.html;
-        echo "Created WEBASM";
-        ls -lh;
-        git add --all;
-        git commit -sm "Update WebAssembly";
-      fi    
 
 after_success:
     - if [ "${TRAVIS_PULL_REQUEST}" != false ] || [ "${TRAVIS_BRANCH}" != "master" ]; then
@@ -243,5 +215,4 @@ after_success:
     - if [ -n "${APPIMAGE}" ] && [ -f "${ARTIFACT_QIF}" ];           then bash ./upload.sh "${ARTIFACT_QIF}"; fi
     - if [ -n "${DMG}" ]      && [ -f "${ARTIFACT_MAC_QIF}" ];       then bash ./upload.sh "${ARTIFACT_MAC_QIF}"; fi
     - if [ -n "${DMG}" ]      && [ -f "${ARTIFACT_MAC}" ];           then bash ./upload.sh "${ARTIFACT_MAC}"; fi
-    - if [ -n "${WEBASM}" ]; then git push origin gh-pages; fi
     
