@@ -70,7 +70,7 @@ SOURCES     *= src/main.cpp
 FORMS       += src/mainwindow.ui
 FORMS       += src/aboutdialog.ui
 #
-DISTFILES   += data/WeBook.ini
+DISTFILES   += data/WeBookClient.ini
 DISTFILES   += data/WeBook.toc
 DISTFILES   += data/WeBooks.cat
 DISTFILES   += data/urllist.txt
@@ -145,10 +145,10 @@ unix {
     isEmpty(PREFIX) {
         PREFIX = /usr
     }
-    target.path         = $${PREFIX}/bin
-    shortcutfiles.files = usr/share/applications/$${TARGET}.desktop
+    target.path         = "$${PREFIX}/bin"
+    shortcutfiles.files = "usr/share/applications/$${TARGET}.desktop"
     shortcutfiles.path  = usr/share/applications
-    data.files         += usr/share/icons/hicolor/48x48/apps/$${TARGET}.png
+    data.files         += "usr/share/icons/hicolor/48x48/apps/$${TARGET}.png"
     data.path           = usr/share/pixmaps
     INSTALLS           += shortcutfiles
     INSTALLS           += data

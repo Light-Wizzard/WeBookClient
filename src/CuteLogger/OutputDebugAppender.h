@@ -24,7 +24,8 @@
 class CUTELOGGERSHARED_EXPORT OutputDebugAppender : public AbstractStringAppender
 {
     protected:
-        virtual void append(const QDateTime& timeStamp, Logger::LogLevel logLevel, const char* file, int line, const char* function, const QString& category, const QString& message) override;
+        virtual void append(const QDateTime &timeStamp, Logger::LogLevel logLevel, const char *file, int line, const char *function, const QString &category, const QString &message) override;
+
 }; // end OutputDebugAppender
 #endif // OUTPUTDEBUGAPPENDER_H
 /******************************* End of File *********************************/
