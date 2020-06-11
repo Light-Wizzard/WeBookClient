@@ -89,7 +89,7 @@ QT_FORWARD_DECLARE_CLASS(QSqlError)
 #include "AboutDialog.h"
 
 // This file gets created at Build time
-#include "ui_mainwindow.h"
+#include "ui_MainWindow.h"
 /******************************************************************************
 ** MainWindow                                                                 *
 *******************************************************************************/

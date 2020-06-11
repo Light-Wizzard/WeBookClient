@@ -679,6 +679,8 @@ QString WeBookCommon::getSha()
 *******************************************************************************/
 void WeBookCommon::setWeBookLogger()
 {
+
+    return;
     //qDebug() << "getLogPath=" << getLogPath() << " QDir::separator()=" << QDir::separator() << " date=" << QDateTime::currentDateTime().toString("-Log.yyyy-MM");
 
     QLogger::myLogFile = QString("%1%2%3.log").arg(getLogPath()).arg(QDir::separator()).arg(getAppName()).arg(QDateTime::currentDateTime().toString("-Log.yyyy-MM"));
