@@ -6,8 +6,8 @@
 //static QFile myLogFileHandle;
 static QString myLogPathFileName = "WeBookClient.log";
 static QString myAppName = "WeBookClient";
-static bool isLogToFile = false;
-
+static bool isLogToFile = true;
+static bool isRunOnce = false;
 /******************************************************************************
 ** mainEventHandler                                                           *
 *******************************************************************************/
@@ -35,12 +35,15 @@ void WeBookMessenger(QtMsgType type, const QMessageLogContext &context, const QS
     QString txt = QString("%1 %2: %3 (%4:%5, %6)").arg(QTime::currentTime().toString("hh:mm:ss.zzz")).arg(msgLevelHash[type]).arg(msg).arg(context.file).arg(context.line).arg(context.function);
     if (isLogToFile)
     {
-        QLogger::myLogFile = QString("%1%2%3.log").arg(myLogPathFileName).arg(QDir::separator()).arg(myAppName).arg(QDateTime::currentDateTime().toString("-Log.yyyy-MM"));
-        QLogger::myModule = "WeBookClient";
-
-        QLogger::QLoggerManager *manager = QLogger::QLoggerManager::getInstance();
-        manager->addDestination(QLogger::myLogFile, QLogger::myModule, QLogger::LogLevel::Debug);
-
+        if (!isRunOnce)
+        {
+            isRunOnce = true;
+            QLogger::myLogFile = QString("%1%2%3.log").arg(myLogPathFileName).arg(QDir::separator()).arg(myAppName).arg(QDateTime::currentDateTime().toString("-Log.yyyy-MM"));
+            QLogger::myModule = "WeBookClient";
+            QLogger::QLoggerManager *manager = QLogger::QLoggerManager::getInstance();
+            manager->addDestination(QLogger::myLogFile, QLogger::myModule, QLogger::LogLevel::Debug);
+        }
+        QLOG_DEBUG() << txt;
 //        if (!myLogFileHandle.isOpen())
 //        {
 //            myLogFileHandle.setFileName(myLogPathFileName);
