@@ -1,4 +1,6 @@
-#include "webookcommon.h"
+/******************************************************************************
+** WeBook: Pronounced Web-Book, is a Book Content Management System  (BCMS)   *
+*******************************************************************************/
 #include "webookcommon.h"
 /******************************************************************************
 ** WeBookCommon Constructor                                                   *
@@ -224,6 +226,7 @@ void WeBookCommon::setIniFileName(const QString &thisIniFileName)
 } // end setIniFileName
 /******************************************************************************
 ** getLogPath                                                                 *
+** FIXME argument error
 *******************************************************************************/
 QString WeBookCommon::getLogPath()
 {
@@ -255,17 +258,17 @@ void WeBookCommon::setLogPath(const QString &thisLogPath)
 *******************************************************************************/
 QString WeBookCommon::getLogFolderName()
 {
-    if (myLogFileName.isEmpty()) myLogFileName = constLogFolderName;
-    return myLogFileName;
+    if (myLogFolderName.isEmpty()) myLogFolderName = constLogFolderName;
+    return myLogFolderName;
 } // end getLogFolderName
 /******************************************************************************
 ** setLogFolderName                                                           *
 *******************************************************************************/
 void WeBookCommon::setLogFolderName(const QString &thisLogFolderName)
 {
-    if (myLogFileName != thisLogFolderName)
+    if (myLogFolderName != thisLogFolderName)
     {
-        myLogFileName = thisLogFolderName;
+        myLogFolderName = thisLogFolderName;
         emit handelSettinChanged();
     }
 } // end setLogFolderName
@@ -274,17 +277,17 @@ void WeBookCommon::setLogFolderName(const QString &thisLogFolderName)
 *******************************************************************************/
 QString WeBookCommon::getFileFolderName()
 {
-    if (myFileFolder.isEmpty()) myFileFolder = constFileFolderName;
-    return myFileFolder;
+    if (myFileFolderName.isEmpty()) myFileFolderName = constFileFolderName;
+    return myFileFolderName;
 } // end getFileFolderName
 /******************************************************************************
 ** setFileFolderName                                                          *
 *******************************************************************************/
 void WeBookCommon::setFileFolderName(const QString &thisFileFolderName)
 {
-    if (myFileFolder != thisFileFolderName)
+    if (myFileFolderName != thisFileFolderName)
     {
-        myFileFolder = thisFileFolderName;
+        myFileFolderName = thisFileFolderName;
         emit handelSettinChanged();
     }
 } // end setFileFolderName
@@ -352,12 +355,12 @@ void WeBookCommon::setUserName(const QString &thisUserName)
         #elif defined(Q_OS_MAC)
         #elif defined(Q_OS_WINCE)
         #elif defined(Q_OS_WIN)
-            if (myUserName.isEmpty)
-            {
-                char acUserName[MAX_USERNAME];
-                DWORD nUserName = sizeof(acUserName);
-                if (GetUserName(acUserName, &nUserName)) myUserName = acUserName;
-            }
+//            if (myUserName.isEmpty())
+//            {
+//                char acUserName[MAX_USERNAME];
+//                DWORD nUserName = sizeof(acUserName);
+//                if (GetUserName(acUserName, &nUserName)) myUserName = acUserName;
+//            }
         #elif defined(Q_OS_LINUX)
         #elif defined(Q_OS_UNIX)
         #else
@@ -660,6 +663,8 @@ QString WeBookCommon::getSha()
 *******************************************************************************/
 void WeBookCommon::setWeBookLogger()
 {
+    //qDebug() << "getLogPath=" << getLogPath() << " QDir::separator()=" << QDir::separator() << " date=" << QDateTime::currentDateTime().toString("-Log.yyyy-MM");
+
     QLogger::myLogFile = QString("%1%2%3.log").arg(getLogPath()).arg(QDir::separator()).arg(getAppName()).arg(QDateTime::currentDateTime().toString("-Log.yyyy-MM"));
     QLogger::myModule = "WeBookServer";
 

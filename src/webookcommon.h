@@ -9,6 +9,7 @@
 #include <QDir>
 #include <stdio.h>
 #include <stdlib.h>
+#include <QProcess>
 
 // Qt-AES
 #include "src/QtAES/qaesencryption.h"
@@ -222,15 +223,15 @@ AppConfigLocation       "~/.config/<APPNAME>", "/etc/xdg/<APPNAME>"
     private:
         QSettings               *weBookSettings         = nullptr;                          // QSettings is used for this class
         QString                 myLogPath               = "";                               //
-        QString                 myLogFileName           = "";                               //
+        QString                 myLogFolderName         = "";                               //
+        QString                 myFilePath              = "";                               // Path to the folder that holds the data, I named it data by default
+        QString                 myFileFolderName        = "";                               // File Folder Name
         QString                 myHomePath              = "";                               //
         QString                 myUserName              = "";                               //
         QString                 myIniFileName           = "";                               // Ini File Name
         QString                 myOrganizationName      = "";                               // OrganizationName
         QString                 myOrganizationDomain    = "";                               // OrganizationDomain
         QString                 myApplicationName       = "";                               // ApplicationName
-        QString                 myFilePath              = "";                               // Path to the folder that holds the data, I named it data by default
-        QString                 myFileFolder            = "";                               // File Folder Name
         QString                 myCryptoKey             = "";                               // Argument to Constructor from main.cpp
         QString                 myCryptoIvVector        = "";                               // Argument to Constructor from main.cpp
         PasswordCryptoMd        myCryptoMd              = PasswordCryptoHashMd5;            // PasswordCryptoHashMd4, PasswordCryptoHashMd5

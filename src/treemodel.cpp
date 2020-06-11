@@ -1,4 +1,5 @@
 /******************************************************************************
+** WeBook: Pronounced Web-Book, is a Book Content Management System  (BCMS)   *
 ** Drag & Drop Model                                                          *
 *******************************************************************************/
 #include "treemodel.h"
@@ -62,7 +63,7 @@ void TreeModel::setupModelData(const QStringList &lines, TreeItem *parent)
         {
             // Read the column data from the rest of the line.
             // Tab (\t) is used to delimit columns
-            QStringList columnStrings = lineData.split("\t", QString::SkipEmptyParts);
+            QStringList columnStrings = lineData.split("\t", Qt::SkipEmptyParts);
             QList<QVariant> columnData;
             for (int column = 0; column < columnStrings.count(); ++column) columnData << columnStrings[column];
             // Indentaion means its a child

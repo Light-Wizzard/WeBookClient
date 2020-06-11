@@ -1,5 +1,5 @@
 /******************************************************************************
-** WeBook: Pronounced Web Book, is a Book Content Management System  (BCMS)   *
+** WeBook: Pronounced Web-Book, is a Book Content Management System  (BCMS)   *
 *******************************************************************************/
 #include "mainwindow.h"
 /******************************************************************************

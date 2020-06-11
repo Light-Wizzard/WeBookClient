@@ -1,4 +1,5 @@
 /******************************************************************************
+** WeBook: Pronounced Web-Book, is a Book Content Management System  (BCMS)   *
 ** Drag & Drop Model                                                          *
 *******************************************************************************/
 #include "treeitem.h"

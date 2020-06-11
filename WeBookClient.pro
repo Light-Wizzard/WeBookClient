@@ -49,17 +49,14 @@ DEPENDSPATH *= src/QtAES
 
 # Headers files
 HEADERS     *= src/aboutdialog.h
-HEADERS     *= src/qlogger.h
 HEADERS     *= src/webookcommon.h
 HEADERS     *= src/mainwindow.h
 HEADERS     *= src/webookman.h
 HEADERS     *= src/treeitem.h
 HEADERS     *= src/treemodel.h
 HEADERS     *= src/treeviewdragdropmodel.h
-HEADERS     *=
 # Source files
 SOURCES     *= src/aboutdialog.cpp
-SOURCES     *= src/qlogger.cpp
 SOURCES     *= src/webookcommon.cpp
 SOURCES     *= src/mainwindow.cpp
 SOURCES     *= src/webookman.cpp
@@ -78,6 +75,12 @@ DISTFILES   += data/urllist.txt
 DISTFILES   += README.md
 #
 RESOURCES   += WeBookClient.qrc
+
+###############################################################################
+# https://github.com/Light-Wizzard/QLogger                                    #
+###############################################################################
+HEADERS     *= src/qlogger.h
+SOURCES     *= src/qlogger.cpp
 ###############################################################################
 # https://github.com/bricke/Qt-AES                                            #
 ###############################################################################
