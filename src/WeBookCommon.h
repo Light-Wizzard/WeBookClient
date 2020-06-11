@@ -11,10 +11,10 @@
 #include <stdlib.h>
 #include <QProcess>
 
-// Qt-AES
-#include "src/QtAES/QAESEncryption.h"
 // QLogger
 #include "QLogger.h"
+// Qt-AES
+#include "src/QtAES/QAESEncryption.h"
 /******************************************************************************
 ** class WeBookCommon                                                         *
 *******************************************************************************/

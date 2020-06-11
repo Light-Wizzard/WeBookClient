@@ -143,7 +143,6 @@ int main(int argc, char *argv[])
     //
     //isLogToFile = true;
     //myLogPathFileName = QString("%1%2.log").arg(applicationName).arg(QDateTime::currentDateTime().toString("-Log.yyyy-MM"));
-    //qInstallMessageHandler(WeBookMessenger); // Install the Message handler
     //MyLogFile = QString("%1%2.log").arg(applicationName).arg(QDateTime::currentDateTime().toString("-Log.yyyy-MM"));
     weBookCommon->setAppName(theAppName);
     weBookCommon->setIniFileName(theInit);
@@ -166,6 +165,7 @@ int main(int argc, char *argv[])
     weBookLogger->onLogFileChanged();
     QObject::connect(weBookLogger, &WeBookLogger::handelLogFileChanged, &WeBookLogger::onLogFileChanged);
     */
+    qInstallMessageHandler(WeBookMessenger); // Install the Message handler
     weBookWindow->show();
     // QApplication::setStyle(QStyleFactory::create("fusion"));
     // QStyleFactory::keys= ("Windows", "Fusion")

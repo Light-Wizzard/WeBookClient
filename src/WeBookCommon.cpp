@@ -11,7 +11,8 @@
 *******************************************************************************/
 WeBookCommon::WeBookCommon(bool isLog)
 {
-    if (isLog) setWeBookLogger();
+    Q_UNUSED(isLog)
+    //if (isLog) setWeBookLogger();
 } // end WeBookCommon
 /******************************************************************************
 ** WeBookCommon Deconstructor                                                 *
