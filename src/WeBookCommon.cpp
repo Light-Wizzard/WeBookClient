@@ -135,7 +135,7 @@ QVariant WeBookCommon::getSetting(const QString &key, const QVariant &defaultVal
         setSetting(key, defaultValue);
         return defaultValue;
     }
-    qDebug() << "getSettings=" << weBookSettings->value(key, defaultValue);
+    qDebug() << "WeBookCommon::getSettings=" << weBookSettings->value(key, defaultValue);
     return weBookSettings->value(key, defaultValue);
 } // end getSetting
 /******************************************************************************

@@ -51,7 +51,6 @@ bool TreeViewDragDropModel::dropMimeData(const QMimeData *data, Qt::DropAction a
     else if (parent.isValid()) beginRow = 0;
     else                       beginRow = rowCount(QModelIndex());
 
-
     TreeItem *parentItem;
     if (!parent.isValid()) parentItem = rootTreeItem;
     else                   parentItem = static_cast<TreeItem*>(parent.internalPointer());
@@ -74,9 +73,9 @@ bool TreeViewDragDropModel::dropMimeData(const QMimeData *data, Qt::DropAction a
     {
         qint64 id;
         QString text;
-        int row; int column;
-        stream >> id >> row >> column >> text;
-        newItems[id][row][column] = text;
+        int thisRow; int thisColumn;
+        stream >> id >> thisRow >> thisColumn >> text;
+        newItems[id][thisRow][thisColumn] = text;
     }
     int rows = newItems.count();
 
