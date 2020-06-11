@@ -23,6 +23,23 @@ WeBookCommon::~WeBookCommon()
 
 } // end ~WeBookCommon
 /******************************************************************************
+** setWeBookLogger                                                            *
+*******************************************************************************/
+void WeBookCommon::setWeBookLogger()
+{
+
+    return;
+    //qDebug() << "getLogPath=" << getLogPath() << " QDir::separator()=" << QDir::separator() << " date=" << QDateTime::currentDateTime().toString("-Log.yyyy-MM");
+
+    QLogger::myLogFile = QString("%1%2%3.log").arg(getLogPath()).arg(QDir::separator()).arg(getAppName()).arg(QDateTime::currentDateTime().toString("-Log.yyyy-MM"));
+    QLogger::myModule = "WeBookServer";
+
+    manager = QLogger::QLoggerManager::getInstance();
+    manager->addDestination(QLogger::myLogFile, QLogger::myModule, QLogger::LogLevel::Debug);
+
+    qDebug() << "setWeBookLogger";
+} // end setWeBookLogger
+/******************************************************************************
 ** weBookSetter                                                               *
 ** Creates QSettings for organizationName, organizationDomain, applicationName*
 **
@@ -43,6 +60,7 @@ void WeBookCommon::weBookSetter()
     {
         qFatal("%s", QString("Error: cannot create file %1").arg(myIni).toLocal8Bit().constData());
     }
+    // ${HOME}/WeBookClient/data/WeBookClient/WeBookClient.ini
     weBookSettings  = new QSettings(myIni, QSettings::IniFormat);
 } // end weBookSetter
 /******************************************************************************
@@ -464,7 +482,7 @@ QString WeBookCommon::setFilePath(QString thisFileName, QString thisDataFolderNa
 *******************************************************************************/
 QString WeBookCommon::getFullFilePathName(QString thisFileName)
 {
-    return QString("%1%2%3%4%5").arg(getFilelPath()).arg(QDir::separator()).arg(getAppName()).arg(QDir::separator()).arg(thisFileName);
+    return QString("%1%2%3").arg(getFilelPath()).arg(QDir::separator()).arg(thisFileName);
 } // end getFullFilePathName
 /******************************************************************************
 ** setGeometry                                                                *
@@ -689,21 +707,4 @@ QString WeBookCommon::getSha()
     }
     return securePassword;
 } // end getSha
-/******************************************************************************
-** setWeBookLogger                                                            *
-*******************************************************************************/
-void WeBookCommon::setWeBookLogger()
-{
-
-    return;
-    //qDebug() << "getLogPath=" << getLogPath() << " QDir::separator()=" << QDir::separator() << " date=" << QDateTime::currentDateTime().toString("-Log.yyyy-MM");
-
-    QLogger::myLogFile = QString("%1%2%3.log").arg(getLogPath()).arg(QDir::separator()).arg(getAppName()).arg(QDateTime::currentDateTime().toString("-Log.yyyy-MM"));
-    QLogger::myModule = "WeBookServer";
-
-    manager = QLogger::QLoggerManager::getInstance();
-    manager->addDestination(QLogger::myLogFile, QLogger::myModule, QLogger::LogLevel::Debug);
-
-    qDebug() << "setWeBookLogger";
-} // end setWeBookLogger
 /* ***************************** End of File ******************************* */
