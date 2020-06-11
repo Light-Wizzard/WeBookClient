@@ -13,14 +13,14 @@ TreeViewDragDropModel::TreeViewDragDropModel(const QString &strings, QObject *pa
     #ifndef QT_DEBUG
         isDebugMessage = isDebugAllMessage = false;
     #endif
-    if (isDebugMessage) LOG_DEBUG() << "TreeViewDragDropModel::TreeViewDragDropModel(" << strings << ", parent)";
+    if (isDebugMessage) qDebug() << "TreeViewDragDropModel::TreeViewDragDropModel(" << strings << ", parent)";
 } // end TreeViewDragDropModel
 /******************************************************************************
 ** flags                                                                      *
 *******************************************************************************/
 Qt::ItemFlags TreeViewDragDropModel::flags(const QModelIndex &index) const
 {
-    if (isDebugAllMessage) LOG_DEBUG() << "TreeViewDragDropModel::flags(" << index << ")";
+    if (isDebugAllMessage) qDebug() << "TreeViewDragDropModel::flags(" << index << ")";
     Qt::ItemFlags defaultFlags = TreeModel::flags(index);
 
     if (index.isValid()) return Qt::ItemIsDragEnabled | Qt::ItemIsDropEnabled | defaultFlags;
@@ -38,7 +38,7 @@ QString TreeViewDragDropModel::getErrorMessage()
 *******************************************************************************/
 bool TreeViewDragDropModel::dropMimeData(const QMimeData *data, Qt::DropAction action, int row, int column, const QModelIndex &parent)
 {
-    if (isDebugMessage) LOG_DEBUG() << "TreeViewDragDropModel::dropMimeData(" << data << ", " << action << ", " << row  << ", " << column  << ", parent)";
+    if (isDebugMessage) qDebug() << "TreeViewDragDropModel::dropMimeData(" << data << ", " << action << ", " << row  << ", " << column  << ", parent)";
     Q_UNUSED(column);
     if (action == Qt::IgnoreAction) return true;
 
@@ -55,11 +55,11 @@ bool TreeViewDragDropModel::dropMimeData(const QMimeData *data, Qt::DropAction a
     if (!parent.isValid()) parentItem = rootTreeItem;
     else                   parentItem = static_cast<TreeItem*>(parent.internalPointer());
 
-    LOG_DEBUG() << "parentItem->data(0).toString()=" << parentItem->data(0).toString();
+    qDebug() << "parentItem->data(0).toString()=" << parentItem->data(0).toString();
     int myLevel = forEachChildLevel(parentItem->data(0).toString(), QModelIndex());
     if (myLevel >= 6)
     {
-        LOG_DEBUG() << "aborting move due to myLevel=" << myLevel;
+        qDebug() << "aborting move due to myLevel=" << myLevel;
         myErrorMessage = QString("aborting move due to myLevel=%1 you cannot move beyond level 6 nor can you move root level").arg(myLevel);
         return false;
     }
@@ -103,7 +103,7 @@ bool TreeViewDragDropModel::dropMimeData(const QMimeData *data, Qt::DropAction a
 *******************************************************************************/
 QMimeData *TreeViewDragDropModel::mimeData(const QModelIndexList &indexes) const
 {
-    if (isDebugMessage) LOG_DEBUG() << "TreeViewDragDropModel::mimeData(" << indexes << ")";
+    if (isDebugMessage) qDebug() << "TreeViewDragDropModel::mimeData(" << indexes << ")";
     QMimeData *mimeData = new QMimeData();
     QByteArray encodedData;
 
@@ -126,7 +126,7 @@ QMimeData *TreeViewDragDropModel::mimeData(const QModelIndexList &indexes) const
 *******************************************************************************/
 QStringList TreeViewDragDropModel::mimeTypes() const
 {
-    if (isDebugAllMessage) LOG_DEBUG() << "TreeViewDragDropModel::mimeTypes = text/plain";
+    if (isDebugAllMessage) qDebug() << "TreeViewDragDropModel::mimeTypes = text/plain";
     return types;
 } // end mimeTypes
 /******************************************************************************
@@ -134,7 +134,7 @@ QStringList TreeViewDragDropModel::mimeTypes() const
 *******************************************************************************/
 Qt::DropActions TreeViewDragDropModel::supportedDropActions() const
 {
-    if (isDebugAllMessage) LOG_DEBUG() << "TreeViewDragDropModel::supportedDropActions = Qt::MoveAction";
+    if (isDebugAllMessage) qDebug() << "TreeViewDragDropModel::supportedDropActions = Qt::MoveAction";
     return Qt::MoveAction;
 } // end supportedDropActions
 /* ***************************** End of File ******************************* */

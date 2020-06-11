@@ -12,7 +12,7 @@ TreeItem::TreeItem(const QList<QVariant> &data, int myLevel, TreeItem *parent)
     #ifndef QT_DEBUG
         isDebugMessage = isDebugAllMessage = false;
     #endif
-    if (isDebugMessage) LOG_DEBUG() << "TreeItem::TreeItem(" << data << ", " << myLevel  << ", parent)";
+    if (isDebugMessage) QLOG_DEBUG() << "TreeItem::TreeItem(" << data << ", " << myLevel  << ", parent)";
     parentItem = parent;
     itemData = data;
     level = myLevel;
@@ -22,7 +22,7 @@ TreeItem::TreeItem(const QList<QVariant> &data, int myLevel, TreeItem *parent)
 *******************************************************************************/
 TreeItem::~TreeItem()
 {
-    if (isDebugMessage) LOG_DEBUG() << "TreeItem::~TreeItem";
+    if (isDebugMessage) QLOG_DEBUG() << "TreeItem::~TreeItem";
     qDeleteAll(childItems);
 } // end ~TreeItem
 /******************************************************************************
@@ -30,7 +30,7 @@ TreeItem::~TreeItem()
 *******************************************************************************/
 TreeItem *TreeItem::parent()
 {
-    if (isDebugAllMessage) LOG_DEBUG() << "TreeItem::parent";
+    if (isDebugAllMessage) QLOG_DEBUG() << "TreeItem::parent";
     return parentItem;
 } // end parent
 /******************************************************************************
@@ -38,7 +38,7 @@ TreeItem *TreeItem::parent()
 *******************************************************************************/
 QVariant TreeItem::data(int column) const
 {
-    if (isDebugAllMessage) LOG_DEBUG() << "TreeItem::data(" << column << ")";
+    if (isDebugAllMessage) QLOG_DEBUG() << "TreeItem::data(" << column << ")";
     return itemData.value(column);
 } // end data
 /******************************************************************************
@@ -46,7 +46,7 @@ QVariant TreeItem::data(int column) const
 *******************************************************************************/
 bool TreeItem::setData(int column, const QVariant &data)
 {
-    if (isDebugMessage) LOG_DEBUG() << "TreeItem::setData(" << column << ", " << data << ")";
+    if (isDebugMessage) QLOG_DEBUG() << "TreeItem::setData(" << column << ", " << data << ")";
     if (column < 0 || column >= itemData.count()) return false;
 
     itemData.replace(column, data);
@@ -57,7 +57,7 @@ bool TreeItem::setData(int column, const QVariant &data)
 *******************************************************************************/
 void TreeItem::appendChild(TreeItem *item)
 {
-    if (isDebugMessage) LOG_DEBUG() << "TreeItem::appendChild(item)";
+    if (isDebugMessage) QLOG_DEBUG() << "TreeItem::appendChild(item)";
     childItems.append(item);
 } // end appendChild
 /******************************************************************************
@@ -65,7 +65,7 @@ void TreeItem::appendChild(TreeItem *item)
 *******************************************************************************/
 TreeItem *TreeItem::child(int row)
 {
-    if (isDebugAllMessage) LOG_DEBUG() << "TreeItem::child(" << row << ")";
+    if (isDebugAllMessage) QLOG_DEBUG() << "TreeItem::child(" << row << ")";
     return childItems.value(row);
 } // end child
 /******************************************************************************
@@ -73,7 +73,7 @@ TreeItem *TreeItem::child(int row)
 *******************************************************************************/
 int TreeItem::childCount() const
 {
-    if (isDebugAllMessage) LOG_DEBUG() << "TreeItem::childCount=" << childItems.count();
+    if (isDebugAllMessage) QLOG_DEBUG() << "TreeItem::childCount=" << childItems.count();
     return childItems.count();
 } // end childCount
 /******************************************************************************
@@ -81,7 +81,7 @@ int TreeItem::childCount() const
 *******************************************************************************/
 int TreeItem::columnCount() const
 {
-    if (isDebugAllMessage) LOG_DEBUG() << "TreeItem::columnCount=" << itemData.count();
+    if (isDebugAllMessage) QLOG_DEBUG() << "TreeItem::columnCount=" << itemData.count();
     return itemData.count();
 } // end columnCount
 /******************************************************************************
@@ -89,7 +89,7 @@ int TreeItem::columnCount() const
 *******************************************************************************/
 bool TreeItem::insertChild(int row, TreeItem *item)
 {
-    if (isDebugMessage) LOG_DEBUG() << "TreeItem::insertChild(" << row << ", item)";
+    if (isDebugMessage) QLOG_DEBUG() << "TreeItem::insertChild(" << row << ", item)";
     if (row < 0 || row > childItems.count()) return false;
 
     childItems.insert(row, item);
@@ -100,7 +100,7 @@ bool TreeItem::insertChild(int row, TreeItem *item)
 *******************************************************************************/
 bool TreeItem::removeChild(int row)
 {
-    if (isDebugMessage) LOG_DEBUG() << "TreeItem::removeChild(" << row << ")";
+    if (isDebugMessage) QLOG_DEBUG() << "TreeItem::removeChild(" << row << ")";
     if (row < 0 || row >= childItems.count()) return false;
 
     delete childItems.takeAt(row);
@@ -111,7 +111,7 @@ bool TreeItem::removeChild(int row)
 *******************************************************************************/
 int TreeItem::row() const
 {
-    if (isDebugAllMessage) LOG_DEBUG() << "TreeItem::row";
+    if (isDebugAllMessage) QLOG_DEBUG() << "TreeItem::row";
     if (parentItem) return parentItem->childItems.indexOf(const_cast<TreeItem*>(this));
 
     return 0;

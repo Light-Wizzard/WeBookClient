@@ -12,10 +12,8 @@
 
 // Qt-AES
 #include "src/QtAES/qaesencryption.h"
-
-// Cute Logger
-#include "src/CuteLogger/Logger.h"
-#include "src/CuteLogger/RollingFileAppender.h"
+// QLogger
+#include "qlogger.h"
 /******************************************************************************
 ** class WeBookCommon                                                         *
 *******************************************************************************/
@@ -241,7 +239,7 @@ AppConfigLocation       "~/.config/<APPNAME>", "/etc/xdg/<APPNAME>"
         QByteArray              myHashKey;                                                  // used for Encryption and Decrytion
         QByteArray              myHashIV;                                                   // used for Encryption and Decrytion
         quint16                 myPort                  = 0;                                // Port Number of WeBookServer
-
+        QLogger::QLoggerManager *manager                = nullptr;
 }; // end class WeBookCommon
 #endif // WEBOOKCOMMON_H
 /* ***************************** End of File ******************************* */

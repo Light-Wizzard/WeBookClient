@@ -12,7 +12,6 @@ TARGET       = "WeBookClient"
 #
 INCLUDEPATH     += .
 INCLUDEPATH     += src/
-INCLUDEPATH     += src/CuteLogger
 INCLUDEPATH     += "${QT_INSTALL_LIBS}/qt"
 #
 DEPENDPATH      += src/
@@ -24,8 +23,8 @@ QT              += widgets
 !win32:QT       *= network
 
 CONFIG          *= qt
-CONFIG          *= "c++11"
-#CONFIG          *= "c++14"
+#CONFIG          *= "c++11"
+CONFIG          *= "c++14"
 #CONFIG         *= "c++1z"
 #CONFIG         *= "c++17"
 #CONFIG         *= "c++2a"
@@ -49,7 +48,8 @@ DEPENDSPATH *= src/
 DEPENDSPATH *= src/QtAES
 
 # Headers files
-HEADERS     *= src/aboutdialog.h 
+HEADERS     *= src/aboutdialog.h
+HEADERS     *= src/qlogger.h
 HEADERS     *= src/webookcommon.h
 HEADERS     *= src/mainwindow.h
 HEADERS     *= src/webookman.h
@@ -58,7 +58,8 @@ HEADERS     *= src/treemodel.h
 HEADERS     *= src/treeviewdragdropmodel.h
 HEADERS     *=
 # Source files
-SOURCES     *= src/aboutdialog.cpp 
+SOURCES     *= src/aboutdialog.cpp
+SOURCES     *= src/qlogger.cpp
 SOURCES     *= src/webookcommon.cpp
 SOURCES     *= src/mainwindow.cpp
 SOURCES     *= src/webookman.cpp
@@ -91,32 +92,6 @@ HEADERS     *= src/QtAES/qaesencryption.h
 #
 #DISTFILES   *= src/QtAES/unit_test/longText.txt
 #RESOURCES   *= src/QtAES/res.qrc
-#
-# Cute Logger
-SOURCES += src/CuteLogger/Logger.cpp
-SOURCES += src/CuteLogger/AbstractAppender.cpp
-SOURCES += src/CuteLogger/AbstractStringAppender.cpp
-SOURCES += src/CuteLogger/ConsoleAppender.cpp
-SOURCES += src/CuteLogger/FileAppender.cpp
-SOURCES += src/CuteLogger/RollingFileAppender.cpp
-#
-HEADERS += src/CuteLogger/Logger.h
-HEADERS += src/CuteLogger/CuteLogger_global.h
-HEADERS += src/CuteLogger/AbstractAppender.h
-HEADERS += src/CuteLogger/AbstractStringAppender.h
-HEADERS += src/CuteLogger/ConsoleAppender.h
-HEADERS += src/CuteLogger/FileAppender.h
-HEADERS += src/CuteLogger/RollingFileAppender.h
-
-win32 {
-    SOURCES += src/CuteLogger/OutputDebugAppender.cpp
-    HEADERS += src/CuteLogger/OutputDebugAppender.h
-}
-
-android {
-    SOURCES += src/CuteLogger/AndroidAppender.cpp
-    HEADERS += src/CuteLogger/AndroidAppender.h
-}
 #
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings

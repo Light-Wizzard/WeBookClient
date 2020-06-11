@@ -131,7 +131,7 @@ QVariant WeBookCommon::getSetting(const QString &key, const QVariant &defaultVal
         setSetting(key, defaultValue);
         return defaultValue;
     }
-    LOG_DEBUG() << "getSettings=" << weBookSettings->value(key, defaultValue);
+    qDebug() << "getSettings=" << weBookSettings->value(key, defaultValue);
     return weBookSettings->value(key, defaultValue);
 } // end getSetting
 /******************************************************************************
@@ -364,7 +364,7 @@ void WeBookCommon::setUserName(const QString &thisUserName)
         #endif
         }
         if (!myUserName.isEmpty()) emit handelSettinChanged();
-        else LOG_ERROR() << "Failed to find User Name";
+        else qWarning() << "Failed to find User Name";
     }
     //
     if (myUserName != thisUserName)
@@ -423,21 +423,21 @@ QString WeBookCommon::setFilePath(QString thisFileName, QString thisDataFolderNa
     {
         // APP_FOLDER/databaseFolderName/databaseFileName
         dataFullPath = dataFileDir.cleanPath(dataFileDir.absoluteFilePath(QString("..%1%2%3%4%5%6").arg(QDir::separator()).arg(constAppFolder).arg(QDir::separator()).arg(thisDataFolderName).arg(QDir::separator()).arg(thisFileName)));
-        LOG_DEBUG() << QString("..%1%2%3%4%5%6").arg(QDir::separator()).arg(constAppFolder).arg(QDir::separator()).arg(thisDataFolderName).arg(QDir::separator()).arg(thisFileName);
+        qDebug() << QString("..%1%2%3%4%5%6").arg(QDir::separator()).arg(constAppFolder).arg(QDir::separator()).arg(thisDataFolderName).arg(QDir::separator()).arg(thisFileName);
     }
     if (!QFile(dataFullPath).exists())
     {
         dataFullPath = dataFileDir.cleanPath(dataFileDir.absoluteFilePath(QString("..%1..%2%3%4%5%6%7").arg(QDir::separator()).arg(QDir::separator()).arg(constAppFolder).arg(QDir::separator()).arg(thisDataFolderName).arg(QDir::separator()).arg(thisFileName)));
-        LOG_DEBUG() << QString("..%1..%2%3%4%5%6%7").arg(QDir::separator()).arg(QDir::separator()).arg(constAppFolder).arg(QDir::separator()).arg(thisDataFolderName).arg(QDir::separator()).arg(thisFileName);
+        qDebug() << QString("..%1..%2%3%4%5%6%7").arg(QDir::separator()).arg(QDir::separator()).arg(constAppFolder).arg(QDir::separator()).arg(thisDataFolderName).arg(QDir::separator()).arg(thisFileName);
     }
     if (!QFile(dataFullPath).exists())
     {
         dataFullPath = dataFileDir.cleanPath(dataFileDir.absoluteFilePath(QString("..%1..%2..%3%4%5%6%7%8").arg(QDir::separator()).arg(QDir::separator()).arg(QDir::separator()).arg(constAppFolder).arg(QDir::separator()).arg(thisDataFolderName).arg(QDir::separator()).arg(thisFileName)));
-        LOG_DEBUG() << QString("..%1..%2..%3%4%5%6%7%8").arg(QDir::separator()).arg(QDir::separator()).arg(QDir::separator()).arg(constAppFolder).arg(QDir::separator()).arg(thisDataFolderName).arg(QDir::separator()).arg(thisFileName);
+        qDebug() << QString("..%1..%2..%3%4%5%6%7%8").arg(QDir::separator()).arg(QDir::separator()).arg(QDir::separator()).arg(constAppFolder).arg(QDir::separator()).arg(thisDataFolderName).arg(QDir::separator()).arg(thisFileName);
     }
     if (!QFile(dataFullPath).exists())
     {
-        LOG_DEBUG() << "setFilePath cannot find folder";
+        qDebug() << "setFilePath cannot find folder";
     }
     return dataFullPath;
 } // end setFilePath
@@ -660,14 +660,12 @@ QString WeBookCommon::getSha()
 *******************************************************************************/
 void WeBookCommon::setWeBookLogger()
 {
-    QString myLogFile = QString("%1%2%3.log").arg(getLogPath()).arg(QDir::separator()).arg(getAppName()).arg(QDateTime::currentDateTime().toString("-Log.yyyy-MM"));
-    RollingFileAppender *rollfile = new RollingFileAppender(myLogFile);
-    //roll every Month
-    rollfile->setDatePattern(RollingFileAppender::MonthlyRollover);
-    // logfile been retained
-    rollfile->setLogFilesLimit(0); // I think 0 or 1 will not delete logs
-    cuteLogger->registerCategoryAppender("WeBookServerID", rollfile);
-    // LOG_CERROR("WeBookServerID") << "roll every month and retain all files";
-    LOG_DEBUG() << "setWeBookLogger";
+    QLogger::myLogFile = QString("%1%2%3.log").arg(getLogPath()).arg(QDir::separator()).arg(getAppName()).arg(QDateTime::currentDateTime().toString("-Log.yyyy-MM"));
+    QLogger::myModule = "WeBookServer";
+
+    manager = QLogger::QLoggerManager::getInstance();
+    manager->addDestination(QLogger::myLogFile, QLogger::myModule, QLogger::LogLevel::Debug);
+
+    qDebug() << "setWeBookLogger";
 } // end setWeBookLogger
 /* ***************************** End of File ******************************* */
