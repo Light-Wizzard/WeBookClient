@@ -2,6 +2,7 @@
 ** WeBook: Pronounced Web-Book, is a Book Content Management System  (BCMS)   *
 *******************************************************************************/
 #include "WeBookCommon.h"
+#include "WeBookCommon.h"
 /******************************************************************************
 ** WeBookCommon Constructor                                                   *
 ** Requires Setting:
@@ -172,7 +173,7 @@ void WeBookCommon::setOrgName(const QString &thisOrgName)
 *******************************************************************************/
 QString WeBookCommon::getOrgDomain()
 {
-    if (myOrganizationName.isEmpty()) myOrganizationDomain = constOrgDomain;
+    if (myOrganizationDomain.isEmpty()) myOrganizationDomain = constOrgDomain;
     return myOrganizationDomain;
 } // end getOrgDomain
 /******************************************************************************
@@ -231,6 +232,10 @@ void WeBookCommon::setIniFileName(const QString &thisIniFileName)
 *******************************************************************************/
 QString WeBookCommon::getLogPath()
 {
+    myLogPath = QString("%1%2%3").arg(getHomePath()).arg(QDir::separator()).arg(getAppName());
+    myLogPath = QString("%1%2%3%4%5").arg(getHomePath()).arg(QDir::separator()).arg(getAppName()).arg(QDir::separator()).arg(getLogFolderName());
+    myLogPath = QString("%1%2%3%4%5").arg(getHomePath()).arg(QDir::separator()).arg(getAppName()).arg(QDir::separator()).arg(getLogFolderName());
+
     if (myLogPath.isEmpty()) myLogPath = QString("%1%2%3%4%5").arg(getHomePath()).arg(QDir::separator()).arg(getAppName()).arg(QDir::separator()).arg(getLogFolderName());
 
     if (!isMakeDir(QString("%1%2%3").arg(getHomePath()).arg(QDir::separator()).arg(getAppName())))
@@ -377,6 +382,16 @@ void WeBookCommon::setUserName(const QString &thisUserName)
         emit handelSettinChanged();
     }
 } // end setUserName
+/******************************************************************************
+** portToString                                                               *
+** Valid Port Numbers range varies on plateform                               *
+** Typical Ports: 8080                                                        *
+*******************************************************************************/
+QString WeBookCommon::portToString()
+{
+    if (myPort == 0) myPort = ConstPort;
+    return QString::number(myPort);
+} // end portToString
 /******************************************************************************
 ** getPort                                                                    *
 ** Valid Port Numbers range varies on plateform                               *
@@ -544,7 +559,7 @@ void WeBookCommon::setCryptoKey(const QString &thisCryptoKey)
 *******************************************************************************/
 QString WeBookCommon::getCryptoIvVector()
 {
-    if (myOrganizationName.isEmpty()) myOrganizationName = constOrgName;
+    if (myCryptoIvVector.isEmpty()) myCryptoIvVector = constCryptoIvVector;
     return myCryptoIvVector;
 } // end getCryptoIvVector
 /******************************************************************************

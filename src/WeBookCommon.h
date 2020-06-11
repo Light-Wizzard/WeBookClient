@@ -39,9 +39,9 @@ class WeBookCommon : public QObject
         const QString constAppName               = "WeBookClient";
         // These next 3 settings will set the Local Data Storage for this App to use, changing it after it has run, will create a new storage containtainer
         // This is the User Name for GitHub account, but does not have to be
-        const QString constOrgName = "Light Wizzard";
+        const QString constOrgName               = "Light-Wizzard";
         // This is the User Name and Project or GitHub URL, but does not have to be
-        const QString constOrgDomain = "https://github.com/Light-Wizzard/WeBookClient";
+        const QString constOrgDomain             = "https://github.com/Light-Wizzard/WeBookClient";
         // I hard code these values here for a reason, not that I would use them, set the Link to include this data, pass in as Arguments
         // These values are for testing only
         // Default WeBookServer Port
@@ -190,6 +190,7 @@ AppConfigLocation       "~/.config/<APPNAME>", "/etc/xdg/<APPNAME>"
         void setCryptoCodeHashish();                                                        // set Crypto Code Hashish (Hash Like: combines both cryptoKey and cryptoIvVector, to form AES Encrytion)
         // Port of WeBookServer
         quint16 getPort();                                                                  // myPort
+        QString portToString();
         void setPort(quint16 thisPort);
         // Logger
         void setWeBookLogger();

@@ -139,7 +139,7 @@ int main(int argc, char *argv[])
     if (theOrgDomain.isEmpty()) theOrgDomain    = weBookCommon->getOrgDomain();
     if (theCryptoKey.isEmpty()) theCryptoKey    = weBookCommon->getCryptoKey();
     if (theCryptoIv.isEmpty())  theCryptoIv     = weBookCommon->getCryptoIvVector();
-    if (thePort.isEmpty())      thePort         = weBookCommon->getPort();
+    if (thePort.isEmpty())      thePort         = weBookCommon->portToString();
     if (theLogPath.isEmpty())   theLogPath      = weBookCommon->getLogPath();
     if (theFilePath.isEmpty())  theFilePath     = weBookCommon->getFilelPath();
     if (theLogFolder.isEmpty()) theLogFolder    = weBookCommon->getLogFolderName();
