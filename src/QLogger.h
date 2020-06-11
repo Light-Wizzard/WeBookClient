@@ -325,46 +325,46 @@ namespace QLogger
 
 
 
-static QString myModule = "";
-static QString myLogFile = "";
+    static QString myModule = "";
+    static QString myLogFile = "";
 
-#if defined(QLOGGER_LIBRARY)
-#  define QLOGGERSHARED_EXPORT Q_DECL_EXPORT
-#else
-#  define QLOGGERSHARED_EXPORT Q_DECL_IMPORT
-#endif
-/******************************************************************************
-** class QLoggerWrapper                                                       *
-*******************************************************************************/
-//class QLOGGERSHARED_EXPORT QLoggerWrapper
-class QLoggerWrapper
-{
-        //Q_DISABLE_COPY(QLoggerWrapper)
+    #if defined(QLOGGER_LIBRARY)
+    #  define QLOGGERSHARED_EXPORT Q_DECL_EXPORT
+    #else
+    #  define QLOGGERSHARED_EXPORT Q_DECL_IMPORT
+    #endif
+    /******************************************************************************
+    ** class QLoggerWrapper                                                       *
+    *******************************************************************************/
+    class QLOGGERSHARED_EXPORT QLoggerWrapper
+    //class QLoggerWrapper
+    {
+            //Q_DISABLE_COPY(QLoggerWrapper)
 
-    public:
-        QLoggerWrapper(LogLevel level, const char *file, int line, const char *function);
-        ~QLoggerWrapper();
+        public:
+            QLoggerWrapper(LogLevel level, const char *file, int line, const char *function);
+            ~QLoggerWrapper();
 
-        void write(const char* msg, ...)
-#if defined(Q_CC_GNU) && !defined(__INSURE__)
-#  if defined(Q_CC_MINGW) && !defined(Q_CC_CLANG)
-        __attribute__ ((format (gnu_printf, 2, 3)))
-#  else
-        __attribute__ ((format (printf, 2, 3)))
-#  endif
-#endif
-        ;
-        void write(const QString &msg);
-        QDebug write();
+            void write(const char* msg, ...)
+            #if defined(Q_CC_GNU) && !defined(__INSURE__)
+            #  if defined(Q_CC_MINGW) && !defined(Q_CC_CLANG)
+            __attribute__ ((format (gnu_printf, 2, 3)))
+            #  else
+            __attribute__ ((format (printf, 2, 3)))
+            #  endif
+            #endif
+            ;
+            void write(const QString &msg);
+            QDebug write();
 
-    private:
-        LogLevel            myLogLevel;
-        const char         *myFileName;
-        int                 myLine;
-        const char         *myFunctionName;
-        QString             myMessage;
+        private:
+            LogLevel            myLogLevel;
+            const char         *myFileName;
+            int                 myLine;
+            const char         *myFunctionName;
+            QString             myMessage;
 
-}; // end class QLoggerWrapper
+    }; // end class QLoggerWrapper
 
 } // end namespace QLogger
 

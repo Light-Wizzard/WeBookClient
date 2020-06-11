@@ -12,8 +12,8 @@
 *******************************************************************************/
 WeBookCommon::WeBookCommon(bool isLog)
 {
-    Q_UNUSED(isLog)
-    //if (isLog) setWeBookLogger();
+    //Q_UNUSED(isLog)
+    if (isLog) setWeBookLogger();
 } // end WeBookCommon
 /******************************************************************************
 ** WeBookCommon Deconstructor                                                 *
@@ -28,16 +28,18 @@ WeBookCommon::~WeBookCommon()
 void WeBookCommon::setWeBookLogger()
 {
 
-    return;
     //qDebug() << "getLogPath=" << getLogPath() << " QDir::separator()=" << QDir::separator() << " date=" << QDateTime::currentDateTime().toString("-Log.yyyy-MM");
 
-    QLogger::myLogFile = QString("%1%2%3.log").arg(getLogPath()).arg(QDir::separator()).arg(getAppName()).arg(QDateTime::currentDateTime().toString("-Log.yyyy-MM"));
-    QLogger::myModule = "WeBookServer";
+    QLogger::myLogFile = QString("%1%2%3%4.log").arg(getLogPath()).arg(QDir::separator()).arg(getAppName()).arg(QDateTime::currentDateTime().toString("-Log.yyyy-MM"));
+    QLogger::myModule = "WeBookClient";
+
+    //qDebug() << "QLogger::myLogFile=" << QLogger::myLogFile; // ${HOME}/WeBookClient/logs/WeBookClient.log
+    //qDebug() << "QLogger::myModule=" << QLogger::myModule;   // WeBookClient
 
     manager = QLogger::QLoggerManager::getInstance();
     manager->addDestination(QLogger::myLogFile, QLogger::myModule, QLogger::LogLevel::Debug);
 
-    qDebug() << "setWeBookLogger";
+    QLOG_DEBUG() << "setWeBookLogger";
 } // end setWeBookLogger
 /******************************************************************************
 ** weBookSetter                                                               *

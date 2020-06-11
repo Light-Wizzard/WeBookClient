@@ -168,7 +168,7 @@ int main(int argc, char *argv[])
     weBookLogger->onLogFileChanged();
     QObject::connect(weBookLogger, &WeBookLogger::handelLogFileChanged, &WeBookLogger::onLogFileChanged);
     */
-    qInstallMessageHandler(WeBookMessenger); // Install the Message handler
+    //qInstallMessageHandler(WeBookMessenger); // Install the Message handler
     weBookWindow->show();
     // QApplication::setStyle(QStyleFactory::create("fusion"));
     // QStyleFactory::keys= ("Windows", "Fusion")
