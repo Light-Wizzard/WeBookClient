@@ -48,25 +48,41 @@ DEPENDSPATH *= src/
 DEPENDSPATH *= src/QtAES
 
 # Headers files
-HEADERS     *= src/aboutdialog.h
-HEADERS     *= src/webookcommon.h
-HEADERS     *= src/mainwindow.h
-HEADERS     *= src/webookman.h
-HEADERS     *= src/treeitem.h
-HEADERS     *= src/treemodel.h
-HEADERS     *= src/treeviewdragdropmodel.h
+HEADERS     *= \
+    src/AboutDialog.h
+HEADERS     *= \
+    src/WeBookCommon.h
+HEADERS     *= \
+    src/MainWindow.h
+HEADERS     *= \
+    src/WeBookMan.h
+HEADERS     *= \
+    src/TreeItem.h
+HEADERS     *= \
+    src/TreeModel.h
+HEADERS     *= \
+    src/TreeViewDragDropModel.h
 # Source files
-SOURCES     *= src/aboutdialog.cpp
-SOURCES     *= src/webookcommon.cpp
-SOURCES     *= src/mainwindow.cpp
-SOURCES     *= src/webookman.cpp
-SOURCES     *= src/treeitem.cpp
-SOURCES     *= src/treemodel.cpp
-SOURCES     *= src/treeviewdragdropmodel.cpp
+SOURCES     *= \
+    src/AboutDialog.cpp
+SOURCES     *= \
+    src/WeBookCommon.cpp
+SOURCES     *= \
+    src/MainWindow.cpp
+SOURCES     *= \
+    src/WeBookMan.cpp
+SOURCES     *= \
+    src/TreeItem.cpp
+SOURCES     *= \
+    src/TreeModel.cpp
+SOURCES     *= \
+    src/TreeViewDragDropModel.cpp
 SOURCES     *= src/main.cpp
 # Ui Form(s)
-FORMS       += src/mainwindow.ui
-FORMS       += src/aboutdialog.ui
+FORMS       += \
+    src/MainWindow.ui
+FORMS       += \
+    src/AboutDialog.ui
 #
 DISTFILES   += data/WeBookClient.ini
 DISTFILES   += data/WeBook.toc
@@ -79,18 +95,22 @@ RESOURCES   += WeBookClient.qrc
 ###############################################################################
 # https://github.com/Light-Wizzard/QLogger                                    #
 ###############################################################################
-HEADERS     *= src/qlogger.h
-SOURCES     *= src/qlogger.cpp
+HEADERS     *= \
+    src/QLogger.h
+SOURCES     *= \
+    src/QLogger.cpp
 ###############################################################################
 # https://github.com/bricke/Qt-AES                                            #
 ###############################################################################
 #QT          *= testlib
 #
-SOURCES     *= src/QtAES/qaesencryption.cpp
+SOURCES     *= \
+    src/QtAES/QAESEncryption.cpp
 #SOURCES     *= src/QtAES/maintest.cpp
 #SOURCES     *= src/QtAES/unit_test/aestest.cpp
 #
-HEADERS     *= src/QtAES/qaesencryption.h
+HEADERS     *= \
+    src/QtAES/QAESEncryption.h
 #HEADERS     *= src/QtAES/unit_test/aestest.h
 #
 #DISTFILES   *= src/QtAES/unit_test/longText.txt

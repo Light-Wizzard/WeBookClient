@@ -1,7 +1,7 @@
 /******************************************************************************
 ** WeBook: Pronounced Web Book, is a Book Content Management System  (BCMS)   *
 *******************************************************************************/
-#include "mainwindow.h"
+#include "MainWindow.h"
 
 //static QFile myLogFileHandle;
 //static QString myLogPathFileName = "WeBookClient.log";

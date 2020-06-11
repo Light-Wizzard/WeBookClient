@@ -56,7 +56,7 @@
     #endif
 #endif
 
-#include "webookcommon.h"
+#include "WeBookCommon.h"
 
 #ifdef Q_OS_MAC
     const QString rsrcPath = ":/images/mac";
@@ -83,10 +83,10 @@ QT_FORWARD_DECLARE_CLASS(QPushButton)
 QT_FORWARD_DECLARE_CLASS(QTextEdit)
 QT_FORWARD_DECLARE_CLASS(QSqlError)
 
-#include "webookman.h"
-#include "treemodel.h"
-#include "treeviewdragdropmodel.h"
-#include "aboutdialog.h"
+#include "WeBookMan.h"
+#include "TreeModel.h"
+#include "TreeViewDragDropModel.h"
+#include "AboutDialog.h"
 
 // This file gets created at Build time
 #include "ui_mainwindow.h"

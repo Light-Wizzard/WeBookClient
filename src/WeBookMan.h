@@ -6,7 +6,7 @@
 #include <QStringList>
 #include <QtGui>
 
-#include "webookcommon.h"
+#include "WeBookCommon.h"
 
 /******************************************************************************
 ** class WeBookMan : public QAbstractListModel                                *

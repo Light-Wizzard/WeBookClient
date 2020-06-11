@@ -10,9 +10,9 @@
 #include <QModelIndex>
 #include <QVariant>
 
-#include "webookcommon.h"
+#include "WeBookCommon.h"
 
-#include "treeitem.h"
+#include "TreeItem.h"
 
 class TreeItem;
 /******************************************************************************

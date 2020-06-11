@@ -24,6 +24,7 @@ I used the Qt Rich Text Editor Project and documentation.
 [Tables](#Tables)
 [Hyperlinks](#Hyperlinks)
 [Undo and Redo](#Undo-and-Redo)
+[QLogger](#QLogger)
 
 ## Status
 
@@ -219,5 +220,21 @@ together to make editing a more comfortable experience for the user.
 
 *Try making changes to this document and press `Ctrl+Z` to undo them. You can
 always recover the original contents of the document.*
+
+
+## QLogger
+
+I Forked QLogger from https://github.com/francescmm/QLogger,
+I call it in WeBookCommon.cpp,
+
+```c
+QLogger::myLogFile = QString("%1%2%3.log").arg(getLogPath()).arg(QDir::separator()).arg(getAppName()).arg(QDateTime::currentDateTime().toString("-Log.yyyy-MM"));
+QLogger::myModule = "WeBookServer";
+
+manager = QLogger::QLoggerManager::getInstance();
+manager->addDestination(QLogger::myLogFile, QLogger::myModule, QLogger::LogLevel::Debug);
+```
+
+Currently my part of the code is broken, actually its new code that that has issues with arguments, in work.
 
 ## End of Read me.

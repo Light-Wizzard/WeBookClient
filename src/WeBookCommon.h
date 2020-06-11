@@ -12,9 +12,9 @@
 #include <QProcess>
 
 // Qt-AES
-#include "src/QtAES/qaesencryption.h"
+#include "src/QtAES/QAESEncryption.h"
 // QLogger
-#include "qlogger.h"
+#include "QLogger.h"
 /******************************************************************************
 ** class WeBookCommon                                                         *
 *******************************************************************************/

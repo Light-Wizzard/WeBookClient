@@ -7,9 +7,9 @@
 #include <QStringList>
 #include <QtGui>
 
-#include "webookcommon.h"
+#include "WeBookCommon.h"
 
-#include "treemodel.h"
+#include "TreeModel.h"
 
 /******************************************************************************
 ** class TreeViewDragDropModel                                                *

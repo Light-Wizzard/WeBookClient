@@ -2,7 +2,7 @@
 ** WeBook: Pronounced Web-Book, is a Book Content Management System  (BCMS)   *
 ** Drag & Drop Model                                                          *
 *******************************************************************************/
-#include "treemodel.h"
+#include "TreeModel.h"
 /******************************************************************************
 ** TreeModel Constructor                                                      *
 ** The QModelIndex class is used to locate data in a data model.              *

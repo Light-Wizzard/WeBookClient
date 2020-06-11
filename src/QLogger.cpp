@@ -1,4 +1,4 @@
-#include "qlogger.h"
+#include "QLogger.h"
 /****************************************************************************************
  ** QLogger is a library to register and print logs into a file.
  ** Copyright (C) 2018  Francesc Martinez <es.linkedin.com/in/cescmm/en>

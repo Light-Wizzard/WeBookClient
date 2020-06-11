@@ -9,7 +9,7 @@
 #include <QVariant>
 #include <QtGui>
 
-#include "webookcommon.h"
+#include "WeBookCommon.h"
 
 /******************************************************************************
 ** class TreeItem                                                             *
