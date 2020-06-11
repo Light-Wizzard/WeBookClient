@@ -1457,10 +1457,8 @@ void MainWindow::writeSettings()
     weBookCommon->setSetting(constCurrentWeBook, getSetCurrentBook());
     // Current Chapter
     weBookCommon->setSetting(constCurrentWeChapter, getSetCurrentChapter());
-
     // Geometry
     weBookCommon->setGeometry(pos(), size(), isMaximized(), isMinimized());
-    //
     //
     weBookCommon->setSetting(weBookCommon->ConstSettingsIniFileName, ui->editSettingsIniFileName->text());
     weBookCommon->setSetting(weBookCommon->ConstSettingsApplicationName, ui->editSettingsApplicationName->text());
@@ -1513,18 +1511,15 @@ void MainWindow::readSettings()
     // Current Chapter
     myCurrentChapter = weBookCommon->getSetting(constCurrentWeChapter, myCurrentChapter).toString();
     // Geometry
+    QSize mySize = weBookCommon->getGeometrySize(weBookCommon->ConstGeometrySize);
+    QPoint myPos = weBookCommon->getGeometryPos(weBookCommon->ConstGeometryPos);
+    resize(mySize);
+    move(myPos);
     //
     if (isUiSet)
     {
-        resize(weBookCommon->getGeometrySize(QSize(ui->centralwidget->geometry().width(), ui->centralwidget->geometry().height())).toSize());
-        move(weBookCommon->getGeometryPos(QPoint(defaultGeometryPositionX, defaultGeometryPositionY)).toPoint());
         if(weBookCommon->getGeometryMax(isMaximized())) setWindowState(windowState() | Qt::WindowMaximized);
         if(weBookCommon->getGeometryMin(isMinimized())) setWindowState(windowState() | Qt::WindowMinimized);
-    }
-    else
-    {
-        resize(weBookCommon->getGeometrySize(QSize(defaultGeometryWidth, defaultGeometryHeight)).toSize());
-        move(weBookCommon->getGeometryPos(QPoint(defaultGeometryPositionX, defaultGeometryPositionY)).toPoint());
     }
     //
     // Set Book Active

@@ -118,10 +118,10 @@ bool WeBookCommon::isMakeDir(const QString &thisPath)
 /******************************************************************************
 ** isSetting by key                                                           *
 *******************************************************************************/
-bool WeBookCommon::isSetting(const QString &thisCryptoKey)
+bool WeBookCommon::isSetting(const QString &thisFieldName)
 {
     if (weBookSettings == nullptr)  weBookSetter();
-    return weBookSettings->contains(thisCryptoKey);
+    return weBookSettings->contains(thisFieldName);
 } // end isSetting
 /******************************************************************************
 ** getSetting by key and  default Value                                       *
@@ -130,7 +130,7 @@ bool WeBookCommon::isSetting(const QString &thisCryptoKey)
 QVariant WeBookCommon::getSetting(const QString &key, const QVariant &defaultValue)
 {
     if (weBookSettings == nullptr) weBookSetter();
-    if (! isSetting(key))
+    if (!isSetting(key))
     {
         setSetting(key, defaultValue);
         return defaultValue;
@@ -143,10 +143,10 @@ QVariant WeBookCommon::getSetting(const QString &key, const QVariant &defaultVal
 ** setSetting("this_key", "to this");                                         *
 ** QVariant is used for value, so it can be anything it supports              *
 *******************************************************************************/
-void WeBookCommon::setSetting(const QString &thisKey, const QVariant &thisValue)
+void WeBookCommon::setSetting(const QString &thisKey, const QVariant &defaultValue)
 {
     if (weBookSettings == nullptr) weBookSetter();
-    weBookSettings->setValue(thisKey, thisValue);
+    weBookSettings->setValue(thisKey, defaultValue);
 } // end setSetting
 /******************************************************************************
 ** getOrgName                                                                 *
@@ -355,22 +355,21 @@ void WeBookCommon::setUserName(const QString &thisUserName)
         if (myUserName.isEmpty()) myUserName = qgetenv("USERNAME");
         if (myUserName.isEmpty())
         {
-        #if   defined(Q_OS_ANDROID)
-        #elif defined(Q_OS_BLACKBERRY)
-        #elif defined(Q_OS_IOS)
-        #elif defined(Q_OS_MAC)
-        #elif defined(Q_OS_WINCE)
-        #elif defined(Q_OS_WIN)
-//            if (myUserName.isEmpty())
-//            {
-//                char acUserName[MAX_USERNAME];
-//                DWORD nUserName = sizeof(acUserName);
-//                if (GetUserName(acUserName, &nUserName)) myUserName = acUserName;
-//            }
-        #elif defined(Q_OS_LINUX)
-        #elif defined(Q_OS_UNIX)
-        #else
-        #endif
+            // FIXME Add OS Specific ways to get User Name if above fails
+            #if   defined(Q_OS_ANDROID)
+            #elif defined(Q_OS_BLACKBERRY)
+            #elif defined(Q_OS_IOS)
+            #elif defined(Q_OS_MAC)
+            #elif defined(Q_OS_WINCE)
+            #elif defined(Q_OS_WIN)
+            // FIXME add header for MAX_USERNAME DWORD
+            //  char acUserName[MAX_USERNAME];
+            //  DWORD nUserName = sizeof(acUserName);
+            //  if (GetUserName(acUserName, &nUserName)) myUserName = acUserName;
+            #elif defined(Q_OS_LINUX)
+            #elif defined(Q_OS_UNIX)
+            #else
+            #endif
         }
         if (!myUserName.isEmpty()) emit handelSettinChanged();
         else qWarning() << "Failed to find User Name";
@@ -480,16 +479,16 @@ void WeBookCommon::setGeometry(QPoint thisPos, QSize thisSize, bool isMax, bool 
 /******************************************************************************
 ** getGeometryPos                                                             *
 *******************************************************************************/
-QVariant WeBookCommon::getGeometryPos(const QPoint &thisDefaultValue)
+QPoint WeBookCommon::getGeometryPos(const QPoint &thisDefaultValue)
 {
-    return getSetting(ConstSettingsGeometryPos, thisDefaultValue);
+    return getSetting(ConstSettingsGeometryPos, thisDefaultValue).toPoint();
 } // end getGeometryPos
 /******************************************************************************
 ** getGeometrySize                                                            *
 *******************************************************************************/
-QVariant WeBookCommon::getGeometrySize(const QSize &thisDefaultValue)
+QSize WeBookCommon::getGeometrySize(const QSize &thisDefaultValue)
 {
-    return getSetting(ConstSettingsGeometrySize, thisDefaultValue);
+    return getSetting(ConstSettingsGeometrySize, thisDefaultValue).toSize();
 } // end getGeometrySize
 /******************************************************************************
 ** getGeometryMax                                                             *
@@ -512,8 +511,8 @@ QString WeBookCommon::enCodeSecret(const QString &thisSecretString)
 {
     setCryptoCodeHashish();
     QAESEncryption encryption(QAESEncryption::AES_256, QAESEncryption::CBC);
-    //
-    QByteArray encodeText = encryption.encode(thisSecretString.toLocal8Bit(), myHashKey, myHashIV);
+    // FIXME Var for Debugging only
+    QByteArray encodeText = encryption.encode(thisSecretString.toLocal8Bit(), getHashKey(), getHashKey());
     return encodeText;
 } // end enCodeSecret
 /******************************************************************************
@@ -523,8 +522,8 @@ QString WeBookCommon::deCodeSecret(const QString &thisSecretString)
 {
     setCryptoCodeHashish();
     QAESEncryption encryption(QAESEncryption::AES_256, QAESEncryption::CBC);
-    //
-    QByteArray decodeText = encryption.decode(thisSecretString.toUtf8(), myHashKey, myHashIV);
+    // FIXME Var for Debugging only
+    QByteArray decodeText = encryption.decode(thisSecretString.toUtf8(), getHashKey(), getHashKey());
     QString decodedString = QString(encryption.removePadding(decodeText));
     return decodedString;
 } // end deCodeSecret
@@ -573,6 +572,22 @@ void WeBookCommon::setCryptoIvVector(const QString &thisCryptoIvVector)
     }
 } // end setCryptoIvVector
 /******************************************************************************
+** getHashKey                                                                 *
+*******************************************************************************/
+QByteArray WeBookCommon::getHashKey()
+{
+    if (myHashKey.isEmpty()) getSha();
+    return myHashKey;
+} // end getHashKey
+/******************************************************************************
+** getHashIV                                                                  *
+*******************************************************************************/
+QByteArray WeBookCommon::getHashIV()
+{
+    if (myHashIV.isEmpty()) getMd();
+    return myHashIV;
+} // end getHashIV
+/******************************************************************************
 ** getKeccak                                                                  *
 *******************************************************************************/
 QString WeBookCommon::getKeccak(const QString &thisIvVector)
@@ -607,12 +622,12 @@ QString WeBookCommon::getMd()
     switch (myCryptoMd)
     {
         case PasswordCryptoHashMd4:
-            securePassword = QString(QCryptographicHash::hash((myCryptoKey.toUtf8()), QCryptographicHash::Md4).toHex());
-            myHashIV         = QCryptographicHash::hash(myCryptoIvVector.toLocal8Bit(), QCryptographicHash::Md4);
+            securePassword = QString(QCryptographicHash::hash((getCryptoKey().toUtf8()), QCryptographicHash::Md4).toHex());
+            myHashIV       = QCryptographicHash::hash(getCryptoIvVector().toLocal8Bit(), QCryptographicHash::Md4);
             break;
         case PasswordCryptoHashMd5:
-            securePassword = QString(QCryptographicHash::hash((myCryptoKey.toUtf8()), QCryptographicHash::Md5).toHex());
-            myHashIV         = QCryptographicHash::hash(myCryptoIvVector.toLocal8Bit(), QCryptographicHash::Md5);
+            securePassword = QString(QCryptographicHash::hash((getCryptoKey().toUtf8()), QCryptographicHash::Md5).toHex());
+            myHashIV       = QCryptographicHash::hash(getCryptoIvVector().toLocal8Bit(), QCryptographicHash::Md5);
             break;
     }
     return securePassword;
@@ -636,40 +651,40 @@ QString WeBookCommon::getSha()
     switch (myCryptoSha)
     {
         case PasswordCryptoHashSha1:
-            securePassword = QString(QCryptographicHash::hash((myCryptoIvVector.toUtf8()), QCryptographicHash::Sha1).toHex());
-            myHashKey        = QCryptographicHash::hash(myCryptoKey.toLocal8Bit(),           QCryptographicHash::Sha1);
+            securePassword = QString(QCryptographicHash::hash((getCryptoIvVector().toUtf8()), QCryptographicHash::Sha1).toHex());
+            myHashKey      = QCryptographicHash::hash(getCryptoKey().toLocal8Bit(),           QCryptographicHash::Sha1);
             break;
         case PasswordCryptoHashSha224:
-            securePassword = QString(QCryptographicHash::hash((myCryptoIvVector.toUtf8()), QCryptographicHash::Sha224).toHex());
-            myHashKey        = QCryptographicHash::hash(myCryptoKey.toLocal8Bit(),           QCryptographicHash::Sha224);
+            securePassword = QString(QCryptographicHash::hash((getCryptoIvVector().toUtf8()), QCryptographicHash::Sha224).toHex());
+            myHashKey      = QCryptographicHash::hash(getCryptoKey().toLocal8Bit(),           QCryptographicHash::Sha224);
             break;
         case PasswordCryptoHashSha256:
-            securePassword = QString(QCryptographicHash::hash((myCryptoIvVector.toUtf8()), QCryptographicHash::Sha256).toHex());
-            myHashKey        = QCryptographicHash::hash(myCryptoKey.toLocal8Bit(),           QCryptographicHash::Sha256);
+            securePassword = QString(QCryptographicHash::hash((getCryptoIvVector().toUtf8()), QCryptographicHash::Sha256).toHex());
+            myHashKey      = QCryptographicHash::hash(getCryptoKey().toLocal8Bit(),           QCryptographicHash::Sha256);
             break;
         case PasswordCryptoHashSha384:
-            securePassword = QString(QCryptographicHash::hash((myCryptoIvVector.toUtf8()), QCryptographicHash::Sha384).toHex());
-            myHashKey        = QCryptographicHash::hash(myCryptoKey.toLocal8Bit(),           QCryptographicHash::Sha384);
+            securePassword = QString(QCryptographicHash::hash((getCryptoIvVector().toUtf8()), QCryptographicHash::Sha384).toHex());
+            myHashKey      = QCryptographicHash::hash(getCryptoKey().toLocal8Bit(),           QCryptographicHash::Sha384);
             break;
         case PasswordCryptoHashSha512:
-            securePassword = QString(QCryptographicHash::hash((myCryptoIvVector.toUtf8()), QCryptographicHash::Sha512).toHex());
-            myHashKey        = QCryptographicHash::hash(myCryptoKey.toLocal8Bit(),           QCryptographicHash::Sha512);
+            securePassword = QString(QCryptographicHash::hash((getCryptoIvVector().toUtf8()), QCryptographicHash::Sha512).toHex());
+            myHashKey      = QCryptographicHash::hash(getCryptoKey().toLocal8Bit(),           QCryptographicHash::Sha512);
             break;
         case PasswordCryptoHashSha3_224:
-            securePassword = QString(QCryptographicHash::hash((myCryptoIvVector.toUtf8()), QCryptographicHash::Sha3_224).toHex());
-            myHashKey        = QCryptographicHash::hash(myCryptoKey.toLocal8Bit(),           QCryptographicHash::Sha3_224);
+            securePassword = QString(QCryptographicHash::hash((getCryptoIvVector().toUtf8()), QCryptographicHash::Sha3_224).toHex());
+            myHashKey      = QCryptographicHash::hash(getCryptoKey().toLocal8Bit(),           QCryptographicHash::Sha3_224);
             break;
         case PasswordCryptoHashSha3_256:
-            securePassword = QString(QCryptographicHash::hash((myCryptoIvVector.toUtf8()), QCryptographicHash::Sha3_256).toHex());
-            myHashKey        = QCryptographicHash::hash(myCryptoKey.toLocal8Bit(),           QCryptographicHash::Sha3_256);
+            securePassword = QString(QCryptographicHash::hash((getCryptoIvVector().toUtf8()), QCryptographicHash::Sha3_256).toHex());
+            myHashKey      = QCryptographicHash::hash(getCryptoKey().toLocal8Bit(),           QCryptographicHash::Sha3_256);
             break;
         case PasswordCryptoHashSha3_384:
-            securePassword = QString(QCryptographicHash::hash((myCryptoIvVector.toUtf8()), QCryptographicHash::Sha3_384).toHex());
-            myHashKey        = QCryptographicHash::hash(myCryptoKey.toLocal8Bit(),           QCryptographicHash::Sha3_384);
+            securePassword = QString(QCryptographicHash::hash((getCryptoIvVector().toUtf8()), QCryptographicHash::Sha3_384).toHex());
+            myHashKey      = QCryptographicHash::hash(getCryptoKey().toLocal8Bit(),           QCryptographicHash::Sha3_384);
             break;
         case PasswordCryptoHashSha3_512:
-            securePassword = QString(QCryptographicHash::hash((myCryptoIvVector.toUtf8()), QCryptographicHash::Sha3_512).toHex());
-            myHashKey        = QCryptographicHash::hash(myCryptoKey.toLocal8Bit(),           QCryptographicHash::Sha3_512);
+            securePassword = QString(QCryptographicHash::hash((getCryptoIvVector().toUtf8()), QCryptographicHash::Sha3_512).toHex());
+            myHashKey      = QCryptographicHash::hash(getCryptoKey().toLocal8Bit(),           QCryptographicHash::Sha3_512);
             break;
     }
     return securePassword;

@@ -138,6 +138,8 @@ AppConfigLocation       "~/.config/<APPNAME>", "/etc/xdg/<APPNAME>"
         const QString ConstSettingsGeometrySize    = "SettingsGeometrySize";                // This holds the Screens Geometry
         const QString ConstSettingsGeometryMax     = "SettingsGeometryMax";                 // This holds the Screens Geometry
         const QString ConstSettingsGeometryMin     = "SettingsGeometryMin";                 // This holds the Screens Geometry
+        const QPoint  ConstGeometryPos             = QPoint(10, 10);                        // Top, Left
+        const QSize   ConstGeometrySize            = QSize(1000, 666);                      // Width x Height
         // Enumerators
         enum PasswordCryptoMd     { PasswordCryptoHashMd4, PasswordCryptoHashMd5 }; // Used for data encyption
         enum PasswordCryptoSha    { PasswordCryptoHashSha1, PasswordCryptoHashSha224, PasswordCryptoHashSha256, PasswordCryptoHashSha384, PasswordCryptoHashSha512, PasswordCryptoHashSha3_224, PasswordCryptoHashSha3_256, PasswordCryptoHashSha3_384, PasswordCryptoHashSha3_512 };
@@ -172,8 +174,8 @@ AppConfigLocation       "~/.config/<APPNAME>", "/etc/xdg/<APPNAME>"
         void setUserName(const QString &thisUserName);
         // QSetter
         void weBookSetter();                                                                // QSetter
-        bool     isSetting(const QString &thisCryptoKey);                                   // isSetting
-        void     setSetting(const QString &thisKey, const QVariant &thisValue);             // setSetting
+        bool     isSetting(const QString &thisFieldName);                                   // isSetting
+        void     setSetting(const QString &thisKey, const QVariant &defaultValue);          // setSetting
         QVariant getSetting(const QString &key, const QVariant &defaultValue = QVariant()); // getSetting
         // Crypto Key
         QString getCryptoKey();                                                             // myCryptoKey
@@ -181,6 +183,9 @@ AppConfigLocation       "~/.config/<APPNAME>", "/etc/xdg/<APPNAME>"
         // Crypto IV Vector
         QString getCryptoIvVector();                                                        // myCryptoIvVector
         void setCryptoIvVector(const QString &thisCryptoIvVector);
+        //
+        QByteArray getHashKey();
+        QByteArray getHashIV();
         // Crypto
         QString getMd();                                                                    // PasswordCryptoMd     myCryptoMd
         QString getSha();                                                                   // PasswordCryptoSha    myCryptoSha
@@ -200,8 +205,8 @@ AppConfigLocation       "~/.config/<APPNAME>", "/etc/xdg/<APPNAME>"
         QString combinePathFileName(QString thisPath, QString thisFileName);                //
         // Screen Geometry
         void     setGeometry(QPoint thisPos, QSize thisSize, bool isMax, bool isMin);       // Screen Geometry
-        QVariant getGeometryPos(const QPoint &thisDefaultValue);
-        QVariant getGeometrySize(const QSize &thisDefaultValue);
+        QPoint   getGeometryPos(const QPoint &thisDefaultValue);
+        QSize    getGeometrySize(const QSize &thisDefaultValue);
         bool     getGeometryMax(const bool &thisDefaultValue);
         bool     getGeometryMin(const bool &thisDefaultValue);
         // File and Path
