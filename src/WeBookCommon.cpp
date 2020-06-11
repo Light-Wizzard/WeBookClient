@@ -465,7 +465,7 @@ QString WeBookCommon::setFilePath(QString thisFileName, QString thisDataFolderNa
 *******************************************************************************/
 QString WeBookCommon::getFullFilePathName(QString thisFileName)
 {
-    return QString("%1%2%3").arg(getFilelPath()).arg(QDir::separator()).arg(getAppName()).arg(QDir::separator()).arg(thisFileName);
+    return QString("%1%2%3%4%5").arg(getFilelPath()).arg(QDir::separator()).arg(getAppName()).arg(QDir::separator()).arg(thisFileName);
 } // end getFullFilePathName
 /******************************************************************************
 ** setGeometry                                                                *
