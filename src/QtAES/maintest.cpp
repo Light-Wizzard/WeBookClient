@@ -1,7 +1,10 @@
 #include <QCoreApplication>
 #include <QTest>
 #include "unit_test/aestest.h"
-
+/******************************************************************************
+** maintest                                                                   *
+** QAESEncryption                                                             *
+*******************************************************************************/
 int maintest(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
@@ -10,5 +13,5 @@ int maintest(int argc, char *argv[])
     QTest::qExec(&test1);
     return 0;
 }
-
+/* ***************************** End of File ******************************* */
 

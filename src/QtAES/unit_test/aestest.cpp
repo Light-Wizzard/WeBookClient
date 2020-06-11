@@ -7,7 +7,7 @@
 #include <QByteArray>
 #include <QCryptographicHash>
 #include <QFile>
-#include "qaesencryption.h"
+#include "QAESEncryption.h"
 /******************************************************************************
 ** initTestCase                                                               *
 *******************************************************************************/

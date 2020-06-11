@@ -4,8 +4,9 @@
 #include "MainWindow.h"
 
 //static QFile myLogFileHandle;
-//static QString myLogPathFileName = "WeBookClient.log";
-//static bool isLogToFile = false;
+static QString myLogPathFileName = "WeBookClient.log";
+static QString myAppName = "WeBookClient";
+static bool isLogToFile = false;
 
 /******************************************************************************
 ** mainEventHandler                                                           *
@@ -28,21 +29,17 @@ void mainEventHandler(int eventValue)
 ** ensuring thread safe way to open and write to a log file.                  *
 ** Note: I close the file in mainEventHandler.                                *
 *******************************************************************************/
-//void WeBookMessenger(QtMsgType type, const QMessageLogContext &context, const QString &msg)
-//{
-//    QHash<QtMsgType, QString> msgLevelHash({{QtDebugMsg, "Debug"}, {QtInfoMsg, "Info"}, {QtWarningMsg, "Warning"}, {QtCriticalMsg, "Critical"}, {QtFatalMsg, "Fatal"}});
-//    QString txt = QString("%1 %2: %3 (%4:%5, %6)").arg(QTime::currentTime().toString("hh:mm:ss.zzz")).arg(msgLevelHash[type]).arg(msg).arg(context.file).arg(context.line).arg(context.function);
-//    if (isLogToFile)
-//    {
+void WeBookMessenger(QtMsgType type, const QMessageLogContext &context, const QString &msg)
+{
+    QHash<QtMsgType, QString> msgLevelHash({{QtDebugMsg, "Debug"}, {QtInfoMsg, "Info"}, {QtWarningMsg, "Warning"}, {QtCriticalMsg, "Critical"}, {QtFatalMsg, "Fatal"}});
+    QString txt = QString("%1 %2: %3 (%4:%5, %6)").arg(QTime::currentTime().toString("hh:mm:ss.zzz")).arg(msgLevelHash[type]).arg(msg).arg(context.file).arg(context.line).arg(context.function);
+    if (isLogToFile)
+    {
+        QLogger::myLogFile = QString("%1%2%3.log").arg(myLogPathFileName).arg(QDir::separator()).arg(myAppName).arg(QDateTime::currentDateTime().toString("-Log.yyyy-MM"));
+        QLogger::myModule = "WeBookClient";
 
-//        RollingFileAppender *rollfile = new RollingFileAppender(QString("%1.log").arg(myLogPathFileName));
-//        //roll every minute
-//        rollfile->setDatePattern(RollingFileAppender::MonthlyRollover);
-//        // logfile been retained
-//        rollfile->setLogFilesLimit(0); // I think 0 or 1 will not delete logs
-//        cuteLogger->registerCategoryAppender("WeBookServerID", rollfile);
-//        // LOG_CERROR("WeBookServerID") << "roll every month and retain all files";
-//        LOG_INFO() << txt;
+        QLogger::QLoggerManager *manager = QLogger::QLoggerManager::getInstance();
+        manager->addDestination(QLogger::myLogFile, QLogger::myModule, QLogger::LogLevel::Debug);
 
 //        if (!myLogFileHandle.isOpen())
 //        {
@@ -51,15 +48,15 @@ void mainEventHandler(int eventValue)
 //        }
 //        QTextStream ts(&myLogFileHandle);
 //        ts << txt << endl;
-//    }
-//    else
-//    {
-//        QByteArray formattedMessage = txt.toLocal8Bit();
-//        fprintf(stderr, "%s\n", formattedMessage.constData());
-//        fflush(stderr);
-//    }
-//    if (type == QtFatalMsg) abort();
-//} // end
+    }
+    else
+    {
+        QByteArray formattedMessage = txt.toLocal8Bit();
+        fprintf(stderr, "%s\n", formattedMessage.constData());
+        fflush(stderr);
+    }
+    if (type == QtFatalMsg) abort();
+} // end
 /******************************************************************************
 ** main                                                                       *
 ** This is a Qt GUI Application written to be a Conent Manager                *
@@ -102,15 +99,15 @@ int main(int argc, char *argv[])
     parser.addVersionOption();
     // a b c d f i k l n p
     QCommandLineOption a_opt({"a","appname"},       QApplication::translate("main", "Application Name if you want it different then executable name."), "appname");
+    QCommandLineOption b_opt({"b","blogfolder"},    QApplication::translate("main", "The Log Folder Name: logs"), "blogfolder");
     QCommandLineOption c_opt({"c","cryptoiv"},      QApplication::translate("main", "The Crypto IV Vector String"), "cryptoiv");
-    QCommandLineOption d_opt({"d","domain"},        QApplication::translate("main", "The Organization Domain URL: https://github.com/USERNAME/PROJECT"), "orgdomain");
-    QCommandLineOption i_opt({"i","ini"},           QApplication::translate("main", "The Ini File Name: WeBookClient.ini"), "inifile");
+    QCommandLineOption d_opt({"d","orgdomain"},     QApplication::translate("main", "The Organization Domain URL: https://github.com/USERNAME/PROJECT"), "orgdomain");
+    QCommandLineOption f_opt({"f","filepath"},      QApplication::translate("main", "The Full Path to Files like ini: /path"), "filepath");
+    QCommandLineOption i_opt({"i","inifile"},       QApplication::translate("main", "The Ini File Name: WeBookClient.ini"), "inifile");
     QCommandLineOption k_opt({"k","key"},           QApplication::translate("main", "The Crypto Key String"), "key");
     QCommandLineOption l_opt({"l","logpath"},       QApplication::translate("main", "The Full Path to Log Fils: /path"), "logpath");
-    QCommandLineOption n_opt({"n","name"},          QApplication::translate("main", "The Organization Name going to be the Window Title"), "orgname");
+    QCommandLineOption n_opt({"n","orgname"},       QApplication::translate("main", "The Organization Name going to be the Window Title"), "orgname");
     QCommandLineOption p_opt({"p","port"},          QApplication::translate("main", "The Port Number of Server"), "port");
-    QCommandLineOption f_opt({"f","filepath"},      QApplication::translate("main", "The Full Path to Files like ini: /path"), "filepath");
-    QCommandLineOption b_opt({"b","blogfolder"},    QApplication::translate("main", "The Log Folder Name: logs"), "blogfolder");
     parser.addOption(a_opt);
     parser.addOption(b_opt);
     parser.addOption(c_opt);

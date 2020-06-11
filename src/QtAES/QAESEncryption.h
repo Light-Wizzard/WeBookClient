@@ -151,7 +151,6 @@ class QAESEncryption : public QObject
          * Only the first 14 elements are needed
          */
         const quint8 Rcon[14] = { 0x8d, 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80, 0x1b, 0x36, 0x6c, 0xd8, 0xab };
-};
-
+}; // end class
 #endif // QAESENCRYPTION_H
 /* ***************************** End of File ******************************* */

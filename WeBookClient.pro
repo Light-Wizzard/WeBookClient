@@ -41,48 +41,30 @@ DEFINES         = APP_VERSION=\\\"$${VERSION}\\\"
 # Include Path Current path, defined in MY_CUSTOM_SOURCE_HEADER_UI_FOLDER_NAME i.e. src
 INCLUDEPATH *= .
 INCLUDEPATH *= src/
-INCLUDEPATH *= src/QtAES
 
 DEPENDSPATH *= .
 DEPENDSPATH *= src/
-DEPENDSPATH *= src/QtAES
 
 # Headers files
-HEADERS     *= \
-    src/AboutDialog.h
-HEADERS     *= \
-    src/WeBookCommon.h
-HEADERS     *= \
-    src/MainWindow.h
-HEADERS     *= \
-    src/WeBookMan.h
-HEADERS     *= \
-    src/TreeItem.h
-HEADERS     *= \
-    src/TreeModel.h
-HEADERS     *= \
-    src/TreeViewDragDropModel.h
+HEADERS     *= src/AboutDialog.h
+HEADERS     *= src/WeBookCommon.h
+HEADERS     *= src/MainWindow.h
+HEADERS     *= src/WeBookMan.h
+HEADERS     *= src/TreeItem.h
+HEADERS     *= src/TreeModel.h
+HEADERS     *= src/TreeViewDragDropModel.h
 # Source files
-SOURCES     *= \
-    src/AboutDialog.cpp
-SOURCES     *= \
-    src/WeBookCommon.cpp
-SOURCES     *= \
-    src/MainWindow.cpp
-SOURCES     *= \
-    src/WeBookMan.cpp
-SOURCES     *= \
-    src/TreeItem.cpp
-SOURCES     *= \
-    src/TreeModel.cpp
-SOURCES     *= \
-    src/TreeViewDragDropModel.cpp
+SOURCES     *= src/AboutDialog.cpp
+SOURCES     *= src/WeBookCommon.cpp
+SOURCES     *= src/MainWindow.cpp
+SOURCES     *= src/WeBookMan.cpp
+SOURCES     *= src/TreeItem.cpp
+SOURCES     *= src/TreeModel.cpp
+SOURCES     *= src/TreeViewDragDropModel.cpp
 SOURCES     *= src/main.cpp
 # Ui Form(s)
-FORMS       += \
-    src/MainWindow.ui
-FORMS       += \
-    src/AboutDialog.ui
+FORMS       += src/MainWindow.ui
+FORMS       += src/AboutDialog.ui
 #
 DISTFILES   += data/WeBookClient.ini
 DISTFILES   += data/WeBook.toc
@@ -94,27 +76,27 @@ RESOURCES   += WeBookClient.qrc
 
 ###############################################################################
 # https://github.com/Light-Wizzard/QLogger                                    #
+# Fork: https://github.com/francescmm/QLogger                                 #
 ###############################################################################
-HEADERS     *= \
-    src/QLogger.h
-SOURCES     *= \
-    src/QLogger.cpp
+HEADERS     *= src/QLogger.h
+SOURCES     *= src/QLogger.cpp
 ###############################################################################
 # https://github.com/bricke/Qt-AES                                            #
 ###############################################################################
-#QT          *= testlib
+INCLUDEPATH *= src/QtAES
+DEPENDSPATH *= src/QtAES
 #
-SOURCES     *= \
-    src/QtAES/QAESEncryption.cpp
+SOURCES     *= src/QtAES/QAESEncryption.cpp
+HEADERS     *= src/QtAES/QAESEncryption.h
+# Test
+#QT          += testlib
+#HEADERS     *= src/QtAES/unit_test/aestest.h
 #SOURCES     *= src/QtAES/maintest.cpp
 #SOURCES     *= src/QtAES/unit_test/aestest.cpp
-#
-HEADERS     *= \
-    src/QtAES/QAESEncryption.h
-#HEADERS     *= src/QtAES/unit_test/aestest.h
-#
+##
 #DISTFILES   *= src/QtAES/unit_test/longText.txt
 #RESOURCES   *= src/QtAES/res.qrc
+###############################################################################
 #
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings
