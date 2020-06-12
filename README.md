@@ -230,11 +230,8 @@ I call it in WeBookCommon.cpp,
 ```c
 QLogger::myLogFile = QString("%1%2%3.log").arg(getLogPath()).arg(QDir::separator()).arg(getAppName()).arg(QDateTime::currentDateTime().toString("-Log.yyyy-MM"));
 QLogger::myModule = "WeBookServer";
-
 manager = QLogger::QLoggerManager::getInstance();
 manager->addDestination(QLogger::myLogFile, QLogger::myModule, QLogger::LogLevel::Debug);
 ```
-
-Currently my part of the code is broken, actually its new code that that has issues with arguments, in work.
 
 ## End of Read me.

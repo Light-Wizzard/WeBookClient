@@ -4,10 +4,10 @@
 #include "MainWindow.h"
 
 //static QFile myLogFileHandle;
-static QString myLogPathFileName = "WeBookClient.log";
-static QString myAppName = "WeBookClient";
-static bool isLogToFile = true;
-static bool isRunOnce = false;
+//static QString myLogPathFileName = "WeBookClient.log";
+//static QString myAppName = "WeBookClient";
+//static bool isLogToFile = true;
+//static bool isRunOnce = false;
 /******************************************************************************
 ** mainEventHandler                                                           *
 *******************************************************************************/
@@ -29,37 +29,37 @@ void mainEventHandler(int eventValue)
 ** ensuring thread safe way to open and write to a log file.                  *
 ** Note: I close the file in mainEventHandler.                                *
 *******************************************************************************/
-void WeBookMessenger(QtMsgType type, const QMessageLogContext &context, const QString &msg)
-{
-    QHash<QtMsgType, QString> msgLevelHash({{QtDebugMsg, "Debug"}, {QtInfoMsg, "Info"}, {QtWarningMsg, "Warning"}, {QtCriticalMsg, "Critical"}, {QtFatalMsg, "Fatal"}});
-    QString txt = QString("%1 %2: %3 (%4:%5, %6)").arg(QTime::currentTime().toString("hh:mm:ss.zzz")).arg(msgLevelHash[type]).arg(msg).arg(context.file).arg(context.line).arg(context.function);
-    if (isLogToFile)
-    {
-        if (!isRunOnce)
-        {
-            isRunOnce = true;
-            QLogger::myLogFile = QString("%1%2%3.log").arg(myLogPathFileName).arg(QDir::separator()).arg(myAppName).arg(QDateTime::currentDateTime().toString("-Log.yyyy-MM"));
-            QLogger::myModule = "WeBookClient";
-            QLogger::QLoggerManager *manager = QLogger::QLoggerManager::getInstance();
-            manager->addDestination(QLogger::myLogFile, QLogger::myModule, QLogger::LogLevel::Debug);
-        }
-        QLOG_DEBUG() << txt;
-//        if (!myLogFileHandle.isOpen())
+//void WeBookMessenger(QtMsgType type, const QMessageLogContext &context, const QString &msg)
+//{
+//    QHash<QtMsgType, QString> msgLevelHash({{QtDebugMsg, "Debug"}, {QtInfoMsg, "Info"}, {QtWarningMsg, "Warning"}, {QtCriticalMsg, "Critical"}, {QtFatalMsg, "Fatal"}});
+//    QString txt = QString("%1 %2: %3 (%4:%5, %6)").arg(QTime::currentTime().toString("hh:mm:ss.zzz")).arg(msgLevelHash[type]).arg(msg).arg(context.file).arg(context.line).arg(context.function);
+//    if (isLogToFile)
+//    {
+//        if (!isRunOnce)
 //        {
-//            myLogFileHandle.setFileName(myLogPathFileName);
-//            myLogFileHandle.open(QIODevice::WriteOnly | QIODevice::Append);
+//            isRunOnce = true;
+//            QLogger::myLogFile = QString("%1%2%3.log").arg(myLogPathFileName).arg(QDir::separator()).arg(myAppName).arg(QDateTime::currentDateTime().toString("-Log.yyyy-MM"));
+//            QLogger::myModule = "WeBookClient";
+//            QLogger::QLoggerManager *manager = QLogger::QLoggerManager::getInstance();
+//            manager->addDestination(QLogger::myLogFile, QLogger::myModule, QLogger::LogLevel::Debug);
 //        }
-//        QTextStream ts(&myLogFileHandle);
-//        ts << txt << endl;
-    }
-    else
-    {
-        QByteArray formattedMessage = txt.toLocal8Bit();
-        fprintf(stderr, "%s\n", formattedMessage.constData());
-        fflush(stderr);
-    }
-    if (type == QtFatalMsg) abort();
-} // end
+//        QLOG_DEBUG() << txt;
+//        //        if (!myLogFileHandle.isOpen())
+//        //        {
+//        //            myLogFileHandle.setFileName(myLogPathFileName);
+//        //            myLogFileHandle.open(QIODevice::WriteOnly | QIODevice::Append);
+//        //        }
+//        //        QTextStream ts(&myLogFileHandle);
+//        //        ts << txt << endl;
+//    }
+//    else
+//    {
+//        QByteArray formattedMessage = txt.toLocal8Bit();
+//        fprintf(stderr, "%s\n", formattedMessage.constData());
+//        fflush(stderr);
+//    }
+//    if (type == QtFatalMsg) abort();
+//} // end
 /******************************************************************************
 ** main                                                                       *
 ** This is a Qt GUI Application written to be a Conent Manager                *

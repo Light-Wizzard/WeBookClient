@@ -10,12 +10,12 @@ AboutDialog::AboutDialog(QWidget *parent) : QDialog(parent), ui(new Ui::AboutDia
 {
     ui->setupUi(this);
     connect(ui->pushButtonCloseAbout, &QPushButton::clicked,  this, &QDialog::close);
-}
+} // end AboutDialog
 /******************************************************************************
 ** AboutDialog Destructor                                                     *
 *******************************************************************************/
 AboutDialog::~AboutDialog()
 {
     delete ui;
-}
+} // end ~AboutDialog
 /* ***************************** End of File ******************************* */

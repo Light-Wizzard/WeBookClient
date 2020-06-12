@@ -18,6 +18,8 @@
 *******************************************************************************/
 class TreeItem
 {
+        Q_DISABLE_COPY(TreeItem)
+
     public:
         explicit TreeItem(const QList<QVariant> &data, int myLevel, TreeItem *parent = nullptr);
         ~TreeItem();

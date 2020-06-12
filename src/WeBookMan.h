@@ -32,9 +32,9 @@ class WeBookMan : public QAbstractListModel
         QString getData();
 
     private:
-        WeBookCommon    *weBookCommon     = nullptr;           // Logging, Crpto, QtSettings
         QObject         *myParent;                             //
         QStringList     stringList;                            //
+        WeBookCommon    *weBookCommon     = nullptr;           // Logging, Crpto, QtSettings
         QString         weBookListItemsReturned;               //
         QList<QVariant> rootData          = { "ID" };          //
         bool            isDebugMessage    = true;              // Set to true to show debug messages

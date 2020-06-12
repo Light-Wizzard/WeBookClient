@@ -55,9 +55,9 @@ class TreeModel : public QAbstractItemModel
         QModelIndex setActive(const QString &thisColId, const QModelIndex &parent);
 
     private:
+        QObject         *myParent         = nullptr;            // required by setData
         void setupModelData(const QStringList &lines, TreeItem *parent);
         WeBookCommon    *weBookCommon     = nullptr;            // Logging, Crpto, QtSettings
-        QObject         *myParent         = nullptr;            // required by setData
         QList<QVariant> rootData          = { "ID", "Title" };  //
         bool            isDebugMessage    = true;               // Set to true to show debug messages
         bool            isDebugAllMessage = false;              // Set to true to show all debug messages

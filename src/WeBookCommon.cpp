@@ -10,7 +10,7 @@
 ** OrganizationDomain
 ** ApplicationName
 *******************************************************************************/
-WeBookCommon::WeBookCommon(bool isLog)
+WeBookCommon::WeBookCommon(bool isLog) : QObject()
 {
     //Q_UNUSED(isLog)
     if (isLog) setWeBookLogger();
@@ -29,7 +29,7 @@ void WeBookCommon::setWeBookLogger()
 {
 
     //qDebug() << "getLogPath=" << getLogPath() << " QDir::separator()=" << QDir::separator() << " date=" << QDateTime::currentDateTime().toString("-Log.yyyy-MM");
-
+    /*
     QLogger::myLogFile = QString("%1%2%3%4.log").arg(getLogPath()).arg(QDir::separator()).arg(getAppName()).arg(QDateTime::currentDateTime().toString("-Log.yyyy-MM"));
     QLogger::myModule = "WeBookClient";
 
@@ -40,6 +40,7 @@ void WeBookCommon::setWeBookLogger()
     manager->addDestination(QLogger::myLogFile, QLogger::myModule, QLogger::LogLevel::Debug);
 
     QLOG_DEBUG() << "setWeBookLogger";
+    */
 } // end setWeBookLogger
 /******************************************************************************
 ** weBookSetter                                                               *

@@ -11,16 +11,17 @@
 #include <stdlib.h>
 #include <QProcess>
 
-// QLogger
-#include "QLogger.h"
+// QLogger Wrapper
+#include "QLogger/QLoggerWrapper.h"
 // Qt-AES
-#include "src/QtAES/QAESEncryption.h"
+#include "QtAES/QAESEncryption.h"
 /******************************************************************************
 ** class WeBookCommon                                                         *
 *******************************************************************************/
 class WeBookCommon : public QObject
 {
         Q_OBJECT
+        Q_DISABLE_COPY(WeBookCommon)
 
     public:
         explicit WeBookCommon(bool isLog);

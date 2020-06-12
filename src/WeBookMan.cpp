@@ -2,9 +2,8 @@
 /******************************************************************************
 ** WeBookMan Constructor                                                      *
 *******************************************************************************/
-WeBookMan::WeBookMan(const QStringList &strings, QObject *parent) : QAbstractListModel(parent), stringList(strings)
+WeBookMan::WeBookMan(const QStringList &strings, QObject *parent) : QAbstractListModel(parent), myParent(parent), stringList(strings)
 {
-    myParent = parent;
     weBookCommon = new WeBookCommon(true);
     QLOG_DEBUG() << "WeBookMan Constructor";
 } // end WeBookMan
