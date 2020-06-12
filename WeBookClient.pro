@@ -1,7 +1,6 @@
 # WeBookServerClient.pro
 #DEFINES         *= QT_PRINTSUPPORT_LIB
-#qtHaveModule(printsupport): QT *= printsupport
-QT *= printsupport
+qtHaveModule(printsupport): QT *= printsupport
 # Specifies the name of the template to use when generating the project.
 # The allowed values are: app, lib, subdirs, aux, vcapp or vclib
 TEMPLATE     = "app"
@@ -47,7 +46,6 @@ DEPENDSPATH *= src/
 
 # Headers files
 HEADERS     *= src/AboutDialog.h
-HEADERS     *= src/QLogger/QLoggerConstants.h
 HEADERS     *= src/MainWindow.h
 HEADERS     *= src/WeBookMan.h
 HEADERS     *= src/TreeItem.h
@@ -83,6 +81,7 @@ HEADERS     *= src/QLogger/QLoggerWriter.h
 SOURCES     *= src/QLogger/QLogger.cpp
 SOURCES     *= src/QLogger/QLoggerWriter.cpp
 #
+HEADERS     *= src/QLogger/QLoggerConstants.h
 HEADERS     *= src/QLogger/QLoggerCommon.h
 HEADERS     *= src/QLogger/QLoggerWrapper.h
 HEADERS     *= src/QLogger/QLoggerCrypto.h

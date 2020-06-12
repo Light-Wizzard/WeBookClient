@@ -208,7 +208,7 @@ class MainWindow : public QMainWindow
         Ui::MainWindow          *ui                 = nullptr;                              // Pointer to mainwindow.ui
         WeBookMan               *weBookMan          = nullptr;                              // WeBookMan is a StringList Model
         TreeViewDragDropModel   *dragDropTocModel   = nullptr;                              // TOC Model
-        QLoggerCrypto            *weBookCrypto       = nullptr;                              // Crpto
+        QLoggerCrypto           *weBookCrypto       = nullptr;                              // Crypto
         QLogger::QLoggerCommon  *qLoggerCommon      = nullptr;                              // Logging and QtSettings
 
 

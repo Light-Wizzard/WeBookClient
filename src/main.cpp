@@ -157,7 +157,7 @@ int main(int argc, char *argv[])
     qLoggerCommon->setLogPath(theLogPath);
     qLoggerCommon->setFilePath(theFilePath);
     qLoggerCommon->setLogFolderName(theLogFolder);
-    qLoggerCommon->setWeBookLogger();
+    qLoggerCommon->setLogger();
     //
     weBookCrypto->setCryptoKey(theCryptoKey);
     weBookCrypto->setCryptoIvVector(theCryptoIv);

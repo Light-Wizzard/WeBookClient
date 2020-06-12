@@ -58,7 +58,7 @@ namespace QLogger
             QString portToString();
             void setPort(quint16 thisPort);
             // Logger
-            void setWeBookLogger();
+            void setLogger();
             //
             QString setFilePath(QString thisFileName, QString thisDataFolderName);              //
             //

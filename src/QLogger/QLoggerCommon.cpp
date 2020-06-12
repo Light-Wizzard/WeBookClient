@@ -7,7 +7,7 @@ namespace QLogger
     QLoggerCommon::QLoggerCommon(bool isLog)
     {
         //Q_UNUSED(isLog)
-        if (isLog) setWeBookLogger();
+        if (isLog) setLogger();
 
     } // end QLoggerCommon
     /******************************************************************************
@@ -18,25 +18,25 @@ namespace QLogger
 
     } // end ~QLoggerCommon
     /******************************************************************************
-    ** setWeBookLogger                                                            *
+    ** setLogger                                                                  *
     *******************************************************************************/
-    void QLoggerCommon::setWeBookLogger()
+    void QLoggerCommon::setLogger()
     {
 
         //qDebug() << "getLogPath=" << getLogPath() << " QDir::separator()=" << QDir::separator() << " date=" << QDateTime::currentDateTime().toString("-Log.yyyy-MM");
         /*
         QLogger::myLogFile = QString("%1%2%3%4.log").arg(getLogPath()).arg(QDir::separator()).arg(getAppName()).arg(QDateTime::currentDateTime().toString("-Log.yyyy-MM"));
-        QLogger::myModule = "WeBookClient";
+        QLogger::myModule = "AppName";
 
-        //qDebug() << "QLogger::myLogFile=" << QLogger::myLogFile; // ${HOME}/WeBookClient/logs/WeBookClient.log
-        //qDebug() << "QLogger::myModule=" << QLogger::myModule;   // WeBookClient
+        //qDebug() << "QLogger::myLogFile=" << QLogger::myLogFile; // ${HOME}/AppName/logs/AppName.log
+        //qDebug() << "QLogger::myModule=" << QLogger::myModule;   // AppName
 
         manager = QLogger::QLoggerManager::getInstance();
         manager->addDestination(QLogger::myLogFile, QLogger::myModule, QLogger::LogLevel::Debug);
 
         QLOG_DEBUG() << "setWeBookLogger";
         */
-    } // end setWeBookLogger
+    } // end setLogger
     /******************************************************************************
     ** qSettingsInstance                                                          *
     ** Creates QSettings for organizationName, organizationDomain, applicationName*
@@ -50,7 +50,7 @@ namespace QLogger
         QApplication::setOrganizationDomain(getOrgDomain());
         QApplication::setApplicationName(getAppName());
         QApplication::setApplicationDisplayName(getAppName());
-        // see *.pro file where it is: DEFINE  S     *= APP_VERSION=$${VERSION}
+        // see *.pro file where it is: DEFINES *= APP_VERSION=$${VERSION}
         QApplication::setApplicationVersion(QObject::tr(APP_VERSION));
         QString myIni = getFullFilePathName(getIniFileName());
 
@@ -58,7 +58,7 @@ namespace QLogger
         {
             qFatal("%s", QString("Error: cannot create file %1").arg(myIni).toLocal8Bit().constData());
         }
-        // ${HOME}/WeBookClient/data/WeBookClient/WeBookClient.ini
+        // ${HOME}/AppName/data/AppName/AppName.ini
         mySettings  = new QSettings(myIni, QSettings::IniFormat);
     } // end qSettingsInstance
     /******************************************************************************
