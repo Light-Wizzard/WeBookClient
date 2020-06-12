@@ -29,20 +29,11 @@ namespace QLogger
     *******************************************************************************/
     void QLoggerCommon::setLogger()
     {
-
-        //qDebug() << "getLogPath=" << getLogPath() << " QDir::separator()=" << QDir::separator() << " date=" << QDateTime::currentDateTime().toString("-Log.yyyy-MM");
-        /*
-        QLogger::myLogFile = QString("%1%2%3%4.log").arg(getLogPath()).arg(QDir::separator()).arg(getAppName()).arg(QDateTime::currentDateTime().toString("-Log.yyyy-MM"));
-        QLogger::myModule = "AppName";
-
-        //qDebug() << "QLogger::myLogFile=" << QLogger::myLogFile; // ${HOME}/AppName/logs/AppName.log
-        //qDebug() << "QLogger::myModule=" << QLogger::myModule;   // AppName
-
-        manager = QLogger::QLoggerManager::getInstance();
-        manager->addDestination(QLogger::myLogFile, QLogger::myModule, QLogger::LogLevel::Debug);
-
-        QLOG_DEBUG() << "setLogger";
-        */
+        if (false)
+        {
+            const auto manager = QLoggerManager::getInstance();
+            manager->addDestination(getLogFullPath(), getModuleName(), getLogLevel());
+        }
     } // end setLogger
     /******************************************************************************
     ** qSettingsInstance                                                          *
@@ -302,6 +293,45 @@ namespace QLogger
         }
     } // end setLogFolderName
     /******************************************************************************
+    ** getLogFileName                                                             *
+    ** The Auto setting uses AppName + Pattern + Extension                        *
+    *******************************************************************************/
+    QString QLoggerCommon::getLogFileName()
+    {
+        if (myLogFileName.isEmpty()) myLogFileName = QString("%1%2.%3").arg(getAppName()).arg(QDateTime::currentDateTime().toString(getLogNamePattern()).arg(getLogFileExtension()));
+        return myLogFileName;
+    } // end getLogFileName
+    /******************************************************************************
+    ** setLogFileName                                                             *
+    *******************************************************************************/
+    void QLoggerCommon::setLogFileName(const QString &thisLogFileName)
+    {
+        if (myLogFileName != thisLogFileName)
+        {
+            myLogFileName = thisLogFileName;
+            emit handelSettinChanged();
+        }
+    } // end setLogFileName
+    /******************************************************************************
+    ** getLogNamePattern                                                          *
+    *******************************************************************************/
+    QString QLoggerCommon::getLogNamePattern()
+    {
+        if (myLogNamePattern.isEmpty()) myLogNamePattern = constLogNamePattern;
+        return myLogNamePattern;
+    } // end getLogNamePattern
+    /******************************************************************************
+    ** setLogNamePattern                                                          *
+    *******************************************************************************/
+    void QLoggerCommon::setLogNamePattern(const QString &thisLogNamePattern)
+    {
+        if (myLogNamePattern != thisLogNamePattern)
+        {
+            myLogNamePattern = thisLogNamePattern;
+            emit handelSettinChanged();
+        }
+    } // end setLogNamePattern
+    /******************************************************************************
     ** getFileFolderName                                                          *
     *******************************************************************************/
     QString QLoggerCommon::getFileFolderName()
@@ -320,6 +350,82 @@ namespace QLogger
             emit handelSettinChanged();
         }
     } // end setFileFolderName
+    /******************************************************************************
+    ** getLogFileExtension                                                        *
+    *******************************************************************************/
+    QString QLoggerCommon::getLogFileExtension()
+    {
+        if (myLogFileExtension.isEmpty()) myLogFileExtension = constLogFileExtension;
+        return myLogFileExtension;
+    } // end getLogFileExtension
+    /******************************************************************************
+    ** setLogFileExtension                                                        *
+    *******************************************************************************/
+    void QLoggerCommon::setLogFileExtension(const QString &thisLogFileExtension)
+    {
+        if (myLogFileExtension != thisLogFileExtension)
+        {
+            myLogFileExtension = thisLogFileExtension;
+            emit handelSettinChanged();
+        }
+    } // end setLogFileExtension
+    /******************************************************************************
+    ** getLogFullPath                                                             *
+    ** ${HOME}/AppName/LogFolderName/LogFileName.LogFileExtension
+    *******************************************************************************/
+    QString QLoggerCommon::getLogFullPath()
+    {
+        if (myLogFullPath.isEmpty()) myLogFullPath = QString("%1%2%3%4%5%6%7.%8").arg(getLogPath()).arg(QDir::separator()).arg(getAppName()).arg(QDir::separator()).arg(getLogFolderName()).arg(QDir::separator()).arg(getLogFileName()).arg(getLogFileExtension());
+        return myLogFullPath;
+    } // end getLogFullPath
+    /******************************************************************************
+    ** setLogFullPath                                                             *
+    *******************************************************************************/
+    void QLoggerCommon::setLogFullPath(const QString &thisLogFullPath)
+    {
+        if (myLogFullPath != thisLogFullPath)
+        {
+            myLogFullPath = thisLogFullPath;
+            emit handelSettinChanged();
+        }
+    } // end setLogFullPath
+    /******************************************************************************
+    ** getModuleName                                                              *
+    *******************************************************************************/
+    QString QLoggerCommon::getModuleName()
+    {
+        if (myModuleName.isEmpty()) myModuleName = constModuleName;
+        return myModuleName;
+    } // end getModuleName
+    /******************************************************************************
+    ** setModuleName                                                              *
+    *******************************************************************************/
+    void QLoggerCommon::setModuleName(const QString &thisModuleName)
+    {
+        if (myModuleName != thisModuleName)
+        {
+            myModuleName = thisModuleName;
+            emit handelSettinChanged();
+        }
+    } // end setModuleName
+    /******************************************************************************
+    ** getLogLevel                                                                *
+    *******************************************************************************/
+    QLoggerLevel::LogLevel QLoggerCommon::getLogLevel()
+    {
+        return myLogLevel;
+    } // end getLogLevel
+    /******************************************************************************
+    ** setLogLevel                                                                *
+    *******************************************************************************/
+    void QLoggerCommon::setLogLevel(QLoggerLevel::LogLevel thisLogLevel)
+    {
+        if (myLogLevel != thisLogLevel)
+        {
+            myLogLevel = thisLogLevel;
+            emit handelSettinChanged();
+        }
+    } // end setLogLevel
     /******************************************************************************
     ** getFilelPath                                                               *
     ** /constDataFolderName/

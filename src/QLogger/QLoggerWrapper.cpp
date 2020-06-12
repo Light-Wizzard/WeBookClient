@@ -23,23 +23,13 @@ namespace QLogger
     *******************************************************************************/
     QLoggerWrapper::~QLoggerWrapper()
     {
-        qDebug() << "QLoggerWrapper::~QLoggerWrapper() myModule=" << myModule << " myLogPath=" << myLogPath << " myMessage=" << myMessage << " myLogLevel=" << QLoggerLevel::levelToText(myLogLevel) << " myFile=" << myFile << " myLine=" << myLine << " myFunction=" << myFunction;
-        /*
-        const auto manager = QLoggerManager::getInstance();
-        QMutexLocker(&manager->mutex);
-
-        const auto logWriter = manager->getLogWriter(myModule);
-
-        QString thisMessage = QString("%1 (%2:%3 =>%4)").arg(myMessage).arg(myFileName).arg(myLine).arg(myFunctionName);
-
-        if (logWriter && !logWriter->isStop() && logWriter->getLevel() <= myLogLevel)
+        QString thisMessage = QString("%1 (%2:%3 =>%4)").arg(myMessage).arg(myFile).arg(myLine).arg(myFunction);
+        if (false)
         {
-            manager->writeAndDequeueMessages(myModule);
-            logWriter->write(myModule, thisMessage, myLogLevel);
+            // FIXME both are empty for some reason
+            qDebug() << "QLoggerWrapper::~QLoggerWrapper() myModule=" << myModule << " myLogPath=" << myLogPath << " myMessage=" << myMessage << " myLogLevel=" << QLoggerLevel::levelToText(myLogLevel) << " myFile=" << myFile << " myLine=" << myLine << " myFunction=" << myFunction;
+            QLOG_DEBUG() << thisMessage;
         }
-        else if (!logWriter)
-            manager->queueMessage(myModule, { thisMessage, static_cast<int>(myLogLevel), QDateTime::currentDateTime().toString("dd-MM-yyyy hh:mm:ss.zzz") });
-        */
     } // end ~QLoggerWrapper
     /******************************************************************************
     ** write                                                                      *

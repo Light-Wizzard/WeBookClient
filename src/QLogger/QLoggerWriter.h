@@ -91,11 +91,11 @@ public:
    void closeDestination();
 
 private:
-   QString                   mFileDestination;
-   QLoggerLevel::LogLevel    mLevel;
-   bool                      mQuit = false;
-   bool                      mIsStop = false;
-   QWaitCondition            mQueueNotEmpty;
+   QString                          mFileDestination;
+   QLoggerLevel::LogLevel           mLevel;
+   bool                             mQuit = false;
+   bool                             mIsStop = false;
+   QWaitCondition                   mQueueNotEmpty;
    QVector<QPair<QString, QString>> messages;
    QMutex mutex;
    static const int MaxFileSize = 1024 * 1024;

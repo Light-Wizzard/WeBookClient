@@ -21,6 +21,7 @@ namespace QLogger
     const QString constAppFolder             = "WeBook";           // Name of Folder this Project is in
     const QString constFileFolderName        = "data";             // Name of data Folder
     const QString constLogFolderName         = "logs";             // Name of log Folder
+    const QString constLogFileExtension      = "log";              // Log File Extension
     // Const Ini File Name Full Path if want to change the Path to the ini or rename it, leaving it just the name, will look for it in the data folder
     // normally Settings.ini, but I make it an option, see above comment
     const QString constIniFileName           = "WeBookClient.ini"; // Name of ini file with no path
@@ -34,7 +35,9 @@ namespace QLogger
     // I hard code these values here for a reason, not that I would use them, set the Link to include this data, pass in as Arguments
     // These values are for testing only
     // Default Log Server Port
-    const quint16 ConstPort                  = 9696; // Port of Log Server
+    const quint16 ConstPort                  = 9696;           // Port Number of Log Server
+    const QString constLogNamePattern        = "-Log.yyyy-MM"; // Log File Name Pattern (See Notes in QLoggerCommon.h)
+    const QString constModuleName            = "WeBook";       // Default Module Name
     // Store only what you need, comment the rest
     const QString constHomeLocation          = QStandardPaths::writableLocation(QStandardPaths::HomeLocation);          // Home
     const QString constAppDataLocation       = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);       // App Data

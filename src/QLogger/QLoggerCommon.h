@@ -19,6 +19,14 @@
  ** You should have received a copy of the GNU Lesser General Public
  ** License along with this library; if not, write to the Free Software
  ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+ **
+ ** Notes on format for Log File Names:
+ ** Format	        Result
+ ** dd.MM.yyyy	    21.05.2001
+ ** ddd MMMM d yy	Tue May 21 01
+ ** hh:mm:ss.zzz	14:13:09.120
+ ** hh:mm:ss.z	    14:13:09.12
+ ** h:m:s ap	    2:13:9 pm
  ***************************************************************************************/
 
 #include <QApplication>
@@ -91,36 +99,60 @@ namespace QLogger
             bool     getGeometryMin(const bool &thisDefaultValue);
             // File and Path
             bool isFileExists(QString thisFile);                                                // File Functions
+            bool isFileMake(const QString &thisPath, const QString &thisFileName);
             bool isPathExists(QString thisPath);
             bool isPathMake(const QString &thisRootPath, const QString &thisPath);
             QString getFullFilePathName(QString thisFileName);
             bool isMakeDir(const QString &thisPath);
             //
-            QString getLogFolderName();
+            QString getLogFolderName();                                                         // myLogFolderName
             void setLogFolderName(const QString &thisLogFolderName);
             //
-            QString getFileFolderName();
+            QString getLogFileName();                                                           // myLogFileName
+            void setLogFileName(const QString &thisLogFileName);
+            //
+            QString getLogNamePattern();                                                        // myLogNamePattern
+            void setLogNamePattern(const QString &thisLogNamePattern);
+            //
+            QString getFileFolderName();                                                        // myFileFolderName
             void setFileFolderName(const QString &thisFileFolderName);
-            bool isFileMake(const QString &thisPath, const QString &thisFileName);
+            //
+            QString getLogFileExtension();                                                      // myLogFileExtension
+            void setLogFileExtension(const QString &thisLogFileExtension);
+            //
+            QString getLogFullPath();                                                           // myLogFullPath
+            void setLogFullPath(const QString &thisLogFullPath);
+            //
+            QString getModuleName();                                                            // myModuleName
+            void setModuleName(const QString &thisModuleName);
+            //
+            QLoggerLevel::LogLevel getLogLevel();                                               // myLogLevel
+            void setLogLevel(QLoggerLevel::LogLevel thisLogLevel);
 
         signals:
             void handelSettinChanged();
 
         private:
             QSettings               *mySettings             = nullptr;                          // QSettings is used for this class
-            QString                 myLogPath               = "";                               // Log Path
-            QString                 myLogFolderName         = "";                               // Log Folder Name
+            QString                 myLogPath               = "";                               // Log Path: ${HOME}/AppName
+            QString                 myLogFolderName         = "";                               // Log Folder Name: ${HOME}/AppName/LogFolderName
+            QString                 myLogFileName           = "";                               // Log File Name, if blank, make one up using pattern
+            QString                 myLogFullPath           = "";                               // Log Full Path ${HOME}/AppName/LogFolderName/LogFileName.LogFileExtension
+            QString                 myLogNamePattern        = "";                               // Log Name Pattern: see Notes at top
+            QString                 myLogFileExtension      = "";                               // Log File Extension
             QString                 myFilePath              = "";                               // Path to the folder that holds the data, I named it data by default
             QString                 myFileFolderName        = "";                               // File Folder Name
             QString                 myHomePath              = "";                               // Home Path
+            QString                 myModuleName            = "";                               // Module Name
             QString                 myUserName              = "";                               // User Name
             QString                 myIniFileName           = "";                               // Ini File Name
             QString                 myOrganizationName      = "";                               // OrganizationName
             QString                 myOrganizationDomain    = "";                               // OrganizationDomain
             QString                 myApplicationName       = "";                               // ApplicationName
-            QString                 myUrl                   = "";                               // URL used for HTTP request
-            quint16                 myPort                  = 0;                                // Port Number used URL
+            QString                 myUrl                   = "";                               // URL used for HTTP request for Log Server
+            quint16                 myPort                  = 0;                                // Port Number of Log Server used URL
             QLoggerManager         *manager                 = nullptr;                          // QLogger Manager
+            QLoggerLevel::LogLevel  myLogLevel              = QLoggerLevel::LogLevel::Trace;    // Log Level
 
     }; // end class QLoggerCommon
 } // end namespace QLogger
