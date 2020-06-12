@@ -218,12 +218,21 @@ void MainWindow::setTocTreeViewModel(QString modelName)
 {
     if (isDebugMessage) QLOG_DEBUG() << "Set Toc TreeView Model";
     //
+    QString myTocPath;
     if (modelName.isEmpty())
     {
         // Current Book
         modelName = myCurrentBook = qLoggerCommon->getSetting(constCurrentWeBook, QLogger::constAppFolder).toString(); // Defaults to the same as the default folder name
+        myTocPath = QString("%1%2%3.toc").arg(qLoggerCommon->getFilelPath(), QDir::separator(), modelName);
     }
-    QString myTocPath = QString("%1%2%3.toc").arg(qLoggerCommon->getFilelPath(), QDir::separator(), modelName);
+    else
+    {
+        myTocPath = modelName;
+    }
+    if (!myTocPath.contains(QDir::separator()))
+    {
+        myTocPath = QString("%1%2%3.toc").arg(qLoggerCommon->getFilelPath(), QDir::separator(), modelName);
+    }
     QFile booksResourceFile(myTocPath);
     if (booksResourceFile.exists())
     {
@@ -1489,7 +1498,7 @@ void MainWindow::writeSettings()
     bookListItems = weBookMan->getStringList();
     for (int i = 0; i < bookListItems.count(); i++)
     {
-        saveTOC(bookListItems[i]);
+        saveTOC(QString("%1%2%3.%4").arg(qLoggerCommon->getFilelPath(), QDir::separator(), bookListItems[i], "toc"));
     }
 } // end writeSettings
 /******************************************************************************

@@ -107,22 +107,22 @@ namespace QLogger
             //
             QString getLogFolderName();                                                         // myLogFolderName
             void setLogFolderName(const QString &thisLogFolderName);
-            //
+            // Log File Name
             QString getLogFileName();                                                           // myLogFileName
             void setLogFileName(const QString &thisLogFileName);
-            //
+            // Log File Name Pattern
             QString getLogNamePattern();                                                        // myLogNamePattern
             void setLogNamePattern(const QString &thisLogNamePattern);
-            //
-            QString getFileFolderName();                                                        // myFileFolderName
-            void setFileFolderName(const QString &thisFileFolderName);
-            //
+            // Log File Extension
             QString getLogFileExtension();                                                      // myLogFileExtension
             void setLogFileExtension(const QString &thisLogFileExtension);
-            //
+            // Log File Full Path
             QString getLogFullPath();                                                           // myLogFullPath
             void setLogFullPath(const QString &thisLogFullPath);
-            //
+            // File Foler Name
+            QString getFileFolderName();                                                        // myFileFolderName
+            void setFileFolderName(const QString &thisFileFolderName);
+            // Module Name
             QString getModuleName();                                                            // myModuleName
             void setModuleName(const QString &thisModuleName);
             //
