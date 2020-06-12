@@ -9,6 +9,10 @@
 
 namespace QLogger
 {
+    void QLogIt(const QString &module, QLoggerLevel::LogLevel level, const QString &message, const QString &file, int line)
+    {
+        QLoggerManager::getInstance()->enqueueMessage(module, level, message, file, line);
+    }
     /******************************************************************************
     ** QLoggerWrapper Constructor                                                 *
     *******************************************************************************/
@@ -23,12 +27,13 @@ namespace QLogger
     *******************************************************************************/
     QLoggerWrapper::~QLoggerWrapper()
     {
-        QLoggerCommon *qLoggerCommon = new QLoggerCommon(true);
-        Q_UNUSED(qLoggerCommon)
-
+        //QLoggerCommon *qLoggerCommon = new QLoggerCommon(true);  Q_UNUSED(qLoggerCommon)
         QString thisMessage = QString("%1 (%2:%3 =>%4)").arg(myMessage).arg(myFile).arg(myLine).arg(myFunction);
-
         qDebug() << thisMessage;
+        // FIXME this crashes in deconstructor, calling it from one, cannot imagine the lifetime issue
+        //QLoggerManager::getInstance()->enqueueMessage(myMessage, myLogLevel, myMessage, myFile, myLine);
+        // void QLog_(const QString &module, QLogger::QLoggerLevel::LogLevel level, const QString &message, const QString &file = QString(), int line = -1);
+        //QLogIt(myModule, myLogLevel, myMessage, QString(myFile), myLine);
         if (false)
         {
             qDebug() << "QLoggerWrapper::~QLoggerWrapper() myModule=" << myModule << " myLogPath=" << myLogPath << " myMessage=" << myMessage << " myLogLevel=" << QLoggerLevel::levelToText(myLogLevel) << " myFile=" << myFile << " myLine=" << myLine << " myFunction=" << myFunction;

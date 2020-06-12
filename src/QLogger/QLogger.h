@@ -149,8 +149,7 @@ namespace QLogger
  * @param level The level of the message.
  * @param message The message.
  */
-void QLog_(const QString &module, QLogger::QLoggerLevel::LogLevel level, const QString &message, const QString &file = QString(),
-           int line = -1);
+void QLog_(const QString &module, QLogger::QLoggerLevel::LogLevel level, const QString &message, const QString &file = QString(), int line = -1);
 
 #ifndef QLog_Trace
 /**

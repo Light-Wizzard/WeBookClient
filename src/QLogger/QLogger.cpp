@@ -7,7 +7,6 @@
 
 #include "QLogger.h"
 
-
 //Q_DECLARE_METATYPE(QLogger::LogLevel);
 
 namespace QLogger
