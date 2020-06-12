@@ -46,9 +46,8 @@ DEPENDSPATH *= .
 DEPENDSPATH *= src/
 
 # Headers files
-HEADERS     *= src/AboutDialog.h \
-    src/QLogger/QLoggerConstants.h
-HEADERS     *= src/WeBookCrypto.h
+HEADERS     *= src/AboutDialog.h
+HEADERS     *= src/QLogger/QLoggerConstants.h
 HEADERS     *= src/MainWindow.h
 HEADERS     *= src/WeBookMan.h
 HEADERS     *= src/TreeItem.h
@@ -56,7 +55,6 @@ HEADERS     *= src/TreeModel.h
 HEADERS     *= src/TreeViewDragDropModel.h
 # Source files
 SOURCES     *= src/AboutDialog.cpp
-SOURCES     *= src/WeBookCrypto.cpp
 SOURCES     *= src/MainWindow.cpp
 SOURCES     *= src/WeBookMan.cpp
 SOURCES     *= src/TreeItem.cpp
@@ -87,8 +85,10 @@ SOURCES     *= src/QLogger/QLoggerWriter.cpp
 #
 HEADERS     *= src/QLogger/QLoggerCommon.h
 HEADERS     *= src/QLogger/QLoggerWrapper.h
+HEADERS     *= src/QLogger/QLoggerCrypto.h
 SOURCES     *= src/QLogger/QLoggerCommon.cpp
 SOURCES     *= src/QLogger/QLoggerWrapper.cpp
+SOURCES     *= src/QLogger/QLoggerCrypto.cpp
 ###############################################################################
 # https://github.com/bricke/Qt-AES                                            #
 ###############################################################################

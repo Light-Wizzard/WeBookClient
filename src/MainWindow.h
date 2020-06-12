@@ -57,7 +57,7 @@
 #endif
 
 #include "QLogger/QLoggerCommon.h"
-#include "WeBookCrypto.h"
+#include "QLoggerCrypto.h"
 
 #ifdef Q_OS_MAC
     const QString rsrcPath = ":/images/mac";
@@ -208,7 +208,7 @@ class MainWindow : public QMainWindow
         Ui::MainWindow          *ui                 = nullptr;                              // Pointer to mainwindow.ui
         WeBookMan               *weBookMan          = nullptr;                              // WeBookMan is a StringList Model
         TreeViewDragDropModel   *dragDropTocModel   = nullptr;                              // TOC Model
-        WeBookCrypto            *weBookCrypto       = nullptr;                              // Crpto
+        QLoggerCrypto            *weBookCrypto       = nullptr;                              // Crpto
         QLogger::QLoggerCommon  *qLoggerCommon      = nullptr;                              // Logging and QtSettings
 
 

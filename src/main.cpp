@@ -85,7 +85,7 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
     // WeBook Common has QtSettings and Crypto Functions Common between Client/Server
     QLogger::QLoggerCommon *qLoggerCommon = new QLogger::QLoggerCommon(false);
-    WeBookCrypto *weBookCrypto = new WeBookCrypto();
+    QLoggerCrypto *weBookCrypto = new QLoggerCrypto();
     QString applicationName;
     //#define USE_REAL_FILENAME
     #ifdef USE_REAL_FILENAME

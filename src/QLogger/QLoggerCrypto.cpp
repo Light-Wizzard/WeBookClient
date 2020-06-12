@@ -1,28 +1,28 @@
 /******************************************************************************
 ** WeBook: Pronounced Web-Book, is a Book Content Management System  (BCMS)   *
 *******************************************************************************/
-#include "WeBookCrypto.h"
+#include "QLoggerCrypto.h"
 /******************************************************************************
-** WeBookCrypto Constructor                                                   *
+** QLoggerCrypto Constructor                                                   *
 ** Requires Setting:
 ** OrganizationName
 ** OrganizationDomain
 ** ApplicationName
 *******************************************************************************/
-WeBookCrypto::WeBookCrypto() : QObject()
+QLoggerCrypto::QLoggerCrypto() : QObject()
 {
-} // end WeBookCrypto
+} // end QLoggerCrypto
 /******************************************************************************
-** WeBookCrypto Deconstructor                                                 *
+** QLoggerCrypto Deconstructor                                                 *
 *******************************************************************************/
-WeBookCrypto::~WeBookCrypto()
+QLoggerCrypto::~QLoggerCrypto()
 {
 
-} // end ~WeBookCrypto
+} // end ~QLoggerCrypto
 /******************************************************************************
 ** enCodeSecret(const QString &mySecretString)                                *
 *******************************************************************************/
-QString WeBookCrypto::enCodeSecret(const QString &thisSecretString)
+QString QLoggerCrypto::enCodeSecret(const QString &thisSecretString)
 {
     setCryptoCodeHashish();
     QAESEncryption encryption(QAESEncryption::AES_256, QAESEncryption::CBC);
@@ -33,7 +33,7 @@ QString WeBookCrypto::enCodeSecret(const QString &thisSecretString)
 /******************************************************************************
 ** deCodeSecret(const QString &mySecretString)                                *
 *******************************************************************************/
-QString WeBookCrypto::deCodeSecret(const QString &thisSecretString)
+QString QLoggerCrypto::deCodeSecret(const QString &thisSecretString)
 {
     setCryptoCodeHashish();
     QAESEncryption encryption(QAESEncryption::AES_256, QAESEncryption::CBC);
@@ -45,7 +45,7 @@ QString WeBookCrypto::deCodeSecret(const QString &thisSecretString)
 /******************************************************************************
 ** setCryptoCodeHashish                                                       *
 *******************************************************************************/
-void WeBookCrypto::setCryptoCodeHashish()
+void QLoggerCrypto::setCryptoCodeHashish()
 {
     getSha();
     getSha();
@@ -53,7 +53,7 @@ void WeBookCrypto::setCryptoCodeHashish()
 /******************************************************************************
 ** getCryptoKey                                                               *
 *******************************************************************************/
-QString WeBookCrypto::getCryptoKey()
+QString QLoggerCrypto::getCryptoKey()
 {
     if (myCryptoKey.isEmpty()) myCryptoKey = constCryptoKey;
     return myCryptoKey;
@@ -61,17 +61,18 @@ QString WeBookCrypto::getCryptoKey()
 /******************************************************************************
 ** setCryptoKey(QString myCrypokey)                                           *
 *******************************************************************************/
-void WeBookCrypto::setCryptoKey(const QString &thisCryptoKey)
+void QLoggerCrypto::setCryptoKey(const QString &thisCryptoKey)
 {
-    if (!myCryptoKey.isEmpty() && myCryptoKey != thisCryptoKey)
+    if (myCryptoKey.isEmpty() || (!myCryptoKey.isEmpty() && myCryptoKey != thisCryptoKey))
     {
         myCryptoKey = thisCryptoKey;
-    }
+        emit handelSettinChanged();
+    }   
 } // end setCryptoKey
 /******************************************************************************
 ** getCryptoIvVector                                                          *
 *******************************************************************************/
-QString WeBookCrypto::getCryptoIvVector()
+QString QLoggerCrypto::getCryptoIvVector()
 {
     if (myCryptoIvVector.isEmpty()) myCryptoIvVector = constCryptoIvVector;
     return myCryptoIvVector;
@@ -79,17 +80,18 @@ QString WeBookCrypto::getCryptoIvVector()
 /******************************************************************************
 ** setCryptoIvVector(QString myCrypokey)                                      *
 *******************************************************************************/
-void WeBookCrypto::setCryptoIvVector(const QString &thisCryptoIvVector)
+void QLoggerCrypto::setCryptoIvVector(const QString &thisCryptoIvVector)
 {
-    if (!myCryptoIvVector.isEmpty() && myCryptoIvVector != thisCryptoIvVector)
+    if (myCryptoIvVector.isEmpty() || (!myCryptoIvVector.isEmpty() && myCryptoIvVector != thisCryptoIvVector))
     {
         myCryptoIvVector = thisCryptoIvVector;
+        emit handelSettinChanged();
     }
 } // end setCryptoIvVector
 /******************************************************************************
 ** getHashKey                                                                 *
 *******************************************************************************/
-QByteArray WeBookCrypto::getHashKey()
+QByteArray QLoggerCrypto::getHashKey()
 {
     if (myHashKey.isEmpty()) getSha();
     return myHashKey;
@@ -97,7 +99,7 @@ QByteArray WeBookCrypto::getHashKey()
 /******************************************************************************
 ** getHashIV                                                                  *
 *******************************************************************************/
-QByteArray WeBookCrypto::getHashIV()
+QByteArray QLoggerCrypto::getHashIV()
 {
     if (myHashIV.isEmpty()) getMd();
     return myHashIV;
@@ -105,7 +107,7 @@ QByteArray WeBookCrypto::getHashIV()
 /******************************************************************************
 ** getKeccak                                                                  *
 *******************************************************************************/
-QString WeBookCrypto::getKeccak(const QString &thisIvVector)
+QString QLoggerCrypto::getKeccak(const QString &thisIvVector)
 {
     QString securePassword;
     switch (myCryptoKeccak)
@@ -131,7 +133,7 @@ QString WeBookCrypto::getKeccak(const QString &thisIvVector)
 QCryptographicHash::Md4
 QCryptographicHash::Md5
 *******************************************************************************/
-QString WeBookCrypto::getMd()
+QString QLoggerCrypto::getMd()
 {
     QString securePassword;
     switch (myCryptoMd)
@@ -160,7 +162,7 @@ QCryptographicHash::Sha3_256
 QCryptographicHash::Sha3_384
 QCryptographicHash::Sha3_512
 *******************************************************************************/
-QString WeBookCrypto::getSha()
+QString QLoggerCrypto::getSha()
 {
     QString securePassword;
     switch (myCryptoSha)

@@ -42,13 +42,13 @@ namespace QLogger
 
         private:
             // Define in order of init
-            QString             myModule;
-            QString             myLogPath;
-            QString             myMessage;
-            QLoggerLevel::LogLevel   myLogLevel;
-            const char         *myFile;
-            int                 myLine;
-            const char         *myFunction;
+            QString                 myModule;
+            QString                 myLogPath;
+            QString                 myMessage;
+            QLoggerLevel::LogLevel  myLogLevel;
+            const char              *myFile;
+            int                     myLine;
+            const char              *myFunction;
 
     }; // end class QLoggerWrapper
 } // end namespace QLogger

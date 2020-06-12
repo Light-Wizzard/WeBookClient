@@ -17,16 +17,16 @@
 // Qt-AES
 #include "QtAES/QAESEncryption.h"
 /******************************************************************************
-** class WeBookCrypto                                                         *
+** class QLoggerCrypto                                                        *
 *******************************************************************************/
-class WeBookCrypto : public QObject
+class QLoggerCrypto : public QObject
 {
         Q_OBJECT
-        Q_DISABLE_COPY(WeBookCrypto)
+        Q_DISABLE_COPY(QLoggerCrypto)
 
     public:
-        explicit WeBookCrypto();
-        ~WeBookCrypto();
+        explicit QLoggerCrypto();
+        ~QLoggerCrypto();
         //
         const QString constCryptoKey             = "!1@2#3$4%5^6&7*8)9(0)NowPickRand"; // These values are for testing only
         const QString constCryptoIvVector        = "PutMoveVector1!2@3#4$NowPickRand"; // These values are for testing only
@@ -66,6 +66,6 @@ class WeBookCrypto : public QObject
         PasswordCryptoKeccak    myCryptoKeccak          = PasswordCryptoHashKeccak_512;     // PasswordCryptoHashKeccak_224, PasswordCryptoHashKeccak_256, PasswordCryptoHashKeccak_384, PasswordCryptoHashKeccak_512
         QByteArray              myHashKey;                                                  // used for Encryption and Decrytion
         QByteArray              myHashIV;                                                   // used for Encryption and Decrytion
-}; // end class WeBookCrypto
+}; // end class QLoggerCrypto
 #endif // WEBOOKCOMMON_H
 /* ***************************** End of File ******************************* */
