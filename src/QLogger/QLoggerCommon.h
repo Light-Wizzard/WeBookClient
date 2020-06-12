@@ -47,7 +47,7 @@ namespace QLogger
     class QLoggerCommon : public QObject
     {
             Q_OBJECT
-            Q_DISABLE_COPY(QLoggerCommon)
+            //Q_DISABLE_COPY(QLoggerCommon)
 
         public:
             explicit QLoggerCommon(bool isLog);

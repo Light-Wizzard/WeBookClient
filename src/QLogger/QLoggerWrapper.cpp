@@ -12,7 +12,7 @@ namespace QLogger
     /******************************************************************************
     ** QLoggerWrapper Constructor                                                 *
     *******************************************************************************/
-    QLoggerWrapper::QLoggerWrapper(const QString &thisModule, const QString &thisLogPath, QLoggerLevel::LogLevel level, const char *file, int line, const char *function) : myModule(thisModule), myLogPath(thisLogPath), myLogLevel(level), myFile(file), myLine(line), myFunction(function)
+    QLoggerWrapper::QLoggerWrapper(QLoggerLevel::LogLevel level, const char *file, int line, const char *function) : myLogLevel(level), myFile(file), myLine(line), myFunction(function)
     {
         // init
     } // end CuteMessageLogger
@@ -23,12 +23,15 @@ namespace QLogger
     *******************************************************************************/
     QLoggerWrapper::~QLoggerWrapper()
     {
+        QLoggerCommon *qLoggerCommon = new QLoggerCommon(true);
+        Q_UNUSED(qLoggerCommon)
+
         QString thisMessage = QString("%1 (%2:%3 =>%4)").arg(myMessage).arg(myFile).arg(myLine).arg(myFunction);
+
+        qDebug() << thisMessage;
         if (false)
         {
-            // FIXME both are empty for some reason
             qDebug() << "QLoggerWrapper::~QLoggerWrapper() myModule=" << myModule << " myLogPath=" << myLogPath << " myMessage=" << myMessage << " myLogLevel=" << QLoggerLevel::levelToText(myLogLevel) << " myFile=" << myFile << " myLine=" << myLine << " myFunction=" << myFunction;
-            QLOG_DEBUG() << thisMessage;
         }
     } // end ~QLoggerWrapper
     /******************************************************************************

@@ -29,7 +29,7 @@ namespace QLogger
     *******************************************************************************/
     void QLoggerCommon::setLogger()
     {
-        if (false)
+        if (true)
         {
             const auto manager = QLoggerManager::getInstance();
             manager->addDestination(getLogFullPath(), getModuleName(), getLogLevel());
