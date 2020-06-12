@@ -57,7 +57,7 @@
 #endif
 
 #include "QLogger/QLoggerCommon.h"
-#include "QLoggerCrypto.h"
+#include "QLogger/QLoggerCrypto.h"
 
 #ifdef Q_OS_MAC
     const QString rsrcPath = ":/images/mac";

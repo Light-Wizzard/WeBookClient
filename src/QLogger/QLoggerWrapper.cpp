@@ -16,7 +16,7 @@ namespace QLogger
     *******************************************************************************/
     QLoggerWrapper::~QLoggerWrapper()
     {
-        qDebug() << "QLoggerWrapper::~QLoggerWrapper() myModule=" << myModule << " myLogPath=" << myLogPath << " myMessage=" << myMessage << " myLogLevel=" << QLoggerLevel::levelToText(myLogLevel);
+        qDebug() << "QLoggerWrapper::~QLoggerWrapper() myModule=" << myModule << " myLogPath=" << myLogPath << " myMessage=" << myMessage << " myLogLevel=" << QLoggerLevel::levelToText(myLogLevel) << " myFile=" << myFile << " myLine=" << myLine << " myFunction=" << myFunction;
         /*
         const auto manager = QLoggerManager::getInstance();
         QMutexLocker(&manager->mutex);
