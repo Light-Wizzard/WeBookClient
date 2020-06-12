@@ -64,7 +64,7 @@ namespace QLogger
     *******************************************************************************/
     QString QLoggerCommon::combinePathFileName(QString thisPath, QString thisFileName)
     {
-        return QString("%1%2%3").arg(thisPath).arg(QDir::separator()).arg(thisFileName);
+        return QString("%1%2%3").arg(thisPath, QDir::separator(), thisFileName);
     } // end combinePathFileName
     /******************************************************************************
     ** isFileExists                                                               *
@@ -246,19 +246,19 @@ namespace QLogger
     *******************************************************************************/
     QString QLoggerCommon::getLogPath()
     {
-        myLogPath = QString("%1%2%3").arg(getHomePath()).arg(QDir::separator()).arg(getAppName());
-        myLogPath = QString("%1%2%3%4%5").arg(getHomePath()).arg(QDir::separator()).arg(getAppName()).arg(QDir::separator()).arg(getLogFolderName());
-        myLogPath = QString("%1%2%3%4%5").arg(getHomePath()).arg(QDir::separator()).arg(getAppName()).arg(QDir::separator()).arg(getLogFolderName());
+        myLogPath = QString("%1%2%3").arg(getHomePath(), QDir::separator(), getAppName());
+        myLogPath = QString("%1%2%3%4%5").arg(getHomePath(), QDir::separator(), getAppName(), QDir::separator(), getLogFolderName());
+        myLogPath = QString("%1%2%3%4%5").arg(getHomePath(), QDir::separator(), getAppName(), QDir::separator(), getLogFolderName());
 
-        if (myLogPath.isEmpty()) myLogPath = QString("%1%2%3%4%5").arg(getHomePath()).arg(QDir::separator()).arg(getAppName()).arg(QDir::separator()).arg(getLogFolderName());
+        if (myLogPath.isEmpty()) myLogPath = QString("%1%2%3%4%5").arg(getHomePath(), QDir::separator(), getAppName(), QDir::separator(), getLogFolderName());
 
-        if (!isMakeDir(QString("%1%2%3").arg(getHomePath()).arg(QDir::separator()).arg(getAppName())))
+        if (!isMakeDir(QString("%1%2%3").arg(getHomePath(), QDir::separator(), getAppName())))
         {
-            qFatal("%s", QString("Error: cannot create Folder %1").arg(QString("%1%2%3").arg(getHomePath()).arg(QDir::separator()).arg(getAppName())).toLocal8Bit().constData());
+            qFatal("%s", QString("Error: cannot create Folder %1").arg(QString("%1%2%3").arg(getHomePath(), QDir::separator(), getAppName())).toLocal8Bit().constData());
         }
-        if (!isMakeDir(QString("%1%2%3%4%5").arg(getHomePath()).arg(QDir::separator()).arg(getAppName()).arg(QDir::separator()).arg(getLogFolderName())))
+        if (!isMakeDir(QString("%1%2%3%4%5").arg(getHomePath(), QDir::separator(), getAppName(), QDir::separator(), getLogFolderName())))
         {
-            qFatal("%s", QString("Error: cannot create Folder %1").arg(QString("%1%2%3%4%5").arg(getHomePath()).arg(QDir::separator()).arg(getAppName()).arg(QDir::separator()).arg(getLogFolderName())).toLocal8Bit().constData());
+            qFatal("%s", QString("Error: cannot create Folder %1").arg(QString("%1%2%3%4%5").arg(getHomePath(), QDir::separator(), getAppName(), QDir::separator(), getLogFolderName())).toLocal8Bit().constData());
         }
         return myLogPath;
     } // end getLogPath
@@ -298,7 +298,7 @@ namespace QLogger
     *******************************************************************************/
     QString QLoggerCommon::getLogFileName()
     {
-        if (myLogFileName.isEmpty()) myLogFileName = QString("%1%2.%3").arg(getAppName()).arg(QDateTime::currentDateTime().toString(getLogNamePattern()).arg(getLogFileExtension()));
+        if (myLogFileName.isEmpty()) myLogFileName = QString("%1%2.%3").arg(getAppName(), QDateTime::currentDateTime().toString(getLogNamePattern()), getLogFileExtension());
         return myLogFileName;
     } // end getLogFileName
     /******************************************************************************
@@ -375,7 +375,7 @@ namespace QLogger
     *******************************************************************************/
     QString QLoggerCommon::getLogFullPath()
     {
-        if (myLogFullPath.isEmpty()) myLogFullPath = QString("%1%2%3%4%5%6%7.%8").arg(getLogPath()).arg(QDir::separator()).arg(getAppName()).arg(QDir::separator()).arg(getLogFolderName()).arg(QDir::separator()).arg(getLogFileName()).arg(getLogFileExtension());
+        if (myLogFullPath.isEmpty()) myLogFullPath = QString("%1%2%3%4%5%6%7").arg(getLogPath(), QDir::separator(), getAppName(), QDir::separator(), getLogFolderName(), QDir::separator(), getLogFileName(), getLogFileExtension());
         return myLogFullPath;
     } // end getLogFullPath
     /******************************************************************************
@@ -432,7 +432,7 @@ namespace QLogger
     *******************************************************************************/
     QString QLoggerCommon::getFilelPath()
     {
-        if (myFilePath.isEmpty()) myFilePath = QString("%1%2%3%4%5").arg(getHomePath()).arg(QDir::separator()).arg(getAppName()).arg(QDir::separator()).arg(getFileFolderName());
+        if (myFilePath.isEmpty()) myFilePath = QString("%1%2%3%4%5").arg(getHomePath(), QDir::separator(), getAppName(), QDir::separator(), getFileFolderName());
         return myFilePath;
     } // end getFilelPath
     /******************************************************************************
@@ -564,23 +564,23 @@ namespace QLogger
         // If running from within Qt Creator, this path is outside of the root application folder
         QDir dataFileDir(QCoreApplication::applicationDirPath());
         // full_path/databaseFolderName/databaseFileName
-        QString dataFullPath = dataFileDir.cleanPath(dataFileDir.absoluteFilePath(QString("%1%2%3").arg(thisDataFolderName).arg(QDir::separator()).arg(thisFileName)));
+        QString dataFullPath = dataFileDir.cleanPath(dataFileDir.absoluteFilePath(QString("%1%2%3").arg(thisDataFolderName, QDir::separator(), thisFileName)));
         // If ran from within Qt Creator
         if (!dataFullPath.contains(constAppFolder))
         {
             // APP_FOLDER/databaseFolderName/databaseFileName
-            dataFullPath = dataFileDir.cleanPath(dataFileDir.absoluteFilePath(QString("..%1%2%3%4%5%6").arg(QDir::separator()).arg(constAppFolder).arg(QDir::separator()).arg(thisDataFolderName).arg(QDir::separator()).arg(thisFileName)));
-            qDebug() << QString("..%1%2%3%4%5%6").arg(QDir::separator()).arg(constAppFolder).arg(QDir::separator()).arg(thisDataFolderName).arg(QDir::separator()).arg(thisFileName);
+            dataFullPath = dataFileDir.cleanPath(dataFileDir.absoluteFilePath(QString("..%1%2%3%4%5%6").arg(QDir::separator(), constAppFolder, QDir::separator(), thisDataFolderName, QDir::separator(), thisFileName)));
+            qDebug() << QString("..%1%2%3%4%5%6").arg(QDir::separator(), constAppFolder, QDir::separator(), thisDataFolderName, QDir::separator(), thisFileName);
         }
         if (!QFile(dataFullPath).exists())
         {
-            dataFullPath = dataFileDir.cleanPath(dataFileDir.absoluteFilePath(QString("..%1..%2%3%4%5%6%7").arg(QDir::separator()).arg(QDir::separator()).arg(constAppFolder).arg(QDir::separator()).arg(thisDataFolderName).arg(QDir::separator()).arg(thisFileName)));
-            qDebug() << QString("..%1..%2%3%4%5%6%7").arg(QDir::separator()).arg(QDir::separator()).arg(constAppFolder).arg(QDir::separator()).arg(thisDataFolderName).arg(QDir::separator()).arg(thisFileName);
+            dataFullPath = dataFileDir.cleanPath(dataFileDir.absoluteFilePath(QString("..%1..%2%3%4%5%6%7").arg(QDir::separator(), QDir::separator(), constAppFolder, QDir::separator(), thisDataFolderName, QDir::separator(), thisFileName)));
+            qDebug() << QString("..%1..%2%3%4%5%6%7").arg(QDir::separator(), QDir::separator(), constAppFolder, QDir::separator(), thisDataFolderName, QDir::separator(), thisFileName);
         }
         if (!QFile(dataFullPath).exists())
         {
-            dataFullPath = dataFileDir.cleanPath(dataFileDir.absoluteFilePath(QString("..%1..%2..%3%4%5%6%7%8").arg(QDir::separator()).arg(QDir::separator()).arg(QDir::separator()).arg(constAppFolder).arg(QDir::separator()).arg(thisDataFolderName).arg(QDir::separator()).arg(thisFileName)));
-            qDebug() << QString("..%1..%2..%3%4%5%6%7%8").arg(QDir::separator()).arg(QDir::separator()).arg(QDir::separator()).arg(constAppFolder).arg(QDir::separator()).arg(thisDataFolderName).arg(QDir::separator()).arg(thisFileName);
+            dataFullPath = dataFileDir.cleanPath(dataFileDir.absoluteFilePath(QString("..%1..%2..%3%4%5%6%7%8").arg(QDir::separator(), QDir::separator(), QDir::separator(), constAppFolder, QDir::separator(), thisDataFolderName, QDir::separator(), thisFileName)));
+            qDebug() << QString("..%1..%2..%3%4%5%6%7%8").arg(QDir::separator(), QDir::separator(), QDir::separator(), constAppFolder, QDir::separator(), thisDataFolderName, QDir::separator(), thisFileName);
         }
         if (!QFile(dataFullPath).exists())
         {
@@ -593,7 +593,7 @@ namespace QLogger
     *******************************************************************************/
     QString QLoggerCommon::getFullFilePathName(QString thisFileName)
     {
-        return QString("%1%2%3").arg(getFilelPath()).arg(QDir::separator()).arg(thisFileName);
+        return QString("%1%2%3").arg(getFilelPath(), QDir::separator(), thisFileName);
     } // end getFullFilePathName
     /******************************************************************************
     ** setGeometry                                                                *

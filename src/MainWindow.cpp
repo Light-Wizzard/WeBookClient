@@ -223,7 +223,7 @@ void MainWindow::setTocTreeViewModel(QString modelName)
         // Current Book
         modelName = myCurrentBook = qLoggerCommon->getSetting(constCurrentWeBook, QLogger::constAppFolder).toString(); // Defaults to the same as the default folder name
     }
-    QString myTocPath = QString("%1%2%3.toc").arg(qLoggerCommon->getFilelPath()).arg(QDir::separator()).arg(modelName);
+    QString myTocPath = QString("%1%2%3.toc").arg(qLoggerCommon->getFilelPath(), QDir::separator(), modelName);
     QFile booksResourceFile(myTocPath);
     if (booksResourceFile.exists())
     {
@@ -286,7 +286,7 @@ void MainWindow::setWeBookModel()
 {
     if (isDebugMessage) QLOG_DEBUG() << "Set WeBook Model";
     //
-    WeBooksCatFileFullPath = QString("%1%2%3").arg(qLoggerCommon->getFilelPath()).arg(QDir::separator()).arg(constWeBookCatName);
+    WeBooksCatFileFullPath = QString("%1%2%3").arg(qLoggerCommon->getFilelPath(), QDir::separator(), constWeBookCatName);
     QFile WeBooksCatFile(WeBooksCatFileFullPath);
     if (WeBooksCatFile.exists())
     {
@@ -697,12 +697,12 @@ QString MainWindow::getSetFullPathFileNameExt(QString thisFileName)
         if (isDebugMessage) QLOG_DEBUG() << "thisFileName and myCurrentChapter are empty";
     }
     // Setter
-    fullPathFileNameExt = QString("%1%2%3%4%5.%6").arg(qLoggerCommon->getFilelPath()).arg(QDir::separator()).arg(myCurrentBook).arg(QDir::separator()).arg(thisFileName).arg(constWeBookEditorExt);
+    fullPathFileNameExt = QString("%1%2%3%4%5.%6").arg(qLoggerCommon->getFilelPath(), QDir::separator(), myCurrentBook, QDir::separator(), thisFileName, constWeBookEditorExt);
     // Make Sure File and Path exist
     QFile booksResourceFile(fullPathFileNameExt);
     if (!booksResourceFile.exists())
     {
-        QString myFolderName = QString("%1%2%3").arg(qLoggerCommon->getFilelPath()).arg(QDir::separator()).arg(myCurrentBook);
+        QString myFolderName = QString("%1%2%3").arg(qLoggerCommon->getFilelPath(), QDir::separator(), myCurrentBook);
         if (!QDir(myFolderName).exists()) { QDir().mkdir(myFolderName); }
         if (booksResourceFile.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text))
         {
@@ -1365,9 +1365,9 @@ void MainWindow::onTocUpdateActions()
         const int row = ui->treeViewTocView->selectionModel()->currentIndex().row();
         const int column = ui->treeViewTocView->selectionModel()->currentIndex().column();
         if (ui->treeViewTocView->selectionModel()->currentIndex().parent().isValid())
-        { statusBar()->showMessage(tr("Position: (%1,%2)").arg(row).arg(column)); }
+        { statusBar()->showMessage(tr("Position: (%1,%2)").arg(row, column)); }
         else
-        { statusBar()->showMessage(tr("Position: (%1,%2) in top level").arg(row).arg(column)); }
+        { statusBar()->showMessage(tr("Position: (%1,%2) in top level").arg(row, column)); }
         loadDoc(getSetCurrentChapter());
     }
 } // end onTocUpdateActions
@@ -1379,11 +1379,11 @@ void MainWindow::loadDoc(QString thisFileName)
     if (isDebugMessage) QLOG_DEBUG() << "load(" << thisFileName << ")";
     //
     if (!this->fullPathFileNameExt.isEmpty()) { onFileSave(); fullPathFileNameExt.clear(); }
-    QString myFileName = QString("%1%2%3%4%5.%6").arg(qLoggerCommon->getFilelPath()).arg(QDir::separator()).arg(myCurrentBook).arg(QDir::separator()).arg(thisFileName).arg(constWeBookEditorExt);
+    QString myFileName = QString("%1%2%3%4%5.%6").arg(qLoggerCommon->getFilelPath(), QDir::separator(), myCurrentBook, QDir::separator(), thisFileName, constWeBookEditorExt);
     QFile booksResourceFile(myFileName);
     if (!booksResourceFile.exists())
     {
-        QString myFolderName = QString("%1%2%3").arg(qLoggerCommon->getFilelPath()).arg(QDir::separator()).arg(myCurrentBook);
+        QString myFolderName = QString("%1%2%3").arg(qLoggerCommon->getFilelPath(), QDir::separator(), myCurrentBook);
         if (!QDir(myFolderName).exists()) { QDir().mkdir(myFolderName); }
         if (booksResourceFile.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text))
         {
@@ -1435,10 +1435,10 @@ void MainWindow::loadTOC()
         const int row = ui->listViewWeBookMan->selectionModel()->currentIndex().row();
         const int column = ui->listViewWeBookMan->selectionModel()->currentIndex().column();
         if (ui->listViewWeBookMan->selectionModel()->currentIndex().parent().isValid())
-        { statusBar()->showMessage(tr("Position: (%1,%2)").arg(row).arg(column));  }
+        { statusBar()->showMessage(tr("Position: (%1,%2)").arg(row, column));  }
         else
-        { statusBar()->showMessage(tr("Position: (%1,%2) in top level").arg(row).arg(column)); }
-        QString myFileName = QString("%1%2%3.toc").arg(qLoggerCommon->getFilelPath()).arg(QDir::separator()).arg(getSetCurrentBook());
+        { statusBar()->showMessage(tr("Position: (%1,%2) in top level").arg(row, column)); }
+        QString myFileName = QString("%1%2%3.toc").arg(qLoggerCommon->getFilelPath(), QDir::separator(), getSetCurrentBook());
         setTocTreeViewModel(myFileName);
     }
 } // end loadTOC

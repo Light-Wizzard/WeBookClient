@@ -150,14 +150,14 @@ void TreeModel::forEachSave(const QModelIndex &parent, bool isChild)
                 if (isChild)
                 {
                     // Children off of Root level: Indent by 2 Spaces and seperate columns with Tab (\t) and newline (\n)
-                    treeListItemsReturned.append(QString("%1%2\t%3\n").arg(getSpace(recursiveLevel)).arg(cellOne).arg(cellTwo));
-                    if (isDebugMessage) QLOG_DEBUG() << "Child name=" << QString("%1%2\t%3\n").arg(getSpace(recursiveLevel)).arg(cellOne).arg(cellTwo) << " level = " << recursiveLevel;
+                    treeListItemsReturned.append(QString("%1%2\t%3\n").arg(getSpace(recursiveLevel), cellOne, cellTwo));
+                    if (isDebugMessage) QLOG_DEBUG() << "Child name=" << QString("%1%2\t%3\n").arg(getSpace(recursiveLevel), cellOne, cellTwo) << " level = " << recursiveLevel;
                 }
                 else
                 {
                     // Root Level: seperate columns with Tab (\t) and newline (\n)
-                    treeListItemsReturned.append(QString("%1\t%2\n").arg(cellOne).arg(cellTwo));
-                    if (isDebugAllMessage) QLOG_DEBUG() << "name=" << QString("%1\t%2\n").arg(cellOne).arg(cellTwo);
+                    treeListItemsReturned.append(QString("%1\t%2\n").arg(cellOne, cellTwo));
+                    if (isDebugAllMessage) QLOG_DEBUG() << "name=" << QString("%1\t%2\n").arg(cellOne, cellTwo);
                 }
                 if( hasChildren(MyIndex) ) { forEachSave(MyIndex, true); recursiveLevel--; } // Sets isChild to true and iterates its Siblings
             } // end if (myCol

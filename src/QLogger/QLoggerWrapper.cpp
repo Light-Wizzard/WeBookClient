@@ -28,7 +28,7 @@ namespace QLogger
     QLoggerWrapper::~QLoggerWrapper()
     {
         //QLoggerCommon *qLoggerCommon = new QLoggerCommon(true);  Q_UNUSED(qLoggerCommon)
-        QString thisMessage = QString("%1 (%2:%3 =>%4)").arg(myMessage).arg(myFile).arg(myLine).arg(myFunction);
+        QString thisMessage = QString("%1 (%2:%3 =>%4)").arg(myMessage, myFile, QString::number(myLine), myFunction);
         qDebug() << thisMessage;
         // FIXME this crashes in deconstructor, calling it from one, cannot imagine the lifetime issue
         //QLoggerManager::getInstance()->enqueueMessage(myMessage, myLogLevel, myMessage, myFile, myLine);
