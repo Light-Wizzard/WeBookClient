@@ -7,7 +7,7 @@
 #include <QStringList>
 #include <QtGui>
 
-#include "WeBookCommon.h"
+#include "QLogger/QLoggerCommon.h"
 
 #include "TreeModel.h"
 
@@ -29,11 +29,11 @@ class TreeViewDragDropModel : public TreeModel
         QString getErrorMessage();
 
     private:
-        WeBookCommon    *weBookCommon       = nullptr;          // Logging, Crpto, QtSettings
-        QString         myErrorMessage      = "";               // my Error Message
-        const           QStringList types   = { "text/plain" }; // This only supports this type so make it const
-        bool            isDebugMessage      = true;             // Set to true to show debug messages
-        bool            isDebugAllMessage   = false;            // Set to true to show all debug messages
+        QLogger::QLoggerCommon  *qLoggerCommon       = nullptr;          // Logging and QtSettings
+        QString                  myErrorMessage      = "";               // my Error Message
+        const QStringList        types               = { "text/plain" }; // This only supports this type so make it const
+        bool                     isDebugMessage      = true;             // Set to true to show debug messages
+        bool                     isDebugAllMessage   = false;            // Set to true to show all debug messages
 };
 #endif
 /* ***************************** End of File ******************************* */

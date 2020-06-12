@@ -25,7 +25,7 @@ namespace QLogger
             Q_DISABLE_COPY(QLoggerWrapper)
 
         public:
-            QLoggerWrapper(const QString &thisModule, const QString &thisLogPath, QLogger::LogLevel level, const char *file, int line, const char *function);
+            QLoggerWrapper(const QString &thisModule, const QString &thisLogPath, QLoggerLevel::LogLevel level, const char *file, int line, const char *function);
             ~QLoggerWrapper();
 
             void write(const char* msg, ...)
@@ -45,7 +45,7 @@ namespace QLogger
             QString             myModule;
             QString             myLogPath;
             QString             myMessage;
-            QLogger::LogLevel   myLogLevel;
+            QLoggerLevel::LogLevel   myLogLevel;
             const char         *myFile;
             int                 myLine;
             const char         *myFunction;
@@ -79,12 +79,12 @@ namespace QLogger
 // FIXME not the way to do it
 static QString myModule = "WeBookClient";
 static QString myLogPath = "logs";
-#define QLOG_TRACE      QLogger::QLoggerWrapper(myModule, myLogPath, QLogger::QLogger::LogLevel::Trace,   __FILE__, __LINE__, Q_FUNC_INFO).write
-#define QLOG_DEBUG      QLogger::QLoggerWrapper(myModule, myLogPath, QLogger::QLogger::LogLevel::Debug,   __FILE__, __LINE__, Q_FUNC_INFO).write
-#define QLOG_INFO       QLogger::QLoggerWrapper(myModule, myLogPath, QLogger::QLogger::LogLevel::Info,    __FILE__, __LINE__, Q_FUNC_INFO).write
-#define QLOG_WARNING    QLogger::QLoggerWrapper(myModule, myLogPath, QLogger::QLogger::LogLevel::Warning, __FILE__, __LINE__, Q_FUNC_INFO).write
-#define QLOG_ERROR      QLogger::QLoggerWrapper(myModule, myLogPath, QLogger::QLogger::LogLevel::Error,   __FILE__, __LINE__, Q_FUNC_INFO).write
-#define QLOG_FATAL      QLogger::QLoggerWrapper(myModule, myLogPath, QLogger::QLogger::LogLevel::Fatal,   __FILE__, __LINE__, Q_FUNC_INFO).write
+#define QLOG_TRACE      QLogger::QLoggerWrapper(myModule, myLogPath, QLogger::QLoggerLevel::LogLevel::Trace,   __FILE__, __LINE__, Q_FUNC_INFO).write
+#define QLOG_DEBUG      QLogger::QLoggerWrapper(myModule, myLogPath, QLogger::QLoggerLevel::LogLevel::Debug,   __FILE__, __LINE__, Q_FUNC_INFO).write
+#define QLOG_INFO       QLogger::QLoggerWrapper(myModule, myLogPath, QLogger::QLoggerLevel::LogLevel::Info,    __FILE__, __LINE__, Q_FUNC_INFO).write
+#define QLOG_WARNING    QLogger::QLoggerWrapper(myModule, myLogPath, QLogger::QLoggerLevel::LogLevel::Warning, __FILE__, __LINE__, Q_FUNC_INFO).write
+#define QLOG_ERROR      QLogger::QLoggerWrapper(myModule, myLogPath, QLogger::QLoggerLevel::LogLevel::Error,   __FILE__, __LINE__, Q_FUNC_INFO).write
+#define QLOG_FATAL      QLogger::QLoggerWrapper(myModule, myLogPath, QLogger::QLoggerLevel::LogLevel::Fatal,   __FILE__, __LINE__, Q_FUNC_INFO).write
 
 #endif // QLOGGERWRAPPER_H
 /* ***************************** End of File ******************************* */

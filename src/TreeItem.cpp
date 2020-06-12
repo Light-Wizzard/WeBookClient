@@ -8,7 +8,7 @@
 *******************************************************************************/
 TreeItem::TreeItem(const QList<QVariant> &data, int myLevel, TreeItem *parent)
 {
-    weBookCommon = new WeBookCommon(true);
+    qLoggerCommon = new QLogger::QLoggerCommon(true);
 
     #ifndef QT_DEBUG
         isDebugMessage = isDebugAllMessage = false;

@@ -6,7 +6,7 @@
 namespace QLogger
 {
 
-    void QLog_(const QString &module, QLogger::LogLevel level, const QString &message, const QString &file, int line)
+    void QLog_(const QString &module, QLoggerLevel::LogLevel level, const QString &message, const QString &file, int line)
     {
         QLoggerManager::getInstance()->enqueueMessage(module, level, message, file, line);
     }
@@ -26,7 +26,7 @@ namespace QLogger
         return &INSTANCE;
     }
 
-    bool QLoggerManager::addDestination(const QString &fileDest, const QString &module, QLogger::LogLevel level)
+    bool QLoggerManager::addDestination(const QString &fileDest, const QString &module, QLoggerLevel::LogLevel level)
     {
         QMutexLocker lock(&mMutex);
 
@@ -37,7 +37,7 @@ namespace QLogger
 
             const auto threadId = QString("%1").arg((quintptr)QThread::currentThread(), QT_POINTER_SIZE * 2, 16, QChar('0'));
 
-            log->enqueue(QDateTime::currentDateTime(), threadId, module, QLogger::LogLevel::Info, "", -1, "Adding destination!");
+            log->enqueue(QDateTime::currentDateTime(), threadId, module, QLoggerLevel::LogLevel::Info, "", -1, "Adding destination!");
 
             mModuleDest.insert(module, log);
 
@@ -49,7 +49,7 @@ namespace QLogger
         return false;
     }
 
-    bool QLoggerManager::addDestination(const QString &fileDest, const QStringList &modules, QLogger::LogLevel level)
+    bool QLoggerManager::addDestination(const QString &fileDest, const QStringList &modules, QLoggerLevel::LogLevel level)
     {
         QMutexLocker lock(&mMutex);
         bool allAdded = false;
@@ -64,7 +64,7 @@ namespace QLogger
                 const auto threadId
                         = QString("%1").arg((quintptr)QThread::currentThread(), QT_POINTER_SIZE * 2, 16, QChar('0'));
 
-                log->enqueue(QDateTime::currentDateTime(), threadId, module, QLogger::LogLevel::Info, "", -1, "Adding destination!");
+                log->enqueue(QDateTime::currentDateTime(), threadId, module, QLoggerLevel::LogLevel::Info, "", -1, "Adding destination!");
 
                 mModuleDest.insert(module, log);
 
@@ -87,7 +87,7 @@ namespace QLogger
         {
             for (const auto &values : mNonWriterQueue)
             {
-                const auto level = qvariant_cast<QLogger::LogLevel>(values.at(2).toInt());
+                const auto level = qvariant_cast<QLoggerLevel::LogLevel>(values.at(2).toInt());
 
                 if (logWriter->getLevel() <= level)
                 {
@@ -105,7 +105,7 @@ namespace QLogger
         }
     }
 
-    void QLoggerManager::enqueueMessage(const QString &module, QLogger::LogLevel level, const QString &message, QString file,
+    void QLoggerManager::enqueueMessage(const QString &module, QLoggerLevel::LogLevel level, const QString &message, QString file,
                                         int line)
     {
         QMutexLocker lock(&mMutex);
@@ -122,7 +122,7 @@ namespace QLogger
         else if (!logWriter && mNonWriterQueue.count(module) < QUEUE_LIMIT)
             mNonWriterQueue.insert(
                         module,
-            { QDateTime::currentDateTime(), threadId, QVariant::fromValue<QLogger::LogLevel>(level), fileName, line, message });
+            { QDateTime::currentDateTime(), threadId, QVariant::fromValue<QLoggerLevel::LogLevel>(level), fileName, line, message });
     }
 
     void QLoggerManager::pause()
@@ -145,7 +145,7 @@ namespace QLogger
             logWriter->stop(mIsStop);
     }
 
-    void QLoggerManager::overwriteLogLevel(QLogger::LogLevel level)
+    void QLoggerManager::overwriteLogLevel(QLoggerLevel::LogLevel level)
     {
         QMutexLocker lock(&mMutex);
 

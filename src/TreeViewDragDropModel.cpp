@@ -9,7 +9,7 @@
 *******************************************************************************/
 TreeViewDragDropModel::TreeViewDragDropModel(const QString &strings, QObject *parent) : TreeModel(strings, parent)
 {
-    weBookCommon = new WeBookCommon(true);
+    qLoggerCommon = new QLogger::QLoggerCommon(true);
 
     #ifndef QT_DEBUG
         isDebugMessage = isDebugAllMessage = false;

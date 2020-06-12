@@ -6,7 +6,7 @@
 #include <QStringList>
 #include <QtGui>
 
-#include "WeBookCommon.h"
+#include "QLogger/QLoggerCommon.h"
 
 /******************************************************************************
 ** class WeBookMan : public QAbstractListModel                                *
@@ -32,13 +32,13 @@ class WeBookMan : public QAbstractListModel
         QString getData();
 
     private:
-        QObject         *myParent;                             //
-        QStringList     stringList;                            //
-        WeBookCommon    *weBookCommon     = nullptr;           // Logging, Crpto, QtSettings
-        QString         weBookListItemsReturned;               //
-        QList<QVariant> rootData          = { "ID" };          //
-        bool            isDebugMessage    = true;              // Set to true to show debug messages
-        bool            isDebugAllMessage = false;             // Set to true to show all debug messages
+        QLogger::QLoggerCommon  *qLoggerCommon    = nullptr;    // Logging and QtSettings
+        QObject                 *myParent;                      //
+        QStringList              stringList;                    //
+        QString                  weBookListItemsReturned;       //
+        QList<QVariant>          rootData          = { "ID" };  //
+        bool                     isDebugMessage    = true;      // Set to true to show debug messages
+        bool                     isDebugAllMessage = false;     // Set to true to show all debug messages
 }; // end class WeBookMan
 #endif // WEBOOKMAN_H
 /* ***************************** End of File ******************************* */

@@ -9,7 +9,7 @@
 #include <QVariant>
 #include <QtGui>
 
-#include "WeBookCommon.h"
+#include "QLogger/QLoggerCommon.h"
 
 /******************************************************************************
 ** class TreeItem                                                             *
@@ -43,12 +43,12 @@ class TreeItem
         int                 level             = -1;         // Level Number
 
     private:
-        WeBookCommon       *weBookCommon      = nullptr;    // Logging, Crpto, QtSettings
-        QList<TreeItem*>    childItems;                     // child Items
-        QList<QVariant>     itemData;                       // item Data
-        TreeItem           *parentItem        = nullptr;    // parent Item
-        bool                isDebugMessage    = true;       // Set to true to show debug messages
-        bool                isDebugAllMessage = false;      // Set to true to show all debug messages
+        QLogger::QLoggerCommon  *qLoggerCommon     = nullptr;    // Logging and QtSettings
+        QList<TreeItem*>         childItems;                     // child Items
+        QList<QVariant>          itemData;                       // item Data
+        TreeItem                *parentItem        = nullptr;    // parent Item
+        bool                     isDebugMessage    = true;       // Set to true to show debug messages
+        bool                     isDebugAllMessage = false;      // Set to true to show all debug messages
 
 }; // end class TreeItem
 #endif // TREEITEM_H

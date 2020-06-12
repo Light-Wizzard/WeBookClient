@@ -46,19 +46,19 @@ public:
     * @param fileDestination The complete path.
     * @param level The maximum level that is allowed.
     */
-   explicit QLoggerWriter(const QString &fileDestination, QLogger::LogLevel level);
+   explicit QLoggerWriter(const QString &fileDestination, QLoggerLevel::LogLevel level);
 
    /**
     * @brief Gets the current level threshold.
     * @return The level.
     */
-   QLogger::LogLevel getLevel() const { return mLevel; }
+   QLoggerLevel::LogLevel getLevel() const { return mLevel; }
 
    /**
     * @brief setLogLevel Sets the log level for this destination
     * @param level The new level threshold.
     */
-   void setLogLevel(QLogger::LogLevel level) { mLevel = level; }
+   void setLogLevel(QLoggerLevel::LogLevel level) { mLevel = level; }
 
 
    /**
@@ -71,7 +71,7 @@ public:
     * @param line The line of the file name that prints the log.
     * @param message The message to log.
     */
-   void enqueue(const QDateTime &date, const QString &threadId, const QString &module, QLogger::LogLevel level,
+   void enqueue(const QDateTime &date, const QString &threadId, const QString &module, QLoggerLevel::LogLevel level,
                 const QString &fileName, int line, const QString &message);
 
    /**
@@ -92,7 +92,7 @@ public:
 
 private:
    QString              mFileDestination;
-   QLogger::LogLevel    mLevel;
+   QLoggerLevel::LogLevel    mLevel;
    bool                 mQuit = false;
    bool                 mIsStop = false;
    QWaitCondition       mQueueNotEmpty;

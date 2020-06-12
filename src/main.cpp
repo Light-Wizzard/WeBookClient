@@ -84,14 +84,15 @@ int main(int argc, char *argv[])
     Q_INIT_RESOURCE(WeBookClient);
     QApplication app(argc, argv);
     // WeBook Common has QtSettings and Crypto Functions Common between Client/Server
-    WeBookCommon *weBookCommon = new WeBookCommon(false);
+    QLogger::QLoggerCommon *qLoggerCommon = new QLogger::QLoggerCommon(false);
+    WeBookCrypto *weBookCrypto = new WeBookCrypto();
     QString applicationName;
     //#define USE_REAL_FILENAME
     #ifdef USE_REAL_FILENAME
         applicationName = QFileInfo(QApplication::applicationFilePath()).fileName();
-        if (applicationName.isEmpty()) applicationName = weBookCommon->getAppName(); // This can happen in compile envirnoment
+        if (applicationName.isEmpty()) applicationName = qLoggerCommon->getAppName(); // This can happen in compile envirnoment
     #else
-        applicationName    = weBookCommon->getAppName();
+        applicationName    = qLoggerCommon->getAppName();
     #endif
     // From *.pro file TARGET   = WeBook, maybe getTarget?
     QApplication::setWindowIcon(QIcon(":/images/logo32.png"));
@@ -134,30 +135,32 @@ int main(int argc, char *argv[])
     QString theLogFolder    = parser.value("blogfolder");
     //
     if (theAppName.isEmpty())   theAppName      = applicationName;
-    if (theInit.isEmpty())      theInit         = weBookCommon->getIniFileName();
-    if (theOrgName.isEmpty())   theOrgName      = weBookCommon->getOrgName();
-    if (theOrgDomain.isEmpty()) theOrgDomain    = weBookCommon->getOrgDomain();
-    if (theCryptoKey.isEmpty()) theCryptoKey    = weBookCommon->getCryptoKey();
-    if (theCryptoIv.isEmpty())  theCryptoIv     = weBookCommon->getCryptoIvVector();
-    if (thePort.isEmpty())      thePort         = weBookCommon->portToString();
-    if (theLogPath.isEmpty())   theLogPath      = weBookCommon->getLogPath();
-    if (theFilePath.isEmpty())  theFilePath     = weBookCommon->getFilelPath();
-    if (theLogFolder.isEmpty()) theLogFolder    = weBookCommon->getLogFolderName();
+    if (theInit.isEmpty())      theInit         = qLoggerCommon->getIniFileName();
+    if (theOrgName.isEmpty())   theOrgName      = qLoggerCommon->getOrgName();
+    if (theOrgDomain.isEmpty()) theOrgDomain    = qLoggerCommon->getOrgDomain();
+    if (thePort.isEmpty())      thePort         = qLoggerCommon->portToString();
+    if (theLogPath.isEmpty())   theLogPath      = qLoggerCommon->getLogPath();
+    if (theFilePath.isEmpty())  theFilePath     = qLoggerCommon->getFilelPath();
+    if (theLogFolder.isEmpty()) theLogFolder    = qLoggerCommon->getLogFolderName();
+    //
+    if (theCryptoKey.isEmpty()) theCryptoKey    = weBookCrypto->getCryptoKey();
+    if (theCryptoIv.isEmpty())  theCryptoIv     = weBookCrypto->getCryptoIvVector();
     //
     //isLogToFile = true;
     //myLogPathFileName = QString("%1%2.log").arg(applicationName).arg(QDateTime::currentDateTime().toString("-Log.yyyy-MM"));
     //MyLogFile = QString("%1%2.log").arg(applicationName).arg(QDateTime::currentDateTime().toString("-Log.yyyy-MM"));
-    weBookCommon->setAppName(theAppName);
-    weBookCommon->setIniFileName(theInit);
-    weBookCommon->setOrgName(theOrgName);
-    weBookCommon->setOrgDomain(theOrgDomain);
-    weBookCommon->setCryptoKey(theCryptoKey);
-    weBookCommon->setCryptoIvVector(theCryptoIv);
-    weBookCommon->setPort(thePort.toInt());
-    weBookCommon->setLogPath(theLogPath);
-    weBookCommon->setFilePath(theFilePath);
-    weBookCommon->setLogFolderName(theLogFolder);
-    weBookCommon->setWeBookLogger();
+    qLoggerCommon->setAppName(theAppName);
+    qLoggerCommon->setIniFileName(theInit);
+    qLoggerCommon->setOrgName(theOrgName);
+    qLoggerCommon->setOrgDomain(theOrgDomain);
+    qLoggerCommon->setPort(thePort.toInt());
+    qLoggerCommon->setLogPath(theLogPath);
+    qLoggerCommon->setFilePath(theFilePath);
+    qLoggerCommon->setLogFolderName(theLogFolder);
+    qLoggerCommon->setWeBookLogger();
+    //
+    weBookCrypto->setCryptoKey(theCryptoKey);
+    weBookCrypto->setCryptoIvVector(theCryptoIv);
     //
     MainWindow *weBookWindow = new MainWindow();
     QObject::connect(weBookWindow, &MainWindow::handleEventAction, mainEventHandler);

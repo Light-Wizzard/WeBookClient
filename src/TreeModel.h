@@ -10,7 +10,7 @@
 #include <QModelIndex>
 #include <QVariant>
 
-#include "WeBookCommon.h"
+#include "QLogger/QLoggerCommon.h"
 
 #include "TreeItem.h"
 
@@ -54,13 +54,15 @@ class TreeModel : public QAbstractItemModel
         int forEachChildLevel(const QString &thisColId, const QModelIndex &parent);
         QModelIndex setActive(const QString &thisColId, const QModelIndex &parent);
 
-    private:
-        QObject         *myParent         = nullptr;            // required by setData
+    protected:
         void setupModelData(const QStringList &lines, TreeItem *parent);
-        WeBookCommon    *weBookCommon     = nullptr;            // Logging, Crpto, QtSettings
-        QList<QVariant> rootData          = { "ID", "Title" };  //
-        bool            isDebugMessage    = true;               // Set to true to show debug messages
-        bool            isDebugAllMessage = false;              // Set to true to show all debug messages
+
+    private:
+        QLogger::QLoggerCommon  *qLoggerCommon     = nullptr;            // Logging and QtSettings
+        QObject                 *myParent          = nullptr;            // required by setData
+        QList<QVariant>          rootData          = { "ID", "Title" };  //
+        bool                     isDebugMessage    = true;               // Set to true to show debug messages
+        bool                     isDebugAllMessage = false;              // Set to true to show all debug messages
 }; // end class TreeModel
 #endif // TREEMODEL_H
 /* ***************************** End of File ******************************* */

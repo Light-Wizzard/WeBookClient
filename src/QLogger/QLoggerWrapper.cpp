@@ -5,7 +5,7 @@ namespace QLogger
     /******************************************************************************
     ** QLoggerWrapper Constructor                                                 *
     *******************************************************************************/
-    QLoggerWrapper::QLoggerWrapper(const QString &thisModule, const QString &thisLogPath, QLogger::LogLevel level, const char *file, int line, const char *function) : myModule(thisModule), myLogPath(thisLogPath), myLogLevel(level), myFile(file), myLine(line), myFunction(function)
+    QLoggerWrapper::QLoggerWrapper(const QString &thisModule, const QString &thisLogPath, QLoggerLevel::LogLevel level, const char *file, int line, const char *function) : myModule(thisModule), myLogPath(thisLogPath), myLogLevel(level), myFile(file), myLine(line), myFunction(function)
     {
         // init
     } // end CuteMessageLogger
@@ -16,7 +16,7 @@ namespace QLogger
     *******************************************************************************/
     QLoggerWrapper::~QLoggerWrapper()
     {
-        qDebug() << "QLoggerWrapper::~QLoggerWrapper() myModule=" << myModule << " myLogPath=" << myLogPath << " myMessage=" << myMessage << " myLogLevel=" << QLogger::levelToText(myLogLevel);
+        qDebug() << "QLoggerWrapper::~QLoggerWrapper() myModule=" << myModule << " myLogPath=" << myLogPath << " myMessage=" << myMessage << " myLogLevel=" << QLoggerLevel::levelToText(myLogLevel);
         /*
         const auto manager = QLoggerManager::getInstance();
         QMutexLocker(&manager->mutex);

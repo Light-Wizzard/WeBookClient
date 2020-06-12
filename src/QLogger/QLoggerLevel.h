@@ -25,9 +25,10 @@
 
 #include <QObject>
 #include <QMetaEnum>
+// Maybe I do not need to wrap it in a namespace QLogger::QLogger::
 namespace QLogger
 {
-    class QLogger
+    class QLoggerLevel
     {
             Q_GADGET
 
@@ -49,9 +50,9 @@ namespace QLogger
 
             Q_ENUM(LogLevel)
 
-            static QString levelToText(const QLogger::LogLevel &value)
+            static QString levelToText(const QLoggerLevel::LogLevel &value)
             {
-                auto metaEnum = QMetaEnum::fromType<QLogger::QLogger::LogLevel>();
+                auto metaEnum = QMetaEnum::fromType<QLoggerLevel::QLoggerLevel::LogLevel>();
                 return QString(metaEnum.valueToKey(value));
             }
     }; // end class QLogger

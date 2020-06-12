@@ -27,7 +27,7 @@
 namespace QLogger
 {
     // FIXME make logs a variable you can change
-    QLoggerWriter::QLoggerWriter(const QString &fileDestination, QLogger::LogLevel level) : QThread(), mFileDestination("logs/" + fileDestination),  mLevel(level)
+    QLoggerWriter::QLoggerWriter(const QString &fileDestination, QLoggerLevel::LogLevel level) : QThread(), mFileDestination("logs/" + fileDestination),  mLevel(level)
     {
         //mFileDestination = "logs/" + fileDestination;
         //mLevel = level;
@@ -71,17 +71,17 @@ namespace QLogger
         }
     }
 
-    void QLoggerWriter::enqueue(const QDateTime &date, const QString &threadId, const QString &module, QLogger::LogLevel level,
+    void QLoggerWriter::enqueue(const QDateTime &date, const QString &threadId, const QString &module, QLoggerLevel::LogLevel level,
                                 const QString &fileName, int line, const QString &message)
     {
         QString fileLine;
 
-        if (!fileName.isEmpty() && line > 0 && mLevel <= QLogger::LogLevel::Debug)
+        if (!fileName.isEmpty() && line > 0 && mLevel <= QLoggerLevel::LogLevel::Debug)
             fileLine = QString(" {%1:%2}").arg(fileName, QString::number(line));
 
         const auto text
                 = QString("[%1] [%2] [%3] [%4]%5 %6 \n")
-                  .arg(QLogger::levelToText(level), module, date.toString("dd-MM-yyyy hh:mm:ss.zzz"), threadId, fileLine, message);
+                  .arg(QLoggerLevel::levelToText(level), module, date.toString("dd-MM-yyyy hh:mm:ss.zzz"), threadId, fileLine, message);
 
         QMutexLocker locker(&mutex);
         messages.append({ threadId, text });
