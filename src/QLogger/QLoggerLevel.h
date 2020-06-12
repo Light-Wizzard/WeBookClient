@@ -40,6 +40,7 @@ namespace QLogger
                 Trace = 0,  //! \c Trace \brief Trace level is used for internal code tracing.
                 Debug,      //! \c Debug \brief Debug level is used for writing custom debug output.
                 Info,       //! \c Info \brief Info level is used for informational messages.
+                Event,       //! \c Info \brief Event level is used for logging events, like: login, http requests...
                 Warning,    //! \c Warning \brief Warning level is used to report warnings and recoverable errors in your application.
                 Error,      //! \c Error \brief Error level is used for writing critical error messages and reporting system errors.
                 Critical,   //! \c Critical \brief Critical level is used for writing critical error messages and reporting system errors more sever than Error.
