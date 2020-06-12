@@ -1,5 +1,8 @@
 /******************************************************************************
-** WeBook: Pronounced Web-Book, is a Book Content Management System  (BCMS)   *
+** QLogger                                                                    *
+** Thread-safe logger for Qt applications                                     *
+** https://github.com/francescmm/QLogger                                      *
+** Fork: https://github.com/Light-Wizzard/QLogger                             *
 *******************************************************************************/
 #include "QLoggerCrypto.h"
 /******************************************************************************

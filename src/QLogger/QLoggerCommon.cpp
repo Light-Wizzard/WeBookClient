@@ -1,3 +1,10 @@
+/******************************************************************************
+** QLogger                                                                    *
+** Thread-safe logger for Qt applications                                     *
+** https://github.com/francescmm/QLogger                                      *
+** Fork: https://github.com/Light-Wizzard/QLogger                             *
+*******************************************************************************/
+
 #include "QLoggerCommon.h"
 namespace QLogger
 {
@@ -34,7 +41,7 @@ namespace QLogger
         manager = QLogger::QLoggerManager::getInstance();
         manager->addDestination(QLogger::myLogFile, QLogger::myModule, QLogger::LogLevel::Debug);
 
-        QLOG_DEBUG() << "setWeBookLogger";
+        QLOG_DEBUG() << "setLogger";
         */
     } // end setLogger
     /******************************************************************************

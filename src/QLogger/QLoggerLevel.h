@@ -25,7 +25,7 @@
 
 #include <QObject>
 #include <QMetaEnum>
-// Maybe I do not need to wrap it in a namespace QLogger::QLogger::
+
 namespace QLogger
 {
     class QLoggerLevel

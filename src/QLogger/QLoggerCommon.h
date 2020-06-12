@@ -1,5 +1,25 @@
 #ifndef QLOGGERCOMMON_H
 #define QLOGGERCOMMON_H
+/****************************************************************************************
+ ** QLogger is a library to register and print logs into a file.
+ **
+ ** LinkedIn: www.linkedin.com/in/cescmm/
+ ** Web: www.francescmm.com
+ **
+ ** This lbirary is free software; you can redistribute it and/or
+ ** modify it under the terms of the GNU Lesser General Public
+ ** License as published by the Free Software Foundation; either
+ ** version 2 of the License, or (at your option) any later version.
+ **
+ ** This library is distributed in the hope that it will be useful,
+ ** but WITHOUT ANY WARRANTY; without even the implied warranty of
+ ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ ** Lesser General Public License for more details.
+ **
+ ** You should have received a copy of the GNU Lesser General Public
+ ** License along with this library; if not, write to the Free Software
+ ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+ ***************************************************************************************/
 
 #include <QApplication>
 #include <QtCore>
@@ -49,11 +69,11 @@ namespace QLogger
             QString getUserName();                                                               // myUserName
             void setUserName(const QString &thisUserName);
             // QSetter
-            void qSettingsInstance();                                                                // QSetter
+            void qSettingsInstance();                                                           // QSetter
             bool     isSetting(const QString &thisFieldName);                                   // isSetting
             void     setSetting(const QString &thisKey, const QVariant &defaultValue);          // setSetting
             QVariant getSetting(const QString &key, const QVariant &defaultValue = QVariant()); // getSetting
-            // Port of WeBookServer
+            // Port of Log Server
             quint16 getPort();                                                                  // myPort
             QString portToString();
             void setPort(quint16 thisPort);

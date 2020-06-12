@@ -1,30 +1,40 @@
 #ifndef QLOGGERCONSTANTS_H
 #define QLOGGERCONSTANTS_H
-
 #include <QApplication>
 #include <QtCore>
 #include <QString>
-
+/******************************************************************************
+** QLogger                                                                    *
+** Thread-safe logger for Qt applications                                     *
+** https://github.com/francescmm/QLogger                                      *
+** Fork: https://github.com/Light-Wizzard/QLogger                             *
+** This is where all the hard coded variables the App needs to run            *
+** This Project is GitHub Based, and can use GitHub features if Enabled       *
+** To make this Project flexible it is configuration here                     *
+** There are a lot of notes about paths in this header, its cross-plateform   *
+*******************************************************************************/
 namespace QLogger
 {
-    // I do not like hard coding variables into Applications
+    //
+    const QString constAppName               = "WeBookClient";     //
+    const QString constOrgName               = "Light-Wizzard";    //
     const QString constAppFolder             = "WeBook";           // Name of Folder this Project is in
     const QString constFileFolderName        = "data";             // Name of data Folder
     const QString constLogFolderName         = "logs";             // Name of log Folder
     // Const Ini File Name Full Path if want to change the Path to the ini or rename it, leaving it just the name, will look for it in the data folder
-    // normally WeBookClient.ini, but I make it an option, see above comment
+    // normally Settings.ini, but I make it an option, see above comment
     const QString constIniFileName           = "WeBookClient.ini"; // Name of ini file with no path
-    //
-    const QString constAppName               = "WeBookClient";
     // These next 3 settings will set the Local Data Storage for this App to use, changing it after it has run, will create a new storage containtainer
     // This is the User Name for GitHub account, but does not have to be
-    const QString constOrgName               = "Light-Wizzard";
+    // https://github.com/constOrgName/constAppName
     // This is the User Name and Project or GitHub URL, but does not have to be
-    const QString constOrgDomain             = "https://github.com/Light-Wizzard/WeBookClient";
+    const QString constDomain                = "https://github.com"; // This can be any URL
+    // "https://github.com/Light-Wizzard/WeBookClient";
+    const QString constOrgDomain             = constDomain + "/" + constOrgName + "/" + constAppName;
     // I hard code these values here for a reason, not that I would use them, set the Link to include this data, pass in as Arguments
     // These values are for testing only
-    // Default WeBookServer Port
-    const quint16 ConstPort                  = 9696; // Port of WeBookServer
+    // Default Log Server Port
+    const quint16 ConstPort                  = 9696; // Port of Log Server
     // Store only what you need, comment the rest
     const QString constHomeLocation          = QStandardPaths::writableLocation(QStandardPaths::HomeLocation);          // Home
     const QString constAppDataLocation       = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);       // App Data
@@ -122,3 +132,4 @@ namespace QLogger
 
 } // end namespace QLogger
 #endif // QLOGGERCONSTANTS_H
+/* ***************************** End of File ******************************* */
