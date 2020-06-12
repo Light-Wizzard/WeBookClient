@@ -225,13 +225,6 @@ always recover the original contents of the document.*
 ## QLogger
 
 I Forked QLogger from https://github.com/francescmm/QLogger,
-I call it in WeBookCrypto.cpp,
-
-```c
-QLogger::myLogFile = QString("%1%2%3.log").arg(getLogPath()).arg(QDir::separator()).arg(getAppName()).arg(QDateTime::currentDateTime().toString("-Log.yyyy-MM"));
-QLogger::myModule = "WeBookServer";
-manager = QLogger::QLoggerManager::getInstance();
-manager->addDestination(QLogger::myLogFile, QLogger::myModule, QLogger::LogLevel::Debug);
-```
+please see the Wiki https://github.com/Light-Wizzard/WeBookClient/wiki/3.Logging
 
 ## End of Read me.

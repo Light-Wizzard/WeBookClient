@@ -49,7 +49,7 @@ namespace QLogger
             QString getUserName();                                                               // myUserName
             void setUserName(const QString &thisUserName);
             // QSetter
-            void weBookSetter();                                                                // QSetter
+            void qSettingsInstance();                                                                // QSetter
             bool     isSetting(const QString &thisFieldName);                                   // isSetting
             void     setSetting(const QString &thisKey, const QVariant &defaultValue);          // setSetting
             QVariant getSetting(const QString &key, const QVariant &defaultValue = QVariant()); // getSetting

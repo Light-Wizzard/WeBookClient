@@ -38,11 +38,11 @@ namespace QLogger
         */
     } // end setWeBookLogger
     /******************************************************************************
-    ** weBookSetter                                                               *
+    ** qSettingsInstance                                                          *
     ** Creates QSettings for organizationName, organizationDomain, applicationName*
     **
     *******************************************************************************/
-    void QLoggerCommon::weBookSetter()
+    void QLoggerCommon::qSettingsInstance()
     {
         // organizationName, organizationDomain, applicationName and applicationName
         // are set in main.cpp, and passed into Constuctor, so they are set
@@ -60,7 +60,7 @@ namespace QLogger
         }
         // ${HOME}/WeBookClient/data/WeBookClient/WeBookClient.ini
         mySettings  = new QSettings(myIni, QSettings::IniFormat);
-    } // end weBookSetter
+    } // end qSettingsInstance
     /******************************************************************************
     ** combinePathFileName                                                        *
     *******************************************************************************/
@@ -136,7 +136,7 @@ namespace QLogger
     *******************************************************************************/
     bool QLoggerCommon::isSetting(const QString &thisFieldName)
     {
-        if (mySettings == nullptr)  weBookSetter();
+        if (mySettings == nullptr)  qSettingsInstance();
         return mySettings->contains(thisFieldName);
     } // end isSetting
     /******************************************************************************
@@ -145,7 +145,7 @@ namespace QLogger
     *******************************************************************************/
     QVariant QLoggerCommon::getSetting(const QString &key, const QVariant &defaultValue)
     {
-        if (mySettings == nullptr) weBookSetter();
+        if (mySettings == nullptr) qSettingsInstance();
         if (!isSetting(key))
         {
             setSetting(key, defaultValue);
@@ -161,7 +161,7 @@ namespace QLogger
     *******************************************************************************/
     void QLoggerCommon::setSetting(const QString &thisKey, const QVariant &defaultValue)
     {
-        if (mySettings == nullptr) weBookSetter();
+        if (mySettings == nullptr) qSettingsInstance();
         mySettings->setValue(thisKey, defaultValue);
     } // end setSetting
     /******************************************************************************
