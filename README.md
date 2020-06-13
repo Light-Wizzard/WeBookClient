@@ -35,6 +35,10 @@ I am posting this only so I can get the Travis and AppVeyor Builds to work.
 Currently it works somewhat, and missing a lot of features,
 it currently does not talk with the WeBookServer.
 
+It will run on Windows 10, but building the Deploy file failed.
+
+MSVC has an Error in the MakeFile line 141, its a Private Class.
+
 ## Downloads
 
 - :penguin: [Linux](https://github.com/Light-Wizzard/WeBookClient/releases/download/continuous/WeBookClient-travis-x86_64.AppImage)

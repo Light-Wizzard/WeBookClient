@@ -22,10 +22,10 @@ QT              += widgets
 !win32:QT       *= network
 
 CONFIG          *= qt
-#CONFIG          *= "c++11"
-CONFIG          *= "c++14"
+#CONFIG         *= "c++11"
+#CONFIG         *= "c++14"
 #CONFIG         *= "c++1z"
-#CONFIG         *= "c++17"
+CONFIG          *= "c++17"
 #CONFIG         *= "c++2a"
 #CONFIG         *= "c++latest"
 #TRANSLATIONS    += src/WeBookServer_en_US.ts
