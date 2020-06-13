@@ -410,14 +410,22 @@ namespace QLogger
     /******************************************************************************
     ** getLogLevel                                                                *
     *******************************************************************************/
+#ifdef LOGLEVEL_CLASS
     QLoggerLevel::LogLevel QLoggerCommon::getLogLevel()
+#else
+    LogLevel QLoggerCommon::getLogLevel()
+#endif
     {
         return myLogLevel;
     } // end getLogLevel
     /******************************************************************************
     ** setLogLevel                                                                *
     *******************************************************************************/
+#ifdef LOGLEVEL_CLASS
     void QLoggerCommon::setLogLevel(QLoggerLevel::LogLevel thisLogLevel)
+#else
+    void QLoggerCommon::setLogLevel(LogLevel thisLogLevel)
+#endif
     {
         if (myLogLevel != thisLogLevel)
         {

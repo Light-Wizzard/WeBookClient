@@ -46,19 +46,31 @@ public:
     * @param fileDestination The complete path.
     * @param level The maximum level that is allowed.
     */
-   explicit QLoggerWriter(const QString &fileDestination, QLoggerLevel::LogLevel level);
+#ifdef LOGLEVEL_CLASS
+        explicit QLoggerWriter(const QString &fileDestination, QLoggerLevel::LogLevel level);
+#else
+        explicit QLoggerWriter(const QString &fileDestination, LogLevel level);
+#endif
 
    /**
     * @brief Gets the current level threshold.
     * @return The level.
     */
-   QLoggerLevel::LogLevel getLevel() const { return mLevel; }
+#ifdef LOGLEVEL_CLASS
+        QLoggerLevel::LogLevel getLevel() const { return mLevel; }
+#else
+        LogLevel getLevel() const { return mLevel; }
+#endif
 
    /**
     * @brief setLogLevel Sets the log level for this destination
     * @param level The new level threshold.
     */
+#ifdef LOGLEVEL_CLASS
    void setLogLevel(QLoggerLevel::LogLevel level) { mLevel = level; }
+#else
+   void setLogLevel(LogLevel level) { mLevel = level; }
+#endif
 
 
    /**
@@ -71,8 +83,11 @@ public:
     * @param line The line of the file name that prints the log.
     * @param message The message to log.
     */
-   void enqueue(const QDateTime &date, const QString &threadId, const QString &module, QLoggerLevel::LogLevel level,
-                const QString &fileName, int line, const QString &message);
+#ifdef LOGLEVEL_CLASS
+   void enqueue(const QDateTime &date, const QString &threadId, const QString &module, QLoggerLevel::LogLevel level, const QString &fileName, int line, const QString &message);
+#else
+   void enqueue(const QDateTime &date, const QString &threadId, const QString &module, LogLevel level, const QString &fileName, int line, const QString &message);
+#endif
 
    /**
     * @brief Stops the log writer
@@ -92,7 +107,11 @@ public:
 
 private:
    QString                          mFileDestination;
+#ifdef LOGLEVEL_CLASS
    QLoggerLevel::LogLevel           mLevel;
+#else
+   LogLevel           mLevel;
+#endif
    bool                             mQuit = false;
    bool                             mIsStop = false;
    QWaitCondition                   mQueueNotEmpty;

@@ -22,6 +22,7 @@
  ***************************************************************************************/
 
 
+#ifdef LOGLEVEL_CLASS
 
 #include <QObject>
 #include <QMetaEnum>
@@ -35,6 +36,7 @@ namespace QLogger
         public:
             /**
              * @brief The LogLevel enum class defines the level of the log message.
+             * QLoggerLevel::LogLevel::Trace
              */
             enum LogLevel
             {
@@ -57,20 +59,22 @@ namespace QLogger
             }
     }; // end class QLogger
 } // end namespace QLogger
-
+#else
 namespace QLogger
 {
 
     /**
      * @brief The LogLevel enum class defines the level of the log message.
      */
-//    enum class LogLevel
-//    {
-//        Trace = 0,
-//        Debug,
-//        Info,
-//        Warning,
-//        Error,
-//        Fatal
-//    };
+    enum class LogLevel
+    {
+        Trace = 0,
+        Debug,
+        Info,
+        Warning,
+        Error,
+        Fatal
+    };
 }
+#endif
+

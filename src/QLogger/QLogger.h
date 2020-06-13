@@ -59,7 +59,11 @@ namespace QLogger
     * @param level The maximum level allowed.
     * @return Returns true if any error have been done.
     */
+#ifdef LOGLEVEL_CLASS
             bool addDestination(const QString &fileDest, const QString &module, QLoggerLevel::LogLevel level);
+#else
+            bool addDestination(const QString &fileDest, const QString &module, LogLevel level);
+#endif
             /**
     * @brief This method creates a QLoogerWriter that stores the name of the file and the log
     * level assigned to it. Here is added to the map the different modules assigned to each
@@ -71,7 +75,11 @@ namespace QLogger
     * @param level The maximum level allowed.
     * @return Returns true if any error have been done.
     */
+#ifdef LOGLEVEL_CLASS
             bool addDestination(const QString &fileDest, const QStringList &modules, QLoggerLevel::LogLevel level);
+#else
+            bool addDestination(const QString &fileDest, const QStringList &modules, LogLevel level);
+#endif
 
             /**
     * @brief enqueueMessage Enqueues a message in the corresponding QLoggerWritter.
@@ -81,7 +89,11 @@ namespace QLogger
     * @param file The file that logs.
     * @param line The line in the file where the log comes from.
     */
+#ifdef LOGLEVEL_CLASS
             void enqueueMessage(const QString &module, QLoggerLevel::LogLevel level, const QString &message, QString file, int line);
+#else
+            void enqueueMessage(const QString &module, LogLevel level, const QString &message, QString file, int line);
+#endif
 
             /**
     * @brief pause Pauses all QLoggerWriters.
@@ -98,7 +110,11 @@ namespace QLogger
     *
     * @param level The new log level
     */
+#ifdef LOGLEVEL_CLASS
             void overwriteLogLevel(QLoggerLevel::LogLevel level);
+#else
+            void overwriteLogLevel(LogLevel level);
+#endif
 
         private:
             /**
@@ -149,7 +165,11 @@ namespace QLogger
  * @param level The level of the message.
  * @param message The message.
  */
+#ifdef LOGLEVEL_CLASS
 void QLog_(const QString &module, QLogger::QLoggerLevel::LogLevel level, const QString &message, const QString &file = QString(), int line = -1);
+#else
+void QLog_(const QString &module, QLogger::LogLevel level, const QString &message, const QString &file = QString(), int line = -1);
+#endif
 
 #ifndef QLog_Trace
 /**

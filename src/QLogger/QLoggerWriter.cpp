@@ -7,34 +7,40 @@
 
 #include "QLoggerWriter.h"
 
-//namespace
-//{
-//    QString levelToText(const QLogger::LogLevel &level)
-//    {
-//        switch (level)
-//        {
-//            case QLogger::LogLevel::Trace:
-//                return "Trace";
-//            case QLogger::LogLevel::Debug:
-//                return "Debug";
-//            case QLogger::LogLevel::Info:
-//                return "Info";
-//            case QLogger::LogLevel::Warning:
-//                return "Warning";
-//            case QLogger::LogLevel::Error:
-//                return "Error";
-//            case QLogger::LogLevel::Fatal:
-//                return "Fatal";
-//        }
+#include "QLoggerWrapper.h"
+#ifndef LOGLEVEL_CLASS
+namespace
+{
+    QString levelToText(const QLogger::LogLevel &level)
+    {
+        switch (level)
+        {
+            case QLogger::LogLevel::Trace:
+                return "Trace";
+            case QLogger::LogLevel::Debug:
+                return "Debug";
+            case QLogger::LogLevel::Info:
+                return "Info";
+            case QLogger::LogLevel::Warning:
+                return "Warning";
+            case QLogger::LogLevel::Error:
+                return "Error";
+            case QLogger::LogLevel::Fatal:
+                return "Fatal";
+        }
 
-//        return QString();
-//    }
-//}
-
+        return QString();
+    }
+}
+#endif
 namespace QLogger
 {
     // FIXME make logs a variable you can change
+#ifdef LOGLEVEL_CLASS
     QLoggerWriter::QLoggerWriter(const QString &fileDestination, QLoggerLevel::LogLevel level) : QThread(), mFileDestination("logs/" + fileDestination),  mLevel(level)
+#else
+    QLoggerWriter::QLoggerWriter(const QString &fileDestination, LogLevel level) : QThread(), mFileDestination("logs/" + fileDestination),  mLevel(level)
+#endif
     {
         //mFileDestination = "logs/" + fileDestination;
         //mLevel = level;
@@ -77,18 +83,28 @@ namespace QLogger
             file.close();
         }
     }
-
-    void QLoggerWriter::enqueue(const QDateTime &date, const QString &threadId, const QString &module, QLoggerLevel::LogLevel level,
-                                const QString &fileName, int line, const QString &message)
+#ifdef LOGLEVEL_CLASS
+    void QLoggerWriter::enqueue(const QDateTime &date, const QString &threadId, const QString &module, QLoggerLevel::LogLevel level, const QString &fileName, int line, const QString &message)
+#else
+    void QLoggerWriter::enqueue(const QDateTime &date, const QString &threadId, const QString &module, LogLevel level, const QString &fileName, int line, const QString &message)
+#endif
     {
         QString fileLine;
+#ifdef LOGLEVEL_CLASS
+#else
+#endif
 
-        if (!fileName.isEmpty() && line > 0 && mLevel <= QLoggerLevel::LogLevel::Debug)
-            fileLine = QString(" {%1:%2}").arg(fileName, QString::number(line));
+#ifdef LOGLEVEL_CLASS
+        if (!fileName.isEmpty() && line > 0 && mLevel <= QLoggerLevel::LogLevel::Debug) fileLine = QString(" {%1:%2}").arg(fileName, QString::number(line));
+#else
+        if (!fileName.isEmpty() && line > 0 && mLevel <= LogLevel::Debug) fileLine = QString(" {%1:%2}").arg(fileName, QString::number(line));
+#endif
 
-        const auto text
-                = QString("[%1] [%2] [%3] [%4]%5 %6 \n")
-                  .arg(QLoggerLevel::levelToText(level), module, date.toString("dd-MM-yyyy hh:mm:ss.zzz"), threadId, fileLine, message);
+#ifdef LOGLEVEL_CLASS
+        const auto text = QString("[%1] [%2] [%3] [%4]%5 %6 \n").arg(QLoggerLevel::levelToText(level), module, date.toString("dd-MM-yyyy hh:mm:ss.zzz"), threadId, fileLine, message);
+#else
+        const auto text = QString("[%1] [%2] [%3] [%4]%5 %6 \n").arg(levelToText(level), module, date.toString("dd-MM-yyyy hh:mm:ss.zzz"), threadId, fileLine, message);
+#endif
 
         QMutexLocker locker(&mutex);
         messages.append({ threadId, text });

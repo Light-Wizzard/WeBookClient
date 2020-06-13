@@ -126,8 +126,13 @@ namespace QLogger
             QString getModuleName();                                                            // myModuleName
             void setModuleName(const QString &thisModuleName);
             //
+#ifdef LOGLEVEL_CLASS
             QLoggerLevel::LogLevel getLogLevel();                                               // myLogLevel
             void setLogLevel(QLoggerLevel::LogLevel thisLogLevel);
+#else
+            LogLevel getLogLevel();                                               // myLogLevel
+            void setLogLevel(LogLevel thisLogLevel);
+#endif
 
         signals:
             void handelSettinChanged();
@@ -152,7 +157,11 @@ namespace QLogger
             QString                 myUrl                   = "";                               // URL used for HTTP request for Log Server
             quint16                 myPort                  = 0;                                // Port Number of Log Server used URL
             QLoggerManager         *manager                 = nullptr;                          // QLogger Manager
+#ifdef LOGLEVEL_CLASS
             QLoggerLevel::LogLevel  myLogLevel              = QLoggerLevel::LogLevel::Trace;    // Log Level
+#else
+            LogLevel  myLogLevel                            = LogLevel::Trace;    // Log Level
+#endif
 
     }; // end class QLoggerCommon
 } // end namespace QLogger
