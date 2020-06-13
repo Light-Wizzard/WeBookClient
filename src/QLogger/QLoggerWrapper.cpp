@@ -68,9 +68,10 @@ namespace QLogger
         QLoggerManager::getInstance()->enqueueMessage(myMessage, QLoggerLevel::LogLevel::Trace, myMessage, myFile, myLine);
         //QLogIt(myModule, myLogLevel, myMessage, QString(myFile), myLine);
 #else
+        // Any of these methods crash
         //QLoggerManager::getInstance()->enqueueMessage(myMessage, myLogLevel, myMessage, myFile, myLine);
         //QLoggerManager::getInstance()->enqueueMessage(myMessage, LogLevel::Trace, myMessage, myFile, myLine);
-        QLogIt(myModule, myLogLevel, myMessage, QString(myFile), myLine);
+        //QLogIt(myModule, myLogLevel, myMessage, QString(myFile), myLine);
 #endif
         // void QLog_(const QString &module, QLogger::QLoggerLevel::LogLevel level, const QString &message, const QString &file = QString(), int line = -1);
         if (false)
