@@ -134,9 +134,7 @@ private:
     * @param message Pair of values consistent on the date and the message to be log.
     */
    void write(const QPair<QString, QString> &message);
-};
-
-}
-
-
+}; // end class QLoggerWriter
+} // end namespace QLogger
 //#endif // QLOGGERWRITER_H
+/* ***************************** End of File ******************************* */

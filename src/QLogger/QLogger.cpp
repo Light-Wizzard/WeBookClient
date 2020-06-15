@@ -12,9 +12,14 @@ Q_DECLARE_METATYPE(QLogger::QLoggerLevel::LogLevel);
 #else
 Q_DECLARE_METATYPE(QLogger::LogLevel);
 #endif
-
+/******************************************************************************
+** QLogger                                                                    *
+*******************************************************************************/
 namespace QLogger
 {
+    /******************************************************************************
+    ** QLog_                                                                      *
+    *******************************************************************************/
 #ifdef LOGLEVEL_CLASS
     void QLog_(const QString &module, QLoggerLevel::LogLevel level, const QString &message, const QString &file, int line)
 #else
@@ -23,22 +28,30 @@ namespace QLogger
     {
         QLoggerManager::getInstance()->enqueueMessage(module, level, message, file, line);
     }
-
+    /******************************************************************************
+    ** QUEUE_LIMIT                                                                *
+    *******************************************************************************/
     static const int QUEUE_LIMIT = 100;
-
+    /******************************************************************************
+    ** QLoggerManager Constructor                                                 *
+    *******************************************************************************/
     QLoggerManager::QLoggerManager() : mMutex(QMutex::Recursive)
     {
         QDir dir(QDir::currentPath());
         dir.mkdir("logs");
     }
-
+    /******************************************************************************
+    ** getInstance                                                                *
+    *******************************************************************************/
     QLoggerManager *QLoggerManager::getInstance()
     {
         static QLoggerManager INSTANCE;
 
         return &INSTANCE;
-    }
-
+    } // end getInstance
+    /******************************************************************************
+    ** addDestination                                                             *
+    *******************************************************************************/
 #ifdef LOGLEVEL_CLASS
     bool QLoggerManager::addDestination(const QString &fileDest, const QString &module, QLoggerLevel::LogLevel level)
 #else
@@ -69,6 +82,9 @@ namespace QLogger
 
         return false;
     }
+    /******************************************************************************
+    ** addDestination                                                             *
+    *******************************************************************************/
 #ifdef LOGLEVEL_CLASS
     bool QLoggerManager::addDestination(const QString &fileDest, const QStringList &modules, QLoggerLevel::LogLevel level)
 #else
@@ -103,7 +119,9 @@ namespace QLogger
 
         return allAdded;
     }
-
+    /******************************************************************************
+    ** writeAndDequeueMessages                                                    *
+    *******************************************************************************/
     void QLoggerManager::writeAndDequeueMessages(const QString &module)
     {
         QMutexLocker lock(&mMutex);
@@ -115,6 +133,7 @@ namespace QLogger
             for (const auto &values : mNonWriterQueue)
             {
 #ifdef LOGLEVEL_CLASS
+                // .toInt() crashes
                 //const auto level = qvariant_cast<QLoggerLevel::LogLevel>(values.at(2).toInt());
                 const auto level = qvariant_cast<QLoggerLevel::LogLevel>(values.at(2));
 #else
@@ -140,6 +159,9 @@ namespace QLogger
             mNonWriterQueue.remove(module);
         }
     }
+    /******************************************************************************
+    ** enqueueMessage                                                             *
+    *******************************************************************************/
 #ifdef LOGLEVEL_CLASS
     void QLoggerManager::enqueueMessage(const QString &module, QLoggerLevel::LogLevel level, const QString &message, QString file, int line)
 #else
@@ -164,7 +186,9 @@ namespace QLogger
             mNonWriterQueue.insert( module, { QDateTime::currentDateTime(), threadId, QVariant::fromValue<LogLevel>(level), fileName, line, message });
 #endif
     }
-
+    /******************************************************************************
+    ** pause                                                                      *
+    *******************************************************************************/
     void QLoggerManager::pause()
     {
         QMutexLocker lock(&mMutex);
@@ -174,7 +198,9 @@ namespace QLogger
         for (auto &logWriter : mModuleDest)
             logWriter->stop(mIsStop);
     }
-
+    /******************************************************************************
+    ** resume                                                                     *
+    *******************************************************************************/
     void QLoggerManager::resume()
     {
         QMutexLocker lock(&mMutex);
@@ -184,7 +210,9 @@ namespace QLogger
         for (auto &logWriter : mModuleDest)
             logWriter->stop(mIsStop);
     }
-
+    /******************************************************************************
+    ** overwriteLogLevel                                                          *
+    *******************************************************************************/
 #ifdef LOGLEVEL_CLASS
     void QLoggerManager::overwriteLogLevel(QLoggerLevel::LogLevel level)
 #else
@@ -193,10 +221,11 @@ namespace QLogger
     {
         QMutexLocker lock(&mMutex);
 
-        for (auto &logWriter : mModuleDest)
-            logWriter->setLogLevel(level);
+        for (auto &logWriter : mModuleDest) logWriter->setLogLevel(level);
     }
-
+    /******************************************************************************
+    ** QLoggerManager Deconstructor                                               *
+    *******************************************************************************/
     QLoggerManager::~QLoggerManager()
     {
         QMutexLocker locker(&mMutex);
@@ -207,10 +236,10 @@ namespace QLogger
         for (auto dest : mModuleDest)
         {
             dest->closeDestination();
-            //if (dest) delete dest;
+            delete dest;
         }
 
         mModuleDest.clear();
-    }
-
-}
+    } // end ~QLoggerManager
+} // end namespace QLogger
+/* ***************************** End of File ******************************* */

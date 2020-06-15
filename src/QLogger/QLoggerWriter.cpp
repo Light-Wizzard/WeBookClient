@@ -34,8 +34,14 @@ namespace
     }
 }
 #endif
+/******************************************************************************
+** QLogger                                                                    *
+*******************************************************************************/
 namespace QLogger
 {
+    /******************************************************************************
+    ** QLoggerWriter Constructor                                                  *
+    *******************************************************************************/
     // FIXME make logs a variable you can change
 #ifdef LOGLEVEL_CLASS
     QLoggerWriter::QLoggerWriter(const QString &fileDestination, QLoggerLevel::LogLevel level) : QThread(), mFileDestination(fileDestination),  mLevel(level)
@@ -46,7 +52,9 @@ namespace QLogger
         //mFileDestination = "logs/" + fileDestination;
         //mLevel = level;
     }
-
+    /******************************************************************************
+    ** renameFileIfFull                                                           *
+    *******************************************************************************/
     QString QLoggerWriter::renameFileIfFull()
     {
         QFile file(mFileDestination);
@@ -63,7 +71,9 @@ namespace QLogger
 
         return QString();
     }
-
+    /******************************************************************************
+    ** write                                                                      *
+    *******************************************************************************/
     void QLoggerWriter::write(const QPair<QString, QString> &message)
     {
         QFile file(mFileDestination);
@@ -81,6 +91,9 @@ namespace QLogger
             file.close();
         }
     }
+    /******************************************************************************
+    ** enqueue                                                                    *
+    *******************************************************************************/
 #ifdef LOGLEVEL_CLASS
     void QLoggerWriter::enqueue(const QDateTime &date, const QString &threadId, const QString &module, QLoggerLevel::LogLevel level, const QString &fileName, int line, const QString &message)
 #else
@@ -109,7 +122,9 @@ namespace QLogger
 
         mQueueNotEmpty.wakeOne();
     }
-
+    /******************************************************************************
+    ** run                                                                        *
+    *******************************************************************************/
     void QLoggerWriter::run()
     {
         while (!mQuit)
@@ -120,8 +135,7 @@ namespace QLogger
                 std::swap(copy, messages);
             }
 
-            for (const auto &msg : copy)
-                write(msg);
+            for (const auto &msg : copy) write(msg);
 
             copy.clear();
 
@@ -130,14 +144,15 @@ namespace QLogger
             mutex.unlock();
         }
     }
-
+    /******************************************************************************
+    ** closeDestination                                                           *
+    *******************************************************************************/
     void QLoggerWriter::closeDestination()
     {
         mQuit = true;
         mQueueNotEmpty.wakeOne();
-
-        exit(0);
-        //wait();
+        //exit(0);
+        wait();
     }
-
-}
+} // end
+/* ***************************** End of File ******************************* */

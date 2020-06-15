@@ -235,3 +235,4 @@ void QLog_(const QString &module, QLogger::LogLevel level, const QString &messag
     QLogger::QLoggerManager::getInstance()->enqueueMessage(module, QLogger::LogLevel::Fatal, message, __FILE__,      \
     __LINE__)
 #endif
+/* ***************************** End of File ******************************* */
