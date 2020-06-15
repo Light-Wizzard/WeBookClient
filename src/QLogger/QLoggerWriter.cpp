@@ -12,26 +12,6 @@
 #ifndef LOGLEVEL_CLASS
 namespace
 {
-    QString levelToText(const QLogger::LogLevel &level)
-    {
-        switch (level)
-        {
-            case QLogger::LogLevel::Trace:
-                return "Trace";
-            case QLogger::LogLevel::Debug:
-                return "Debug";
-            case QLogger::LogLevel::Info:
-                return "Info";
-            case QLogger::LogLevel::Warning:
-                return "Warning";
-            case QLogger::LogLevel::Error:
-                return "Error";
-            case QLogger::LogLevel::Fatal:
-                return "Fatal";
-        }
-
-        return QString();
-    }
 }
 #endif
 /******************************************************************************
@@ -51,7 +31,7 @@ namespace QLogger
     {
         //mFileDestination = "logs/" + fileDestination;
         //mLevel = level;
-    }
+    } // end QLoggerWriter
     /******************************************************************************
     ** renameFileIfFull                                                           *
     *******************************************************************************/
@@ -70,7 +50,7 @@ namespace QLogger
         }
 
         return QString();
-    }
+    } // end renameFileIfFull
     /******************************************************************************
     ** write                                                                      *
     *******************************************************************************/
@@ -90,7 +70,7 @@ namespace QLogger
 
             file.close();
         }
-    }
+    } // end write
     /******************************************************************************
     ** enqueue                                                                    *
     *******************************************************************************/
@@ -121,7 +101,7 @@ namespace QLogger
         messages.append({ threadId, text });
 
         mQueueNotEmpty.wakeOne();
-    }
+    } // end enqueue
     /******************************************************************************
     ** run                                                                        *
     *******************************************************************************/
@@ -143,7 +123,7 @@ namespace QLogger
             mQueueNotEmpty.wait(&mutex);
             mutex.unlock();
         }
-    }
+    } // end run
     /******************************************************************************
     ** closeDestination                                                           *
     *******************************************************************************/
@@ -151,8 +131,7 @@ namespace QLogger
     {
         mQuit = true;
         mQueueNotEmpty.wakeOne();
-        //exit(0);
         wait();
-    }
+    } // end closeDestination
 } // end
 /* ***************************** End of File ******************************* */

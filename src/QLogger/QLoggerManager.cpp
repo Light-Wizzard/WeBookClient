@@ -5,7 +5,7 @@
 ** Fork: https://github.com/Light-Wizzard/QLogger                             *
 *******************************************************************************/
 
-#include "QLogger.h"
+#include "QLoggerManager.h"
 
 #ifdef LOGLEVEL_CLASS
 Q_DECLARE_METATYPE(QLogger::QLoggerLevel::LogLevel);
@@ -180,12 +180,14 @@ namespace QLogger
             logWriter->enqueue(QDateTime::currentDateTime(), threadId, module, level, fileName, line, message);
         }
         else if (!logWriter && mNonWriterQueue.count(module) < QUEUE_LIMIT)
+        {
 #ifdef LOGLEVEL_CLASS
             mNonWriterQueue.insert( module, { QDateTime::currentDateTime(), threadId, QVariant::fromValue<QLoggerLevel::LogLevel>(level), fileName, line, message });
 #else
             mNonWriterQueue.insert( module, { QDateTime::currentDateTime(), threadId, QVariant::fromValue<LogLevel>(level), fileName, line, message });
 #endif
-    }
+        }
+    } // end enqueueMessage
     /******************************************************************************
     ** pause                                                                      *
     *******************************************************************************/
@@ -195,9 +197,8 @@ namespace QLogger
 
         mIsStop = true;
 
-        for (auto &logWriter : mModuleDest)
-            logWriter->stop(mIsStop);
-    }
+        for (auto &logWriter : mModuleDest) logWriter->stop(mIsStop);
+    } // end pause
     /******************************************************************************
     ** resume                                                                     *
     *******************************************************************************/
@@ -207,9 +208,8 @@ namespace QLogger
 
         mIsStop = false;
 
-        for (auto &logWriter : mModuleDest)
-            logWriter->stop(mIsStop);
-    }
+        for (auto &logWriter : mModuleDest) logWriter->stop(mIsStop);
+    } // end resume
     /******************************************************************************
     ** overwriteLogLevel                                                          *
     *******************************************************************************/

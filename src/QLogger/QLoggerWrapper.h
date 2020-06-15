@@ -24,7 +24,7 @@
 #include <QString>
 #include <QDebug>
 
-#include "QLogger.h"
+#include "QLoggerManager.h"
 #include "QLogger/QLoggerCommon.h"
 
 // Define if using as Libary

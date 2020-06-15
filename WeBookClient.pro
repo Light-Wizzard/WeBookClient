@@ -76,10 +76,12 @@ RESOURCES   += WeBookClient.qrc
 # https://github.com/Light-Wizzard/QLogger                                    #
 # Fork: https://github.com/francescmm/QLogger                                 #
 ###############################################################################
-HEADERS     *= src/QLogger/QLogger.h
+HEADERS     *= \
+    src/QLogger/QLoggerManager.h
 HEADERS     *= src/QLogger/QLoggerLevel.h
 HEADERS     *= src/QLogger/QLoggerWriter.h
-SOURCES     *= src/QLogger/QLogger.cpp
+SOURCES     *= \
+    src/QLogger/QLoggerManager.cpp
 SOURCES     *= src/QLogger/QLoggerWriter.cpp
 #
 HEADERS     *= src/QLogger/QLoggerConstants.h

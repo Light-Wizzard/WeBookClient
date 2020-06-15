@@ -5,31 +5,6 @@
 ** Fork: https://github.com/Light-Wizzard/QLogger                             *
 *******************************************************************************/
 #include "QLoggerWrapper.h"
-#ifndef LOGLEVEL_CLASS
-namespace
-{
-    QString levelToText(const QLogger::LogLevel &level)
-    {
-        switch (level)
-        {
-            case QLogger::LogLevel::Trace:
-                return "Trace";
-            case QLogger::LogLevel::Debug:
-                return "Debug";
-            case QLogger::LogLevel::Info:
-                return "Info";
-            case QLogger::LogLevel::Warning:
-                return "Warning";
-            case QLogger::LogLevel::Error:
-                return "Error";
-            case QLogger::LogLevel::Fatal:
-                return "Fatal";
-        }
-
-        return QString();
-    }
-}
-#endif
 
 namespace QLogger
 {

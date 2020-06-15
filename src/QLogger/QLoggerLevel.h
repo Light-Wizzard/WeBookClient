@@ -21,11 +21,12 @@
  ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ***************************************************************************************/
 
+#include <QObject>
+
 #define LOGLEVEL_CLASS
 
 #ifdef LOGLEVEL_CLASS
 
-#include <QObject>
 #include <QMetaEnum>
 
 namespace QLogger
@@ -58,7 +59,7 @@ namespace QLogger
                 auto metaEnum = QMetaEnum::fromType<QLoggerLevel::QLoggerLevel::LogLevel>();
                 return QString(metaEnum.valueToKey(value));
             }
-    }; // end class QLogger
+    }; // end class QLoggerLevel
 } // end namespace QLogger
 #else
 namespace QLogger
@@ -76,6 +77,26 @@ namespace QLogger
         Error,
         Fatal
     };
+    static QString levelToText(const QLogger::LogLevel &level)
+    {
+        switch (level)
+        {
+            case QLogger::LogLevel::Trace:
+                return "Trace";
+            case QLogger::LogLevel::Debug:
+                return "Debug";
+            case QLogger::LogLevel::Info:
+                return "Info";
+            case QLogger::LogLevel::Warning:
+                return "Warning";
+            case QLogger::LogLevel::Error:
+                return "Error";
+            case QLogger::LogLevel::Fatal:
+                return "Fatal";
+        }
+
+        return QString();
+    }
 }
 #endif
 /* ***************************** End of File ******************************* */
