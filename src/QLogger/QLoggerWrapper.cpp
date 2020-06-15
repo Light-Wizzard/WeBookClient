@@ -65,11 +65,11 @@ namespace QLogger
         // FIXME this crashes in deconstructor, calling it from one, cannot imagine the lifetime issue
 #ifdef LOGLEVEL_CLASS
         //QLoggerManager::getInstance()->enqueueMessage(myMessage, myLogLevel, myMessage, myFile, myLine);
-        QLoggerManager::getInstance()->enqueueMessage(myMessage, QLoggerLevel::LogLevel::Trace, myMessage, myFile, myLine);
+        QLoggerManager::getInstance()->enqueueMessage(myMessage, QLoggerLevel::LogLevel::Debug, myMessage, myFile, myLine);
         //QLogIt(myModule, myLogLevel, myMessage, QString(myFile), myLine);
 #else
         // Any of these methods crash
-        //QLoggerManager::getInstance()->enqueueMessage(myMessage, myLogLevel, myMessage, myFile, myLine);
+        QLoggerManager::getInstance()->enqueueMessage(myMessage, myLogLevel, myMessage, myFile, myLine);
         //QLoggerManager::getInstance()->enqueueMessage(myMessage, LogLevel::Trace, myMessage, myFile, myLine);
         //QLogIt(myModule, myLogLevel, myMessage, QString(myFile), myLine);
 #endif

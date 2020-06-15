@@ -1,4 +1,5 @@
 # WeBookServerClient.pro
+DEFINES += LOGLEVEL_CLASS=true
 #DEFINES         *= QT_PRINTSUPPORT_LIB
 qtHaveModule(printsupport): QT *= printsupport
 # Specifies the name of the template to use when generating the project.

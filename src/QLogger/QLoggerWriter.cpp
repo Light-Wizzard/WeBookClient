@@ -8,6 +8,7 @@
 #include "QLoggerWriter.h"
 
 #include "QLoggerWrapper.h"
+
 #ifndef LOGLEVEL_CLASS
 namespace
 {
@@ -37,9 +38,9 @@ namespace QLogger
 {
     // FIXME make logs a variable you can change
 #ifdef LOGLEVEL_CLASS
-    QLoggerWriter::QLoggerWriter(const QString &fileDestination, QLoggerLevel::LogLevel level) : QThread(), mFileDestination("logs/" + fileDestination),  mLevel(level)
+    QLoggerWriter::QLoggerWriter(const QString &fileDestination, QLoggerLevel::LogLevel level) : QThread(), mFileDestination(fileDestination),  mLevel(level)
 #else
-    QLoggerWriter::QLoggerWriter(const QString &fileDestination, LogLevel level) : QThread(), mFileDestination("logs/" + fileDestination),  mLevel(level)
+    QLoggerWriter::QLoggerWriter(const QString &fileDestination, LogLevel level) : QThread(), mFileDestination(fileDestination),  mLevel(level)
 #endif
     {
         //mFileDestination = "logs/" + fileDestination;
@@ -53,9 +54,7 @@ namespace QLogger
         // Rename file if it's full
         if (file.size() >= MaxFileSize)
         {
-            const auto newName = QString("%1_%2.log")
-                                 .arg(mFileDestination.left(mFileDestination.lastIndexOf('.')),
-                                      QDateTime::currentDateTime().toString("dd_MM_yy__hh_mm_ss"));
+            const auto newName = QString("%1_%2.log").arg(mFileDestination.left(mFileDestination.lastIndexOf('.')), QDateTime::currentDateTime().toString("dd_MM_yy__hh_mm_ss"));
 
             const auto renamed = file.rename(mFileDestination, newName);
 
@@ -75,8 +74,7 @@ namespace QLogger
         {
             QTextStream out(&file);
 
-            if (!prevFilename.isEmpty())
-                out << QString("%1 - Previous log %2\n").arg(message.first, prevFilename);
+            if (!prevFilename.isEmpty()) out << QString("%1 - Previous log %2\n").arg(message.first, prevFilename);
 
             out << message.second;
 

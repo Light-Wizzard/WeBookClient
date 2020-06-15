@@ -158,7 +158,7 @@ namespace QLogger
             quint16                 myPort                  = 0;                                // Port Number of Log Server used URL
             QLoggerManager         *manager                 = nullptr;                          // QLogger Manager
 #ifdef LOGLEVEL_CLASS
-            QLoggerLevel::LogLevel  myLogLevel              = QLoggerLevel::LogLevel::Trace;    // Log Level
+            QLoggerLevel::LogLevel  myLogLevel              = QLoggerLevel::LogLevel::Debug;    // Log Level
 #else
             LogLevel  myLogLevel                            = LogLevel::Trace;    // Log Level
 #endif

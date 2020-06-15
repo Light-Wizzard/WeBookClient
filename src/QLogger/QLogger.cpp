@@ -7,7 +7,9 @@
 
 #include "QLogger.h"
 
-#ifndef LOGLEVEL_CLASS
+#ifdef LOGLEVEL_CLASS
+Q_DECLARE_METATYPE(QLogger::QLoggerLevel::LogLevel);
+#else
 Q_DECLARE_METATYPE(QLogger::LogLevel);
 #endif
 
@@ -113,9 +115,14 @@ namespace QLogger
             for (const auto &values : mNonWriterQueue)
             {
 #ifdef LOGLEVEL_CLASS
-                const auto level = qvariant_cast<QLoggerLevel::LogLevel>(values.at(2).toInt());
+                //const auto level = qvariant_cast<QLoggerLevel::LogLevel>(values.at(2).toInt());
+                const auto level = qvariant_cast<QLoggerLevel::LogLevel>(values.at(2));
 #else
-                const auto level = qvariant_cast<LogLevel>(values.at(2).toInt());
+
+                //const auto level = static_cast<LogLevel>(values.at(2).toInt());
+                const auto level = qvariant_cast<LogLevel>(values.at(2));
+
+                //const auto level = qvariant_cast<LogLevel>(values.at(2).toInt());
 #endif
 
                 if (logWriter->getLevel() <= level)
@@ -200,7 +207,7 @@ namespace QLogger
         for (auto dest : mModuleDest)
         {
             dest->closeDestination();
-            delete dest;
+            //if (dest) delete dest;
         }
 
         mModuleDest.clear();

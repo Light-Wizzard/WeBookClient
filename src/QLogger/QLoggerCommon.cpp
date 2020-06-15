@@ -374,7 +374,7 @@ namespace QLogger
     *******************************************************************************/
     QString QLoggerCommon::getLogFullPath()
     {
-        if (myLogFullPath.isEmpty()) myLogFullPath = QString("%1%2%3%4%5%6%7").arg(getLogPath(), QDir::separator(), getAppName(), QDir::separator(), getLogFolderName(), QDir::separator(), getLogFileName());
+        if (myLogFullPath.isEmpty()) myLogFullPath = QString("%1%2%3").arg(getLogPath(), QDir::separator(), getLogFileName());
         return myLogFullPath;
     } // end getLogFullPath
     /******************************************************************************
