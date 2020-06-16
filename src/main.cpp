@@ -23,7 +23,6 @@ void mainEventHandler(int eventValue)
 ** This uses Qt qInstallMessageHandler(WeBookMessenger);                      *
 ** I have no idea if this gets called in a Thread, but Qt should handle it,   *
 ** ensuring thread safe way to open and write to a log file.                  *
-** Note: I close the file in mainEventHandler.                                *
 *******************************************************************************/
 void WeBookMessenger(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
@@ -86,7 +85,7 @@ int main(int argc, char *argv[])
     // WeBook Common has QtSettings and Crypto Functions Common between Client/Server
     QLogger::QLoggerCommon *qLoggerCommon = new QLogger::QLoggerCommon(false);
     qLoggerCommon->setLogLevel(QLoggerLevel::LogLevel::Fatal);
-    QLoggerCrypto *weBookCrypto = new QLoggerCrypto();
+    QLogger::QLoggerCrypto *weBookCrypto = new QLogger::QLoggerCrypto();
     QString applicationName;
     //#define USE_REAL_FILENAME
     #ifdef USE_REAL_FILENAME
@@ -165,13 +164,6 @@ int main(int argc, char *argv[])
     //
     MainWindow *weBookWindow = new MainWindow();
     QObject::connect(weBookWindow, &MainWindow::handleEventAction, mainEventHandler);
-    /*
-    WeBookLogger *weBookLogger = new WeBookLogger();
-    if (theLogPath.isEmpty()) theLogPath = QString("%1%2.log").arg(applicationName).arg(QDateTime::currentDateTime().toString("-Log.yyyy-MM"));
-    weBookLogger->setLogPath(theLogPath);
-    weBookLogger->onLogFileChanged();
-    QObject::connect(weBookLogger, &WeBookLogger::handelLogFileChanged, &WeBookLogger::onLogFileChanged);
-    */
 
     qInstallMessageHandler(WeBookMessenger); // Install the Message handler
 

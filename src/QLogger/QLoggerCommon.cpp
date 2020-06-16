@@ -105,12 +105,13 @@ namespace QLogger
                 #elif defined(Q_OS_MAC)
                 #elif defined(Q_OS_WINCE)
                 #elif defined(Q_OS_WIN)
-                // FIXME add header for MAX_USERNAME DWORD
+                // #include "winbase.h"
+                // #include "windows. h"
                 //  char acUserName[MAX_USERNAME];
                 //  DWORD nUserName = sizeof(acUserName);
                 //  if (GetUserName(acUserName, &nUserName)) myUserName = acUserName;
                 #elif defined(Q_OS_LINUX)
-                #elif defined(Q_OS_UNIX)
+                #elif defined(Q_OS_UNIX) && !defined(Q_OS_LINUX)
                 #else
                 #endif
             }

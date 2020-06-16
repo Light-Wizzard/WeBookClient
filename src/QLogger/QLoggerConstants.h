@@ -40,6 +40,8 @@ namespace QLogger
     const QString ConstDefaultModuleName            = "WeBook";       // Default Module Name
     const QPoint  ConstDefaultGeometryPos           = QPoint(10, 10);                        // Top, Left
     const QSize   ConstDefaultGeometrySize          = QSize(1000, 666);                      // Width x Height
+    const QString ConstDefaultCryptoKey             = "!1@2#3$4%5^6&7*8)9(0)NowPickRand"; // These values are for testing only
+    const QString ConstDefaultCryptoIvVector        = "PutMoveVector1!2@3#4$NowPickRand"; // These values are for testing only
     // Store only what you need, comment the rest
     const QString ConstDefaultHomeLocation          = QStandardPaths::writableLocation(QStandardPaths::HomeLocation);          // Home
     const QString ConstDefaultAppDataLocation       = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);       // App Data
