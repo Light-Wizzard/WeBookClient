@@ -14,7 +14,7 @@ TreeModel::TreeModel(const QString &strings, QObject *parent) : QAbstractItemMod
     #ifndef QT_DEBUG
         isDebugMessage = isDebugAllMessage = false;
     #endif
-    if (isDebugMessage) QLOG_DEBUG() << "TreeModel::TreeModel(" << strings << ", parent)";
+    if (isDebugMessage) qDebug() << "TreeModel::TreeModel(" << strings << ", parent)";
 
     rootTreeItem = new TreeItem(rootData, 0); // Header
 
@@ -26,7 +26,7 @@ TreeModel::TreeModel(const QString &strings, QObject *parent) : QAbstractItemMod
 *******************************************************************************/
 TreeModel::~TreeModel()
 {
-    if (isDebugMessage) QLOG_DEBUG() << "TreeModel::~TreeModel";
+    if (isDebugMessage) qDebug() << "TreeModel::~TreeModel";
     delete rootTreeItem;
 } // end ~TreeModel
 /******************************************************************************
@@ -35,7 +35,7 @@ TreeModel::~TreeModel()
 *******************************************************************************/
 void TreeModel::setupModelData(const QStringList &lines, TreeItem *parent)
 {
-    if (isDebugMessage) QLOG_DEBUG() << "TreeModel::setupModelData(" << lines << ", parent)";
+    if (isDebugMessage) qDebug() << "TreeModel::setupModelData(" << lines << ", parent)";
     QList<TreeItem*> parents;
     QList<int> indentations;
     parents << parent;
@@ -151,13 +151,13 @@ void TreeModel::forEachSave(const QModelIndex &parent, bool isChild)
                 {
                     // Children off of Root level: Indent by 2 Spaces and seperate columns with Tab (\t) and newline (\n)
                     treeListItemsReturned.append(QString("%1%2\t%3\n").arg(getSpace(recursiveLevel), cellOne, cellTwo));
-                    if (isDebugMessage) QLOG_DEBUG() << "Child name=" << QString("%1%2\t%3\n").arg(getSpace(recursiveLevel), cellOne, cellTwo) << " level = " << recursiveLevel;
+                    if (isDebugMessage) qDebug() << "Child name=" << QString("%1%2\t%3\n").arg(getSpace(recursiveLevel), cellOne, cellTwo) << " level = " << recursiveLevel;
                 }
                 else
                 {
                     // Root Level: seperate columns with Tab (\t) and newline (\n)
                     treeListItemsReturned.append(QString("%1\t%2\n").arg(cellOne, cellTwo));
-                    if (isDebugAllMessage) QLOG_DEBUG() << "name=" << QString("%1\t%2\n").arg(cellOne, cellTwo);
+                    if (isDebugAllMessage) qDebug() << "name=" << QString("%1\t%2\n").arg(cellOne, cellTwo);
                 }
                 if( hasChildren(MyIndex) ) { forEachSave(MyIndex, true); recursiveLevel--; } // Sets isChild to true and iterates its Siblings
             } // end if (myCol
@@ -261,10 +261,10 @@ QModelIndex TreeModel::setActive(const QString &thisColId, const QModelIndex &pa
 *******************************************************************************/
 QString TreeModel::getData()
 {
-    if (isDebugMessage) QLOG_DEBUG() << "TreeModel::getData";
+    if (isDebugMessage) qDebug() << "TreeModel::getData";
     treeListItemsReturned.clear();
     forEachSave(QModelIndex(), false);
-    if (isDebugMessage) QLOG_DEBUG() << "TreeModel::getData()=" << treeListItemsReturned;
+    if (isDebugMessage) qDebug() << "TreeModel::getData()=" << treeListItemsReturned;
     return treeListItemsReturned;
 } // end getData
 /******************************************************************************
@@ -272,7 +272,7 @@ QString TreeModel::getData()
 *******************************************************************************/
 QModelIndex TreeModel::index(int row, int column, const QModelIndex &parent) const
 {
-    if (isDebugAllMessage) QLOG_DEBUG() << "TreeModel::index(" << row << "," << column << ", parent)";
+    if (isDebugAllMessage) qDebug() << "TreeModel::index(" << row << "," << column << ", parent)";
     TreeItem *parentItem;
 
     if (!parent.isValid()) parentItem = rootTreeItem;
@@ -287,7 +287,7 @@ QModelIndex TreeModel::index(int row, int column, const QModelIndex &parent) con
 *******************************************************************************/
 QModelIndex TreeModel::parent(const QModelIndex &index) const
 {
-    if (isDebugAllMessage) QLOG_DEBUG() << "TreeModel::parent(" << index << ")";
+    if (isDebugAllMessage) qDebug() << "TreeModel::parent(" << index << ")";
     if (!index.isValid()) return QModelIndex();
 
     TreeItem *childItem = static_cast<TreeItem*>(index.internalPointer());
@@ -302,7 +302,7 @@ QModelIndex TreeModel::parent(const QModelIndex &index) const
 *******************************************************************************/
 QVariant TreeModel::data(const QModelIndex &index, int role) const
 {
-    if (isDebugAllMessage) QLOG_DEBUG() << "TreeModel::data(" << index << ", " << role << ")";
+    if (isDebugAllMessage) qDebug() << "TreeModel::data(" << index << ", " << role << ")";
     if (!index.isValid()) return QVariant();
 
     if (role == Qt::DisplayPropertyRole)
@@ -322,7 +322,7 @@ QVariant TreeModel::data(const QModelIndex &index, int role) const
 *******************************************************************************/
 QVariant TreeModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
-    if (isDebugAllMessage) QLOG_DEBUG() << "TreeModel::headerData(" << section << "," << orientation << "," << role << ")";
+    if (isDebugAllMessage) qDebug() << "TreeModel::headerData(" << section << "," << orientation << "," << role << ")";
     if (orientation == Qt::Horizontal && role == Qt::DisplayRole) return rootTreeItem->data(section);
 
     return QVariant();
@@ -332,7 +332,7 @@ QVariant TreeModel::headerData(int section, Qt::Orientation orientation, int rol
 *******************************************************************************/
 bool TreeModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
-    if (isDebugMessage) QLOG_DEBUG() << "TreeModel::setData(" << index << ", " << value << role << ")";
+    if (isDebugMessage) qDebug() << "TreeModel::setData(" << index << ", " << value << role << ")";
 
 
     if (!index.isValid() || role != Qt::EditRole) return false;
@@ -358,7 +358,7 @@ bool TreeModel::setData(const QModelIndex &index, const QVariant &value, int rol
 *******************************************************************************/
 Qt::ItemFlags TreeModel::flags(const QModelIndex &index) const
 {
-    if (isDebugAllMessage) QLOG_DEBUG() << "TreeModel::flags(" << index << ")";
+    if (isDebugAllMessage) qDebug() << "TreeModel::flags(" << index << ")";
     if (!index.isValid()) return Qt::ItemIsEnabled | Qt::NoItemFlags;
     return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable | QAbstractItemModel::flags(index);
 } // end flags
@@ -367,7 +367,7 @@ Qt::ItemFlags TreeModel::flags(const QModelIndex &index) const
 *******************************************************************************/
 int TreeModel::columnCount(const QModelIndex &parent) const
 {
-    if (isDebugAllMessage) QLOG_DEBUG() << "TreeModel::columnCount(parent)";
+    if (isDebugAllMessage) qDebug() << "TreeModel::columnCount(parent)";
     if (parent.isValid()) return static_cast<TreeItem*>(parent.internalPointer())->columnCount();
     else                  return rootTreeItem->columnCount();
 } // end columnCount
@@ -376,7 +376,7 @@ int TreeModel::columnCount(const QModelIndex &parent) const
 *******************************************************************************/
 bool TreeModel::insertRows(int position, int rows, const QModelIndex &parent)
 {
-    if (isDebugMessage) QLOG_DEBUG() << "TreeModel::insertRows(" << position << "," << rows << ", parent)";
+    if (isDebugMessage) qDebug() << "TreeModel::insertRows(" << position << "," << rows << ", parent)";
 
     TreeItem *parentItem;
 
@@ -391,7 +391,7 @@ bool TreeModel::insertRows(int position, int rows, const QModelIndex &parent)
 
 
     int myLevel = forEachChildLevel(parentItem->data(0).toString(), QModelIndex());
-    QLOG_DEBUG() << "myLevel=" << myLevel;
+    qDebug() << "myLevel=" << myLevel;
 
     beginInsertRows(parent, position, position + rows - 1);
     for (int row = 0; row < rows; ++row)
@@ -407,7 +407,7 @@ bool TreeModel::insertRows(int position, int rows, const QModelIndex &parent)
 *******************************************************************************/
 bool TreeModel::removeRows(int position, int rows, const QModelIndex &parent)
 {
-    if (isDebugMessage) QLOG_DEBUG() << "TreeModel::removeRows(" << position << "," << rows << ", parent)";
+    if (isDebugMessage) qDebug() << "TreeModel::removeRows(" << position << "," << rows << ", parent)";
     TreeItem *parentItem;
 
     if (!parent.isValid()) parentItem = rootTreeItem;
@@ -430,7 +430,7 @@ bool TreeModel::removeRows(int position, int rows, const QModelIndex &parent)
 *******************************************************************************/
 int TreeModel::rowCount(const QModelIndex &parent) const
 {
-    if (isDebugAllMessage) QLOG_DEBUG() << "TreeModel::rowCount(parent)";
+    if (isDebugAllMessage) qDebug() << "TreeModel::rowCount(parent)";
     TreeItem *parentItem;
 
     if (!parent.isValid()) parentItem = rootTreeItem;

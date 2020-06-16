@@ -34,7 +34,9 @@
 // QLogger Constants
 #include "QLoggerConstants.h"
 // QLogger Wrapper
-#include "QLoggerWrapper.h"
+//#include "WeBookLogger.h"
+#include "QLoggerLevel.h"
+#include "QLoggerManager.h"
 
 /******************************************************************************
 ** namespace QLogger                                                          *

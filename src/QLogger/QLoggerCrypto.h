@@ -32,7 +32,7 @@
 #include <QProcess>
 
 // QLogger Common
-#include "QLogger/QLoggerCommon.h"
+#include "QLoggerCommon.h"
 
 // Qt-AES
 #include "QtAES/QAESEncryption.h"

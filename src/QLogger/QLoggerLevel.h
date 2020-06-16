@@ -38,7 +38,7 @@ namespace QLogger
         public:
             /**
              * @brief The LogLevel enum class defines the level of the log message.
-             * QLoggerLevel::LogLevel::Trace
+             * QLogger::QLoggerLevel::LogLevel::Trace
              */
             enum LogLevel
             {

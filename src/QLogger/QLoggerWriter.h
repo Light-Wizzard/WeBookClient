@@ -30,6 +30,7 @@
 #include <QFile>
 #include <QTextStream>
 
+//#include "WeBookLogger.h"
 #include "QLoggerLevel.h"
 
 namespace QLogger

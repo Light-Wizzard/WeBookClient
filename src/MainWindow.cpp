@@ -165,7 +165,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 *******************************************************************************/
 MainWindow::~MainWindow()
 {
-    if (isDebugMessage) QLOG_DEBUG() << "Deconstructor: writeSettings then delete ui";
+    if (isDebugMessage) qDebug() << "Deconstructor: writeSettings then delete ui";
     delete ui;
 } // end ~MainWindow
 /******************************************************************************
@@ -173,7 +173,7 @@ MainWindow::~MainWindow()
 *******************************************************************************/
 void MainWindow::closeEvent(QCloseEvent *e)
 {
-    if (isDebugMessage) QLOG_DEBUG() << "closeEvent";
+    if (isDebugMessage) qDebug() << "closeEvent";
     if (maybeSave()) e->accept();
     else             e->ignore();
     if (!isCloseCalled)
@@ -187,7 +187,7 @@ void MainWindow::closeEvent(QCloseEvent *e)
 *******************************************************************************/
 void MainWindow::quitNow()
 {
-    if (isDebugMessage) QLOG_DEBUG() << "quitNow";
+    if (isDebugMessage) qDebug() << "quitNow";
     writeSettings();
     if (!isCloseCalled)
     {
@@ -216,7 +216,7 @@ void MainWindow::quitNow()
 *******************************************************************************/
 void MainWindow::setTocTreeViewModel(QString modelName)
 {
-    if (isDebugMessage) QLOG_DEBUG() << "Set Toc TreeView Model";
+    if (isDebugMessage) qDebug() << "Set Toc TreeView Model";
     //
     QString myTocPath;
     if (modelName.isEmpty())
@@ -238,7 +238,7 @@ void MainWindow::setTocTreeViewModel(QString modelName)
     {
         if (!openWeBookTOC(myTocPath))
         {
-            QLOG_DEBUG() << "Error could not open file for reading: " << booksResourceFile.fileName() << " Error = " << booksResourceFile.errorString();
+            qDebug() << "Error could not open file for reading: " << booksResourceFile.fileName() << " Error = " << booksResourceFile.errorString();
         }
     }
     else
@@ -250,12 +250,12 @@ void MainWindow::setTocTreeViewModel(QString modelName)
             booksResourceFile.close();
             if (!openWeBookTOC(myTocPath))
             {
-                QLOG_DEBUG() << "Error could not open file for reading: " << booksResourceFile.fileName() << " Error = " << booksResourceFile.errorString();
+                qDebug() << "Error could not open file for reading: " << booksResourceFile.fileName() << " Error = " << booksResourceFile.errorString();
             }
         }
         else
         {
-            QLOG_DEBUG() << "Error could not open file for reading: " << booksResourceFile.fileName() << " Error = " << booksResourceFile.errorString();
+            qDebug() << "Error could not open file for reading: " << booksResourceFile.fileName() << " Error = " << booksResourceFile.errorString();
         }
     }
 } // end setTocTreeViewModel
@@ -264,7 +264,7 @@ void MainWindow::setTocTreeViewModel(QString modelName)
 *******************************************************************************/
 bool MainWindow::openWeBookTOC(QString thisFullPathFileName)
 {
-    if (isDebugMessage) QLOG_DEBUG() << "open WeBook TOC";
+    if (isDebugMessage) qDebug() << "open WeBook TOC";
     QFile booksResourceFile(thisFullPathFileName);
     if (booksResourceFile.exists())
     {
@@ -282,7 +282,7 @@ bool MainWindow::openWeBookTOC(QString thisFullPathFileName)
         }
         else
         {
-            QLOG_DEBUG() << "Error could not open books.txt for reading: " << booksResourceFile.fileName() << " Error = " << booksResourceFile.errorString();
+            qDebug() << "Error could not open books.txt for reading: " << booksResourceFile.fileName() << " Error = " << booksResourceFile.errorString();
         }
     }
     return false;
@@ -293,7 +293,7 @@ bool MainWindow::openWeBookTOC(QString thisFullPathFileName)
 *******************************************************************************/
 void MainWindow::setWeBookModel()
 {
-    if (isDebugMessage) QLOG_DEBUG() << "Set WeBook Model";
+    if (isDebugMessage) qDebug() << "Set WeBook Model";
     //
     WeBooksCatFileFullPath = QString("%1%2%3").arg(qLoggerCommon->getFilelPath(), QDir::separator(), constWeBookCatName);
     QFile WeBooksCatFile(WeBooksCatFileFullPath);
@@ -312,7 +312,7 @@ void MainWindow::setWeBookModel()
         }
         else
         {
-            QLOG_DEBUG() << "Error could not open file for reading: " << WeBooksCatFile.fileName() << " Error = " << WeBooksCatFile.errorString();
+            qDebug() << "Error could not open file for reading: " << WeBooksCatFile.fileName() << " Error = " << WeBooksCatFile.errorString();
         }
     }
 } // end setWeBookModel
@@ -341,7 +341,7 @@ bool MainWindow::openWeBookCat(QString thisFullPathFileName)
         }
         else
         {
-            QLOG_DEBUG() << "Error could not open file for reading: " << WeBooksCatFile.fileName() << " Error = " << WeBooksCatFile.errorString();
+            qDebug() << "Error could not open file for reading: " << WeBooksCatFile.fileName() << " Error = " << WeBooksCatFile.errorString();
         }
     }
     return false;
@@ -363,7 +363,7 @@ bool MainWindow::openWeBookCat(QString thisFullPathFileName)
 *******************************************************************************/
 void MainWindow::saveTabStates(int tabNumber)
 {
-    if (isDebugMessage) QLOG_DEBUG() << "saveTabStates";
+    if (isDebugMessage) qDebug() << "saveTabStates";
     switch (tabNumber)
     {
         case TabSettings:       // 0
@@ -422,7 +422,7 @@ void MainWindow::saveTabStates(int tabNumber)
 *******************************************************************************/
 void MainWindow::restoreTabStates(int tabNumber)
 {
-    if (isDebugMessage) QLOG_DEBUG() << "restoreTabStates";
+    if (isDebugMessage) qDebug() << "restoreTabStates";
     switch (tabNumber)
     {
         case TabSettings:        // 0
@@ -507,7 +507,7 @@ void MainWindow::restoreTabStates(int tabNumber)
 *******************************************************************************/
 void MainWindow::onTabChanged(int tab)
 {
-    if (isDebugMessage) QLOG_DEBUG() << "onTabChanged=" << tab;
+    if (isDebugMessage) qDebug() << "onTabChanged=" << tab;
     disableAllMenuToolbarActions(tab);
 
     switch (tab)
@@ -538,7 +538,7 @@ void MainWindow::onTabChanged(int tab)
 *******************************************************************************/
 void MainWindow::disableAllMenuToolbarActions(int tabNumber)
 {
-    if (isDebugMessage) QLOG_DEBUG() << "disableAllMenuToolbarActions";
+    if (isDebugMessage) qDebug() << "disableAllMenuToolbarActions";
     saveTabStates(lastTab);
     ui->actionAlignLeft->setEnabled(false);
     ui->actionAlignRight->setEnabled(false);
@@ -571,7 +571,7 @@ void MainWindow::disableAllMenuToolbarActions(int tabNumber)
 *******************************************************************************/
 void MainWindow::onSaveApplicationSettings()
 {
-    if (isDebugMessage) QLOG_DEBUG() << "onSaveApplicationSettings";
+    if (isDebugMessage) qDebug() << "onSaveApplicationSettings";
 
 } // end onSaveApplicationSettings
 /******************************************************************************
@@ -579,7 +579,7 @@ void MainWindow::onSaveApplicationSettings()
 *******************************************************************************/
 void MainWindow::setupTextActions()
 {
-    if (isDebugMessage) QLOG_DEBUG() << "setupTextActions";
+    if (isDebugMessage) qDebug() << "setupTextActions";
 
     ui->toolBar->addSeparator();
     QToolBar *tb = addToolBar(tr("Format Actions"));
@@ -628,7 +628,7 @@ void MainWindow::setupTextActions()
 *******************************************************************************/
 bool MainWindow::load(const QString &f)
 {
-    if (isDebugMessage) QLOG_DEBUG() << "load";
+    if (isDebugMessage) qDebug() << "load";
 
     if (!QFile::exists(f))           return false;
     QFile file(f);
@@ -663,7 +663,7 @@ bool MainWindow::load(const QString &f)
 *******************************************************************************/
 void MainWindow::setCurrentFileName(const QString &thisFileName)
 {
-    if (isDebugMessage) QLOG_DEBUG() << "Set Current File Name=" << thisFileName;
+    if (isDebugMessage) qDebug() << "Set Current File Name=" << thisFileName;
 
     this->fullPathFileNameExt = thisFileName;
     ui->textEdit->document()->setModified(false);
@@ -680,7 +680,7 @@ void MainWindow::setCurrentFileName(const QString &thisFileName)
 *******************************************************************************/
 bool MainWindow::maybeSave()
 {
-    if (isDebugMessage) QLOG_DEBUG() << "maybe Save is now just Save it Automatically";
+    if (isDebugMessage) qDebug() << "maybe Save is now just Save it Automatically";
     if (! ui->textEdit->document()->isModified())  return true;
     return onFileSave();
 } // end maybeSave
@@ -690,11 +690,11 @@ bool MainWindow::maybeSave()
 *******************************************************************************/
 QString MainWindow::getSetFullPathFileNameExt(QString thisFileName)
 {
-    if (isDebugMessage) QLOG_DEBUG() << "Getter Setter fullPathFileNameExt";
+    if (isDebugMessage) qDebug() << "Getter Setter fullPathFileNameExt";
     if (thisFileName.isNull() || thisFileName.isEmpty()) { thisFileName = myCurrentChapter; }
     if (thisFileName != myCurrentChapter)
     {
-        if (isDebugMessage) QLOG_DEBUG() << "Getter Setter fullPathFileNameExt(myFileName=" << thisFileName << ") and myCurrentChapter=" << myCurrentChapter;
+        if (isDebugMessage) qDebug() << "Getter Setter fullPathFileNameExt(myFileName=" << thisFileName << ") and myCurrentChapter=" << myCurrentChapter;
     }
 
     if (myCurrentBook.isEmpty())  getSetCurrentBook();
@@ -703,7 +703,7 @@ QString MainWindow::getSetFullPathFileNameExt(QString thisFileName)
 
     if (thisFileName.isEmpty())
     {
-        if (isDebugMessage) QLOG_DEBUG() << "thisFileName and myCurrentChapter are empty";
+        if (isDebugMessage) qDebug() << "thisFileName and myCurrentChapter are empty";
     }
     // Setter
     fullPathFileNameExt = QString("%1%2%3%4%5.%6").arg(qLoggerCommon->getFilelPath(), QDir::separator(), myCurrentBook, QDir::separator(), thisFileName, constWeBookEditorExt);
@@ -721,7 +721,7 @@ QString MainWindow::getSetFullPathFileNameExt(QString thisFileName)
         }
         else
         {
-            QLOG_DEBUG() << "Error could not open file for writing: " << booksResourceFile.fileName() << " Error = " << booksResourceFile.errorString();
+            qDebug() << "Error could not open file for writing: " << booksResourceFile.fileName() << " Error = " << booksResourceFile.errorString();
         }
     }
     // Getter
@@ -732,7 +732,7 @@ QString MainWindow::getSetFullPathFileNameExt(QString thisFileName)
 *******************************************************************************/
 void MainWindow::onFileNew()
 {
-    if (isDebugMessage) QLOG_DEBUG() << "onFileNew";
+    if (isDebugMessage) qDebug() << "onFileNew";
     if (maybeSave())
     {
         ui->textEdit->clear();
@@ -744,7 +744,7 @@ void MainWindow::onFileNew()
 *******************************************************************************/
 void MainWindow::onFileOpen()
 {
-    if (isDebugMessage) QLOG_DEBUG() << "onFileOpen";
+    if (isDebugMessage) qDebug() << "onFileOpen";
     QFileDialog fileDialog(this, tr("Open File..."));
     fileDialog.setAcceptMode(QFileDialog::AcceptOpen);
     fileDialog.setFileMode(QFileDialog::ExistingFile);
@@ -766,7 +766,7 @@ void MainWindow::onFileOpen()
 *******************************************************************************/
 bool MainWindow::onFileSave()
 {
-    if (isDebugMessage) QLOG_DEBUG() << "on File Save";
+    if (isDebugMessage) qDebug() << "on File Save";
 
     if (fullPathFileNameExt.isEmpty())  { getSetFullPathFileNameExt(""); }
     if (fullPathFileNameExt.startsWith(QStringLiteral(":/"))) { getSetFullPathFileNameExt(""); };
@@ -800,7 +800,7 @@ bool MainWindow::onFileSave()
 *******************************************************************************/
 bool MainWindow::onFileSaveAs()
 {
-    if (isDebugMessage) QLOG_DEBUG() << "onFileSaveAs";
+    if (isDebugMessage) qDebug() << "onFileSaveAs";
 
     QFileDialog fileDialog(this, tr("Save as..."));
     fileDialog.setAcceptMode(QFileDialog::AcceptSave);
@@ -828,7 +828,7 @@ bool MainWindow::onFileSaveAs()
 *******************************************************************************/
 void MainWindow::onFilePrint()
 {
-    if (isDebugMessage) QLOG_DEBUG() << "onFilePrint";
+    if (isDebugMessage) qDebug() << "onFilePrint";
     #if defined(QT_PRINTSUPPORT_LIB) && QT_CONFIG(printdialog)
         QPrinter printer(QPrinter::HighResolution);
         QPrintDialog *dlg = new QPrintDialog(&printer, this);
@@ -843,7 +843,7 @@ void MainWindow::onFilePrint()
 *******************************************************************************/
 void MainWindow::onFilePrintPreview()
 {
-    if (isDebugMessage) QLOG_DEBUG() << "onFilePrintPreview";
+    if (isDebugMessage) qDebug() << "onFilePrintPreview";
     #if defined(QT_PRINTSUPPORT_LIB) && QT_CONFIG(printpreviewdialog)
         QPrinter printer(QPrinter::HighResolution);
         QPrintPreviewDialog preview(&printer, this);
@@ -856,7 +856,7 @@ void MainWindow::onFilePrintPreview()
 *******************************************************************************/
 void MainWindow::onPrintPreview(QPrinter *printer)
 {
-    if (isDebugMessage) QLOG_DEBUG() << "onPrintPreview";
+    if (isDebugMessage) qDebug() << "onPrintPreview";
     #if defined(QT_PRINTSUPPORT_LIB) && QT_CONFIG(printer)
         ui->textEdit->print(printer);
     #else
@@ -868,7 +868,7 @@ void MainWindow::onPrintPreview(QPrinter *printer)
 *******************************************************************************/
 void MainWindow::onFilePrintPdf()
 {
-    if (isDebugMessage) QLOG_DEBUG() << "onFilePrintPdf";
+    if (isDebugMessage) qDebug() << "onFilePrintPdf";
     #if defined(QT_PRINTSUPPORT_LIB) && QT_CONFIG(printer)
         QFileDialog fileDialog(this, tr("Export PDF"));
         fileDialog.setAcceptMode(QFileDialog::AcceptSave);
@@ -888,7 +888,7 @@ void MainWindow::onFilePrintPdf()
 *******************************************************************************/
 void MainWindow::onTextBold()
 {
-    if (isDebugMessage) QLOG_DEBUG() << "onTextBold";
+    if (isDebugMessage) qDebug() << "onTextBold";
     QTextCharFormat fmt;
     fmt.setFontWeight(ui->actionTextBold->isChecked() ? QFont::Bold : QFont::Normal);
     mergeFormatOnWordOrSelection(fmt);
@@ -898,7 +898,7 @@ void MainWindow::onTextBold()
 *******************************************************************************/
 void MainWindow::onTextUnderline()
 {
-    if (isDebugMessage) QLOG_DEBUG() << "onTextUnderline";
+    if (isDebugMessage) qDebug() << "onTextUnderline";
     QTextCharFormat fmt;
     fmt.setFontUnderline(ui->actionTextUnderline->isChecked());
     mergeFormatOnWordOrSelection(fmt);
@@ -908,7 +908,7 @@ void MainWindow::onTextUnderline()
 *******************************************************************************/
 void MainWindow::onTextItalic()
 {
-    if (isDebugMessage) QLOG_DEBUG() << "onTextItalic";
+    if (isDebugMessage) qDebug() << "onTextItalic";
     QTextCharFormat fmt;
     fmt.setFontItalic(ui->actionTextItalic->isChecked());
     mergeFormatOnWordOrSelection(fmt);
@@ -918,7 +918,7 @@ void MainWindow::onTextItalic()
 *******************************************************************************/
 void MainWindow::onTextFamily(const QString &f)
 {
-    if (isDebugMessage) QLOG_DEBUG() << "onTextFamily=" << f;
+    if (isDebugMessage) qDebug() << "onTextFamily=" << f;
     QTextCharFormat fmt;
     fmt.setFontFamily(f);
     mergeFormatOnWordOrSelection(fmt);
@@ -928,7 +928,7 @@ void MainWindow::onTextFamily(const QString &f)
 *******************************************************************************/
 void MainWindow::onTextSize(const QString &p)
 {
-    if (isDebugMessage) QLOG_DEBUG() << "onTextSize=" << p;
+    if (isDebugMessage) qDebug() << "onTextSize=" << p;
     qreal pointSize = p.toFloat();
     if (p.toFloat() > 0)
     {
@@ -942,7 +942,7 @@ void MainWindow::onTextSize(const QString &p)
 *******************************************************************************/
 void MainWindow::onTextStyle(int styleIndex)
 {
-    if (isDebugMessage) QLOG_DEBUG() << "onTextStyle=" << styleIndex;
+    if (isDebugMessage) qDebug() << "onTextStyle=" << styleIndex;
     QTextCursor cursor = ui->textEdit->textCursor();
     QTextListFormat::Style style = QTextListFormat::ListStyleUndefined;
     QTextBlockFormat::MarkerType marker = QTextBlockFormat::MarkerType::NoMarker;
@@ -1032,7 +1032,7 @@ void MainWindow::onTextStyle(int styleIndex)
 *******************************************************************************/
 void MainWindow::onTextColor()
 {
-    if (isDebugMessage) QLOG_DEBUG() << "onTextColor";
+    if (isDebugMessage) qDebug() << "onTextColor";
     QColor col = QColorDialog::getColor(ui->textEdit->textColor(), this);
     if (!col.isValid()) return;
     QTextCharFormat fmt;
@@ -1045,7 +1045,7 @@ void MainWindow::onTextColor()
 *******************************************************************************/
 void MainWindow::onTextAlign(QAction *a)
 {
-    if (isDebugMessage) QLOG_DEBUG() << "onTextAlign=" << a;
+    if (isDebugMessage) qDebug() << "onTextAlign=" << a;
     if (a == ui->actionAlignLeft)         ui->textEdit->setAlignment(Qt::AlignLeft | Qt::AlignAbsolute);
     else if (a == ui->actionAlignCenter)  ui->textEdit->setAlignment(Qt::AlignHCenter);
     else if (a == ui->actionAlignRight)   ui->textEdit->setAlignment(Qt::AlignRight | Qt::AlignAbsolute);
@@ -1056,7 +1056,7 @@ void MainWindow::onTextAlign(QAction *a)
 *******************************************************************************/
 void MainWindow::onSetChecked(bool checked)
 {
-    if (isDebugMessage) QLOG_DEBUG() << "onSetChecked=" << checked;
+    if (isDebugMessage) qDebug() << "onSetChecked=" << checked;
     onTextStyle(checked ? 5 : 4);
 } // end onSetChecked
 /******************************************************************************
@@ -1064,7 +1064,7 @@ void MainWindow::onSetChecked(bool checked)
 *******************************************************************************/
 void MainWindow::onIndent()
 {
-    if (isDebugMessage) QLOG_DEBUG() << "onIndent";
+    if (isDebugMessage) qDebug() << "onIndent";
     modifyIndentation(1);
 } // end onIndent
 /******************************************************************************
@@ -1072,7 +1072,7 @@ void MainWindow::onIndent()
 *******************************************************************************/
 void MainWindow::onUnindent()
 {
-    if (isDebugMessage) QLOG_DEBUG() << "onUnindent";
+    if (isDebugMessage) qDebug() << "onUnindent";
     modifyIndentation(-1);
 } // end onUnindent
 /******************************************************************************
@@ -1080,7 +1080,7 @@ void MainWindow::onUnindent()
 *******************************************************************************/
 void MainWindow::modifyIndentation(int amount)
 {
-    if (isDebugMessage) QLOG_DEBUG() << "modifyIndentation=" << amount;
+    if (isDebugMessage) qDebug() << "modifyIndentation=" << amount;
     QTextCursor cursor = ui->textEdit->textCursor();
     cursor.beginEditBlock();
     if (cursor.currentList())
@@ -1113,7 +1113,7 @@ void MainWindow::modifyIndentation(int amount)
 *******************************************************************************/
 void MainWindow::onCurrentCharFormatChanged(const QTextCharFormat &format)
 {
-    if (isDebugMessage) QLOG_DEBUG() << "currentCharFormatChanged=" << format;
+    if (isDebugMessage) qDebug() << "currentCharFormatChanged=" << format;
     fontChanged(format.font());
     colorChanged(format.foreground().color());
 } // end onCurrentCharFormatChanged
@@ -1122,7 +1122,7 @@ void MainWindow::onCurrentCharFormatChanged(const QTextCharFormat &format)
 *******************************************************************************/
 void MainWindow::onCursorPositionChanged()
 {
-    if (isDebugMessage) QLOG_DEBUG() << "onCursorPositionChanged";
+    if (isDebugMessage) qDebug() << "onCursorPositionChanged";
     alignmentChanged(ui->textEdit->alignment());
     QTextList *list = ui->textEdit->textCursor().currentList();
     if (list)
@@ -1183,7 +1183,7 @@ void MainWindow::onCursorPositionChanged()
 *******************************************************************************/
 void MainWindow::onClipboardDataChanged()
 {
-    if (isDebugMessage) QLOG_DEBUG() << "onClipboardDataChanged";
+    if (isDebugMessage) qDebug() << "onClipboardDataChanged";
 #ifndef QT_NO_CLIPBOARD
     if (const QMimeData *md = QApplication::clipboard()->mimeData()) ui->actionPaste->setEnabled(md->hasText());
 #endif
@@ -1193,7 +1193,7 @@ void MainWindow::onClipboardDataChanged()
 *******************************************************************************/
 void MainWindow::mergeFormatOnWordOrSelection(const QTextCharFormat &format)
 {
-    if (isDebugMessage) QLOG_DEBUG() << "mergeFormatOnWordOrSelection";
+    if (isDebugMessage) qDebug() << "mergeFormatOnWordOrSelection";
     QTextCursor cursor = ui->textEdit->textCursor();
     if (!cursor.hasSelection()) cursor.select(QTextCursor::WordUnderCursor);
     cursor.mergeCharFormat(format);
@@ -1204,7 +1204,7 @@ void MainWindow::mergeFormatOnWordOrSelection(const QTextCharFormat &format)
 *******************************************************************************/
 void MainWindow::fontChanged(const QFont &f)
 {
-    if (isDebugMessage) QLOG_DEBUG() << "fontChanged=" << f;
+    if (isDebugMessage) qDebug() << "fontChanged=" << f;
     comboFont->setCurrentIndex(comboFont->findText(QFontInfo(f).family()));
     comboSize->setCurrentIndex(comboSize->findText(QString::number(f.pointSize())));
     ui->actionTextBold->setChecked(f.bold());
@@ -1216,7 +1216,7 @@ void MainWindow::fontChanged(const QFont &f)
 *******************************************************************************/
 void MainWindow::colorChanged(const QColor &c)
 {
-    if (isDebugMessage) QLOG_DEBUG() << "colorChanged=" << c;
+    if (isDebugMessage) qDebug() << "colorChanged=" << c;
     QPixmap pix(16, 16);
     pix.fill(c);
     ui->actionTextColor->setIcon(pix);
@@ -1226,7 +1226,7 @@ void MainWindow::colorChanged(const QColor &c)
 *******************************************************************************/
 void MainWindow::alignmentChanged(Qt::Alignment a)
 {
-    if (isDebugMessage) QLOG_DEBUG() << "alignmentChanged=" << a;
+    if (isDebugMessage) qDebug() << "alignmentChanged=" << a;
     if (a & Qt::AlignLeft)         ui->actionAlignLeft->setChecked(true);
     else if (a & Qt::AlignHCenter) ui->actionAlignCenter->setChecked(true);
     else if (a & Qt::AlignRight)   ui->actionAlignRight->setChecked(true);
@@ -1237,7 +1237,7 @@ void MainWindow::alignmentChanged(Qt::Alignment a)
 *******************************************************************************/
 void MainWindow::onAbout()
 {
-    if (isDebugMessage) QLOG_DEBUG() << "onAbout";
+    if (isDebugMessage) qDebug() << "onAbout";
     AboutDialog *myAbout = new AboutDialog();
     myAbout->show();
 } // end onAbout
@@ -1246,7 +1246,7 @@ void MainWindow::onAbout()
 *******************************************************************************/
 void MainWindow::onAddBook()
 {
-    if (isDebugMessage) QLOG_DEBUG() << "onAddBook";
+    if (isDebugMessage) qDebug() << "onAddBook";
     if (ui->editWeBookManTitle->text().isEmpty())
     {
         onStatusMessage("Title cannot be blank");
@@ -1265,7 +1265,7 @@ void MainWindow::onAddBook()
 *******************************************************************************/
 void MainWindow::onDeleteBook()
 {
-    if (isDebugMessage) QLOG_DEBUG() << "onDeleteBook";
+    if (isDebugMessage) qDebug() << "onDeleteBook";
     const QModelIndex index = ui->listViewWeBookMan->selectionModel()->currentIndex();
     QAbstractItemModel *model = ui->listViewWeBookMan->model();
     if (model->removeRow(index.row(), index.parent())) ui->listViewWeBookMan->repaint();
@@ -1385,7 +1385,7 @@ void MainWindow::onTocUpdateActions()
 *******************************************************************************/
 void MainWindow::loadDoc(QString thisFileName)
 {
-    if (isDebugMessage) QLOG_DEBUG() << "load(" << thisFileName << ")";
+    if (isDebugMessage) qDebug() << "load(" << thisFileName << ")";
     //
     if (!this->fullPathFileNameExt.isEmpty()) { onFileSave(); fullPathFileNameExt.clear(); }
     QString myFileName = QString("%1%2%3%4%5.%6").arg(qLoggerCommon->getFilelPath(), QDir::separator(), myCurrentBook, QDir::separator(), thisFileName, constWeBookEditorExt);
@@ -1402,7 +1402,7 @@ void MainWindow::loadDoc(QString thisFileName)
         }
         else
         {
-            QLOG_DEBUG() << "Error could not open file for writing: " << booksResourceFile.fileName() << " Error = " << booksResourceFile.errorString();
+            qDebug() << "Error could not open file for writing: " << booksResourceFile.fileName() << " Error = " << booksResourceFile.errorString();
         }
     }
     //
@@ -1413,7 +1413,7 @@ void MainWindow::loadDoc(QString thisFileName)
 *******************************************************************************/
 QString MainWindow::getSetCurrentBook()
 {
-    if (isDebugMessage) QLOG_DEBUG() << "getSetCurrentBook";
+    if (isDebugMessage) qDebug() << "getSetCurrentBook";
     myCurrentBook = ui->listViewWeBookMan->model()->data(ui->listViewWeBookMan->currentIndex(), Qt::DisplayRole).toString();
     return ui->listViewWeBookMan->model()->data(ui->listViewWeBookMan->currentIndex(), Qt::DisplayRole).toString();
 } // end getSetCurrentBook
@@ -1422,7 +1422,7 @@ QString MainWindow::getSetCurrentBook()
 *******************************************************************************/
 QString MainWindow::getSetCurrentChapter()
 {
-    if (isDebugMessage) QLOG_DEBUG() << "getSetCurrentChapter";
+    if (isDebugMessage) qDebug() << "getSetCurrentChapter";
     myCurrentChapter = ui->treeViewTocView->model()->data(ui->treeViewTocView->currentIndex(), Qt::DisplayRole).toString();
     return myCurrentChapter;
 } // end getSetCurrentChapter
@@ -1431,7 +1431,7 @@ QString MainWindow::getSetCurrentChapter()
 *******************************************************************************/
 void MainWindow::loadTOC()
 {
-    if (isDebugMessage) QLOG_DEBUG() << "load TOC";
+    if (isDebugMessage) qDebug() << "load TOC";
 
     if (ui->listViewWeBookMan->selectionModel()->selection().isEmpty()) return;
 
@@ -1459,7 +1459,7 @@ void MainWindow::loadTOC()
 *******************************************************************************/
 void MainWindow::writeSettings()
 {
-    if (isDebugMessage) QLOG_DEBUG() << "writeSettings";
+    if (isDebugMessage) qDebug() << "writeSettings";
     // Current Tab
     qLoggerCommon->setSetting(constCurrentTab, lastTab);
     // Current Book
@@ -1478,22 +1478,22 @@ void MainWindow::writeSettings()
     QFile booksResourceFile(WeBooksCatFileFullPath);
     if (booksResourceFile.exists())
     {
-        if (isDebugMessage) QLOG_DEBUG() << "booksResourceFile.exists for writing: " << booksResourceFile.fileName();
+        if (isDebugMessage) qDebug() << "booksResourceFile.exists for writing: " << booksResourceFile.fileName();
         if (booksResourceFile.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text))
         {
-            if (isDebugMessage) QLOG_DEBUG() << "booksResourceFile.open for writing: " << booksResourceFile.fileName();
+            if (isDebugMessage) qDebug() << "booksResourceFile.open for writing: " << booksResourceFile.fileName();
             QTextStream out(&booksResourceFile);
             out << bookListItemsReturned;
             booksResourceFile.close();
         }
         else
         {
-            if (isDebugMessage) QLOG_DEBUG() << "Error could not write to file: " << booksResourceFile.fileName() << " Error = " << booksResourceFile.errorString();
+            if (isDebugMessage) qDebug() << "Error could not write to file: " << booksResourceFile.fileName() << " Error = " << booksResourceFile.errorString();
         }
     }
     else
     {
-        if (isDebugMessage) QLOG_DEBUG() << "Error books.txt file missing: " << booksResourceFile.fileName();
+        if (isDebugMessage) qDebug() << "Error books.txt file missing: " << booksResourceFile.fileName();
     }
     bookListItems = weBookMan->getStringList();
     for (int i = 0; i < bookListItems.count(); i++)
@@ -1512,7 +1512,7 @@ void MainWindow::writeSettings()
 *******************************************************************************/
 void MainWindow::readSettings()
 {
-    if (isDebugMessage) QLOG_DEBUG() << "readSettings";
+    if (isDebugMessage) qDebug() << "readSettings";
     // Current Tab
     currentTab = qLoggerCommon->getSetting(constCurrentTab, TabSettings).toInt();  // Defaults to Settings Tab
     // Current Book
@@ -1561,32 +1561,32 @@ void MainWindow::readSettings()
 *******************************************************************************/
 void MainWindow::saveTOC(QString bookName)
 {
-    if (isDebugMessage) QLOG_DEBUG() << "saveTOC(" << bookName << ")";
+    if (isDebugMessage) qDebug() << "saveTOC(" << bookName << ")";
     // Get Data from model
     treeListItemsReturned = dragDropTocModel->getData();
     // Create a new file since we will overwrite it
-    QLOG_DEBUG() << "Current dir:" << QDir::currentPath();
+    qDebug() << "Current dir:" << QDir::currentPath();
 
     QFile booksResourceFile(bookName);
     if (booksResourceFile.exists())
     {
-        QLOG_DEBUG() << "booksResourceFile.exists for writing: " << booksResourceFile.fileName();
+        qDebug() << "booksResourceFile.exists for writing: " << booksResourceFile.fileName();
         if (booksResourceFile.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text)) // Create File
         {
-            QLOG_DEBUG() << "booksResourceFile.open for writing: " << booksResourceFile.fileName();
+            qDebug() << "booksResourceFile.open for writing: " << booksResourceFile.fileName();
             QTextStream out(&booksResourceFile);
             out << treeListItemsReturned;
-            QLOG_DEBUG() << "out = " << treeListItemsReturned;
+            qDebug() << "out = " << treeListItemsReturned;
             booksResourceFile.close();
         }
         else
         {
-            QLOG_DEBUG() << "Error could not write to file: " << booksResourceFile.fileName() << " Error = " << booksResourceFile.errorString();
+            qDebug() << "Error could not write to file: " << booksResourceFile.fileName() << " Error = " << booksResourceFile.errorString();
         }
     }
     else
     {
-        QLOG_DEBUG() << "Error books.txt file missing: " << booksResourceFile.fileName();
+        qDebug() << "Error books.txt file missing: " << booksResourceFile.fileName();
     }
 } // end saveTOC
 /******************************************************************************
@@ -1594,7 +1594,7 @@ void MainWindow::saveTOC(QString bookName)
 *******************************************************************************/
 void MainWindow::onStatusMessage(const QString &message)
 {
-    if (isDebugMessage) QLOG_DEBUG() << "onStatusMessage=" << message;
+    if (isDebugMessage) qDebug() << "onStatusMessage=" << message;
     ui->statusbar->showMessage(tr(message.toUtf8()));
     if (isRunOnce)
     {

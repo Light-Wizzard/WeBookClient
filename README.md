@@ -231,4 +231,6 @@ always recover the original contents of the document.*
 I Forked QLogger from https://github.com/francescmm/QLogger,
 please see the Wiki https://github.com/Light-Wizzard/WeBookClient/wiki/3.Logging
 
+I changed this to use qInstallMessageHandler in main.cpp, so it just uses normal qDebug.
+
 ## End of Read me.

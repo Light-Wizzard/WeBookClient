@@ -29,7 +29,7 @@ namespace QLogger
     *******************************************************************************/
     void QLoggerCommon::setLogger()
     {
-        if (true)
+        if (false)
         {
             const auto manager = QLoggerManager::getInstance();
             manager->addDestination(getLogFullPath(), getModuleName(), getLogLevel());
@@ -149,7 +149,7 @@ namespace QLogger
             setSetting(key, defaultValue);
             return defaultValue;
         }
-        qDebug() << "QLoggerCommon::getSettings=" << mySettings->value(key, defaultValue);
+        //qDebug() << "QLoggerCommon::getSettings=" << mySettings->value(key, defaultValue);
         return mySettings->value(key, defaultValue);
     } // end getSetting
     /******************************************************************************
@@ -577,21 +577,21 @@ namespace QLogger
         {
             // APP_FOLDER/databaseFolderName/databaseFileName
             dataFullPath = dataFileDir.cleanPath(dataFileDir.absoluteFilePath(QString("..%1%2%3%4%5%6").arg(QDir::separator(), constAppFolder, QDir::separator(), thisDataFolderName, QDir::separator(), thisFileName)));
-            qDebug() << QString("..%1%2%3%4%5%6").arg(QDir::separator(), constAppFolder, QDir::separator(), thisDataFolderName, QDir::separator(), thisFileName);
+            //qDebug() << QString("..%1%2%3%4%5%6").arg(QDir::separator(), constAppFolder, QDir::separator(), thisDataFolderName, QDir::separator(), thisFileName);
         }
         if (!QFile(dataFullPath).exists())
         {
             dataFullPath = dataFileDir.cleanPath(dataFileDir.absoluteFilePath(QString("..%1..%2%3%4%5%6%7").arg(QDir::separator(), QDir::separator(), constAppFolder, QDir::separator(), thisDataFolderName, QDir::separator(), thisFileName)));
-            qDebug() << QString("..%1..%2%3%4%5%6%7").arg(QDir::separator(), QDir::separator(), constAppFolder, QDir::separator(), thisDataFolderName, QDir::separator(), thisFileName);
+            //qDebug() << QString("..%1..%2%3%4%5%6%7").arg(QDir::separator(), QDir::separator(), constAppFolder, QDir::separator(), thisDataFolderName, QDir::separator(), thisFileName);
         }
         if (!QFile(dataFullPath).exists())
         {
             dataFullPath = dataFileDir.cleanPath(dataFileDir.absoluteFilePath(QString("..%1..%2..%3%4%5%6%7%8").arg(QDir::separator(), QDir::separator(), QDir::separator(), constAppFolder, QDir::separator(), thisDataFolderName, QDir::separator(), thisFileName)));
-            qDebug() << QString("..%1..%2..%3%4%5%6%7%8").arg(QDir::separator(), QDir::separator(), QDir::separator(), constAppFolder, QDir::separator(), thisDataFolderName, QDir::separator(), thisFileName);
+            //qDebug() << QString("..%1..%2..%3%4%5%6%7%8").arg(QDir::separator(), QDir::separator(), QDir::separator(), constAppFolder, QDir::separator(), thisDataFolderName, QDir::separator(), thisFileName);
         }
         if (!QFile(dataFullPath).exists())
         {
-            qDebug() << "setFilePath cannot find folder";
+            //qDebug() << "setFilePath cannot find folder";
         }
         return dataFullPath;
     } // end setFilePath

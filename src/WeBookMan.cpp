@@ -5,7 +5,7 @@
 WeBookMan::WeBookMan(const QStringList &strings, QObject *parent) : QAbstractListModel(parent), myParent(parent), stringList(strings)
 {
     qLoggerCommon = new QLogger::QLoggerCommon(true);
-    QLOG_DEBUG() << "WeBookMan Constructor";
+    qDebug() << "WeBookMan Constructor";
 } // end WeBookMan
 /******************************************************************************
 ** forEach                                                                    *
@@ -31,7 +31,7 @@ void WeBookMan::forEachSave(const QModelIndex &parent)
         else
         {
             weBookListItemsReturned.append(QString("%1\n").arg(cellOne));
-            if (isDebugAllMessage) QLOG_DEBUG() << QString("name=%1").arg(cellOne);
+            if (isDebugAllMessage) qDebug() << QString("name=%1").arg(cellOne);
         }
     } // end for(int myRow
 } // end forEach
@@ -40,10 +40,10 @@ void WeBookMan::forEachSave(const QModelIndex &parent)
 *******************************************************************************/
 QString WeBookMan::getData()
 {
-    if (isDebugMessage) QLOG_DEBUG() << "Get Data";
+    if (isDebugMessage) qDebug() << "Get Data";
     weBookListItemsReturned.clear();
     forEachSave(QModelIndex());
-    if (isDebugMessage) QLOG_DEBUG() << "TreeModel::getData()=" << weBookListItemsReturned;
+    if (isDebugMessage) qDebug() << "TreeModel::getData()=" << weBookListItemsReturned;
     return weBookListItemsReturned;
 } // end getData
 /******************************************************************************
@@ -51,7 +51,7 @@ QString WeBookMan::getData()
 *******************************************************************************/
 QStringList WeBookMan::getStringList()
 {
-    if (isDebugMessage) QLOG_DEBUG() << "Get StringList";
+    if (isDebugMessage) qDebug() << "Get StringList";
     return stringList;
 } // end getStringList
 /******************************************************************************
@@ -62,7 +62,7 @@ QStringList WeBookMan::getStringList()
 *******************************************************************************/
 QVariant WeBookMan::data(const QModelIndex &index, int role) const
 {
-    if (isDebugMessage) QLOG_DEBUG() << "data(index, role=" << role << ")";
+    if (isDebugMessage) qDebug() << "data(index, role=" << role << ")";
     if (!index.isValid()) return QVariant();
 
     if (index.row() >= stringList.size()) return QVariant();
@@ -85,7 +85,7 @@ QVariant WeBookMan::data(const QModelIndex &index, int role) const
 */
 bool WeBookMan::setData(const QModelIndex &index, const QVariant &value, int role)
 {
-    if (isDebugMessage) QLOG_DEBUG() << "Set Data(index, value=" << value << ", role=" << role << ")";
+    if (isDebugMessage) qDebug() << "Set Data(index, value=" << value << ", role=" << role << ")";
 
     if (index.isValid() && role == Qt::EditRole)
     {
@@ -107,7 +107,7 @@ bool WeBookMan::setData(const QModelIndex &index, const QVariant &value, int rol
 *******************************************************************************/
 int WeBookMan::rowCount(const QModelIndex &parent) const
 {
-    if (isDebugMessage) QLOG_DEBUG() << "rowCount";
+    if (isDebugMessage) qDebug() << "rowCount";
     Q_UNUSED(parent);
     return stringList.count();
 } // end rowCount
@@ -119,7 +119,7 @@ int WeBookMan::rowCount(const QModelIndex &parent) const
 *******************************************************************************/
 QVariant WeBookMan::headerData(int section, Qt::Orientation orientation, int role) const
 {
-    if (isDebugMessage) QLOG_DEBUG() << "headerData";
+    if (isDebugMessage) qDebug() << "headerData";
     if (role != Qt::DisplayRole) return QVariant();
 
     if (orientation == Qt::Horizontal) return QString("Column %1").arg(section);
@@ -132,7 +132,7 @@ QVariant WeBookMan::headerData(int section, Qt::Orientation orientation, int rol
 *******************************************************************************/
 Qt::ItemFlags WeBookMan::flags(const QModelIndex &index) const
 {
-    if (isDebugMessage) QLOG_DEBUG() << "flags";
+    if (isDebugMessage) qDebug() << "flags";
     if (!index.isValid()) return Qt::ItemIsEnabled;
 
     return QAbstractItemModel::flags(index) | Qt::ItemIsEditable;
@@ -143,7 +143,7 @@ Qt::ItemFlags WeBookMan::flags(const QModelIndex &index) const
 *******************************************************************************/
 bool WeBookMan::insertRows(int position, int rows, const QModelIndex &parent)
 {
-    if (isDebugMessage) QLOG_DEBUG() << "insertRows";
+    if (isDebugMessage) qDebug() << "insertRows";
     Q_UNUSED(parent);
     beginInsertRows(QModelIndex(), position, position + rows - 1);
 
@@ -161,7 +161,7 @@ bool WeBookMan::insertRows(int position, int rows, const QModelIndex &parent)
 *******************************************************************************/
 bool WeBookMan::removeRows(int position, int rows, const QModelIndex &parent)
 {
-    if (isDebugMessage) QLOG_DEBUG() << "removeRows";
+    if (isDebugMessage) qDebug() << "removeRows";
     Q_UNUSED(parent);
     beginRemoveRows(QModelIndex(), position, position + rows - 1);
 

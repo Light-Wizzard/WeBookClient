@@ -4,16 +4,7 @@
 ** https://github.com/francescmm/QLogger                                      *
 ** Fork: https://github.com/Light-Wizzard/QLogger                             *
 *******************************************************************************/
-
 #include "QLoggerWriter.h"
-
-#include "QLoggerWrapper.h"
-
-#ifndef LOGLEVEL_CLASS
-namespace
-{
-}
-#endif
 /******************************************************************************
 ** QLogger                                                                    *
 *******************************************************************************/
