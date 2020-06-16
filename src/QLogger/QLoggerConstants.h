@@ -16,49 +16,51 @@
 namespace QLogger
 {
     //
-    const QString constAppName               = "WeBookClient";     //
-    const QString constOrgName               = "Light-Wizzard";    //
-    const QString constAppFolder             = "WeBook";           // Name of Folder this Project is in
-    const QString constFileFolderName        = "data";             // Name of data Folder
-    const QString constLogFolderName         = "logs";             // Name of log Folder
-    const QString constLogFileExtension      = "log";              // Log File Extension
+    const QString ConstDefaultAppName               = "WeBookClient";     //
+    const QString ConstDefaultOrgName               = "Light-Wizzard";    //
+    const QString ConstDefaultAppFolder             = "WeBook";           // Name of Folder this Project is in
+    const QString ConstDefaultFileFolderName        = "data";             // Name of data Folder
+    const QString ConstDefaultLogFolderName         = "logs";             // Name of log Folder
+    const QString ConstDefaultLogFileExtension      = "log";              // Log File Extension
     // Const Ini File Name Full Path if want to change the Path to the ini or rename it, leaving it just the name, will look for it in the data folder
     // normally Settings.ini, but I make it an option, see above comment
-    const QString constIniFileName           = "WeBookClient.ini"; // Name of ini file with no path
+    const QString ConstDefaultIniFileName           = "WeBookClient.ini"; // Name of ini file with no path
     // These next 3 settings will set the Local Data Storage for this App to use, changing it after it has run, will create a new storage containtainer
     // This is the User Name for GitHub account, but does not have to be
     // https://github.com/constOrgName/constAppName
     // This is the User Name and Project or GitHub URL, but does not have to be
-    const QString constDomain                = "https://github.com"; // This can be any URL
+    const QString ConstDefaultDomain                = "https://github.com"; // This can be any URL
     // "https://github.com/Light-Wizzard/WeBookClient";
-    const QString constOrgDomain             = constDomain + "/" + constOrgName + "/" + constAppName;
+    const QString ConstDefaultOrgDomain             = ConstDefaultDomain + "/" + ConstDefaultOrgName + "/" + ConstDefaultAppName;
     // I hard code these values here for a reason, not that I would use them, set the Link to include this data, pass in as Arguments
     // These values are for testing only
     // Default Log Server Port
-    const quint16 ConstPort                  = 9696;           // Port Number of Log Server
-    const QString constLogNamePattern        = "-Log.yyyy-MM"; // Log File Name Pattern (See Notes in QLoggerCommon.h)
-    const QString constModuleName            = "WeBook";       // Default Module Name
+    const quint16 ConstDefaultPort                  = 9696;           // Port Number of Log Server
+    const QString ConstDefaultLogNamePattern        = "-Log.yyyy-MM"; // Log File Name Pattern (See Notes in QLoggerCommon.h)
+    const QString ConstDefaultModuleName            = "WeBook";       // Default Module Name
+    const QPoint  ConstDefaultGeometryPos           = QPoint(10, 10);                        // Top, Left
+    const QSize   ConstDefaultGeometrySize          = QSize(1000, 666);                      // Width x Height
     // Store only what you need, comment the rest
-    const QString constHomeLocation          = QStandardPaths::writableLocation(QStandardPaths::HomeLocation);          // Home
-    const QString constAppDataLocation       = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);       // App Data
-    //        const QString constDesktopLocation       = QStandardPaths::writableLocation(QStandardPaths::DesktopLocation);       // Desktop
-    //        const QString constDocumentsLocation     = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);     // Documents
-    //        const QString constDownloadLocation      = QStandardPaths::writableLocation(QStandardPaths::DownloadLocation);      // Download
-    //        const QString constMusicLocation         = QStandardPaths::writableLocation(QStandardPaths::MusicLocation);         // Music
-    //        const QString constMoviesLocation        = QStandardPaths::writableLocation(QStandardPaths::MoviesLocation);        // Movies
-    //        const QString constPicturesLocation      = QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);      // Pictures
-    //        const QString constDataLocation          = QStandardPaths::writableLocation(QStandardPaths::DataLocation);          // Data
-    //        const QString constApplicationsLocation  = QStandardPaths::writableLocation(QStandardPaths::ApplicationsLocation);  // Applications
-    //        const QString constAppLocalDataLocation  = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);  // App Local Data
-    //        const QString constAppConfigLocation     = QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation);     // App Config
-    //        const QString constFontsLocation         = QStandardPaths::writableLocation(QStandardPaths::FontsLocation);         // Fonts
-    //        const QString constTempLocation          = QStandardPaths::writableLocation(QStandardPaths::TempLocation);          // Temp
-    //        const QString constCacheLocation         = QStandardPaths::writableLocation(QStandardPaths::CacheLocation);         // Cache
-    //        const QString constGenericCacheLocation  = QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation);  // Generic Cache
-    //        const QString constGenericDataLocation   = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation);   // Generic Data
-    //        const QString constConfigLocation        = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation);        // Config
-    //        const QString constGenericConfigLocation = QStandardPaths::writableLocation(QStandardPaths::GenericConfigLocation); // Generic Config
-    //        const QString constRuntimeLocation       = QStandardPaths::writableLocation(QStandardPaths::RuntimeLocation);       // Runtime
+    const QString ConstDefaultHomeLocation          = QStandardPaths::writableLocation(QStandardPaths::HomeLocation);          // Home
+    const QString ConstDefaultAppDataLocation       = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);       // App Data
+    //        const QString ConstDefaultDesktopLocation       = QStandardPaths::writableLocation(QStandardPaths::DesktopLocation);       // Desktop
+    //        const QString ConstDefaultDocumentsLocation     = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);     // Documents
+    //        const QString ConstDefaultDownloadLocation      = QStandardPaths::writableLocation(QStandardPaths::DownloadLocation);      // Download
+    //        const QString ConstDefaultMusicLocation         = QStandardPaths::writableLocation(QStandardPaths::MusicLocation);         // Music
+    //        const QString ConstDefaultMoviesLocation        = QStandardPaths::writableLocation(QStandardPaths::MoviesLocation);        // Movies
+    //        const QString ConstDefaultPicturesLocation      = QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);      // Pictures
+    //        const QString ConstDefaultDataLocation          = QStandardPaths::writableLocation(QStandardPaths::DataLocation);          // Data
+    //        const QString ConstDefaultApplicationsLocation  = QStandardPaths::writableLocation(QStandardPaths::ApplicationsLocation);  // Applications
+    //        const QString ConstDefaultAppLocalDataLocation  = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);  // App Local Data
+    //        const QString ConstDefaultAppConfigLocation     = QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation);     // App Config
+    //        const QString ConstDefaultFontsLocation         = QStandardPaths::writableLocation(QStandardPaths::FontsLocation);         // Fonts
+    //        const QString ConstDefaultTempLocation          = QStandardPaths::writableLocation(QStandardPaths::TempLocation);          // Temp
+    //        const QString ConstDefaultCacheLocation         = QStandardPaths::writableLocation(QStandardPaths::CacheLocation);         // Cache
+    //        const QString ConstDefaultGenericCacheLocation  = QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation);  // Generic Cache
+    //        const QString ConstDefaultGenericDataLocation   = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation);   // Generic Data
+    //        const QString ConstDefaultConfigLocation        = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation);        // Config
+    //        const QString ConstDefaultGenericConfigLocation = QStandardPaths::writableLocation(QStandardPaths::GenericConfigLocation); // Generic Config
+    //        const QString ConstDefaultRuntimeLocation       = QStandardPaths::writableLocation(QStandardPaths::RuntimeLocation);       // Runtime
     /*
     Path type               Linux                   macOS                   Windows                                 Android                     iOS
     DesktopLocation         "~/Desktop"             "~/Desktop"             "C:/Users/<USER>/Desktop"               "<APPROOT>/files"           "<APPROOT>/Documents/Desktop"
@@ -122,16 +124,20 @@ namespace QLogger
                                                                                                                                         "<APPROOT>/Library/Application Support"
     */
     // Settings Constants Field names QSettings
+    const QString ConstSettingsModuelName      = "SettingsModuelName";                  // Settings is a Key (This is the Key) Value that is what gets assigned to this
     const QString ConstSettingsIniFileName     = "SettingsIniFileName";                 // These values are used for Qt Settings as Literal Strings
     const QString ConstSettingsApplicationName = "SettingsApplicationName";             // It acts like the name in a Database
-    const QString ConstSettingsOrgName         = "SettingsOrgName";                     // Settings is a Key (This is the Key) Value that is what gets assigned to this
+    const QString ConstSettingsOrgName         = "SettingsOrgName";                     //
     const QString ConstSettingsOrgDomain       = "SettingsOrgDomain";                   //
     const QString ConstSettingsGeometryPos     = "SettingsGeometryPos";                 // This holds the Screens Geometry
     const QString ConstSettingsGeometrySize    = "SettingsGeometrySize";                // This holds the Screens Geometry
     const QString ConstSettingsGeometryMax     = "SettingsGeometryMax";                 // This holds the Screens Geometry
     const QString ConstSettingsGeometryMin     = "SettingsGeometryMin";                 // This holds the Screens Geometry
-    const QPoint  ConstGeometryPos             = QPoint(10, 10);                        // Top, Left
-    const QSize   ConstGeometrySize            = QSize(1000, 666);                      // Width x Height
+    const QString ConstSettingsPort            = "SettingsPort";                        //
+    const QString ConstSettingsLogFolder       = "SettingsLogFolder";                   //
+    const QString ConstSettingsLogNamePattern  = "SettingsLogNamePattern";              //
+    const QString ConstSettingsFileFolder      = "SettingsFileFolder";                  //
+    const QString ConstSettingsLogFileExt      = "SettingsLogFileExt";                  //
 
 } // end namespace QLogger
 #endif // QLOGGERCONSTANTS_H

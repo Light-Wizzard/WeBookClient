@@ -35,29 +35,23 @@ void WeBookMessenger(QtMsgType type, const QMessageLogContext &context, const QS
     QString txt = QString("%1 %2: %3 (%4:%5=>%6)").arg(QTime::currentTime().toString("hh:mm:ss.zzz")).arg(msgLevelHash[type]).arg(msg).arg(context.file).arg(context.line).arg(context.function);
     if (isLogToFile)
     {
-        QLogger::QLoggerCommon *qLoggerCommon = new QLogger::QLoggerCommon(false);
-        QLogger::QLoggerManager *manager = QLogger::QLoggerManager::getInstance();
+        QLogger::QLoggerCommon *qLoggerCommon = new QLogger::QLoggerCommon(true);
         switch (type)
         {
             case QtDebugMsg:
-                manager->addDestination(qLoggerCommon->getLogFullPath(), qLoggerCommon->getModuleName(), QLogger::QLoggerLevel::LogLevel::Debug);
-                manager->getInstance()->enqueueMessage(context.function, QLogger::QLoggerLevel::LogLevel::Debug, txt, context.file, context.line);
+                qLoggerCommon->sendMessage(QLoggerLevel::LogLevel::Debug, qLoggerCommon->getModuleName(), context.file, context.line, context.function, msg);
                 break;
             case QtInfoMsg:
-                manager->addDestination(qLoggerCommon->getLogFullPath(), qLoggerCommon->getModuleName(), QLogger::QLoggerLevel::LogLevel::Info);
-                manager->getInstance()->enqueueMessage(context.function, QLogger::QLoggerLevel::LogLevel::Info, txt, context.file, context.line);
+                qLoggerCommon->sendMessage(QLoggerLevel::LogLevel::Info,  qLoggerCommon->getModuleName(), context.file, context.line, context.function, msg);
                 break;
             case QtWarningMsg:
-                manager->addDestination(qLoggerCommon->getLogFullPath(), qLoggerCommon->getModuleName(), QLogger::QLoggerLevel::LogLevel::Warning);
-                manager->getInstance()->enqueueMessage(context.function, QLogger::QLoggerLevel::LogLevel::Warning, txt, context.file, context.line);
+                qLoggerCommon->sendMessage(QLoggerLevel::LogLevel::Warning,  qLoggerCommon->getModuleName(), context.file, context.line, context.function, msg);
                 break;
             case QtCriticalMsg:
-                manager->addDestination(qLoggerCommon->getLogFullPath(), qLoggerCommon->getModuleName(), QLogger::QLoggerLevel::LogLevel::Critical);
-                manager->getInstance()->enqueueMessage(context.function, QLogger::QLoggerLevel::LogLevel::Critical, txt, context.file, context.line);
+                qLoggerCommon->sendMessage(QLoggerLevel::LogLevel::Critical,  qLoggerCommon->getModuleName(), context.file, context.line, context.function, msg);
                 break;
             case QtFatalMsg:
-                manager->addDestination(qLoggerCommon->getLogFullPath(), qLoggerCommon->getModuleName(), QLogger::QLoggerLevel::LogLevel::Fatal);
-                manager->getInstance()->enqueueMessage(context.function, QLogger::QLoggerLevel::LogLevel::Fatal, txt, context.file, context.line);
+                qLoggerCommon->sendMessage(QLoggerLevel::LogLevel::Fatal,  qLoggerCommon->getModuleName(), context.file, context.line, context.function, msg);
                 break;
         }
         //qDebug() << txt;
@@ -102,6 +96,7 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
     // WeBook Common has QtSettings and Crypto Functions Common between Client/Server
     QLogger::QLoggerCommon *qLoggerCommon = new QLogger::QLoggerCommon(false);
+    qLoggerCommon->setLogLevel(QLoggerLevel::LogLevel::Fatal);
     QLoggerCrypto *weBookCrypto = new QLoggerCrypto();
     QString applicationName;
     //#define USE_REAL_FILENAME
@@ -188,7 +183,9 @@ int main(int argc, char *argv[])
     weBookLogger->onLogFileChanged();
     QObject::connect(weBookLogger, &WeBookLogger::handelLogFileChanged, &WeBookLogger::onLogFileChanged);
     */
+
     qInstallMessageHandler(WeBookMessenger); // Install the Message handler
+
     weBookWindow->show();
     // QApplication::setStyle(QStyleFactory::create("fusion"));
     // QStyleFactory::keys= ("Windows", "Fusion")

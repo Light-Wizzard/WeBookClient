@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef QLOGGERCOMMON_H
 #define QLOGGERCOMMON_H
 /****************************************************************************************
@@ -33,8 +35,6 @@
 #include <QtCore>
 // QLogger Constants
 #include "QLoggerConstants.h"
-// QLogger Wrapper
-//#include "WeBookLogger.h"
 #include "QLoggerLevel.h"
 #include "QLoggerManager.h"
 
@@ -87,7 +87,8 @@ namespace QLogger
             quint16 getPort();                                                                  // myPort
             QString portToString();
             void setPort(quint16 thisPort);
-            // Logger
+            // Logger Manager
+            QLoggerManager *getLoggerManager();                                                 // myLoggerManager
             void setLogger();
             //
             QString setFilePath(QString thisFileName, QString thisDataFolderName);              //
@@ -128,13 +129,13 @@ namespace QLogger
             QString getModuleName();                                                            // myModuleName
             void setModuleName(const QString &thisModuleName);
             //
-#ifdef LOGLEVEL_CLASS
             QLoggerLevel::LogLevel getLogLevel();                                               // myLogLevel
             void setLogLevel(QLoggerLevel::LogLevel thisLogLevel);
-#else
-            LogLevel getLogLevel();                                               // myLogLevel
-            void setLogLevel(LogLevel thisLogLevel);
-#endif
+            //
+            void sendMessage(QLoggerLevel::LogLevel thisMsgType, const QString &thisModuleName, const QString &file, int line, const QString &function, const QString &msg);
+
+        public slots:
+            void onSettinChanged();
 
         signals:
             void handelSettinChanged();
@@ -158,12 +159,9 @@ namespace QLogger
             QString                 myApplicationName       = "";                               // ApplicationName
             QString                 myUrl                   = "";                               // URL used for HTTP request for Log Server
             quint16                 myPort                  = 0;                                // Port Number of Log Server used URL
-            QLoggerManager         *manager                 = nullptr;                          // QLogger Manager
-#ifdef LOGLEVEL_CLASS
-            QLoggerLevel::LogLevel  myLogLevel              = QLoggerLevel::LogLevel::Debug;    // Log Level
-#else
-            LogLevel  myLogLevel                            = LogLevel::Trace;    // Log Level
-#endif
+            QLoggerManager         *myLoggerManager         = nullptr;                          // QLogger Manager
+            QLoggerLevel::LogLevel  myLogLevel              = QLoggerLevel::LogLevel::Fatal;    // Maximum Log Level
+            bool                    isSet                   = false;                            // Track if mySettings has been set
 
     }; // end class QLoggerCommon
 } // end namespace QLogger

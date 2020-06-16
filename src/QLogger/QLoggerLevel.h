@@ -22,81 +22,36 @@
  ***************************************************************************************/
 
 #include <QObject>
-
-#define LOGLEVEL_CLASS
-
-#ifdef LOGLEVEL_CLASS
-
 #include <QMetaEnum>
 
-namespace QLogger
+class QLoggerLevel
 {
-    class QLoggerLevel
-    {
-            Q_GADGET
+        Q_GADGET
 
-        public:
-            /**
-             * @brief The LogLevel enum class defines the level of the log message.
-             * QLogger::QLoggerLevel::LogLevel::Trace
-             */
-            enum LogLevel
-            {
-                Trace = 0,  //! \c Trace \brief Trace level is used for internal code tracing.
-                Debug,      //! \c Debug \brief Debug level is used for writing custom debug output.
-                Info,       //! \c Info \brief Info level is used for informational messages.
-                Event,       //! \c Info \brief Event level is used for logging events, like: login, http requests...
-                Warning,    //! \c Warning \brief Warning level is used to report warnings and recoverable errors in your application.
-                Error,      //! \c Error \brief Error level is used for writing critical error messages and reporting system errors.
-                Critical,   //! \c Critical \brief Critical level is used for writing critical error messages and reporting system errors more sever than Error.
-                Fatal       //! \c Fatal \brief Fatal level is used for writing fatal error messages shortly before exiting.
-            };
-
-            Q_ENUM(LogLevel)
-
-            static QString levelToText(const QLoggerLevel::LogLevel &value)
-            {
-                auto metaEnum = QMetaEnum::fromType<QLoggerLevel::QLoggerLevel::LogLevel>();
-                return QString(metaEnum.valueToKey(value));
-            }
-    }; // end class QLoggerLevel
-} // end namespace QLogger
-#else
-namespace QLogger
-{
-
-    /**
-     * @brief The LogLevel enum class defines the level of the log message.
-     */
-    enum class LogLevel
-    {
-        Trace = 0,
-        Debug,
-        Info,
-        Warning,
-        Error,
-        Fatal
-    };
-    static QString levelToText(const QLogger::LogLevel &level)
-    {
-        switch (level)
+    public:
+        /**
+          * @brief The LogLevel enum class defines the level of the log message.
+          * QLoggerLevel::LogLevel::Trace
+          */
+        enum LogLevel
         {
-            case QLogger::LogLevel::Trace:
-                return "Trace";
-            case QLogger::LogLevel::Debug:
-                return "Debug";
-            case QLogger::LogLevel::Info:
-                return "Info";
-            case QLogger::LogLevel::Warning:
-                return "Warning";
-            case QLogger::LogLevel::Error:
-                return "Error";
-            case QLogger::LogLevel::Fatal:
-                return "Fatal";
-        }
+            Trace = 0,  //! \c Trace \brief Trace level is used for internal code tracing.
+            Debug,      //! \c Debug \brief Debug level is used for writing custom debug output.
+            Info,       //! \c Info \brief Info level is used for informational messages.
+            Event,      //! \c Info \brief Event level is used for logging events, like: login, http requests...
+            Warning,    //! \c Warning \brief Warning level is used to report warnings and recoverable errors in your application.
+            Error,      //! \c Error \brief Error level is used for writing critical error messages and reporting system errors.
+            Critical,   //! \c Critical \brief Critical level is used for writing critical error messages and reporting system errors more sever than Error.
+            Fatal       //! \c Fatal \brief Fatal level is used for writing fatal error messages shortly before exiting.
+        };
 
-        return QString();
-    }
-}
-#endif
+        Q_ENUM(LogLevel)
+
+        static QString levelToText(const QLoggerLevel::LogLevel &value)
+        {
+            auto metaEnum = QMetaEnum::fromType<QLoggerLevel::QLoggerLevel::LogLevel>();
+            // FIXME Translation
+            return QString(metaEnum.valueToKey(value));
+        }
+}; // end class QLoggerLevel
 /* ***************************** End of File ******************************* */

@@ -222,7 +222,7 @@ void MainWindow::setTocTreeViewModel(QString modelName)
     if (modelName.isEmpty())
     {
         // Current Book
-        modelName = myCurrentBook = qLoggerCommon->getSetting(constCurrentWeBook, QLogger::constAppFolder).toString(); // Defaults to the same as the default folder name
+        modelName = myCurrentBook = qLoggerCommon->getSetting(constCurrentWeBook, QLogger::ConstDefaultAppFolder).toString(); // Defaults to the same as the default folder name
         myTocPath = QString("%1%2%3.toc").arg(qLoggerCommon->getFilelPath(), QDir::separator(), modelName);
     }
     else
@@ -1516,12 +1516,12 @@ void MainWindow::readSettings()
     // Current Tab
     currentTab = qLoggerCommon->getSetting(constCurrentTab, TabSettings).toInt();  // Defaults to Settings Tab
     // Current Book
-    myCurrentBook = qLoggerCommon->getSetting(constCurrentWeBook, QLogger::constAppFolder).toString(); // Defaults to the same as the default folder name
+    myCurrentBook = qLoggerCommon->getSetting(constCurrentWeBook, QLogger::ConstDefaultAppFolder).toString(); // Defaults to the same as the default folder name
     // Current Chapter
     myCurrentChapter = qLoggerCommon->getSetting(constCurrentWeChapter, myCurrentChapter).toString();
     // Geometry
-    QSize mySize = qLoggerCommon->getGeometrySize(QLogger::ConstGeometrySize);
-    QPoint myPos = qLoggerCommon->getGeometryPos(QLogger::ConstGeometryPos);
+    QSize mySize = qLoggerCommon->getGeometrySize(QLogger::ConstDefaultGeometrySize);
+    QPoint myPos = qLoggerCommon->getGeometryPos(QLogger::ConstDefaultGeometryPos);
     resize(mySize);
     move(myPos);
     //

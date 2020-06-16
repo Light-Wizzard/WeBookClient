@@ -13,13 +13,9 @@ namespace QLogger
     /******************************************************************************
     ** QLoggerWriter Constructor                                                  *
     *******************************************************************************/
-    // FIXME make logs a variable you can change
-#ifdef LOGLEVEL_CLASS
     QLoggerWriter::QLoggerWriter(const QString &fileDestination, QLoggerLevel::LogLevel level) : QThread(), mFileDestination(fileDestination),  mLevel(level)
-#else
-    QLoggerWriter::QLoggerWriter(const QString &fileDestination, LogLevel level) : QThread(), mFileDestination(fileDestination),  mLevel(level)
-#endif
     {
+        // Pass in full path
         //mFileDestination = "logs/" + fileDestination;
         //mLevel = level;
     } // end QLoggerWriter
@@ -65,28 +61,13 @@ namespace QLogger
     /******************************************************************************
     ** enqueue                                                                    *
     *******************************************************************************/
-#ifdef LOGLEVEL_CLASS
-    void QLoggerWriter::enqueue(const QDateTime &date, const QString &threadId, const QString &module, QLoggerLevel::LogLevel level, const QString &fileName, int line, const QString &message)
-#else
-    void QLoggerWriter::enqueue(const QDateTime &date, const QString &threadId, const QString &module, LogLevel level, const QString &fileName, int line, const QString &message)
-#endif
+    void QLoggerWriter::enqueue(const QDateTime &date, const QString &threadId, const QString &module, QLoggerLevel::LogLevel level, const QString &fileName, int line, const QString &theFunction, const QString &message)
     {
         QString fileLine;
-#ifdef LOGLEVEL_CLASS
-#else
-#endif
 
-#ifdef LOGLEVEL_CLASS
-        if (!fileName.isEmpty() && line > 0 && mLevel <= QLoggerLevel::LogLevel::Debug) fileLine = QString(" {%1:%2}").arg(fileName, QString::number(line));
-#else
-        if (!fileName.isEmpty() && line > 0 && mLevel <= LogLevel::Debug) fileLine = QString(" {%1:%2}").arg(fileName, QString::number(line));
-#endif
+        if (!fileName.isEmpty() && line > 0 && mLevel <= QLoggerLevel::LogLevel::Debug) fileLine = QString(" {%1:%2=>%3}").arg(fileName, QString::number(line), theFunction);
 
-#ifdef LOGLEVEL_CLASS
         const auto text = QString("[%1] [%2] [%3] [%4]%5 %6 \n").arg(QLoggerLevel::levelToText(level), module, date.toString("dd-MM-yyyy hh:mm:ss.zzz"), threadId, fileLine, message);
-#else
-        const auto text = QString("[%1] [%2] [%3] [%4]%5 %6 \n").arg(levelToText(level), module, date.toString("dd-MM-yyyy hh:mm:ss.zzz"), threadId, fileLine, message);
-#endif
 
         QMutexLocker locker(&mutex);
         messages.append({ threadId, text });
@@ -117,12 +98,14 @@ namespace QLogger
     } // end run
     /******************************************************************************
     ** closeDestination                                                           *
+    ** FIXME Hanges on quiting app
     *******************************************************************************/
     void QLoggerWriter::closeDestination()
     {
         mQuit = true;
         mQueueNotEmpty.wakeOne();
-        wait();
+        exit(1); // exit(0) causes fatal error
+        //wait(); // wait or exit does not matter, still hangs on exit
     } // end closeDestination
-} // end
+} // end closeDestination
 /* ***************************** End of File ******************************* */

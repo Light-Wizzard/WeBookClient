@@ -10,12 +10,13 @@ namespace QLogger
 {
     /******************************************************************************
     ** QLoggerCommon Constructor                                                  *
+    **
     *******************************************************************************/
     QLoggerCommon::QLoggerCommon(bool isLog)
     {
         //Q_UNUSED(isLog)
         if (isLog) setLogger();
-
+        connect(this, &QLoggerCommon::handelSettinChanged, this, &QLoggerCommon::onSettinChanged);
     } // end QLoggerCommon
     /******************************************************************************
     ** QLoggerCommon Deconstructor                                                *
@@ -25,16 +26,102 @@ namespace QLogger
 
     } // end ~QLoggerCommon
     /******************************************************************************
+    ** onSettinChanged                                                            *
+    *******************************************************************************/
+    void QLoggerCommon::onSettinChanged()
+    {
+
+    } // end onSettinChanged
+    /******************************************************************************
+    ** getLoggerManager                                                           *
+    *******************************************************************************/
+    QLoggerManager *QLoggerCommon::getLoggerManager()
+    {
+        if (myLoggerManager == nullptr) setLogger();
+        return myLoggerManager;
+    } // end getLoggerManager
+    /******************************************************************************
     ** setLogger                                                                  *
     *******************************************************************************/
     void QLoggerCommon::setLogger()
     {
-        if (false)
+        if (myLoggerManager == nullptr)
         {
-            const auto manager = QLoggerManager::getInstance();
-            manager->addDestination(getLogFullPath(), getModuleName(), getLogLevel());
+            myLoggerManager = QLoggerManager::getInstance();
+            myLoggerManager->addDestination(getLogFullPath(), getModuleName(), getLogLevel());
         }
     } // end setLogger
+    /******************************************************************************
+    ** sendMessage                                                                *
+    *******************************************************************************/
+    void QLoggerCommon::sendMessage(QLoggerLevel::LogLevel thisMsgType, const QString &thisModuleName, const QString &file, int line, const QString &function, const QString &msg)
+    {
+        getLoggerManager()->getInstance()->enqueueMessage(thisModuleName, thisMsgType, msg, file, line, function);
+    } // end sendMessage
+    /******************************************************************************
+    ** getHomePath                                                                *
+    *******************************************************************************/
+    QString QLoggerCommon::getHomePath()
+    {
+        if (myHomePath.isEmpty()) myHomePath = ConstDefaultHomeLocation;
+        return myHomePath;
+    } // end getHomePath
+    /******************************************************************************
+    ** setHomePath                                                                *
+    *******************************************************************************/
+    void QLoggerCommon::setHomePath(const QString &thisHomePath)
+    {
+        if (myHomePath != thisHomePath)
+        {
+            myHomePath = thisHomePath;
+            emit handelSettinChanged();
+        }
+    } // end setHomePath
+    /******************************************************************************
+    ** getUserName                                                                *
+    *******************************************************************************/
+    QString QLoggerCommon::getUserName()
+    {
+        if (myUserName.isEmpty()) setUserName("");
+        return myUserName;
+    } // end getUserName
+    /******************************************************************************
+    ** setUserName                                                                *
+    *******************************************************************************/
+    void QLoggerCommon::setUserName(const QString &thisUserName)
+    {
+        if (myUserName.isEmpty() || thisUserName.isEmpty())
+        {
+            myUserName = qgetenv("USER");
+            if (myUserName.isEmpty()) myUserName = qgetenv("USERNAME");
+            if (myUserName.isEmpty())
+            {
+                // FIXME Add OS Specific ways to get User Name if above fails
+                #if   defined(Q_OS_ANDROID)
+                #elif defined(Q_OS_BLACKBERRY)
+                #elif defined(Q_OS_IOS)
+                #elif defined(Q_OS_MAC)
+                #elif defined(Q_OS_WINCE)
+                #elif defined(Q_OS_WIN)
+                // FIXME add header for MAX_USERNAME DWORD
+                //  char acUserName[MAX_USERNAME];
+                //  DWORD nUserName = sizeof(acUserName);
+                //  if (GetUserName(acUserName, &nUserName)) myUserName = acUserName;
+                #elif defined(Q_OS_LINUX)
+                #elif defined(Q_OS_UNIX)
+                #else
+                #endif
+            }
+            if (!myUserName.isEmpty()) emit handelSettinChanged();
+            else qWarning() << "Failed to find User Name";
+        }
+        //
+        if (myUserName != thisUserName)
+        {
+            myUserName = thisUserName;
+            emit handelSettinChanged();
+        }
+    } // end setUserName
     /******************************************************************************
     ** qSettingsInstance                                                          *
     ** Creates QSettings for organizationName, organizationDomain, applicationName*
@@ -58,6 +145,7 @@ namespace QLogger
         }
         // ${HOME}/AppName/data/AppName/AppName.ini
         mySettings  = new QSettings(myIni, QSettings::IniFormat);
+        isSet = true;
     } // end qSettingsInstance
     /******************************************************************************
     ** combinePathFileName                                                        *
@@ -130,116 +218,74 @@ namespace QLogger
         return isPathExists(thisPath);
     } // end isMakeDir
     /******************************************************************************
-    ** isSetting by key                                                           *
+    ** setFilePath(QString myFileName)                                            *
+    ** All files must be in folder constAppFolder                                 *
+    ** This folder is different for debug vs release as well as deployed          *
     *******************************************************************************/
-    bool QLoggerCommon::isSetting(const QString &thisFieldName)
+    QString QLoggerCommon::setFilePath(QString thisFileName, QString thisDataFolderName)
     {
-        if (mySettings == nullptr)  qSettingsInstance();
-        return mySettings->contains(thisFieldName);
-    } // end isSetting
-    /******************************************************************************
-    ** getSetting by key and  default Value                                       *
-    ** QString myName = getSetting("key", "default value");                       *
-    *******************************************************************************/
-    QVariant QLoggerCommon::getSetting(const QString &key, const QVariant &defaultValue)
-    {
-        if (mySettings == nullptr) qSettingsInstance();
-        if (!isSetting(key))
+        // Make sure Build Folder does not contain the App Name, this is default, change Projects Build Path
+        if (ConstDefaultAppDataLocation.contains(ConstDefaultAppFolder))
         {
-            setSetting(key, defaultValue);
-            return defaultValue;
+            if (QDir(ConstDefaultAppDataLocation).exists())
+            {
+                // I have no idea where this is at till I deploy it
+            }
         }
-        //qDebug() << "QLoggerCommon::getSettings=" << mySettings->value(key, defaultValue);
-        return mySettings->value(key, defaultValue);
-    } // end getSetting
-    /******************************************************************************
-    ** setSetting using key and settingValue                                      *
-    ** setSetting("this_key", "to this");                                         *
-    ** QVariant is used for value, so it can be anything it supports              *
-    *******************************************************************************/
-    void QLoggerCommon::setSetting(const QString &thisKey, const QVariant &defaultValue)
-    {
-        if (mySettings == nullptr) qSettingsInstance();
-        mySettings->setValue(thisKey, defaultValue);
-    } // end setSetting
-    /******************************************************************************
-    ** getOrgName                                                                 *
-    ** This value is used for Qt Settings: GitHub Account Name is one example     *
-    *******************************************************************************/
-    QString QLoggerCommon::getOrgName()
-    {
-        if (myOrganizationName.isEmpty()) myOrganizationName = constOrgName;
-        return myOrganizationName;
-    } // end getOrgName
-    /******************************************************************************
-    ** setOrgName(myValue)                                                        *
-    *******************************************************************************/
-    void QLoggerCommon::setOrgName(const QString &thisOrgName)
-    {
-        if (myOrganizationName != thisOrgName)
+        // If running from within Qt Creator, this path is outside of the root application folder
+        QDir dataFileDir(QCoreApplication::applicationDirPath());
+        // full_path/databaseFolderName/databaseFileName
+        QString dataFullPath = dataFileDir.cleanPath(dataFileDir.absoluteFilePath(QString("%1%2%3").arg(thisDataFolderName, QDir::separator(), thisFileName)));
+        // If ran from within Qt Creator
+        if (!dataFullPath.contains(ConstDefaultAppFolder))
         {
-            myOrganizationName = thisOrgName;
+            // APP_FOLDER/databaseFolderName/databaseFileName
+            dataFullPath = dataFileDir.cleanPath(dataFileDir.absoluteFilePath(QString("..%1%2%3%4%5%6").arg(QDir::separator(), ConstDefaultAppFolder, QDir::separator(), thisDataFolderName, QDir::separator(), thisFileName)));
+            //qDebug() << QString("..%1%2%3%4%5%6").arg(QDir::separator(), constAppFolder, QDir::separator(), thisDataFolderName, QDir::separator(), thisFileName);
+        }
+        if (!QFile(dataFullPath).exists())
+        {
+            dataFullPath = dataFileDir.cleanPath(dataFileDir.absoluteFilePath(QString("..%1..%2%3%4%5%6%7").arg(QDir::separator(), QDir::separator(), ConstDefaultAppFolder, QDir::separator(), thisDataFolderName, QDir::separator(), thisFileName)));
+            //qDebug() << QString("..%1..%2%3%4%5%6%7").arg(QDir::separator(), QDir::separator(), constAppFolder, QDir::separator(), thisDataFolderName, QDir::separator(), thisFileName);
+        }
+        if (!QFile(dataFullPath).exists())
+        {
+            dataFullPath = dataFileDir.cleanPath(dataFileDir.absoluteFilePath(QString("..%1..%2..%3%4%5%6%7%8").arg(QDir::separator(), QDir::separator(), QDir::separator(), ConstDefaultAppFolder, QDir::separator(), thisDataFolderName, QDir::separator(), thisFileName)));
+            //qDebug() << QString("..%1..%2..%3%4%5%6%7%8").arg(QDir::separator(), QDir::separator(), QDir::separator(), constAppFolder, QDir::separator(), thisDataFolderName, QDir::separator(), thisFileName);
+        }
+        if (!QFile(dataFullPath).exists())
+        {
+            //qDebug() << "setFilePath cannot find folder";
+        }
+        return dataFullPath;
+    } // end setFilePath
+    /******************************************************************************
+    ** getFullFilePathName                                                        *
+    *******************************************************************************/
+    QString QLoggerCommon::getFullFilePathName(QString thisFileName)
+    {
+        return QString("%1%2%3").arg(getFilelPath(), QDir::separator(), thisFileName);
+    } // end getFullFilePathName
+    /******************************************************************************
+    ** getFilelPath                                                               *
+    ** /constDataFolderName/
+    *******************************************************************************/
+    QString QLoggerCommon::getFilelPath()
+    {
+        if (myFilePath.isEmpty()) myFilePath = QString("%1%2%3%4%5").arg(getHomePath(), QDir::separator(), getAppName(), QDir::separator(), getFileFolderName());
+        return myFilePath;
+    } // end getFilelPath
+    /******************************************************************************
+    ** setFilePath                                                                *
+    *******************************************************************************/
+    void QLoggerCommon::setFilePath(const QString &thisDataFullPath)
+    {
+        if (myFilePath != thisDataFullPath)
+        {
+            myFilePath = thisDataFullPath;
             emit handelSettinChanged();
         }
-    } // end setOrgName
-    /******************************************************************************
-    ** getOrgDomain                                                               *
-    *******************************************************************************/
-    QString QLoggerCommon::getOrgDomain()
-    {
-        if (myOrganizationDomain.isEmpty()) myOrganizationDomain = constOrgDomain;
-        return myOrganizationDomain;
-    } // end getOrgDomain
-    /******************************************************************************
-    ** setOrgDomain(myValue)                                                      *
-    *******************************************************************************/
-    void QLoggerCommon::setOrgDomain(const QString &thisOrgDomain)
-    {
-        if (myOrganizationDomain != thisOrgDomain)
-        {
-            myOrganizationDomain = thisOrgDomain;
-            emit handelSettinChanged();
-        }
-    } // end setOrgDomain
-    /******************************************************************************
-    ** getAppName                                                                 *
-    *******************************************************************************/
-    QString QLoggerCommon::getAppName()
-    {
-        if (myApplicationName.isEmpty()) myApplicationName = constAppName;
-        return myApplicationName;
-    } // end getAppName
-    /******************************************************************************
-    ** setAppName(myValue)                                                        *
-    *******************************************************************************/
-    void QLoggerCommon::setAppName(const QString &thisAppName)
-    {
-        if (myApplicationName != thisAppName)
-        {
-            myApplicationName = thisAppName;
-            emit handelSettinChanged();
-        }
-    } // end setAppName
-    /******************************************************************************
-    ** getIniFileName                                                             *
-    ** File Name only                                                             *
-    *******************************************************************************/
-    QString QLoggerCommon::getIniFileName()
-    {
-        if (myIniFileName.isEmpty()) myIniFileName = constIniFileName;
-        return myIniFileName;
-    } // end getIniFileName
-    /******************************************************************************
-    ** setIniFileName                                                             *
-    *******************************************************************************/
-    void QLoggerCommon::setIniFileName(const QString &thisIniFileName)
-    {
-        if (myIniFileName != thisIniFileName)
-        {
-            myIniFileName = thisIniFileName;
-            emit handelSettinChanged();
-        }
-    } // end setIniFileName
+    } // end setFilePath
     /******************************************************************************
     ** getLogPath                                                                 *
     ** FIXME argument error
@@ -277,7 +323,13 @@ namespace QLogger
     *******************************************************************************/
     QString QLoggerCommon::getLogFolderName()
     {
-        if (myLogFolderName.isEmpty()) myLogFolderName = constLogFolderName;
+        if (myLogFolderName.isEmpty())
+        {
+            if (isSet)
+                myLogFolderName = getSetting(ConstSettingsLogFolder, ConstDefaultLogFolderName).toString();
+            else
+                myLogFolderName = ConstDefaultLogFolderName;
+        }
         return myLogFolderName;
     } // end getLogFolderName
     /******************************************************************************
@@ -316,7 +368,13 @@ namespace QLogger
     *******************************************************************************/
     QString QLoggerCommon::getLogNamePattern()
     {
-        if (myLogNamePattern.isEmpty()) myLogNamePattern = constLogNamePattern;
+        if (myLogNamePattern.isEmpty())
+        {
+            if (isSet)
+                myLogNamePattern = getSetting(ConstSettingsLogNamePattern, ConstDefaultLogNamePattern).toString();
+            else
+                myLogNamePattern = ConstDefaultLogNamePattern;
+        }
         return myLogNamePattern;
     } // end getLogNamePattern
     /******************************************************************************
@@ -335,7 +393,13 @@ namespace QLogger
     *******************************************************************************/
     QString QLoggerCommon::getFileFolderName()
     {
-        if (myFileFolderName.isEmpty()) myFileFolderName = constFileFolderName;
+        if (myFileFolderName.isEmpty())
+        {
+            if (isSet)
+                myFileFolderName = getSetting(ConstSettingsFileFolder, ConstDefaultFileFolderName).toString();
+            else
+                myFileFolderName = ConstDefaultFileFolderName;
+        }
         return myFileFolderName;
     } // end getFileFolderName
     /******************************************************************************
@@ -354,7 +418,13 @@ namespace QLogger
     *******************************************************************************/
     QString QLoggerCommon::getLogFileExtension()
     {
-        if (myLogFileExtension.isEmpty()) myLogFileExtension = constLogFileExtension;
+        if (myLogFileExtension.isEmpty())
+        {
+            if (isSet)
+                myLogFileExtension = getSetting(ConstSettingsLogFileExt, ConstDefaultLogFileExtension).toString();
+            else
+                myLogFileExtension = ConstDefaultLogFileExtension;
+        }
         return myLogFileExtension;
     } // end getLogFileExtension
     /******************************************************************************
@@ -389,11 +459,153 @@ namespace QLogger
         }
     } // end setLogFullPath
     /******************************************************************************
+    ** isSetting by key                                                           *
+    *******************************************************************************/
+    bool QLoggerCommon::isSetting(const QString &thisFieldName)
+    {
+        if (mySettings == nullptr)  qSettingsInstance();
+        return mySettings->contains(thisFieldName);
+    } // end isSetting
+    /******************************************************************************
+    ** getSetting by key and  default Value                                       *
+    ** QString myName = getSetting("key", "default value");                       *
+    *******************************************************************************/
+    QVariant QLoggerCommon::getSetting(const QString &key, const QVariant &defaultValue)
+    {
+        if (mySettings == nullptr) qSettingsInstance();
+        if (!isSetting(key))
+        {
+            setSetting(key, defaultValue);
+            return defaultValue;
+        }
+        //qDebug() << "QLoggerCommon::getSettings=" << mySettings->value(key, defaultValue);
+        return mySettings->value(key, defaultValue);
+    } // end getSetting
+    /******************************************************************************
+    ** setSetting using key and settingValue                                      *
+    ** setSetting("this_key", "to this");                                         *
+    ** QVariant is used for value, so it can be anything it supports              *
+    *******************************************************************************/
+    void QLoggerCommon::setSetting(const QString &thisKey, const QVariant &defaultValue)
+    {
+        if (mySettings == nullptr) qSettingsInstance();
+        mySettings->setValue(thisKey, defaultValue);
+    } // end setSetting
+    /******************************************************************************
+    ** getOrgName                                                                 *
+    ** This value is used for Qt Settings: GitHub Account Name is one example     *
+    *******************************************************************************/
+    QString QLoggerCommon::getOrgName()
+    {
+        if (myOrganizationName.isEmpty())
+        {
+            if (isSet)
+                myOrganizationName = getSetting(ConstSettingsOrgName, ConstDefaultOrgName).toString();
+            else
+                myOrganizationName = ConstDefaultOrgName;
+        }
+        return myOrganizationName;
+    } // end getOrgName
+    /******************************************************************************
+    ** setOrgName(myValue)                                                        *
+    *******************************************************************************/
+    void QLoggerCommon::setOrgName(const QString &thisOrgName)
+    {
+        if (myOrganizationName != thisOrgName)
+        {
+            myOrganizationName = thisOrgName;
+            emit handelSettinChanged();
+        }
+    } // end setOrgName
+    /******************************************************************************
+    ** getOrgDomain                                                               *
+    *******************************************************************************/
+    QString QLoggerCommon::getOrgDomain()
+    {
+        if (myOrganizationDomain.isEmpty())
+        {
+            if (isSet)
+                myOrganizationDomain = getSetting(ConstSettingsOrgDomain, ConstDefaultOrgDomain).toString();
+            else
+                myOrganizationDomain = ConstDefaultOrgName;
+        }
+        return myOrganizationDomain;
+    } // end getOrgDomain
+    /******************************************************************************
+    ** setOrgDomain(myValue)                                                      *
+    *******************************************************************************/
+    void QLoggerCommon::setOrgDomain(const QString &thisOrgDomain)
+    {
+        if (myOrganizationDomain != thisOrgDomain)
+        {
+            myOrganizationDomain = thisOrgDomain;
+            emit handelSettinChanged();
+        }
+    } // end setOrgDomain
+    /******************************************************************************
+    ** getAppName                                                                 *
+    *******************************************************************************/
+    QString QLoggerCommon::getAppName()
+    {
+        if (myApplicationName.isEmpty())
+        {
+            if (isSet)
+                myApplicationName = getSetting(ConstSettingsApplicationName, ConstDefaultAppName).toString();
+            else
+                myApplicationName = ConstDefaultAppName;
+        }
+        return myApplicationName;
+    } // end getAppName
+    /******************************************************************************
+    ** setAppName(myValue)                                                        *
+    *******************************************************************************/
+    void QLoggerCommon::setAppName(const QString &thisAppName)
+    {
+        if (myApplicationName != thisAppName)
+        {
+            myApplicationName = thisAppName;
+            emit handelSettinChanged();
+        }
+    } // end setAppName
+    /******************************************************************************
+    ** getIniFileName                                                             *
+    ** File Name only                                                             *
+    *******************************************************************************/
+    QString QLoggerCommon::getIniFileName()
+    {
+        if (myIniFileName.isEmpty())
+        {
+            if (isSet)
+                myIniFileName = getSetting(ConstSettingsIniFileName, ConstDefaultIniFileName).toString();
+            else
+                myIniFileName = ConstDefaultIniFileName;
+        }
+        return myIniFileName;
+    } // end getIniFileName
+    /******************************************************************************
+    ** setIniFileName                                                             *
+    *******************************************************************************/
+    void QLoggerCommon::setIniFileName(const QString &thisIniFileName)
+    {
+        if (myIniFileName != thisIniFileName)
+        {
+            myIniFileName = thisIniFileName;
+            setSetting(ConstSettingsIniFileName, myIniFileName);
+            emit handelSettinChanged();
+        }
+    } // end setIniFileName
+    /******************************************************************************
     ** getModuleName                                                              *
     *******************************************************************************/
     QString QLoggerCommon::getModuleName()
     {
-        if (myModuleName.isEmpty()) myModuleName = constModuleName;
+        if (myModuleName.isEmpty())
+        {
+            if (isSet)
+                myModuleName = getSetting(ConstSettingsModuelName, ConstDefaultModuleName).toString();
+            else
+                myModuleName = ConstDefaultModuleName;
+        }
         return myModuleName;
     } // end getModuleName
     /******************************************************************************
@@ -410,22 +622,44 @@ namespace QLogger
     /******************************************************************************
     ** getLogLevel                                                                *
     *******************************************************************************/
-#ifdef LOGLEVEL_CLASS
     QLoggerLevel::LogLevel QLoggerCommon::getLogLevel()
-#else
-    LogLevel QLoggerCommon::getLogLevel()
-#endif
     {
+        if (isSet)
+        {
+            switch (getSetting(ConstSettingsModuelName, ConstDefaultModuleName).toInt())
+            {
+                case QLoggerLevel::LogLevel::Trace:
+                    myLogLevel = QLoggerLevel::LogLevel::Trace;
+                    break;
+                case QLoggerLevel::LogLevel::Debug:
+                    myLogLevel = QLoggerLevel::LogLevel::Debug;
+                    break;
+                case QLoggerLevel::LogLevel::Info:
+                    myLogLevel = QLoggerLevel::LogLevel::Info;
+                    break;
+                case QLoggerLevel::LogLevel::Event:
+                    myLogLevel = QLoggerLevel::LogLevel::Event;
+                    break;
+                case QLoggerLevel::LogLevel::Warning:
+                    myLogLevel = QLoggerLevel::LogLevel::Warning;
+                    break;
+                case QLoggerLevel::LogLevel::Error:
+                    myLogLevel = QLoggerLevel::LogLevel::Error;
+                    break;
+                case QLoggerLevel::LogLevel::Critical:
+                    myLogLevel = QLoggerLevel::LogLevel::Critical;
+                    break;
+                case QLoggerLevel::LogLevel::Fatal:
+                    myLogLevel = QLoggerLevel::LogLevel::Fatal;
+                    break;
+            }
+        }
         return myLogLevel;
     } // end getLogLevel
     /******************************************************************************
     ** setLogLevel                                                                *
     *******************************************************************************/
-#ifdef LOGLEVEL_CLASS
     void QLoggerCommon::setLogLevel(QLoggerLevel::LogLevel thisLogLevel)
-#else
-    void QLoggerCommon::setLogLevel(LogLevel thisLogLevel)
-#endif
     {
         if (myLogLevel != thisLogLevel)
         {
@@ -434,97 +668,13 @@ namespace QLogger
         }
     } // end setLogLevel
     /******************************************************************************
-    ** getFilelPath                                                               *
-    ** /constDataFolderName/
-    *******************************************************************************/
-    QString QLoggerCommon::getFilelPath()
-    {
-        if (myFilePath.isEmpty()) myFilePath = QString("%1%2%3%4%5").arg(getHomePath(), QDir::separator(), getAppName(), QDir::separator(), getFileFolderName());
-        return myFilePath;
-    } // end getFilelPath
-    /******************************************************************************
-    ** setFilePath                                                                *
-    *******************************************************************************/
-    void QLoggerCommon::setFilePath(const QString &thisDataFullPath)
-    {
-        if (myFilePath != thisDataFullPath)
-        {
-            myFilePath = thisDataFullPath;
-            emit handelSettinChanged();
-        }
-    } // end setFilePath
-    /******************************************************************************
-    ** getHomePath                                                                *
-    *******************************************************************************/
-    QString QLoggerCommon::getHomePath()
-    {
-        if (myHomePath.isEmpty()) myHomePath = constHomeLocation;
-        return myHomePath;
-    } // end getHomePath
-    /******************************************************************************
-    ** setHomePath                                                                *
-    *******************************************************************************/
-    void QLoggerCommon::setHomePath(const QString &thisHomePath)
-    {
-        if (myHomePath != thisHomePath)
-        {
-            myHomePath = thisHomePath;
-            emit handelSettinChanged();
-        }
-    } // end setHomePath
-    /******************************************************************************
-    ** getUserName                                                                *
-    *******************************************************************************/
-    QString QLoggerCommon::getUserName()
-    {
-        if (myUserName.isEmpty()) setUserName("");
-        return myUserName;
-    } // end getUserName
-    /******************************************************************************
-    ** setUserName                                                                *
-    *******************************************************************************/
-    void QLoggerCommon::setUserName(const QString &thisUserName)
-    {
-        if (myUserName.isEmpty() || thisUserName.isEmpty())
-        {
-            myUserName = qgetenv("USER");
-            if (myUserName.isEmpty()) myUserName = qgetenv("USERNAME");
-            if (myUserName.isEmpty())
-            {
-                // FIXME Add OS Specific ways to get User Name if above fails
-                #if   defined(Q_OS_ANDROID)
-                #elif defined(Q_OS_BLACKBERRY)
-                #elif defined(Q_OS_IOS)
-                #elif defined(Q_OS_MAC)
-                #elif defined(Q_OS_WINCE)
-                #elif defined(Q_OS_WIN)
-                // FIXME add header for MAX_USERNAME DWORD
-                //  char acUserName[MAX_USERNAME];
-                //  DWORD nUserName = sizeof(acUserName);
-                //  if (GetUserName(acUserName, &nUserName)) myUserName = acUserName;
-                #elif defined(Q_OS_LINUX)
-                #elif defined(Q_OS_UNIX)
-                #else
-                #endif
-            }
-            if (!myUserName.isEmpty()) emit handelSettinChanged();
-            else qWarning() << "Failed to find User Name";
-        }
-        //
-        if (myUserName != thisUserName)
-        {
-            myUserName = thisUserName;
-            emit handelSettinChanged();
-        }
-    } // end setUserName
-    /******************************************************************************
     ** portToString                                                               *
     ** Valid Port Numbers range varies on plateform                               *
     ** Typical Ports: 8080                                                        *
     *******************************************************************************/
     QString QLoggerCommon::portToString()
     {
-        if (myPort == 0) myPort = ConstPort;
+        if (myPort == 0) myPort = getPort();
         return QString::number(myPort);
     } // end portToString
     /******************************************************************************
@@ -534,7 +684,13 @@ namespace QLogger
     *******************************************************************************/
     quint16 QLoggerCommon::getPort()
     {
-        if (myPort == 0) myPort = ConstPort;
+        if (myPort == 0)
+        {
+            if (isSet)
+                myPort = getSetting(ConstSettingsPort, ConstDefaultPort).toInt();
+            else
+                myPort = ConstDefaultPort;
+        }
         return myPort;
     } // end getPort
     /******************************************************************************
@@ -553,55 +709,6 @@ namespace QLogger
             myPort = thisPort;
         }
     } // end setPort
-    /******************************************************************************
-    ** setFilePath(QString myFileName)                                            *
-    ** All files must be in folder constAppFolder                                 *
-    ** This folder is different for debug vs release as well as deployed          *
-    *******************************************************************************/
-    QString QLoggerCommon::setFilePath(QString thisFileName, QString thisDataFolderName)
-    {
-        // Make sure Build Folder does not contain the App Name, this is default, change Projects Build Path
-        if (constAppDataLocation.contains(constAppFolder))
-        {
-            if (QDir(constAppDataLocation).exists())
-            {
-                // I have no idea where this is at till I deploy it
-            }
-        }
-        // If running from within Qt Creator, this path is outside of the root application folder
-        QDir dataFileDir(QCoreApplication::applicationDirPath());
-        // full_path/databaseFolderName/databaseFileName
-        QString dataFullPath = dataFileDir.cleanPath(dataFileDir.absoluteFilePath(QString("%1%2%3").arg(thisDataFolderName, QDir::separator(), thisFileName)));
-        // If ran from within Qt Creator
-        if (!dataFullPath.contains(constAppFolder))
-        {
-            // APP_FOLDER/databaseFolderName/databaseFileName
-            dataFullPath = dataFileDir.cleanPath(dataFileDir.absoluteFilePath(QString("..%1%2%3%4%5%6").arg(QDir::separator(), constAppFolder, QDir::separator(), thisDataFolderName, QDir::separator(), thisFileName)));
-            //qDebug() << QString("..%1%2%3%4%5%6").arg(QDir::separator(), constAppFolder, QDir::separator(), thisDataFolderName, QDir::separator(), thisFileName);
-        }
-        if (!QFile(dataFullPath).exists())
-        {
-            dataFullPath = dataFileDir.cleanPath(dataFileDir.absoluteFilePath(QString("..%1..%2%3%4%5%6%7").arg(QDir::separator(), QDir::separator(), constAppFolder, QDir::separator(), thisDataFolderName, QDir::separator(), thisFileName)));
-            //qDebug() << QString("..%1..%2%3%4%5%6%7").arg(QDir::separator(), QDir::separator(), constAppFolder, QDir::separator(), thisDataFolderName, QDir::separator(), thisFileName);
-        }
-        if (!QFile(dataFullPath).exists())
-        {
-            dataFullPath = dataFileDir.cleanPath(dataFileDir.absoluteFilePath(QString("..%1..%2..%3%4%5%6%7%8").arg(QDir::separator(), QDir::separator(), QDir::separator(), constAppFolder, QDir::separator(), thisDataFolderName, QDir::separator(), thisFileName)));
-            //qDebug() << QString("..%1..%2..%3%4%5%6%7%8").arg(QDir::separator(), QDir::separator(), QDir::separator(), constAppFolder, QDir::separator(), thisDataFolderName, QDir::separator(), thisFileName);
-        }
-        if (!QFile(dataFullPath).exists())
-        {
-            //qDebug() << "setFilePath cannot find folder";
-        }
-        return dataFullPath;
-    } // end setFilePath
-    /******************************************************************************
-    ** getFullFilePathName                                                        *
-    *******************************************************************************/
-    QString QLoggerCommon::getFullFilePathName(QString thisFileName)
-    {
-        return QString("%1%2%3").arg(getFilelPath(), QDir::separator(), thisFileName);
-    } // end getFullFilePathName
     /******************************************************************************
     ** setGeometry                                                                *
     *******************************************************************************/
