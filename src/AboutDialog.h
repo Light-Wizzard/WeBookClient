@@ -1,3 +1,7 @@
+/******************************************************************************
+** WeBook: Pronounced Web Book, is a Book Content Management System  (BCMS)   *
+*******************************************************************************/
+#pragma once
 #ifndef ABOUTDIALOG_H
 #define ABOUTDIALOG_H
 

@@ -1,3 +1,4 @@
+#pragma once
 #ifndef QLOGGERCRYPTO_H
 #define QLOGGERCRYPTO_H
 /****************************************************************************************

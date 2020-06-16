@@ -13,29 +13,29 @@ Q_DECLARE_METATYPE(QLoggerLevel::LogLevel);
 *******************************************************************************/
 namespace QLogger
 {
-    /******************************************************************************
-    ** QLog_                                                                      *
-    *******************************************************************************/
+    /**************************************************************************
+    ** QLog_                                                                  *
+    ***************************************************************************/
     void QLog_(const QString &module, QLoggerLevel::LogLevel level, const QString &message, const QString &file, int line, const QString &theFunction)
     {
         QLoggerManager::getInstance()->enqueueMessage(module, level, message, file, line, theFunction);
     }
-    /******************************************************************************
-    ** QUEUE_LIMIT                                                                *
-    *******************************************************************************/
+    /**************************************************************************
+    ** QUEUE_LIMIT                                                            *
+    ***************************************************************************/
     static const int QUEUE_LIMIT = 100;
-    /******************************************************************************
-    ** QLoggerManager Constructor                                                 *
+    /**************************************************************************
+    ** QLoggerManager Constructor                                             *
     ** FIXME logs
-    *******************************************************************************/
+    ***************************************************************************/
     QLoggerManager::QLoggerManager() : mMutex(QMutex::Recursive)
     {
         //QDir dir(QDir::currentPath());
         //dir.mkdir("logs");
     }
-    /******************************************************************************
-    ** QLoggerManager Deconstructor                                               *
-    *******************************************************************************/
+    /**************************************************************************
+    ** QLoggerManager Deconstructor                                           *
+    ***************************************************************************/
     QLoggerManager::~QLoggerManager()
     {
         QMutexLocker locker(&mMutex);
@@ -51,19 +51,19 @@ namespace QLogger
 
         mModuleDest.clear();
     } // end ~QLoggerManager
-    /******************************************************************************
-    ** getInstance                                                                *
-    *******************************************************************************/
+    /**************************************************************************
+    ** getInstance                                                            *
+    ***************************************************************************/
     QLoggerManager *QLoggerManager::getInstance()
     {
         static QLoggerManager INSTANCE;
 
         return &INSTANCE;
     } // end getInstance
-    /******************************************************************************
-    ** addDestination                                                             *
+    /**************************************************************************
+    ** addDestination                                                         *
     ** FIXME Translate
-    *******************************************************************************/
+    ***************************************************************************/
     bool QLoggerManager::addDestination(const QString &fileDest, const QString &module, QLoggerLevel::LogLevel level)
     {
         QMutexLocker lock(&mMutex);
@@ -86,9 +86,9 @@ namespace QLogger
 
         return false;
     }
-    /******************************************************************************
-    ** addDestination                                                             *
-    *******************************************************************************/
+    /**************************************************************************
+    ** addDestination                                                         *
+    ***************************************************************************/
     bool QLoggerManager::addDestination(const QString &fileDest, const QStringList &modules, QLoggerLevel::LogLevel level)
     {
         QMutexLocker lock(&mMutex);
@@ -115,9 +115,9 @@ namespace QLogger
 
         return allAdded;
     }
-    /******************************************************************************
-    ** writeAndDequeueMessages                                                    *
-    *******************************************************************************/
+    /**************************************************************************
+    ** writeAndDequeueMessages                                                *
+    ***************************************************************************/
     void QLoggerManager::writeAndDequeueMessages(const QString &module)
     {
         QMutexLocker lock(&mMutex);
@@ -132,8 +132,7 @@ namespace QLogger
                 //const auto level = qvariant_cast<QLoggerLevel::LogLevel>(values.at(2).toInt());
                 const auto level = qvariant_cast<QLoggerLevel::LogLevel>(values.at(2));
 
-                if (logWriter->getLevel() <= level)
-                {
+                //if (logWriter->getLevel() <= level) {
                     const auto datetime = values.at(0).toDateTime();
                     const auto threadId = values.at(1).toString();
                     const auto file = values.at(3).toString();
@@ -142,15 +141,15 @@ namespace QLogger
                     const auto message = values.at(6).toString();
 
                     logWriter->enqueue(datetime, threadId, module, level, file, line, theFunction, message);
-                }
+               // }
             }
 
             mNonWriterQueue.remove(module);
         }
     }
-    /******************************************************************************
-    ** enqueueMessage                                                             *
-    *******************************************************************************/
+    /**************************************************************************
+    ** enqueueMessage                                                         *
+    ***************************************************************************/
     void QLoggerManager::enqueueMessage(const QString &module, QLoggerLevel::LogLevel level, const QString &message, QString file, int line, const QString &theFunction)
     {
         QMutexLocker lock(&mMutex);
@@ -169,9 +168,9 @@ namespace QLogger
             mNonWriterQueue.insert( module, { QDateTime::currentDateTime(), threadId, QVariant::fromValue<QLoggerLevel::LogLevel>(level), fileName, line, theFunction, message });
         }
     } // end enqueueMessage
-    /******************************************************************************
-    ** pause                                                                      *
-    *******************************************************************************/
+    /**************************************************************************
+    ** pause                                                                  *
+    ***************************************************************************/
     void QLoggerManager::pause()
     {
         QMutexLocker lock(&mMutex);
@@ -180,9 +179,9 @@ namespace QLogger
 
         for (auto &logWriter : mModuleDest) logWriter->stop(mIsStop);
     } // end pause
-    /******************************************************************************
-    ** resume                                                                     *
-    *******************************************************************************/
+    /**************************************************************************
+    ** resume                                                                 *
+    ***************************************************************************/
     void QLoggerManager::resume()
     {
         QMutexLocker lock(&mMutex);
@@ -191,9 +190,9 @@ namespace QLogger
 
         for (auto &logWriter : mModuleDest) logWriter->stop(mIsStop);
     } // end resume
-    /******************************************************************************
-    ** overwriteLogLevel                                                          *
-    *******************************************************************************/
+    /**************************************************************************
+    ** overwriteLogLevel                                                      *
+    ***************************************************************************/
     void QLoggerManager::overwriteLogLevel(QLoggerLevel::LogLevel level)
     {
         QMutexLocker lock(&mMutex);

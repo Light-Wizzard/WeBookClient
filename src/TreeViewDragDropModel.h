@@ -2,6 +2,7 @@
 ** WeBook is Pronounced Web-Book, it is a Web-Book Content Managment System   *
 ** Drag & Drop Model                                                          *
 *******************************************************************************/
+#pragma once
 #ifndef DRAGDROPMODEL_H
 #define DRAGDROPMODEL_H
 #include <QStringList>

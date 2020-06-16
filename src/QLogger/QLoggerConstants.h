@@ -1,3 +1,4 @@
+#pragma once
 #ifndef QLOGGERCONSTANTS_H
 #define QLOGGERCONSTANTS_H
 #include <QApplication>

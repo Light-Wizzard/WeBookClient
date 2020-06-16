@@ -3,7 +3,7 @@
 
 #pragma once
 
-/****************************************************************************************
+/******************************************************************************
  ** QLogger is a library to register and print logs into a file.
  **
  ** LinkedIn: www.linkedin.com/in/cescmm/
@@ -21,8 +21,8 @@
  **
  ** You should have received a copy of the GNU Lesser General Public
  ** License along with this library; if not, write to the Free Software
- ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
- ***************************************************************************************/
+ ** Foundation, Inc. 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+ *****************************************************************************/
 #include <QThread>
 #include <QWaitCondition>
 #include <QMutex>

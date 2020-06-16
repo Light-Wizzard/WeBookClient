@@ -2,6 +2,7 @@
 ** WeBook is Pronounced Web-Book, it is a Web-Book Content Managment System   *
 ** Drag & Drop Model                                                          *
 *******************************************************************************/
+#pragma once
 #ifndef TREEMODEL_H
 #define TREEMODEL_H
 
