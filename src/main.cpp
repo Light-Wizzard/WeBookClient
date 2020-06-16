@@ -3,11 +3,7 @@
 *******************************************************************************/
 #include "MainWindow.h"
 
-//static QFile myLogFileHandle;
-//static QString myLogPathFileName = "WeBookClient.log";
-//static QString myAppName = "WeBookClient";
 static bool isLogToFile = true;
-//static bool isRunOnce = false;
 /******************************************************************************
 ** mainEventHandler                                                           *
 *******************************************************************************/
@@ -31,40 +27,33 @@ void mainEventHandler(int eventValue)
 *******************************************************************************/
 void WeBookMessenger(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
-    QHash<QtMsgType, QString> msgLevelHash({{QtDebugMsg, "Debug"}, {QtInfoMsg, "Info"}, {QtWarningMsg, "Warning"}, {QtCriticalMsg, "Critical"}, {QtFatalMsg, "Fatal"}});
-    QString txt = QString("%1 %2: %3 (%4:%5=>%6)").arg(QTime::currentTime().toString("hh:mm:ss.zzz")).arg(msgLevelHash[type]).arg(msg).arg(context.file).arg(context.line).arg(context.function);
     if (isLogToFile)
     {
         QLogger::QLoggerCommon *qLoggerCommon = new QLogger::QLoggerCommon(true);
         switch (type)
         {
             case QtDebugMsg:
-                qLoggerCommon->sendMessage(QLoggerLevel::LogLevel::Debug, qLoggerCommon->getModuleName(), context.file, context.line, context.function, msg);
+                qLoggerCommon->sendMessage(QLoggerLevel::LogLevel::Debug,    qLoggerCommon->getModuleName(), context.file, context.line, context.function, msg);
                 break;
             case QtInfoMsg:
-                qLoggerCommon->sendMessage(QLoggerLevel::LogLevel::Info,  qLoggerCommon->getModuleName(), context.file, context.line, context.function, msg);
+                qLoggerCommon->sendMessage(QLoggerLevel::LogLevel::Info,     qLoggerCommon->getModuleName(), context.file, context.line, context.function, msg);
                 break;
             case QtWarningMsg:
                 qLoggerCommon->sendMessage(QLoggerLevel::LogLevel::Warning,  qLoggerCommon->getModuleName(), context.file, context.line, context.function, msg);
                 break;
             case QtCriticalMsg:
-                qLoggerCommon->sendMessage(QLoggerLevel::LogLevel::Critical,  qLoggerCommon->getModuleName(), context.file, context.line, context.function, msg);
+                qLoggerCommon->sendMessage(QLoggerLevel::LogLevel::Critical, qLoggerCommon->getModuleName(), context.file, context.line, context.function, msg);
                 break;
             case QtFatalMsg:
-                qLoggerCommon->sendMessage(QLoggerLevel::LogLevel::Fatal,  qLoggerCommon->getModuleName(), context.file, context.line, context.function, msg);
+                qLoggerCommon->sendMessage(QLoggerLevel::LogLevel::Fatal,    qLoggerCommon->getModuleName(), context.file, context.line, context.function, msg);
                 break;
         }
-        qDebug() << txt;
-        //        if (!myLogFileHandle.isOpen())
-        //        {
-        //            myLogFileHandle.setFileName(myLogPathFileName);
-        //            myLogFileHandle.open(QIODevice::WriteOnly | QIODevice::Append);
-        //        }
-        //        QTextStream ts(&myLogFileHandle);
-        //        ts << txt << endl;
+        //qDebug() << txt;
     }
     else
     {
+        QHash<QtMsgType, QString> msgLevelHash({{QtDebugMsg, "Debug"}, {QtInfoMsg, "Info"}, {QtWarningMsg, "Warning"}, {QtCriticalMsg, "Critical"}, {QtFatalMsg, "Fatal"}});
+        QString txt = QString("%1 %2: %3 (%4:%5=>%6)").arg(QTime::currentTime().toString("hh:mm:ss.zzz")).arg(msgLevelHash[type]).arg(msg).arg(context.file).arg(context.line).arg(context.function);
         QByteArray formattedMessage = txt.toLocal8Bit();
         fprintf(stderr, "%s\n", formattedMessage.constData());
         fflush(stderr);

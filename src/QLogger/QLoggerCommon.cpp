@@ -14,8 +14,8 @@ namespace QLogger
     *******************************************************************************/
     QLoggerCommon::QLoggerCommon(bool isLog)
     {
-        //Q_UNUSED(isLog)
         if (isLog) setLogger();
+        // Connect after you set the Logger as to not generate events
         connect(this, &QLoggerCommon::handelSettinChanged, this, &QLoggerCommon::onSettinChanged);
     } // end QLoggerCommon
     /******************************************************************************
@@ -30,7 +30,9 @@ namespace QLogger
     *******************************************************************************/
     void QLoggerCommon::onSettinChanged()
     {
-
+        qSettingsInstance();
+        myLoggerManager = QLoggerManager::getInstance();
+        myLoggerManager->addDestination(getLogFullPath(), getModuleName(), getLogLevel());
     } // end onSettinChanged
     /******************************************************************************
     ** getLoggerManager                                                           *

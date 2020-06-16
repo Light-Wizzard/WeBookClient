@@ -144,6 +144,10 @@ namespace QLogger
  */
 void QLog_(const QString &module, QLoggerLevel::LogLevel level, const QString &message, const QString &file = QString(), int line = -1);
 
+#define QLOGGER_MESSAGELOG_FILE static_cast<const char *>(__FILE__)
+#define QLOGGER_MESSAGELOG_LINE __LINE__
+#define QLOGGER_MESSAGELOG_FUNC static_cast<const char *>(Q_FUNC_INFO)
+
 #ifndef QLog_Trace
 /*!
  * @brief Used to store Trace level messages.
@@ -151,7 +155,7 @@ void QLog_(const QString &module, QLoggerLevel::LogLevel level, const QString &m
  * @param message The message.
  */
 #   define QLog_Trace(module, message)                                                                                 \
-    QLogger::QLoggerManager::getInstance()->enqueueMessage(module, QLogger::LogLevel::Trace, message, __FILE__, __LINE__)
+    QLogger::QLoggerManager::getInstance()->enqueueMessage(module, QLoggerLevel::LogLevel::Trace, message, QLOGGER_MESSAGELOG_FILE, QLOGGER_MESSAGELOG_LINE, QLOGGER_MESSAGELOG_FUNC)
 #endif
 
 #ifndef QLog_Debug
@@ -161,7 +165,7 @@ void QLog_(const QString &module, QLoggerLevel::LogLevel level, const QString &m
  * @param message The message.
  */
 #   define QLog_Debug(module, message)                                                                                 \
-    QLogger::QLoggerManager::getInstance()->enqueueMessage(module, QLogger::LogLevel::Debug, message, __FILE__, __LINE__)
+    QLogger::QLoggerManager::getInstance()->enqueueMessage(module, QLoggerLevel::LogLevel::Debug, message, QLOGGER_MESSAGELOG_FILE, QLOGGER_MESSAGELOG_LINE, QLOGGER_MESSAGELOG_FUNC)
 #endif
 
 #ifndef QLog_Info
@@ -171,7 +175,7 @@ void QLog_(const QString &module, QLoggerLevel::LogLevel level, const QString &m
  * @param message The message.
  */
 #   define QLog_Info(module, message)                                                                                  \
-    QLogger::QLoggerManager::getInstance()->enqueueMessage(module, QLogger::LogLevel::Info, message, __FILE__, __LINE__)
+    QLogger::QLoggerManager::getInstance()->enqueueMessage(module, QLoggerLevel::LogLevel::Info, message, QLOGGER_MESSAGELOG_FILE, QLOGGER_MESSAGELOG_LINE, QLOGGER_MESSAGELOG_FUNC)
 #endif
 
 #ifndef QLog_Warning
@@ -181,7 +185,7 @@ void QLog_(const QString &module, QLoggerLevel::LogLevel level, const QString &m
  * @param message The message.
  */
 #   define QLog_Warning(module, message)                                                                               \
-    QLogger::QLoggerManager::getInstance()->enqueueMessage(module, QLogger::LogLevel::Warning, message, __FILE__, __LINE__)
+    QLogger::QLoggerManager::getInstance()->enqueueMessage(module, QLoggerLevel::LogLevel::Warning, message, QLOGGER_MESSAGELOG_FILE, QLOGGER_MESSAGELOG_LINE, QLOGGER_MESSAGELOG_FUNC)
 #endif
 
 #ifndef QLog_Error
@@ -191,7 +195,7 @@ void QLog_(const QString &module, QLoggerLevel::LogLevel level, const QString &m
  * @param message The message.
  */
 #   define QLog_Error(module, message)                                                                                 \
-    QLogger::QLoggerManager::getInstance()->enqueueMessage(module, QLogger::LogLevel::Error, message, __FILE__, __LINE__)
+    QLogger::QLoggerManager::getInstance()->enqueueMessage(module, QLoggerLevel::LogLevel::Error, message, QLOGGER_MESSAGELOG_FILE, QLOGGER_MESSAGELOG_LINE, QLOGGER_MESSAGELOG_FUNC)
 #endif
 
 #ifndef QLog_Fatal
@@ -201,10 +205,7 @@ void QLog_(const QString &module, QLoggerLevel::LogLevel level, const QString &m
  * @param message The message.
  */
 #   define QLog_Fatal(module, message)                                                                                 \
-    QLogger::QLoggerManager::getInstance()->enqueueMessage(module, QLogger::LogLevel::Fatal, message, __FILE__, __LINE__)
+    QLogger::QLoggerManager::getInstance()->enqueueMessage(module, QLoggerLevel::LogLevel::Fatal, message, QLOGGER_MESSAGELOG_FILE, QLOGGER_MESSAGELOG_LINE, QLOGGER_MESSAGELOG_FUNC)
 #endif
 
-#define QLOGGER_MESSAGELOG_FILE static_cast<const char *>(__FILE__)
-#define QLOGGER_MESSAGELOG_LINE __LINE__
-#define QLOGGER_MESSAGELOG_FUNC static_cast<const char *>(Q_FUNC_INFO)
 /* ***************************** End of File ******************************* */
