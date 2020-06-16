@@ -54,7 +54,7 @@ void WeBookMessenger(QtMsgType type, const QMessageLogContext &context, const QS
                 qLoggerCommon->sendMessage(QLoggerLevel::LogLevel::Fatal,  qLoggerCommon->getModuleName(), context.file, context.line, context.function, msg);
                 break;
         }
-        //qDebug() << txt;
+        qDebug() << txt;
         //        if (!myLogFileHandle.isOpen())
         //        {
         //            myLogFileHandle.setFileName(myLogPathFileName);

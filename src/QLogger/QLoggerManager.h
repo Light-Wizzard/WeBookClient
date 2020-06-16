@@ -203,4 +203,8 @@ void QLog_(const QString &module, QLoggerLevel::LogLevel level, const QString &m
 #   define QLog_Fatal(module, message)                                                                                 \
     QLogger::QLoggerManager::getInstance()->enqueueMessage(module, QLogger::LogLevel::Fatal, message, __FILE__, __LINE__)
 #endif
+
+#define QLOGGER_MESSAGELOG_FILE static_cast<const char *>(__FILE__)
+#define QLOGGER_MESSAGELOG_LINE __LINE__
+#define QLOGGER_MESSAGELOG_FUNC static_cast<const char *>(Q_FUNC_INFO)
 /* ***************************** End of File ******************************* */
