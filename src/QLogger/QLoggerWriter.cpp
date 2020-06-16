@@ -67,7 +67,7 @@ namespace QLogger
         //  && mLevel <= QLoggerLevel::LogLevel::Debug
         if (!fileName.isEmpty() && !theFunction.isEmpty() && line > 0) fileLine = QString(" {%1:%2=>%3}").arg(fileName, QString::number(line), theFunction);
 
-        const auto text = QString("[%1] [%2] [%3] [%4]%5 %6 \n").arg(QLoggerLevel::levelToText(level), module, date.toString("dd-MM-yyyy hh:mm:ss.zzz"), threadId, fileLine, message);
+        const auto text = QString("[%1] [%2] [%3]%4 %5 \n").arg(QLoggerLevel::levelToText(level), module, date.toString("dd-MM-yyyy hh:mm:ss.zzz"), fileLine, message);
 
         QMutexLocker locker(&mutex);
         messages.append({ threadId, text });
