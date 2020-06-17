@@ -1,0 +1,43 @@
+# QDoc is a tool that constantly evolves to suit our needs,
+# and there are some compatibility issues between old and new
+# practices. For that reason, any QDoc configuration file needs to
+# include compat.qdocconf.
+include(/usr/share/doc/qt/global/compat.qdocconf)
+
+# QDoc needs lists of file extensions to know which files to process in
+# different situations. Uncomment the following include statement to get
+# a pre-defined list of file extensions.
+include(/usr/share/doc/qt/global/fileextensions.qdocconf)
+
+# You can also specify file extensions manually.
+headers.fileextensions  = "*.h *.hpp"
+sources.fileextensions  = "*.cpp *.qml *.qdoc"
+
+# The outputdir variable specifies the directory
+# where QDoc will put the generated documentation.
+outputdir   = ./docs
+
+# The headerdirs variable specifies the directories
+# containing the header files associated
+# with the .cpp source files used in the documentation.
+headerdirs  = ./src
+
+# The sourcedirs variable specifies the
+# directories containing the .cpp or .qdoc
+# files used in the documentation.
+sourcedirs  = ./src
+
+# The exampledirs variable specifies the directories containing
+# the source code of the example files.
+# exampledirs = .
+
+# The imagedirs variable specifies the
+# directories containing the images used in the documentation.
+imagedirs   = ./images
+
+project = WeBookClient
+description   = WeBook Client
+outputdir     = docs/
+outputformats = HTML
+version                 = $QT_VERSION
+depends += qtcore qtnetwork qtwidgets qtdoc

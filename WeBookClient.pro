@@ -65,6 +65,7 @@ FORMS       += src/MainWindow.ui
 FORMS       += src/AboutDialog.ui
 #
 DISTFILES   += data/WeBookClient.ini
+DISTFILES   += WeBookClient.qdocconf
 DISTFILES   += data/WeBook.toc
 DISTFILES   += data/WeBooks.cat
 DISTFILES   += data/urllist.txt
