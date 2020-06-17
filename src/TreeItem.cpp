@@ -1,15 +1,14 @@
 /******************************************************************************
-** WeBook: Pronounced Web-Book, is a Book Content Management System  (BCMS)   *
-** Drag & Drop Model                                                          *
+* WeBook: Pronounced Web-Book, is a Book Content Management System  (BCMS)   *
+* Drag & Drop Model                                                          *
 *******************************************************************************/
 #include "TreeItem.h"
 /******************************************************************************
-** TreeItem Constructor                                                       *
+* TreeItem Constructor                                                       *
 *******************************************************************************/
 /*!
    \class TreeItem
    \brief Represents a Tree Item.
-   \inmodule WeBookClient
  */
 TreeItem::TreeItem(const QList<QVariant> &data, int myLevel, TreeItem *parent)
 {
@@ -24,7 +23,7 @@ TreeItem::TreeItem(const QList<QVariant> &data, int myLevel, TreeItem *parent)
     level = myLevel;
 } // end TreeItem
 /******************************************************************************
-** TreeItem Deconstructor                                                     *
+* TreeItem Deconstructor                                                     *
 *******************************************************************************/
 TreeItem::~TreeItem()
 {
@@ -32,7 +31,7 @@ TreeItem::~TreeItem()
     qDeleteAll(childItems);
 } // end ~TreeItem
 /******************************************************************************
-** parent                                                                     *
+* parent                                                                     *
 *******************************************************************************/
 TreeItem *TreeItem::parent()
 {
@@ -40,7 +39,7 @@ TreeItem *TreeItem::parent()
     return parentItem;
 } // end parent
 /******************************************************************************
-** data(int column) 0 or 1                                                    *
+* data(int column) 0 or 1                                                    *
 *******************************************************************************/
 QVariant TreeItem::data(int column) const
 {
@@ -48,7 +47,7 @@ QVariant TreeItem::data(int column) const
     return itemData.value(column);
 } // end data
 /******************************************************************************
-** setData(int column, const QVariant &data)                                  *
+* setData(int column, const QVariant &data)                                  *
 *******************************************************************************/
 bool TreeItem::setData(int column, const QVariant &data)
 {
@@ -59,7 +58,7 @@ bool TreeItem::setData(int column, const QVariant &data)
     return true;
 } // end setData
 /******************************************************************************
-** appendChild(TreeItem *item)                                                *
+* appendChild(TreeItem *item)                                                *
 *******************************************************************************/
 void TreeItem::appendChild(TreeItem *item)
 {
@@ -67,7 +66,7 @@ void TreeItem::appendChild(TreeItem *item)
     childItems.append(item);
 } // end appendChild
 /******************************************************************************
-** child(int row)                                                             *
+* child(int row)                                                             *
 *******************************************************************************/
 TreeItem *TreeItem::child(int row)
 {
@@ -75,7 +74,7 @@ TreeItem *TreeItem::child(int row)
     return childItems.value(row);
 } // end child
 /******************************************************************************
-** childCount()                                                               *
+* childCount()                                                               *
 *******************************************************************************/
 int TreeItem::childCount() const
 {
@@ -83,7 +82,7 @@ int TreeItem::childCount() const
     return childItems.count();
 } // end childCount
 /******************************************************************************
-** columnCount()                                                              *
+* columnCount()                                                              *
 *******************************************************************************/
 int TreeItem::columnCount() const
 {
@@ -91,7 +90,7 @@ int TreeItem::columnCount() const
     return itemData.count();
 } // end columnCount
 /******************************************************************************
-** insertChild(int row, TreeItem *item)                                       *
+* insertChild(int row, TreeItem *item)                                       *
 *******************************************************************************/
 bool TreeItem::insertChild(int row, TreeItem *item)
 {
@@ -102,7 +101,7 @@ bool TreeItem::insertChild(int row, TreeItem *item)
     return true;
 } // end insertChild
 /******************************************************************************
-** removeChild(int row)                                                       *
+* removeChild(int row)                                                       *
 *******************************************************************************/
 bool TreeItem::removeChild(int row)
 {
@@ -113,7 +112,7 @@ bool TreeItem::removeChild(int row)
     return true;
 } // end removeChild
 /******************************************************************************
-** row                                                                        *
+* row                                                                        *
 *******************************************************************************/
 int TreeItem::row() const
 {
@@ -122,5 +121,5 @@ int TreeItem::row() const
 
     return 0;
 } // end row
-/* ***************************** End of File ******************************* */
+/* **************************   End of File ****************************   */
 

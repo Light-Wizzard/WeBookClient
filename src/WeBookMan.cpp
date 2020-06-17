@@ -1,12 +1,10 @@
 #include "WeBookMan.h"
 /******************************************************************************
-** WeBookMan Constructor                                                      *
+*  WeBookMan Constructor                                                      *
 *******************************************************************************/
 /*!
    \class WeBookMan
    \brief WeBookMan is a WeBook Manager.
-   \inmodule WeBookClient
-   \inherits QAbstractListModel
  */
 WeBookMan::WeBookMan(const QStringList &strings, QObject *parent) : QAbstractListModel(parent), myParent(parent), stringList(strings)
 {
@@ -14,11 +12,11 @@ WeBookMan::WeBookMan(const QStringList &strings, QObject *parent) : QAbstractLis
     qDebug() << "WeBookMan Constructor";
 } // end WeBookMan
 /******************************************************************************
-** forEach                                                                    *
-** 1. Clear QStringList: treeListItemsReturned.clear();                       *
-** 2. Call on root: forEach(QModelIndex(), false);                            *
-** 3. forEach is initally set to false, and set to true in hasChilren iterator*
-** 4. Depending on isChild, format the values                                 *
+*  forEach                                                                    *
+*  1. Clear QStringList: treeListItemsReturned.clear();                       *
+*  2. Call on root: forEach(QModelIndex(), false);                            *
+*  3. forEach is initally set to false, and set to true in hasChilren iterator*
+*  4. Depending on isChild, format the values                                 *
 *******************************************************************************/
 void WeBookMan::forEachSave(const QModelIndex &parent)
 {
@@ -42,7 +40,7 @@ void WeBookMan::forEachSave(const QModelIndex &parent)
     } // end for(int myRow
 } // end forEach
 /******************************************************************************
-** getData returns weBookListItemsReturned                                    *
+*  getData returns weBookListItemsReturned                                    *
 *******************************************************************************/
 QString WeBookMan::getData()
 {
@@ -53,7 +51,7 @@ QString WeBookMan::getData()
     return weBookListItemsReturned;
 } // end getData
 /******************************************************************************
-** getStringList                                                              *
+*  getStringList                                                              *
 *******************************************************************************/
 QStringList WeBookMan::getStringList()
 {
@@ -61,10 +59,10 @@ QStringList WeBookMan::getStringList()
     return stringList;
 } // end getStringList
 /******************************************************************************
-** data(const QModelIndex &index, int role)                                   *
-** Returns an appropriate value for the requested data.                       *
-** If the view requests an invalid index, an invalid variant is returned.     *
-** Any valid index that corresponds to a string in the list causes that string to be returned.*
+*  data(const QModelIndex &index, int role)                                   *
+*  Returns an appropriate value for the requested data.                       *
+*  If the view requests an invalid index, an invalid variant is returned.     *
+*  Any valid index that corresponds to a string in the list causes that string to be returned.*
 *******************************************************************************/
 QVariant WeBookMan::data(const QModelIndex &index, int role) const
 {
@@ -77,7 +75,7 @@ QVariant WeBookMan::data(const QModelIndex &index, int role) const
     else                                                 return QVariant();
 } // end data
 /******************************************************************************
-** setData(const QModelIndex &index, const QVariant &value, int role)         *
+*  setData(const QModelIndex &index, const QVariant &value, int role)         *
 *******************************************************************************/
 /*!
     \fn bool WeBookMan::setData(const QModelIndex &index, const QVariant &value, int role)
@@ -111,8 +109,8 @@ bool WeBookMan::setData(const QModelIndex &index, const QVariant &value, int rol
     return false;
 } // end setData
 /******************************************************************************
-** rowCount(const QModelIndex &parent)                                        *
-** Returns the number of items in the string list as the number of rows in the model.
+*  rowCount(const QModelIndex &parent)                                        *
+*  Returns the number of items in the string list as the number of rows in the model.
 *******************************************************************************/
 int WeBookMan::rowCount(const QModelIndex &parent) const
 {
@@ -121,10 +119,10 @@ int WeBookMan::rowCount(const QModelIndex &parent) const
     return stringList.count();
 } // end rowCount
 /******************************************************************************
-** headerData(int section, Qt::Orientation orientation, int role)             *
-** Returns the appropriate header string depending on the orientation of the  *
-** header and the section. If anything other than the display role is requested,*
-** we return an invalid variant.                                              *
+*  headerData(int section, Qt::Orientation orientation, int role)             *
+*  Returns the appropriate header string depending on the orientation of the  *
+*  header and the section. If anything other than the display role is requested,*
+*  we return an invalid variant.                                              *
 *******************************************************************************/
 QVariant WeBookMan::headerData(int section, Qt::Orientation orientation, int role) const
 {
@@ -135,9 +133,9 @@ QVariant WeBookMan::headerData(int section, Qt::Orientation orientation, int rol
     else                               return QString("Row %1").arg(section);
 } // end headerData
 /******************************************************************************
-** flags(const QModelIndex &index)                                            *
-** Returns an appropriate value for the item's flags. Valid items are enabled,*
-** selectable, and editable.                                                  *
+*  flags(const QModelIndex &index)                                            *
+*  Returns an appropriate value for the item's flags. Valid items are enabled,*
+*  selectable, and editable.                                                  *
 *******************************************************************************/
 Qt::ItemFlags WeBookMan::flags(const QModelIndex &index) const
 {
@@ -147,8 +145,8 @@ Qt::ItemFlags WeBookMan::flags(const QModelIndex &index) const
     return QAbstractItemModel::flags(index) | Qt::ItemIsEditable;
 } // end flags
 /******************************************************************************
-** insertRows(int position, int rows, const QModelIndex &parent)              *
-** Inserts a number of rows into the model at the specified position.         *
+*  insertRows(int position, int rows, const QModelIndex &parent)              *
+*  Inserts a number of rows into the model at the specified position.         *
 *******************************************************************************/
 bool WeBookMan::insertRows(int position, int rows, const QModelIndex &parent)
 {
@@ -165,8 +163,8 @@ bool WeBookMan::insertRows(int position, int rows, const QModelIndex &parent)
     return true;
 } // end insertRows
 /******************************************************************************
-** removeRows(int position, int rows, const QModelIndex &parent)              *
-** Removes a number of rows from the model at the specified position.
+*  removeRows(int position, int rows, const QModelIndex &parent)              *
+*  Removes a number of rows from the model at the specified position.
 *******************************************************************************/
 bool WeBookMan::removeRows(int position, int rows, const QModelIndex &parent)
 {
@@ -183,4 +181,4 @@ bool WeBookMan::removeRows(int position, int rows, const QModelIndex &parent)
     return true;
 
 } // end removeRows
-/* ***************************** End of File ******************************* */
+/* ***************************   End of File *****************************   */

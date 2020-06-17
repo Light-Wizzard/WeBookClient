@@ -1,6 +1,6 @@
 /******************************************************************************
-** WeBook is Pronounced Web-Book, it is a Web-Book Content Managment System   *
-** Drag & Drop Model                                                          *
+* WeBook is Pronounced Web-Book, it is a Web-Book Content Managment System   *
+* Drag & Drop Model                                                          *
 *******************************************************************************/
 #pragma once
 #ifndef TREEITEM_H
@@ -13,9 +13,9 @@
 #include "QLogger/QLoggerCommon.h"
 
 /******************************************************************************
-** class TreeItem                                                             *
-** Column is Tablature, you can define any number of columns                  *
-** Row is the number of Column pairs                                          *
+* class TreeItem                                                             *
+* Column is Tablature, you can define any number of columns                  *
+* Row is the number of Column pairs                                          *
 *******************************************************************************/
 class TreeItem
 {
@@ -53,5 +53,5 @@ class TreeItem
 
 }; // end class TreeItem
 #endif // TREEITEM_H
-/* ***************************** End of File ******************************* */
+/* **************************   End of File ****************************   */
 

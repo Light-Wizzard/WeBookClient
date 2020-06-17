@@ -1,6 +1,6 @@
 /******************************************************************************
-** WeBook is Pronounced Web-Book, it is a Web-Book Content Managment System   *
-** Drag & Drop Model                                                          *
+* WeBook is Pronounced Web-Book, it is a Web-Book Content Managment System   *
+* Drag & Drop Model                                                          *
 *******************************************************************************/
 #pragma once
 #ifndef TREEMODEL_H
@@ -17,7 +17,7 @@
 
 class TreeItem;
 /******************************************************************************
-** class TreeModel                                                            *
+* class TreeModel                                                            *
 *******************************************************************************/
 class TreeModel : public QAbstractItemModel
 {
@@ -66,5 +66,5 @@ class TreeModel : public QAbstractItemModel
         bool                     isDebugAllMessage = false;              // Set to true to show all debug messages
 }; // end class TreeModel
 #endif // TREEMODEL_H
-/* ***************************** End of File ******************************* */
+/* **************************   End of File ****************************   */
 

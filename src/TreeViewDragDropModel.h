@@ -1,6 +1,6 @@
 /******************************************************************************
-** WeBook is Pronounced Web-Book, it is a Web-Book Content Managment System   *
-** Drag & Drop Model                                                          *
+* WeBook is Pronounced Web-Book, it is a Web-Book Content Managment System   *
+* Drag & Drop Model                                                          *
 *******************************************************************************/
 #pragma once
 #ifndef DRAGDROPMODEL_H
@@ -13,7 +13,7 @@
 #include "TreeModel.h"
 
 /******************************************************************************
-** class TreeViewDragDropModel                                                *
+* class TreeViewDragDropModel                                                *
 *******************************************************************************/
 class TreeViewDragDropModel : public TreeModel
 {
@@ -37,5 +37,5 @@ class TreeViewDragDropModel : public TreeModel
         bool                     isDebugAllMessage   = false;            // Set to true to show all debug messages
 };
 #endif
-/* ***************************** End of File ******************************* */
+/* **************************   End of File ****************************   */
 

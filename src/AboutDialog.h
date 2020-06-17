@@ -1,5 +1,5 @@
 /******************************************************************************
-** WeBook: Pronounced Web Book, is a Book Content Management System  (BCMS)   *
+* WeBook: Pronounced Web Book, is a Book Content Management System  (BCMS)   *
 *******************************************************************************/
 #pragma once
 #ifndef ABOUTDIALOG_H
@@ -10,7 +10,7 @@
 
 namespace Ui { class AboutDialog; }
 /******************************************************************************
-** class AboutDialog : public QDialog                                         *
+* class AboutDialog : public QDialog                                         *
 *******************************************************************************/
 class AboutDialog : public QDialog
 {
@@ -24,4 +24,4 @@ class AboutDialog : public QDialog
         Ui::AboutDialog *ui;
 }; // end class AboutDialog
 #endif // ABOUTDIALOG_H
-/* ***************************** End of File ******************************* */
+/* **************************   End of File ****************************   */

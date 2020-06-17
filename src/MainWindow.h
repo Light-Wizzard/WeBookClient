@@ -1,5 +1,5 @@
 /******************************************************************************
-** WeBook: Pronounced Web Book, is a Book Content Management System  (BCMS)   *
+* WeBook: Pronounced Web Book, is a Book Content Management System  (BCMS)   *
 *******************************************************************************/
 #pragma once
 #ifndef MAINWINDOW_H
@@ -93,7 +93,7 @@ QT_FORWARD_DECLARE_CLASS(QSqlError)
 // This file gets created at Build time
 #include "ui_MainWindow.h"
 /******************************************************************************
-** MainWindow                                                                 *
+* MainWindow                                                                 *
 *******************************************************************************/
 class MainWindow : public QMainWindow
 {
@@ -262,4 +262,4 @@ class MainWindow : public QMainWindow
         bool openWeBookTOC(QString thisFullPathFileName);                                   // Open File and Read into Model
 }; // end class MainWindow
 #endif // MAINWINDOW_H
-/* ***************************** End of File ******************************* */
+/* **************************   End of File ****************************   */

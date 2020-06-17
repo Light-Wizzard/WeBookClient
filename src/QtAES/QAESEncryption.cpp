@@ -1,31 +1,31 @@
 /******************************************************************************
-** WeBook: Pronounced Web Book, is a Book Content Management System  (BCMS)   *
+* WeBook: Pronounced Web Book, is a Book Content Management System  (BCMS)   *
 *******************************************************************************/
 #include "QAESEncryption.h"
 /******************************************************************************
-** Static Functions                                                           *
-** QAESEncryption                                                             *
+* Static Functions                                                           *
+* QAESEncryption                                                             *
 *******************************************************************************/
 QByteArray QAESEncryption::Crypt(QAESEncryption::Aes level, QAESEncryption::Mode mode, const QByteArray &rawText, const QByteArray &key, const QByteArray &iv, QAESEncryption::Padding padding)
 {
     return QAESEncryption(level, mode, padding).encode(rawText, key, iv);
 }
 /******************************************************************************
-** Decrypt                                                                    *
+* Decrypt                                                                    *
 *******************************************************************************/
 QByteArray QAESEncryption::Decrypt(QAESEncryption::Aes level, QAESEncryption::Mode mode, const QByteArray &rawText, const QByteArray &key, const QByteArray &iv, QAESEncryption::Padding padding)
 {
     return QAESEncryption(level, mode, padding).decode(rawText, key, iv);
 }
 /******************************************************************************
-** ExpandKey(QAESEncryption::Aes level, QAESEncryption::Mode mode, const QByteArray &key) *
+* ExpandKey(QAESEncryption::Aes level, QAESEncryption::Mode mode, const QByteArray &key) *
 *******************************************************************************/
 QByteArray QAESEncryption::ExpandKey(QAESEncryption::Aes level, QAESEncryption::Mode mode, const QByteArray &key)
 {
     return QAESEncryption(level, mode).expandKey(key);
 }
 /******************************************************************************
-** RemovePadding(const QByteArray &rawText, QAESEncryption::Padding padding)  *
+* RemovePadding(const QByteArray &rawText, QAESEncryption::Padding padding)  *
 *******************************************************************************/
 QByteArray QAESEncryption::RemovePadding(const QByteArray &rawText, QAESEncryption::Padding padding)
 {
@@ -70,24 +70,24 @@ QByteArray QAESEncryption::RemovePadding(const QByteArray &rawText, QAESEncrypti
     return ret;
 }
 /******************************************************************************
-** End Static function declarations                                           *
-** Inline Functions                                                           *
-** xTime(quint8 x)                                                            *
+* End Static function declarations                                           *
+* Inline Functions                                                           *
+* xTime(quint8 x)                                                            *
 *******************************************************************************/
 inline quint8 xTime(quint8 x)
 {
     return ((x<<1) ^ (((x>>7) & 1) * 0x1b));
 }
 /******************************************************************************
-** multiply(quint8 x, quint8 y)                                               *
+* multiply(quint8 x, quint8 y)                                               *
 *******************************************************************************/
 inline quint8 multiply(quint8 x, quint8 y)
 {
     return (((y & 1) * x) ^ ((y>>1 & 1) * xTime(x)) ^ ((y>>2 & 1) * xTime(xTime(x))) ^ ((y>>3 & 1) * xTime(xTime(xTime(x)))) ^ ((y>>4 & 1) * xTime(xTime(xTime(xTime(x))))));
 }
 /******************************************************************************
-** End Inline functions                                                       *
-** QAESEncryption                                                             *
+* End Inline functions                                                       *
+* QAESEncryption                                                             *
 *******************************************************************************/
 QAESEncryption::QAESEncryption(Aes level, Mode mode, Padding padding) : m_nb(4), m_blocklen(16), m_level(level), m_mode(mode), m_padding(padding)
 {
@@ -134,7 +134,7 @@ QAESEncryption::QAESEncryption(Aes level, Mode mode, Padding padding) : m_nb(4),
     }
 }
 /******************************************************************************
-** getPadding(int currSize, int alignment)                                    *
+* getPadding(int currSize, int alignment)                                    *
 *******************************************************************************/
 QByteArray QAESEncryption::getPadding(int currSize, int alignment)
 {
@@ -158,7 +158,7 @@ QByteArray QAESEncryption::getPadding(int currSize, int alignment)
     return QByteArray();
 }
 /******************************************************************************
-** expandKey(const QByteArray &key)                                           *
+* expandKey(const QByteArray &key)                                           *
 *******************************************************************************/
 QByteArray QAESEncryption::expandKey(const QByteArray &key)
 {
@@ -214,9 +214,9 @@ QByteArray QAESEncryption::expandKey(const QByteArray &key)
     return roundKey;
 }
 /******************************************************************************
-** This function adds the round key to state.                                 *
-** The round key is added to the state by an XOR function.                    *
-** addRoundKey(const quint8 round, const QByteArray expKey)                   *
+* This function adds the round key to state.                                 *
+* The round key is added to the state by an XOR function.                    *
+* addRoundKey(const quint8 round, const QByteArray expKey)                   *
 *******************************************************************************/
 void QAESEncryption::addRoundKey(const quint8 round, const QByteArray expKey)
 {
@@ -227,8 +227,8 @@ void QAESEncryption::addRoundKey(const quint8 round, const QByteArray expKey)
     }
 }
 /******************************************************************************
-** SubBytes Function Substitutes values in state matrix with values in S-box. *
-** subBytes                                                                   *
+* SubBytes Function Substitutes values in state matrix with values in S-box. *
+* subBytes                                                                   *
 *******************************************************************************/
 void QAESEncryption::subBytes()
 {
@@ -236,10 +236,10 @@ void QAESEncryption::subBytes()
     for(int i = 0; i < 16; i++) it[i] = getSBoxValue((quint8) it[i]);
 }
 /******************************************************************************
-** The ShiftRows() function shifts the rows in the state to the left.         *
-** Each row is shifted with different offset.                                 *
-** Offset = Row number. So the first row is not shifted.                      *
-** shiftRows                                                                  *
+* The ShiftRows() function shifts the rows in the state to the left.         *
+* Each row is shifted with different offset.                                 *
+* Offset = Row number. So the first row is not shifted.                      *
+* shiftRows                                                                  *
 *******************************************************************************/
 void QAESEncryption::shiftRows()
 {
@@ -270,8 +270,8 @@ void QAESEncryption::shiftRows()
     it[7]  = (quint8)temp;
 }
 /******************************************************************************
-** MixColumns function mixes the columns of the state matrix optimized!!      *
-** mixColumns                                                                 *
+* MixColumns function mixes the columns of the state matrix optimized!!      *
+* mixColumns                                                                 *
 *******************************************************************************/
 void QAESEncryption::mixColumns()
 {
@@ -297,10 +297,10 @@ void QAESEncryption::mixColumns()
     }
 }
 /******************************************************************************
-** MixColumns function mixes the columns of the state matrix.                 *
-** Method used to multiply may be difficult to understand for inexperienced.  *
-** Please use the references to gain more information.                        *
-** invMixColumns                                                              *
+* MixColumns function mixes the columns of the state matrix.                 *
+* Method used to multiply may be difficult to understand for inexperienced.  *
+* Please use the references to gain more information.                        *
+* invMixColumns                                                              *
 *******************************************************************************/
 void QAESEncryption::invMixColumns()
 {
@@ -320,8 +320,8 @@ void QAESEncryption::invMixColumns()
     }
 }
 /******************************************************************************
-** SubBytes Function Substitutes values in state matrix with values in S-box. *
-** invSubBytes                                                                *
+* SubBytes Function Substitutes values in state matrix with values in S-box. *
+* invSubBytes                                                                *
 *******************************************************************************/
 void QAESEncryption::invSubBytes()
 {
@@ -329,7 +329,7 @@ void QAESEncryption::invSubBytes()
     for(int i = 0; i < 16; ++i) it[i] = getSBoxInvert((quint8) it[i]);
 }
 /******************************************************************************
-** invShiftRows                                                               *
+* invShiftRows                                                               *
 *******************************************************************************/
 void QAESEncryption::invShiftRows()
 {
@@ -361,7 +361,7 @@ void QAESEncryption::invShiftRows()
     it[11] = (quint8)temp;
 }
 /******************************************************************************
-** byteXor(const QByteArray &a, const QByteArray &b)                          *
+* byteXor(const QByteArray &a, const QByteArray &b)                          *
 *******************************************************************************/
 QByteArray QAESEncryption::byteXor(const QByteArray &a, const QByteArray &b)
 {
@@ -375,8 +375,8 @@ QByteArray QAESEncryption::byteXor(const QByteArray &a, const QByteArray &b)
     return ret;
 }
 /******************************************************************************
-** cipher(const QByteArray &expKey, const QByteArray &in)                     *
-** Cipher is the main function that encrypts the PlainText.                   *
+* cipher(const QByteArray &expKey, const QByteArray &in)                     *
+* Cipher is the main function that encrypts the PlainText.                   *
 *******************************************************************************/
 QByteArray QAESEncryption::cipher(const QByteArray &expKey, const QByteArray &in)
 {
@@ -408,7 +408,7 @@ QByteArray QAESEncryption::cipher(const QByteArray &expKey, const QByteArray &in
     return output;
 }
 /******************************************************************************
-** invCipher(const QByteArray &expKey, const QByteArray &in)                  *
+* invCipher(const QByteArray &expKey, const QByteArray &in)                  *
 *******************************************************************************/
 QByteArray QAESEncryption::invCipher(const QByteArray &expKey, const QByteArray &in)
 {
@@ -439,7 +439,7 @@ QByteArray QAESEncryption::invCipher(const QByteArray &expKey, const QByteArray 
     return output;
 }
 /******************************************************************************
-** encode(const QByteArray &rawText, const QByteArray &key, const QByteArray &iv) *
+* encode(const QByteArray &rawText, const QByteArray &key, const QByteArray &iv) *
 *******************************************************************************/
 QByteArray QAESEncryption::encode(const QByteArray &rawText, const QByteArray &key, const QByteArray &iv)
 {
@@ -494,7 +494,7 @@ QByteArray QAESEncryption::encode(const QByteArray &rawText, const QByteArray &k
     return ret;
 }
 /******************************************************************************
-** decode(const QByteArray &rawText, const QByteArray &key, const QByteArray &iv) *
+* decode(const QByteArray &rawText, const QByteArray &key, const QByteArray &iv) *
 *******************************************************************************/
 QByteArray QAESEncryption::decode(const QByteArray &rawText, const QByteArray &key, const QByteArray &iv)
 {
@@ -550,10 +550,10 @@ QByteArray QAESEncryption::decode(const QByteArray &rawText, const QByteArray &k
     return ret;
 }
 /******************************************************************************
-** removePadding(const QByteArray &rawText)                                   *
+* removePadding(const QByteArray &rawText)                                   *
 *******************************************************************************/
 QByteArray QAESEncryption::removePadding(const QByteArray &rawText)
 {
     return RemovePadding(rawText, (Padding) m_padding);
 }
-/* ***************************** End of File ******************************* */
+/* **************************   End of File ****************************   */

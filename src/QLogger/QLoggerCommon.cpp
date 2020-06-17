@@ -1,15 +1,15 @@
 /**************************************************************************
-** QLogger                                                                    *
-** Thread-safe logger for Qt applications                                     *
-** https://github.com/francescmm/QLogger                                      *
-** Fork: https://github.com/Light-Wizzard/QLogger                             *
+* QLogger                                                                    *
+* Thread-safe logger for Qt applications                                     *
+* https://github.com/francescmm/QLogger                                      *
+* Fork: https://github.com/Light-Wizzard/QLogger                             *
 ***************************************************************************/
 
 #include "QLoggerCommon.h"
 namespace QLogger
 {
     /**************************************************************************
-    ** QLoggerCommon Constructor                                              *
+    * QLoggerCommon Constructor                                              *
     **
     ***************************************************************************/
     QLoggerCommon::QLoggerCommon(bool isLog)
@@ -19,14 +19,14 @@ namespace QLogger
         connect(this, &QLoggerCommon::handelSettinChanged, this, &QLoggerCommon::onSettinChanged);
     } // end QLoggerCommon
     /**************************************************************************
-    ** QLoggerCommon Deconstructor                                            *
+    * QLoggerCommon Deconstructor                                            *
     ***************************************************************************/
     QLoggerCommon::~QLoggerCommon()
     {
 
     } // end ~QLoggerCommon
     /**************************************************************************
-    ** onSettinChanged                                                        *
+    * onSettinChanged                                                        *
     ***************************************************************************/
     void QLoggerCommon::onSettinChanged()
     {
@@ -35,7 +35,7 @@ namespace QLogger
         myLoggerManager->addDestination(getLogFullPath(), getModuleName(), getLogLevel());
     } // end onSettinChanged
     /**************************************************************************
-    ** getLoggerManager                                                       *
+    * getLoggerManager                                                       *
     ***************************************************************************/
     QLoggerManager *QLoggerCommon::getLoggerManager()
     {
@@ -43,7 +43,7 @@ namespace QLogger
         return myLoggerManager;
     } // end getLoggerManager
     /**************************************************************************
-    ** setLogger                                                              *
+    * setLogger                                                              *
     ***************************************************************************/
     void QLoggerCommon::setLogger()
     {
@@ -54,14 +54,14 @@ namespace QLogger
         }
     } // end setLogger
     /**************************************************************************
-    ** sendMessage                                                            *
+    * sendMessage                                                            *
     ***************************************************************************/
     void QLoggerCommon::sendMessage(QLoggerLevel::LogLevel thisMsgType, const QString &thisModuleName, const QString &file, int line, const QString &function, const QString &msg)
     {
         getLoggerManager()->getInstance()->enqueueMessage(thisModuleName, thisMsgType, msg, file, line, function);
     } // end sendMessage
     /**************************************************************************
-    ** getHomePath                                                            *
+    * getHomePath                                                            *
     ***************************************************************************/
     QString QLoggerCommon::getHomePath()
     {
@@ -69,7 +69,7 @@ namespace QLogger
         return myHomePath;
     } // end getHomePath
     /**************************************************************************
-    ** setHomePath                                                            *
+    * setHomePath                                                            *
     ***************************************************************************/
     void QLoggerCommon::setHomePath(const QString &thisHomePath)
     {
@@ -80,7 +80,7 @@ namespace QLogger
         }
     } // end setHomePath
     /**************************************************************************
-    ** getUserName                                                            *
+    * getUserName                                                            *
     ***************************************************************************/
     QString QLoggerCommon::getUserName()
     {
@@ -88,7 +88,7 @@ namespace QLogger
         return myUserName;
     } // end getUserName
     /**************************************************************************
-    ** setUserName                                                            *
+    * setUserName                                                            *
     ***************************************************************************/
     void QLoggerCommon::setUserName(const QString &thisUserName)
     {
@@ -126,8 +126,8 @@ namespace QLogger
         }
     } // end setUserName
     /**************************************************************************
-    ** qSettingsInstance                                                      *
-    ** Creates QSettings for organizationName, organizationDomain, applicationName*
+    * qSettingsInstance                                                      *
+    * Creates QSettings for organizationName, organizationDomain, applicationName*
     **
     ***************************************************************************/
     void QLoggerCommon::qSettingsInstance()
@@ -151,14 +151,14 @@ namespace QLogger
         isSet = true;
     } // end qSettingsInstance
     /**************************************************************************
-    ** combinePathFileName                                                    *
+    * combinePathFileName                                                    *
     ***************************************************************************/
     QString QLoggerCommon::combinePathFileName(QString thisPath, QString thisFileName)
     {
         return QString("%1%2%3").arg(thisPath, QDir::separator(), thisFileName);
     } // end combinePathFileName
     /**************************************************************************
-    ** isFileExists                                                           *
+    * isFileExists                                                           *
     ***************************************************************************/
     bool QLoggerCommon::isFileExists(QString thisFile)
     {
@@ -166,7 +166,7 @@ namespace QLogger
         return QFileInfo::exists(thisFile) && QFileInfo(thisFile).isFile();
     } // end isFileExists
     /**************************************************************************
-    ** isFileMake                                                             *
+    * isFileMake                                                             *
     ***************************************************************************/
     bool QLoggerCommon::isFileMake(const QString &thisPath, const QString &thisFileName)
     {
@@ -184,14 +184,14 @@ namespace QLogger
         return true;
     } // end isFileMake
     /**************************************************************************
-    ** isPathExists                                                           *
+    * isPathExists                                                           *
     ***************************************************************************/
     bool QLoggerCommon::isPathExists(QString thisPath)
     {
         return QDir(thisPath).exists();
     } // end isPathExists
     /**************************************************************************
-    ** isPathMake                                                             *
+    * isPathMake                                                             *
     ***************************************************************************/
     bool QLoggerCommon::isPathMake(const QString &thisRootPath, const QString &thisPath)
     {
@@ -205,7 +205,7 @@ namespace QLogger
         return isFileExists(thisPath);
     } // end isPathMake
     /**************************************************************************
-    ** isMakeDir                                                              *
+    * isMakeDir                                                              *
     ***************************************************************************/
     bool QLoggerCommon::isMakeDir(const QString &thisPath)
     {
@@ -221,9 +221,9 @@ namespace QLogger
         return isPathExists(thisPath);
     } // end isMakeDir
     /**************************************************************************
-    ** setFilePath(QString myFileName)                                        *
-    ** All files must be in folder constAppFolder                             *
-    ** This folder is different for debug vs release as well as deployed      *
+    * setFilePath(QString myFileName)                                        *
+    * All files must be in folder constAppFolder                             *
+    * This folder is different for debug vs release as well as deployed      *
     ***************************************************************************/
     QString QLoggerCommon::setFilePath(QString thisFileName, QString thisDataFolderName)
     {
@@ -263,15 +263,15 @@ namespace QLogger
         return dataFullPath;
     } // end setFilePath
     /**************************************************************************
-    ** getFullFilePathName                                                    *
+    * getFullFilePathName                                                    *
     ***************************************************************************/
     QString QLoggerCommon::getFullFilePathName(QString thisFileName)
     {
         return QString("%1%2%3").arg(getFilelPath(), QDir::separator(), thisFileName);
     } // end getFullFilePathName
     /**************************************************************************
-    ** getFilelPath                                                           *
-    ** /constDataFolderName/
+    * getFilelPath                                                           *
+    * /constDataFolderName/
     ***************************************************************************/
     QString QLoggerCommon::getFilelPath()
     {
@@ -279,7 +279,7 @@ namespace QLogger
         return myFilePath;
     } // end getFilelPath
     /**************************************************************************
-    ** setFilePath                                                            *
+    * setFilePath                                                            *
     ***************************************************************************/
     void QLoggerCommon::setFilePath(const QString &thisDataFullPath)
     {
@@ -290,8 +290,8 @@ namespace QLogger
         }
     } // end setFilePath
     /**************************************************************************
-    ** getLogPath                                                             *
-    ** FIXME argument error
+    * getLogPath                                                             *
+    * FIXME argument error
     ***************************************************************************/
     QString QLoggerCommon::getLogPath()
     {
@@ -311,7 +311,7 @@ namespace QLogger
         return myLogPath;
     } // end getLogPath
     /**************************************************************************
-    ** setLogPath                                                             *
+    * setLogPath                                                             *
     ***************************************************************************/
     void QLoggerCommon::setLogPath(const QString &thisLogPath)
     {
@@ -322,7 +322,7 @@ namespace QLogger
         }
     } // end setDataFullPath
     /**************************************************************************
-    ** getLogFolderName                                                       *
+    * getLogFolderName                                                       *
     ***************************************************************************/
     QString QLoggerCommon::getLogFolderName()
     {
@@ -336,7 +336,7 @@ namespace QLogger
         return myLogFolderName;
     } // end getLogFolderName
     /**************************************************************************
-    ** setLogFolderName                                                       *
+    * setLogFolderName                                                       *
     ***************************************************************************/
     void QLoggerCommon::setLogFolderName(const QString &thisLogFolderName)
     {
@@ -347,8 +347,8 @@ namespace QLogger
         }
     } // end setLogFolderName
     /**************************************************************************
-    ** getLogFileName                                                         *
-    ** The Auto setting uses AppName + Pattern + Extension                    *
+    * getLogFileName                                                         *
+    * The Auto setting uses AppName + Pattern + Extension                    *
     ***************************************************************************/
     QString QLoggerCommon::getLogFileName()
     {
@@ -356,7 +356,7 @@ namespace QLogger
         return myLogFileName;
     } // end getLogFileName
     /**************************************************************************
-    ** setLogFileName                                                         *
+    * setLogFileName                                                         *
     ***************************************************************************/
     void QLoggerCommon::setLogFileName(const QString &thisLogFileName)
     {
@@ -367,7 +367,7 @@ namespace QLogger
         }
     } // end setLogFileName
     /**************************************************************************
-    ** getLogNamePattern                                                      *
+    * getLogNamePattern                                                      *
     ***************************************************************************/
     QString QLoggerCommon::getLogNamePattern()
     {
@@ -381,7 +381,7 @@ namespace QLogger
         return myLogNamePattern;
     } // end getLogNamePattern
     /**************************************************************************
-    ** setLogNamePattern                                                      *
+    * setLogNamePattern                                                      *
     ***************************************************************************/
     void QLoggerCommon::setLogNamePattern(const QString &thisLogNamePattern)
     {
@@ -392,7 +392,7 @@ namespace QLogger
         }
     } // end setLogNamePattern
     /**************************************************************************
-    ** getFileFolderName                                                      *
+    * getFileFolderName                                                      *
     ***************************************************************************/
     QString QLoggerCommon::getFileFolderName()
     {
@@ -406,7 +406,7 @@ namespace QLogger
         return myFileFolderName;
     } // end getFileFolderName
     /**************************************************************************
-    ** setFileFolderName                                                      *
+    * setFileFolderName                                                      *
     ***************************************************************************/
     void QLoggerCommon::setFileFolderName(const QString &thisFileFolderName)
     {
@@ -417,7 +417,7 @@ namespace QLogger
         }
     } // end setFileFolderName
     /**************************************************************************
-    ** getLogFileExtension                                                    *
+    * getLogFileExtension                                                    *
     ***************************************************************************/
     QString QLoggerCommon::getLogFileExtension()
     {
@@ -431,7 +431,7 @@ namespace QLogger
         return myLogFileExtension;
     } // end getLogFileExtension
     /**************************************************************************
-    ** setLogFileExtension                                                    *
+    * setLogFileExtension                                                    *
     ***************************************************************************/
     void QLoggerCommon::setLogFileExtension(const QString &thisLogFileExtension)
     {
@@ -442,8 +442,8 @@ namespace QLogger
         }
     } // end setLogFileExtension
     /**************************************************************************
-    ** getLogFullPath                                                         *
-    ** ${HOME}/AppName/LogFolderName/LogFileName.LogFileExtension
+    * getLogFullPath                                                         *
+    * ${HOME}/AppName/LogFolderName/LogFileName.LogFileExtension
     ***************************************************************************/
     QString QLoggerCommon::getLogFullPath()
     {
@@ -451,7 +451,7 @@ namespace QLogger
         return myLogFullPath;
     } // end getLogFullPath
     /**************************************************************************
-    ** setLogFullPath                                                         *
+    * setLogFullPath                                                         *
     ***************************************************************************/
     void QLoggerCommon::setLogFullPath(const QString &thisLogFullPath)
     {
@@ -462,7 +462,7 @@ namespace QLogger
         }
     } // end setLogFullPath
     /**************************************************************************
-    ** isSetting by key                                                       *
+    * isSetting by key                                                       *
     ***************************************************************************/
     bool QLoggerCommon::isSetting(const QString &thisFieldName)
     {
@@ -470,8 +470,8 @@ namespace QLogger
         return mySettings->contains(thisFieldName);
     } // end isSetting
     /**************************************************************************
-    ** getSetting by key and  default Value                                   *
-    ** QString myName = getSetting("key", "default value");                   *
+    * getSetting by key and  default Value                                   *
+    * QString myName = getSetting("key", "default value");                   *
     ***************************************************************************/
     QVariant QLoggerCommon::getSetting(const QString &key, const QVariant &defaultValue)
     {
@@ -485,9 +485,9 @@ namespace QLogger
         return mySettings->value(key, defaultValue);
     } // end getSetting
     /**************************************************************************
-    ** setSetting using key and settingValue                                  *
-    ** setSetting("this_key", "to this");                                     *
-    ** QVariant is used for value, so it can be anything it supports          *
+    * setSetting using key and settingValue                                  *
+    * setSetting("this_key", "to this");                                     *
+    * QVariant is used for value, so it can be anything it supports          *
     ***************************************************************************/
     void QLoggerCommon::setSetting(const QString &thisKey, const QVariant &defaultValue)
     {
@@ -495,8 +495,8 @@ namespace QLogger
         mySettings->setValue(thisKey, defaultValue);
     } // end setSetting
     /**************************************************************************
-    ** getOrgName                                                             *
-    ** This value is used for Qt Settings: GitHub Account Name is one example *
+    * getOrgName                                                             *
+    * This value is used for Qt Settings: GitHub Account Name is one example *
     ***************************************************************************/
     QString QLoggerCommon::getOrgName()
     {
@@ -510,7 +510,7 @@ namespace QLogger
         return myOrganizationName;
     } // end getOrgName
     /**************************************************************************
-    ** setOrgName(myValue)                                                    *
+    * setOrgName(myValue)                                                    *
     ***************************************************************************/
     void QLoggerCommon::setOrgName(const QString &thisOrgName)
     {
@@ -521,7 +521,7 @@ namespace QLogger
         }
     } // end setOrgName
     /**************************************************************************
-    ** getOrgDomain                                                           *
+    * getOrgDomain                                                           *
     ***************************************************************************/
     QString QLoggerCommon::getOrgDomain()
     {
@@ -535,7 +535,7 @@ namespace QLogger
         return myOrganizationDomain;
     } // end getOrgDomain
     /**************************************************************************
-    ** setOrgDomain(myValue)                                                  *
+    * setOrgDomain(myValue)                                                  *
     ***************************************************************************/
     void QLoggerCommon::setOrgDomain(const QString &thisOrgDomain)
     {
@@ -546,7 +546,7 @@ namespace QLogger
         }
     } // end setOrgDomain
     /**************************************************************************
-    ** getAppName                                                             *
+    * getAppName                                                             *
     ***************************************************************************/
     QString QLoggerCommon::getAppName()
     {
@@ -560,7 +560,7 @@ namespace QLogger
         return myApplicationName;
     } // end getAppName
     /**************************************************************************
-    ** setAppName(myValue)                                                    *
+    * setAppName(myValue)                                                    *
     ***************************************************************************/
     void QLoggerCommon::setAppName(const QString &thisAppName)
     {
@@ -571,8 +571,8 @@ namespace QLogger
         }
     } // end setAppName
     /**************************************************************************
-    ** getIniFileName                                                         *
-    ** File Name only                                                         *
+    * getIniFileName                                                         *
+    * File Name only                                                         *
     ***************************************************************************/
     QString QLoggerCommon::getIniFileName()
     {
@@ -586,7 +586,7 @@ namespace QLogger
         return myIniFileName;
     } // end getIniFileName
     /**************************************************************************
-    ** setIniFileName                                                         *
+    * setIniFileName                                                         *
     ***************************************************************************/
     void QLoggerCommon::setIniFileName(const QString &thisIniFileName)
     {
@@ -598,7 +598,7 @@ namespace QLogger
         }
     } // end setIniFileName
     /**************************************************************************
-    ** getModuleName                                                          *
+    * getModuleName                                                          *
     ***************************************************************************/
     QString QLoggerCommon::getModuleName()
     {
@@ -612,7 +612,7 @@ namespace QLogger
         return myModuleName;
     } // end getModuleName
     /**************************************************************************
-    ** setModuleName                                                          *
+    * setModuleName                                                          *
     ***************************************************************************/
     void QLoggerCommon::setModuleName(const QString &thisModuleName)
     {
@@ -623,7 +623,7 @@ namespace QLogger
         }
     } // end setModuleName
     /**************************************************************************
-    ** getLogLevel                                                            *
+    * getLogLevel                                                            *
     ***************************************************************************/
     QLoggerLevel::LogLevel QLoggerCommon::getLogLevel()
     {
@@ -660,7 +660,7 @@ namespace QLogger
         return myLogLevel;
     } // end getLogLevel
     /**************************************************************************
-    ** setLogLevel                                                            *
+    * setLogLevel                                                            *
     ***************************************************************************/
     void QLoggerCommon::setLogLevel(QLoggerLevel::LogLevel thisLogLevel)
     {
@@ -671,9 +671,9 @@ namespace QLogger
         }
     } // end setLogLevel
     /**************************************************************************
-    ** portToString                                                           *
-    ** Valid Port Numbers range varies on plateform                           *
-    ** Typical Ports: 8080                                                    *
+    * portToString                                                           *
+    * Valid Port Numbers range varies on plateform                           *
+    * Typical Ports: 8080                                                    *
     ***************************************************************************/
     QString QLoggerCommon::portToString()
     {
@@ -681,9 +681,9 @@ namespace QLogger
         return QString::number(myPort);
     } // end portToString
     /**************************************************************************
-    ** getPort                                                                *
-    ** Valid Port Numbers range varies on plateform                           *
-    ** Typical Ports: 8080                                                    *
+    * getPort                                                                *
+    * Valid Port Numbers range varies on plateform                           *
+    * Typical Ports: 8080                                                    *
     ***************************************************************************/
     quint16 QLoggerCommon::getPort()
     {
@@ -697,7 +697,7 @@ namespace QLogger
         return myPort;
     } // end getPort
     /**************************************************************************
-    ** setPort(int thisPort)                                                  *
+    * setPort(int thisPort)                                                  *
     ***************************************************************************/
     void QLoggerCommon::setPort(quint16 thisPort)
     {
@@ -713,7 +713,7 @@ namespace QLogger
         }
     } // end setPort
     /**************************************************************************
-    ** setGeometry                                                            *
+    * setGeometry                                                            *
     ***************************************************************************/
     void QLoggerCommon::setGeometry(QPoint thisPos, QSize thisSize, bool isMax, bool isMin)
     {
@@ -723,32 +723,32 @@ namespace QLogger
         setSetting(ConstSettingsGeometryMin, isMin);
     } // end setGeometry
     /**************************************************************************
-    ** getGeometryPos                                                         *
+    * getGeometryPos                                                         *
     ***************************************************************************/
     QPoint QLoggerCommon::getGeometryPos(const QPoint &thisDefaultValue)
     {
         return getSetting(ConstSettingsGeometryPos, thisDefaultValue).toPoint();
     } // end getGeometryPos
     /**************************************************************************
-    ** getGeometrySize                                                        *
+    * getGeometrySize                                                        *
     ***************************************************************************/
     QSize QLoggerCommon::getGeometrySize(const QSize &thisDefaultValue)
     {
         return getSetting(ConstSettingsGeometrySize, thisDefaultValue).toSize();
     } // end getGeometrySize
     /**************************************************************************
-    ** getGeometryMax                                                         *
+    * getGeometryMax                                                         *
     ***************************************************************************/
     bool QLoggerCommon::getGeometryMax(const bool &thisDefaultValue)
     {
         return getSetting(ConstSettingsGeometryMax, thisDefaultValue).toBool();
     } // end getGeometryMax
     /**************************************************************************
-    ** getGeometryMin                                                         *
+    * getGeometryMin                                                         *
     ***************************************************************************/
     bool QLoggerCommon::getGeometryMin(const bool &thisDefaultValue)
     {
         return getSetting(ConstSettingsGeometryMin, thisDefaultValue).toBool();
     } // end getGeometryMin
 } // end namespace QLogger
-/* ***************************** End of File ******************************* */
+/* **************************   End of File ****************************   */

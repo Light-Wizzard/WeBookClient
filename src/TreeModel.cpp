@@ -1,17 +1,15 @@
 /******************************************************************************
-** WeBook: Pronounced Web-Book, is a Book Content Management System  (BCMS)   *
-** Drag & Drop Model                                                          *
+* WeBook: Pronounced Web-Book, is a Book Content Management System  (BCMS)   *
+* Drag & Drop Model                                                          *
 *******************************************************************************/
 #include "TreeModel.h"
 /******************************************************************************
-** TreeModel Constructor                                                      *
-** The QModelIndex class is used to locate data in a data model.              *
+* TreeModel Constructor                                                      *
+* The QModelIndex class is used to locate data in a data model.              *
 *******************************************************************************/
 /*!
    \class TreeModel
    \brief Show data using a Tree Model.
-   \inmodule WeBookClient
-   \inherits QAbstractItemModel
  */
 TreeModel::TreeModel(const QString &strings, QObject *parent) : QAbstractItemModel(parent), myParent(parent)
 {
@@ -28,7 +26,7 @@ TreeModel::TreeModel(const QString &strings, QObject *parent) : QAbstractItemMod
 
 } // end TreeModel
 /******************************************************************************
-** TreeModel Deconstructor                                                    *
+* TreeModel Deconstructor                                                    *
 *******************************************************************************/
 TreeModel::~TreeModel()
 {
@@ -36,8 +34,8 @@ TreeModel::~TreeModel()
     delete rootTreeItem;
 } // end ~TreeModel
 /******************************************************************************
-** setupModelData(const QStringList &lines, TreeItem *parent)                 *
-** lines is from bookListItems in mainwindow constructor                      *
+* setupModelData(const QStringList &lines, TreeItem *parent)                 *
+* lines is from bookListItems in mainwindow constructor                      *
 *******************************************************************************/
 void TreeModel::setupModelData(const QStringList &lines, TreeItem *parent)
 {
@@ -107,7 +105,7 @@ void TreeModel::setupModelData(const QStringList &lines, TreeItem *parent)
     }
 } // end setupModelData
 /******************************************************************************
-** getSpace(int level)                                                        *
+* getSpace(int level)                                                        *
 *******************************************************************************/
 QString TreeModel::getSpace(int level)
 {
@@ -123,11 +121,11 @@ QString TreeModel::getSpace(int level)
     return "";
 } // end getSpace
 /******************************************************************************
-** forEach                                                                    *
-** 1. Clear QStringList: treeListItemsReturned.clear();                       *
-** 2. Call on root: forEach(QModelIndex(), false);                            *
-** 3. forEach is initally set to false, and set to true in hasChilren iterator*
-** 4. Depending on isChild, format the values                                 *
+* forEach                                                                    *
+* 1. Clear QStringList: treeListItemsReturned.clear();                       *
+* 2. Call on root: forEach(QModelIndex(), false);                            *
+* 3. forEach is initally set to false, and set to true in hasChilren iterator*
+* 4. Depending on isChild, format the values                                 *
 *******************************************************************************/
 void TreeModel::forEachSave(const QModelIndex &parent, bool isChild)
 {
@@ -171,8 +169,8 @@ void TreeModel::forEachSave(const QModelIndex &parent, bool isChild)
     } // end for(int myRow
 } // end forEach
 /******************************************************************************
-** forEachChildLevel                                                          *
-** forEachChildLevel("ColumnID", QModelIndex());                              *
+* forEachChildLevel                                                          *
+* forEachChildLevel("ColumnID", QModelIndex());                              *
 *******************************************************************************/
 int TreeModel::forEachChildLevel(const QString &thisColId, const QModelIndex &parent)
 {
@@ -216,8 +214,8 @@ int TreeModel::forEachChildLevel(const QString &thisColId, const QModelIndex &pa
     return myLevel;
 } // end forEachChildLevel
 /******************************************************************************
-** setActive                                                                  *
-** setActive("ColumnID", QModelIndex());                                      *
+* setActive                                                                  *
+* setActive("ColumnID", QModelIndex());                                      *
 *******************************************************************************/
 QModelIndex TreeModel::setActive(const QString &thisColId, const QModelIndex &parent)
 {
@@ -263,7 +261,7 @@ QModelIndex TreeModel::setActive(const QString &thisColId, const QModelIndex &pa
     return makeActiveIndex;
 } // end setActive
 /******************************************************************************
-** getData returns treeListItemsReturned                                      *
+* getData returns treeListItemsReturned                                      *
 *******************************************************************************/
 QString TreeModel::getData()
 {
@@ -274,7 +272,7 @@ QString TreeModel::getData()
     return treeListItemsReturned;
 } // end getData
 /******************************************************************************
-** index(int row, int column, const QModelIndex &parent)                      *
+* index(int row, int column, const QModelIndex &parent)                      *
 *******************************************************************************/
 QModelIndex TreeModel::index(int row, int column, const QModelIndex &parent) const
 {
@@ -289,7 +287,7 @@ QModelIndex TreeModel::index(int row, int column, const QModelIndex &parent) con
     else           return QModelIndex();
 } // end index
 /******************************************************************************
-** parent(const QModelIndex &index)                                           *
+* parent(const QModelIndex &index)                                           *
 *******************************************************************************/
 QModelIndex TreeModel::parent(const QModelIndex &index) const
 {
@@ -304,7 +302,7 @@ QModelIndex TreeModel::parent(const QModelIndex &index) const
     return createIndex(parentItem->row(), 0, parentItem);
 } // end parent
 /******************************************************************************
-** data(const QModelIndex &index, int role)                                   *
+* data(const QModelIndex &index, int role)                                   *
 *******************************************************************************/
 QVariant TreeModel::data(const QModelIndex &index, int role) const
 {
@@ -324,7 +322,7 @@ QVariant TreeModel::data(const QModelIndex &index, int role) const
     return item->data(index.column());
 } // end data
 /******************************************************************************
-** headerData(int section, Qt::Orientation orientation, int role)             *
+* headerData(int section, Qt::Orientation orientation, int role)             *
 *******************************************************************************/
 QVariant TreeModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
@@ -334,7 +332,7 @@ QVariant TreeModel::headerData(int section, Qt::Orientation orientation, int rol
     return QVariant();
 } // end headerData
 /******************************************************************************
-** setData(const QModelIndex &index, const QVariant &value, int role)         *
+* setData(const QModelIndex &index, const QVariant &value, int role)         *
 *******************************************************************************/
 bool TreeModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
@@ -360,7 +358,7 @@ bool TreeModel::setData(const QModelIndex &index, const QVariant &value, int rol
     return true;
 } // end setData
 /******************************************************************************
-** flags(const QModelIndex &index)                                            *
+* flags(const QModelIndex &index)                                            *
 *******************************************************************************/
 Qt::ItemFlags TreeModel::flags(const QModelIndex &index) const
 {
@@ -369,7 +367,7 @@ Qt::ItemFlags TreeModel::flags(const QModelIndex &index) const
     return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable | QAbstractItemModel::flags(index);
 } // end flags
 /******************************************************************************
-** columnCount(const QModelIndex &parent)                                     *
+* columnCount(const QModelIndex &parent)                                     *
 *******************************************************************************/
 int TreeModel::columnCount(const QModelIndex &parent) const
 {
@@ -378,7 +376,7 @@ int TreeModel::columnCount(const QModelIndex &parent) const
     else                  return rootTreeItem->columnCount();
 } // end columnCount
 /******************************************************************************
-** insertRows(int position, int rows, const QModelIndex &parent)              *
+* insertRows(int position, int rows, const QModelIndex &parent)              *
 *******************************************************************************/
 bool TreeModel::insertRows(int position, int rows, const QModelIndex &parent)
 {
@@ -409,7 +407,7 @@ bool TreeModel::insertRows(int position, int rows, const QModelIndex &parent)
     return true;
 } // end insertRows
 /******************************************************************************
-** removeRows(int position, int rows, const QModelIndex &parent)              *
+* removeRows(int position, int rows, const QModelIndex &parent)              *
 *******************************************************************************/
 bool TreeModel::removeRows(int position, int rows, const QModelIndex &parent)
 {
@@ -432,7 +430,7 @@ bool TreeModel::removeRows(int position, int rows, const QModelIndex &parent)
     return true;
 } // end removeRows
 /******************************************************************************
-** rowCount(const QModelIndex &parent)                                        *
+* rowCount(const QModelIndex &parent)                                        *
 *******************************************************************************/
 int TreeModel::rowCount(const QModelIndex &parent) const
 {
@@ -444,5 +442,5 @@ int TreeModel::rowCount(const QModelIndex &parent) const
 
     return parentItem->childCount();
 } // end rowCount
-/* ***************************** End of File ******************************* */
+/* **************************   End of File ****************************   */
 

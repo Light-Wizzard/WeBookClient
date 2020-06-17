@@ -4,14 +4,14 @@
 #include <QtCore>
 #include <QString>
 /******************************************************************************
-** QLogger                                                                    *
-** Thread-safe logger for Qt applications                                     *
-** https://github.com/francescmm/QLogger                                      *
-** Fork: https://github.com/Light-Wizzard/QLogger                             *
-** This is where all the hard coded variables the App needs to run            *
-** This Project is GitHub Based, and can use GitHub features if Enabled       *
-** To make this Project flexible it is configuration here                     *
-** There are a lot of notes about paths in this header, its cross-plateform   *
+* QLogger                                                                    *
+* Thread-safe logger for Qt applications                                     *
+* https://github.com/francescmm/QLogger                                      *
+* Fork: https://github.com/Light-Wizzard/QLogger                             *
+* This is where all the hard coded variables the App needs to run            *
+* This Project is GitHub Based, and can use GitHub features if Enabled       *
+* To make this Project flexible it is configuration here                     *
+* There are a lot of notes about paths in this header, its cross-plateform   *
 *******************************************************************************/
 namespace QLogger
 {
@@ -147,4 +147,4 @@ namespace QLogger
 
 } // end namespace QLogger
 #endif // QLOGGERCONSTANTS_H
-/* ***************************** End of File ******************************* */
+/* **************************   End of File ****************************   */

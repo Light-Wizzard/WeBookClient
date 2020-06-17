@@ -1,5 +1,5 @@
 /******************************************************************************
-** WeBook: Pronounced Web Book, is a Book Content Management System  (BCMS)   *
+* WeBook: Pronounced Web Book, is a Book Content Management System  (BCMS)   *
 *******************************************************************************/
 #pragma once
 //#ifndef WEBOOKMAN_H
@@ -13,7 +13,7 @@
 #include "QLogger/QLoggerCommon.h"
 
 /******************************************************************************
-** class WeBookMan : public QAbstractListModel                                *
+* class WeBookMan : public QAbstractListModel                                *
 *******************************************************************************/
 class WeBookMan : public QAbstractListModel
 {
@@ -45,4 +45,4 @@ class WeBookMan : public QAbstractListModel
         bool                     isDebugAllMessage = false;     // Set to true to show all debug messages
 }; // end class WeBookMan
 //#endif // WEBOOKMAN_H
-/* ***************************** End of File ******************************* */
+/* **************************   End of File ****************************   */

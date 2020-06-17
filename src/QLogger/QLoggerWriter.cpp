@@ -1,17 +1,17 @@
 /**************************************************************************
-** QLogger                                                                    *
-** Thread-safe logger for Qt applications                                     *
-** https://github.com/francescmm/QLogger                                      *
-** Fork: https://github.com/Light-Wizzard/QLogger                             *
+* QLogger                                                                    *
+* Thread-safe logger for Qt applications                                     *
+* https://github.com/francescmm/QLogger                                      *
+* Fork: https://github.com/Light-Wizzard/QLogger                             *
 ***************************************************************************/
 #include "QLoggerWriter.h"
 /**************************************************************************
-** QLogger                                                                *
+* QLogger                                                                *
 ***************************************************************************/
 namespace QLogger
 {
     /**************************************************************************
-    ** QLoggerWriter Constructor                                              *
+    * QLoggerWriter Constructor                                              *
     ***************************************************************************/
     QLoggerWriter::QLoggerWriter(const QString &fileDestination, QLoggerLevel::LogLevel level) : QThread(), mFileDestination(fileDestination),  mLevel(level)
     {
@@ -20,7 +20,7 @@ namespace QLogger
         //mLevel = level;
     } // end QLoggerWriter
     /**************************************************************************
-    ** renameFileIfFull                                                       *
+    * renameFileIfFull                                                       *
     ***************************************************************************/
     QString QLoggerWriter::renameFileIfFull()
     {
@@ -39,7 +39,7 @@ namespace QLogger
         return QString();
     } // end renameFileIfFull
     /**************************************************************************
-    ** write                                                                  *
+    * write                                                                  *
     ***************************************************************************/
     void QLoggerWriter::write(const QPair<QString, QString> &message)
     {
@@ -59,7 +59,7 @@ namespace QLogger
         }
     } // end write
     /**************************************************************************
-    ** enqueue                                                                *
+    * enqueue                                                                *
     ***************************************************************************/
     void QLoggerWriter::enqueue(const QDateTime &date, const QString &threadId, const QString &module, QLoggerLevel::LogLevel level, const QString &fileName, int line, const QString &theFunction, const QString &message)
     {
@@ -75,7 +75,7 @@ namespace QLogger
         mQueueNotEmpty.wakeOne();
     } // end enqueue
     /**************************************************************************
-    ** run                                                                    *
+    * run                                                                    *
     ***************************************************************************/
     void QLoggerWriter::run()
     {
@@ -97,8 +97,8 @@ namespace QLogger
         }
     } // end run
     /**************************************************************************
-    ** closeDestination                                                       *
-    ** FIXME Hanges on quiting app
+    * closeDestination                                                       *
+    * FIXME Hanges on quiting app
     ***************************************************************************/
     void QLoggerWriter::closeDestination()
     {
@@ -108,4 +108,4 @@ namespace QLogger
         //wait(); // wait or exit does not matter, still hangs on exit
     } // end closeDestination
 } // end closeDestination
-/* ***************************** End of File ******************************* */
+/* **************************   End of File ****************************   */

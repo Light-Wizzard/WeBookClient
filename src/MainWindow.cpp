@@ -1,29 +1,27 @@
 /******************************************************************************
-** WeBook: Pronounced Web-Book, is a Book Content Management System  (BCMS)   *
+* WeBook: Pronounced Web-Book, is a Book Content Management System  (BCMS)   *
 *******************************************************************************/
 #include "MainWindow.h"
 /******************************************************************************
-** MainWindow Constructor                                                     *
-** I use CamelCase and Qt uses no_camel_case; even thu these is an option.    *
-** This means that Automatic Signal to Slot Connects will not be made.        *
-** The reason I do not want this auto handler of events, is simple, typos.    *
-** A typo will not get caught at compile time, CamelCase enforces this.       *
-** So all connects are manual.                                                *
-**  *
-**  *
-** The Method to my Maddness starts with Text only data and not SQL databases *
-** SQL is more complex doing searches for data stored in Text files pointless *
-** The WeBook Manager is a Single Name with No Spaces, and a new entery       *
-** Is Name will be the Folder all the data is in, and why no spaces           *
-**  *
-**  *
+* MainWindow Constructor                                                     *
+* I use CamelCase and Qt uses no_camel_case; even thu these is an option.    *
+* This means that Automatic Signal to Slot Connects will not be made.        *
+* The reason I do not want this auto handler of events, is simple, typos.    *
+* A typo will not get caught at compile time, CamelCase enforces this.       *
+* So all connects are manual.                                                *
+*  *
+*  *
+* The Method to my Maddness starts with Text only data and not SQL databases *
+* SQL is more complex doing searches for data stored in Text files pointless *
+* The WeBook Manager is a Single Name with No Spaces, and a new entery       *
+* Is Name will be the Folder all the data is in, and why no spaces           *
+*  *
+*  *
 *******************************************************************************/
 /*!
    \class MainWindow
    \title WeBook Client Main Windows
    \brief WeBook is Pronounced Web Book, it is a Web Content Book Manager.
-   \inmodule WeBookClient
-   \inherits QMainWindow
  */
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
@@ -161,7 +159,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     emit handelStatusMessage(tr("Ready")); // onStatusMessage
 } // end MainWindow
 /******************************************************************************
-** ~MainWindow Deconstructor                                                  *
+* ~MainWindow Deconstructor                                                  *
 *******************************************************************************/
 MainWindow::~MainWindow()
 {
@@ -169,7 +167,7 @@ MainWindow::~MainWindow()
     delete ui;
 } // end ~MainWindow
 /******************************************************************************
-** closeEvent                                                                 *
+* closeEvent                                                                 *
 *******************************************************************************/
 void MainWindow::closeEvent(QCloseEvent *e)
 {
@@ -183,7 +181,7 @@ void MainWindow::closeEvent(QCloseEvent *e)
     }
 } // end closeEvent
 /******************************************************************************
-** quitNow                                                                    *
+* quitNow                                                                    *
 *******************************************************************************/
 void MainWindow::quitNow()
 {
@@ -197,22 +195,22 @@ void MainWindow::quitNow()
     }
 } // end quitNow
 /******************************************************************************
-** setTreeViewModel                                                           *
-** This uses a String Model, internally all the records are strings
-** A record is a row in a StringList
-** Looking a this from the stand point of the Text, each row is a record
-** The string is a ID Tab Title format using 2 spaces to specify a child of the above
-**  |  1 2  3
-** 1|Top    Top
-** 2|  Item1 Item 1
-** 3|  Item2 Item 2
-** 4|  Item3 Item 3
-** 5|    Item3.1 Item 3.1
-** 6|       Item3.1.1 Item 3.1.1
-** 7|  Item4 Item 4
-** 8|  Item5 Item 5
+* setTreeViewModel                                                           *
+* This uses a String Model, internally all the records are strings
+* A record is a row in a StringList
+* Looking a this from the stand point of the Text, each row is a record
+* The string is a ID Tab Title format using 2 spaces to specify a child of the above
+*  |  1 2  3
+* 1|Top    Top
+* 2|  Item1 Item 1
+* 3|  Item2 Item 2
+* 4|  Item3 Item 3
+* 5|    Item3.1 Item 3.1
+* 6|       Item3.1.1 Item 3.1.1
+* 7|  Item4 Item 4
+* 8|  Item5 Item 5
 **
-** TOC is a File named after the WeBook Managers books: WeBook,MyBook, .toc   *
+* TOC is a File named after the WeBook Managers books: WeBook,MyBook, .toc   *
 *******************************************************************************/
 void MainWindow::setTocTreeViewModel(QString modelName)
 {
@@ -260,7 +258,7 @@ void MainWindow::setTocTreeViewModel(QString modelName)
     }
 } // end setTocTreeViewModel
 /******************************************************************************
-** openWeBookTOC(QString thisFullPathFileName)                                *
+* openWeBookTOC(QString thisFullPathFileName)                                *
 *******************************************************************************/
 bool MainWindow::openWeBookTOC(QString thisFullPathFileName)
 {
@@ -288,8 +286,8 @@ bool MainWindow::openWeBookTOC(QString thisFullPathFileName)
     return false;
 } // end openWeBookTOC
 /******************************************************************************
-** setWeBookModel                                                             *
-** WeBook Manager Model
+* setWeBookModel                                                             *
+* WeBook Manager Model
 *******************************************************************************/
 void MainWindow::setWeBookModel()
 {
@@ -317,7 +315,7 @@ void MainWindow::setWeBookModel()
     }
 } // end setWeBookModel
 /******************************************************************************
-** openWeBookCat(QString thisFullPathFileName)                                *
+* openWeBookCat(QString thisFullPathFileName)                                *
 *******************************************************************************/
 bool MainWindow::openWeBookCat(QString thisFullPathFileName)
 {
@@ -347,19 +345,19 @@ bool MainWindow::openWeBookCat(QString thisFullPathFileName)
     return false;
 } // end openWeBookCat
 /******************************************************************************
-** saveTabStates(int tabNumber)                                               *
-** saveTabStates(TabFileMan)                                                  *
-** Define all actions for specific tabs here                                  *
-**                                                                            *
-** 0 tabSettings                                                              *
-** 1 tabConnectionMan                                                         *
-** 2 tabWeBookMan                                                             *
-** 3 tabTOC                                                                   *
-** 4 tabEditor                                                                *
-** 5 tabContacts                                                              *
-** 6 tabFileMan                                                               *
-** 7 tabCalendarMan                                                           *
-** 8 tabCalculator                                                            *
+* saveTabStates(int tabNumber)                                               *
+* saveTabStates(TabFileMan)                                                  *
+* Define all actions for specific tabs here                                  *
+*                                                                            *
+* 0 tabSettings                                                              *
+* 1 tabConnectionMan                                                         *
+* 2 tabWeBookMan                                                             *
+* 3 tabTOC                                                                   *
+* 4 tabEditor                                                                *
+* 5 tabContacts                                                              *
+* 6 tabFileMan                                                               *
+* 7 tabCalendarMan                                                           *
+* 8 tabCalculator                                                            *
 *******************************************************************************/
 void MainWindow::saveTabStates(int tabNumber)
 {
@@ -407,18 +405,18 @@ void MainWindow::saveTabStates(int tabNumber)
     }
 } // end saveTabStates
 /******************************************************************************
-** restoreTabStates(int tabNumber)                                            *
-** restoreTabStates(TabFileMan)                                               *
-**                                                                            *
-** 0 tabSettings                                                              *
-** 1 tabConnectionMan                                                         *
-** 2 tabWeBookMan                                                             *
-** 3 tabTOC                                                                   *
-** 4 tabEditor                                                                *
-** 5 tabContacts                                                              *
-** 6 tabFileMan                                                               *
-** 7 tabCalendarMan                                                           *
-** 8 tabCalculator                                                            *
+* restoreTabStates(int tabNumber)                                            *
+* restoreTabStates(TabFileMan)                                               *
+*                                                                            *
+* 0 tabSettings                                                              *
+* 1 tabConnectionMan                                                         *
+* 2 tabWeBookMan                                                             *
+* 3 tabTOC                                                                   *
+* 4 tabEditor                                                                *
+* 5 tabContacts                                                              *
+* 6 tabFileMan                                                               *
+* 7 tabCalendarMan                                                           *
+* 8 tabCalculator                                                            *
 *******************************************************************************/
 void MainWindow::restoreTabStates(int tabNumber)
 {
@@ -492,18 +490,18 @@ void MainWindow::restoreTabStates(int tabNumber)
     }
 } // end restoreTabStates
 /******************************************************************************
-** onTabChanged for ui->tabWidget                                             *
-** Define all actions for specific tabs here                                  *
-**                                                                            *
-** 0 tabSettings                                                              *
-** 1 tabConnectionMan                                                         *
-** 2 tabWeBookMan                                                             *
-** 3 tabTOC                                                                   *
-** 4 tabEditor                                                                *
-** 5 tabContacts                                                              *
-** 6 tabFileMan                                                               *
-** 7 tabCalendarMan                                                           *
-** 8 tabCalculator                                                            *
+* onTabChanged for ui->tabWidget                                             *
+* Define all actions for specific tabs here                                  *
+*                                                                            *
+* 0 tabSettings                                                              *
+* 1 tabConnectionMan                                                         *
+* 2 tabWeBookMan                                                             *
+* 3 tabTOC                                                                   *
+* 4 tabEditor                                                                *
+* 5 tabContacts                                                              *
+* 6 tabFileMan                                                               *
+* 7 tabCalendarMan                                                           *
+* 8 tabCalculator                                                            *
 *******************************************************************************/
 void MainWindow::onTabChanged(int tab)
 {
@@ -533,8 +531,8 @@ void MainWindow::onTabChanged(int tab)
     } // end switch on tab
 } // end onTabChanged
 /******************************************************************************
-** disableAllMenuToolbarActions                                               *
-** Define all actions for all tabs here                                       *
+* disableAllMenuToolbarActions                                               *
+* Define all actions for all tabs here                                       *
 *******************************************************************************/
 void MainWindow::disableAllMenuToolbarActions(int tabNumber)
 {
@@ -567,7 +565,7 @@ void MainWindow::disableAllMenuToolbarActions(int tabNumber)
     restoreTabStates(tabNumber);
 } // end disableAllMenuToolbarActions
 /******************************************************************************
-** onSaveApplicationSettings                                                  *
+* onSaveApplicationSettings                                                  *
 *******************************************************************************/
 void MainWindow::onSaveApplicationSettings()
 {
@@ -575,7 +573,7 @@ void MainWindow::onSaveApplicationSettings()
 
 } // end onSaveApplicationSettings
 /******************************************************************************
-** setupTextActions                                                           *
+* setupTextActions                                                           *
 *******************************************************************************/
 void MainWindow::setupTextActions()
 {
@@ -624,7 +622,7 @@ void MainWindow::setupTextActions()
     connect(comboSize, &QComboBox::textActivated, this, &MainWindow::onTextSize);
 } // end setupTextActions
 /******************************************************************************
-** load                                                                       *
+* load                                                                       *
 *******************************************************************************/
 bool MainWindow::load(const QString &f)
 {
@@ -659,7 +657,7 @@ bool MainWindow::load(const QString &f)
     return true;
 } // end load
 /******************************************************************************
-** setCurrentFileName                                                         *
+* setCurrentFileName                                                         *
 *******************************************************************************/
 void MainWindow::setCurrentFileName(const QString &thisFileName)
 {
@@ -676,7 +674,7 @@ void MainWindow::setCurrentFileName(const QString &thisFileName)
     setWindowModified(false);
 } // end setCurrentFileName
 /******************************************************************************
-** maybeSave                                                                  *
+* maybeSave                                                                  *
 *******************************************************************************/
 bool MainWindow::maybeSave()
 {
@@ -685,8 +683,8 @@ bool MainWindow::maybeSave()
     return onFileSave();
 } // end maybeSave
 /******************************************************************************
-** getSetFullPathFileNameExt                                                  *
-** Full Path to file
+* getSetFullPathFileNameExt                                                  *
+* Full Path to file
 *******************************************************************************/
 QString MainWindow::getSetFullPathFileNameExt(QString thisFileName)
 {
@@ -728,7 +726,7 @@ QString MainWindow::getSetFullPathFileNameExt(QString thisFileName)
     return fullPathFileNameExt;
 } // end getSetFullPathFileNameExt
 /******************************************************************************
-** onFileNew                                                                  *
+* onFileNew                                                                  *
 *******************************************************************************/
 void MainWindow::onFileNew()
 {
@@ -740,7 +738,7 @@ void MainWindow::onFileNew()
     }
 } // end onFileNew
 /******************************************************************************
-** onFileOpen FIXME maybe import it                                           *
+* onFileOpen FIXME maybe import it                                           *
 *******************************************************************************/
 void MainWindow::onFileOpen()
 {
@@ -762,7 +760,7 @@ void MainWindow::onFileOpen()
     else          statusBar()->showMessage(tr("Could not open \"%1\"").arg(QDir::toNativeSeparators(fn)));
 } // end onFileOpen
 /******************************************************************************
-** onFileSave                                                                 *
+* onFileSave                                                                 *
 *******************************************************************************/
 bool MainWindow::onFileSave()
 {
@@ -796,7 +794,7 @@ bool MainWindow::onFileSave()
     return success;
 } // end onFileSave
 /******************************************************************************
-** onFileSaveAs                                                               *
+* onFileSaveAs                                                               *
 *******************************************************************************/
 bool MainWindow::onFileSaveAs()
 {
@@ -824,7 +822,7 @@ bool MainWindow::onFileSaveAs()
     return onFileSave();
 } // end onFileSaveAs
 /******************************************************************************
-** onFilePrint                                                                *
+* onFilePrint                                                                *
 *******************************************************************************/
 void MainWindow::onFilePrint()
 {
@@ -839,7 +837,7 @@ void MainWindow::onFilePrint()
     #endif
 } // end onFilePrint
 /******************************************************************************
-** onFilePrintPreview                                                         *
+* onFilePrintPreview                                                         *
 *******************************************************************************/
 void MainWindow::onFilePrintPreview()
 {
@@ -852,7 +850,7 @@ void MainWindow::onFilePrintPreview()
     #endif
 } // end onFilePrintPreview
 /******************************************************************************
-** onPrintPreview FIXME see below                                             *
+* onPrintPreview FIXME see below                                             *
 *******************************************************************************/
 void MainWindow::onPrintPreview(QPrinter *printer)
 {
@@ -864,7 +862,7 @@ void MainWindow::onPrintPreview(QPrinter *printer)
     #endif
 } // end onPrintPreview
 /******************************************************************************
-** onFilePrintPdf FIXME this only works on current page, add option to tree   *
+* onFilePrintPdf FIXME this only works on current page, add option to tree   *
 *******************************************************************************/
 void MainWindow::onFilePrintPdf()
 {
@@ -884,7 +882,7 @@ void MainWindow::onFilePrintPdf()
     #endif
 } // end onFilePrintPdf
 /******************************************************************************
-** onTextBold                                                                 *
+* onTextBold                                                                 *
 *******************************************************************************/
 void MainWindow::onTextBold()
 {
@@ -894,7 +892,7 @@ void MainWindow::onTextBold()
     mergeFormatOnWordOrSelection(fmt);
 } // end onTextBold
 /******************************************************************************
-** onTextUnderline                                                            *
+* onTextUnderline                                                            *
 *******************************************************************************/
 void MainWindow::onTextUnderline()
 {
@@ -904,7 +902,7 @@ void MainWindow::onTextUnderline()
     mergeFormatOnWordOrSelection(fmt);
 } // end onTextUnderline
 /******************************************************************************
-** onTextItalic                                                               *
+* onTextItalic                                                               *
 *******************************************************************************/
 void MainWindow::onTextItalic()
 {
@@ -914,7 +912,7 @@ void MainWindow::onTextItalic()
     mergeFormatOnWordOrSelection(fmt);
 } // end onTextItalic
 /******************************************************************************
-** onTextFamily                                                               *
+* onTextFamily                                                               *
 *******************************************************************************/
 void MainWindow::onTextFamily(const QString &f)
 {
@@ -924,7 +922,7 @@ void MainWindow::onTextFamily(const QString &f)
     mergeFormatOnWordOrSelection(fmt);
 } // end onTextFamily
 /******************************************************************************
-** onTextSize                                                                 *
+* onTextSize                                                                 *
 *******************************************************************************/
 void MainWindow::onTextSize(const QString &p)
 {
@@ -938,7 +936,7 @@ void MainWindow::onTextSize(const QString &p)
     }
 } // end onTextSize
 /******************************************************************************
-** onTextStyle                                                                *
+* onTextStyle                                                                *
 *******************************************************************************/
 void MainWindow::onTextStyle(int styleIndex)
 {
@@ -1028,7 +1026,7 @@ void MainWindow::onTextStyle(int styleIndex)
     cursor.endEditBlock();
 } // end onTextStyle
 /******************************************************************************
-** onTextColor                                                                *
+* onTextColor                                                                *
 *******************************************************************************/
 void MainWindow::onTextColor()
 {
@@ -1041,7 +1039,7 @@ void MainWindow::onTextColor()
     colorChanged(col);
 } // end onTextColor
 /******************************************************************************
-** onTextAlign                                                                *
+* onTextAlign                                                                *
 *******************************************************************************/
 void MainWindow::onTextAlign(QAction *a)
 {
@@ -1052,7 +1050,7 @@ void MainWindow::onTextAlign(QAction *a)
     else if (a == ui->actionAlignJustify) ui->textEdit->setAlignment(Qt::AlignJustify);
 } // end onTextAlign
 /******************************************************************************
-** onSetChecked                                                               *
+* onSetChecked                                                               *
 *******************************************************************************/
 void MainWindow::onSetChecked(bool checked)
 {
@@ -1060,7 +1058,7 @@ void MainWindow::onSetChecked(bool checked)
     onTextStyle(checked ? 5 : 4);
 } // end onSetChecked
 /******************************************************************************
-** onIndent                                                                   *
+* onIndent                                                                   *
 *******************************************************************************/
 void MainWindow::onIndent()
 {
@@ -1068,7 +1066,7 @@ void MainWindow::onIndent()
     modifyIndentation(1);
 } // end onIndent
 /******************************************************************************
-** onUnindent                                                                 *
+* onUnindent                                                                 *
 *******************************************************************************/
 void MainWindow::onUnindent()
 {
@@ -1076,7 +1074,7 @@ void MainWindow::onUnindent()
     modifyIndentation(-1);
 } // end onUnindent
 /******************************************************************************
-** modifyIndentation                                                          *
+* modifyIndentation                                                          *
 *******************************************************************************/
 void MainWindow::modifyIndentation(int amount)
 {
@@ -1109,7 +1107,7 @@ void MainWindow::modifyIndentation(int amount)
     cursor.endEditBlock();
 } // end modifyIndentation
 /******************************************************************************
-** currentCharFormatChanged                                                   *
+* currentCharFormatChanged                                                   *
 *******************************************************************************/
 void MainWindow::onCurrentCharFormatChanged(const QTextCharFormat &format)
 {
@@ -1118,7 +1116,7 @@ void MainWindow::onCurrentCharFormatChanged(const QTextCharFormat &format)
     colorChanged(format.foreground().color());
 } // end onCurrentCharFormatChanged
 /******************************************************************************
-** onCursorPositionChanged                                                    *
+* onCursorPositionChanged                                                    *
 *******************************************************************************/
 void MainWindow::onCursorPositionChanged()
 {
@@ -1179,7 +1177,7 @@ void MainWindow::onCursorPositionChanged()
     }
 } // end onCursorPositionChanged
 /******************************************************************************
-** onClipboardDataChanged                                                     *
+* onClipboardDataChanged                                                     *
 *******************************************************************************/
 void MainWindow::onClipboardDataChanged()
 {
@@ -1189,7 +1187,7 @@ void MainWindow::onClipboardDataChanged()
 #endif
 } // end onClipboardDataChanged
 /******************************************************************************
-** mergeFormatOnWordOrSelection                                               *
+* mergeFormatOnWordOrSelection                                               *
 *******************************************************************************/
 void MainWindow::mergeFormatOnWordOrSelection(const QTextCharFormat &format)
 {
@@ -1200,7 +1198,7 @@ void MainWindow::mergeFormatOnWordOrSelection(const QTextCharFormat &format)
     ui->textEdit->mergeCurrentCharFormat(format);
 } // end mergeFormatOnWordOrSelection
 /******************************************************************************
-** fontChanged                                                                *
+* fontChanged                                                                *
 *******************************************************************************/
 void MainWindow::fontChanged(const QFont &f)
 {
@@ -1212,7 +1210,7 @@ void MainWindow::fontChanged(const QFont &f)
     ui->actionTextUnderline->setChecked(f.underline());
 } // end fontChanged
 /******************************************************************************
-** colorChanged                                                               *
+* colorChanged                                                               *
 *******************************************************************************/
 void MainWindow::colorChanged(const QColor &c)
 {
@@ -1222,7 +1220,7 @@ void MainWindow::colorChanged(const QColor &c)
     ui->actionTextColor->setIcon(pix);
 } // end colorChanged
 /******************************************************************************
-** alignmentChanged                                                           *
+* alignmentChanged                                                           *
 *******************************************************************************/
 void MainWindow::alignmentChanged(Qt::Alignment a)
 {
@@ -1233,7 +1231,7 @@ void MainWindow::alignmentChanged(Qt::Alignment a)
     else if (a & Qt::AlignJustify) ui->actionAlignJustify->setChecked(true);
 } // end alignmentChanged
 /******************************************************************************
-** onAbout                                                                    *
+* onAbout                                                                    *
 *******************************************************************************/
 void MainWindow::onAbout()
 {
@@ -1242,7 +1240,7 @@ void MainWindow::onAbout()
     myAbout->show();
 } // end onAbout
 /******************************************************************************
-** onAddBook for ui->pushButtonWeBookManAdd                                   *
+* onAddBook for ui->pushButtonWeBookManAdd                                   *
 *******************************************************************************/
 void MainWindow::onAddBook()
 {
@@ -1261,7 +1259,7 @@ void MainWindow::onAddBook()
     }
 } // end onAddBook
 /******************************************************************************
-** onDeleteBook for ui->pushButtonWeBookManDelete                             *
+* onDeleteBook for ui->pushButtonWeBookManDelete                             *
 *******************************************************************************/
 void MainWindow::onDeleteBook()
 {
@@ -1271,7 +1269,7 @@ void MainWindow::onDeleteBook()
     if (model->removeRow(index.row(), index.parent())) ui->listViewWeBookMan->repaint();
 } // end onDeleteBook
 /******************************************************************************
-** onTocInsertChild                                                           *
+* onTocInsertChild                                                           *
 *******************************************************************************/
 void MainWindow::onTocInsertChild()
 {
@@ -1296,7 +1294,7 @@ void MainWindow::onTocInsertChild()
     onTocUpdateActions();
 } // end onTocInsertChild
 /******************************************************************************
-** onTocInsertColumn                                                          *
+* onTocInsertColumn                                                          *
 *******************************************************************************/
 bool MainWindow::onTocInsertColumn()
 {
@@ -1312,7 +1310,7 @@ bool MainWindow::onTocInsertColumn()
     return changed;
 } // end onTocInsertColumn
 /******************************************************************************
-** onTocInsertRow                                                             *
+* onTocInsertRow                                                             *
 *******************************************************************************/
 void MainWindow::onTocInsertRow()
 {
@@ -1330,7 +1328,7 @@ void MainWindow::onTocInsertRow()
     }
 } // end onTocInsertRow
 /******************************************************************************
-** onTocRemoveColumn                                                          *
+* onTocRemoveColumn                                                          *
 *******************************************************************************/
 bool MainWindow::onTocRemoveColumn()
 {
@@ -1344,7 +1342,7 @@ bool MainWindow::onTocRemoveColumn()
     return changed;
 } // end
 /******************************************************************************
-** onTocRemoveRow                                                             *
+* onTocRemoveRow                                                             *
 *******************************************************************************/
 void MainWindow::onTocRemoveRow()
 {
@@ -1353,9 +1351,9 @@ void MainWindow::onTocRemoveRow()
     if (model->removeRow(index.row(), index.parent())) onTocUpdateActions();
 } // end onTocRemoveRow
 /******************************************************************************
-** onTocUpdateActions                                                         *
-** If the Book changes so does the TOC                                        *
-** If the Index changes, so does the Document                                 *
+* onTocUpdateActions                                                         *
+* If the Book changes so does the TOC                                        *
+* If the Index changes, so does the Document                                 *
 *******************************************************************************/
 void MainWindow::onTocUpdateActions()
 {
@@ -1381,7 +1379,7 @@ void MainWindow::onTocUpdateActions()
     }
 } // end onTocUpdateActions
 /******************************************************************************
-** loadDoc                                                                    *
+* loadDoc                                                                    *
 *******************************************************************************/
 void MainWindow::loadDoc(QString thisFileName)
 {
@@ -1409,7 +1407,7 @@ void MainWindow::loadDoc(QString thisFileName)
     load(myFileName); // Sets fileName
 } // end loadDoc
 /******************************************************************************
-** getSetCurrentBook                                                          *
+* getSetCurrentBook                                                          *
 *******************************************************************************/
 QString MainWindow::getSetCurrentBook()
 {
@@ -1418,7 +1416,7 @@ QString MainWindow::getSetCurrentBook()
     return ui->listViewWeBookMan->model()->data(ui->listViewWeBookMan->currentIndex(), Qt::DisplayRole).toString();
 } // end getSetCurrentBook
 /******************************************************************************
-** getSetCurrentChapter                                                       *
+* getSetCurrentChapter                                                       *
 *******************************************************************************/
 QString MainWindow::getSetCurrentChapter()
 {
@@ -1427,7 +1425,7 @@ QString MainWindow::getSetCurrentChapter()
     return myCurrentChapter;
 } // end getSetCurrentChapter
 /******************************************************************************
-** loadTOC                                                                    *
+* loadTOC                                                                    *
 *******************************************************************************/
 void MainWindow::loadTOC()
 {
@@ -1452,10 +1450,10 @@ void MainWindow::loadTOC()
     }
 } // end loadTOC
 /******************************************************************************
-** writeSettings                                                              *
-** 1. Current Tab                                                             *
-** 2. Current Book                                                            *
-** 3. Current Chapter                                                         *
+* writeSettings                                                              *
+* 1. Current Tab                                                             *
+* 2. Current Book                                                            *
+* 3. Current Chapter                                                         *
 *******************************************************************************/
 void MainWindow::writeSettings()
 {
@@ -1502,12 +1500,12 @@ void MainWindow::writeSettings()
     }
 } // end writeSettings
 /******************************************************************************
-** readSettings                                                               *
-** Do not use Setters, we do not want any events generated                    *
-** Set all Variables used here                                                *
-** 1. Current Tab                                                             *
-** 2. Current Book                                                            *
-** 3. Current Chapter                                                         *
+* readSettings                                                               *
+* Do not use Setters, we do not want any events generated                    *
+* Set all Variables used here                                                *
+* 1. Current Tab                                                             *
+* 2. Current Book                                                            *
+* 3. Current Chapter                                                         *
 **
 *******************************************************************************/
 void MainWindow::readSettings()
@@ -1557,7 +1555,7 @@ void MainWindow::readSettings()
 
 } // end readSettings
 /******************************************************************************
-** saveTOC                                                                    *
+* saveTOC                                                                    *
 *******************************************************************************/
 void MainWindow::saveTOC(QString bookName)
 {
@@ -1590,7 +1588,7 @@ void MainWindow::saveTOC(QString bookName)
     }
 } // end saveTOC
 /******************************************************************************
-** onStatusMessage for handelStatusMessage                                    *
+* onStatusMessage for handelStatusMessage                                    *
 *******************************************************************************/
 void MainWindow::onStatusMessage(const QString &message)
 {
@@ -1605,4 +1603,4 @@ void MainWindow::onStatusMessage(const QString &message)
         onTocUpdateActions();
     }
 } // end onStatusMessage
-/* ***************************** End of File ******************************* */
+/* **************************   End of File ****************************   */
