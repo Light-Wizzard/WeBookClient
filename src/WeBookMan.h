@@ -2,8 +2,8 @@
 ** WeBook: Pronounced Web Book, is a Book Content Management System  (BCMS)   *
 *******************************************************************************/
 #pragma once
-#ifndef WEBOOKMAN_H
-#define WEBOOKMAN_H
+//#ifndef WEBOOKMAN_H
+//#define WEBOOKMAN_H
 
 #include <QAbstractListModel>
 #include <QObject>
@@ -36,13 +36,13 @@ class WeBookMan : public QAbstractListModel
         QString getData();
 
     private:
-        QLogger::QLoggerCommon  *qLoggerCommon    = nullptr;    // Logging and QtSettings
-        QObject                 *myParent;                      //
+        QObject                 *myParent         = nullptr;    // Needed by QRegExpValidator
         QStringList              stringList;                    //
+        QLogger::QLoggerCommon  *qLoggerCommon    = nullptr;    // Logging and QtSettings
         QString                  weBookListItemsReturned;       //
         QList<QVariant>          rootData          = { "ID" };  //
         bool                     isDebugMessage    = true;      // Set to true to show debug messages
         bool                     isDebugAllMessage = false;     // Set to true to show all debug messages
 }; // end class WeBookMan
-#endif // WEBOOKMAN_H
+//#endif // WEBOOKMAN_H
 /* ***************************** End of File ******************************* */

@@ -7,6 +7,12 @@
 ** TreeViewDragDropModel Constructor                                          *
 ** Passes strings to TreeModel                                                *
 *******************************************************************************/
+/*!
+   \class TreeViewDragDropModel
+   \brief Drag & Drop Tree View Model.
+   \inmodule WeBookClient
+   \inherits TreeModel
+ */
 TreeViewDragDropModel::TreeViewDragDropModel(const QString &strings, QObject *parent) : TreeModel(strings, parent)
 {
     qLoggerCommon = new QLogger::QLoggerCommon(true);

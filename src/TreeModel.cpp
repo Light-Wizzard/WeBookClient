@@ -7,6 +7,12 @@
 ** TreeModel Constructor                                                      *
 ** The QModelIndex class is used to locate data in a data model.              *
 *******************************************************************************/
+/*!
+   \class TreeModel
+   \brief Show data using a Tree Model.
+   \inmodule WeBookClient
+   \inherits QAbstractItemModel
+ */
 TreeModel::TreeModel(const QString &strings, QObject *parent) : QAbstractItemModel(parent), myParent(parent)
 {
     qLoggerCommon = new QLogger::QLoggerCommon(true);

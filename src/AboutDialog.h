@@ -22,7 +22,6 @@ class AboutDialog : public QDialog
 
     private:
         Ui::AboutDialog *ui;
-};
-
+}; // end class AboutDialog
 #endif // ABOUTDIALOG_H
 /* ***************************** End of File ******************************* */

@@ -1,0 +1,173 @@
+\hypertarget{classQLogger_1_1QLoggerCrypto}{}\doxysection{Q\+Logger\+::Q\+Logger\+Crypto Class Reference}
+\label{classQLogger_1_1QLoggerCrypto}\index{QLogger::QLoggerCrypto@{QLogger::QLoggerCrypto}}
+
+
+{\ttfamily \#include $<$Q\+Logger\+Crypto.\+h$>$}
+
+Inheritance diagram for Q\+Logger\+::Q\+Logger\+Crypto\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classQLogger_1_1QLoggerCrypto}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classQLogger_1_1QLoggerCrypto_a32b08801e8e8d95b801f34205bd4e4e3}\label{classQLogger_1_1QLoggerCrypto_a32b08801e8e8d95b801f34205bd4e4e3}} 
+enum {\bfseries Password\+Crypto\+Md} \{ {\bfseries Password\+Crypto\+Hash\+Md4}, 
+{\bfseries Password\+Crypto\+Hash\+Md5}
+ \}
+\item 
+\mbox{\Hypertarget{classQLogger_1_1QLoggerCrypto_a702c6d97b721bfb8de5c6dd7122876e2}\label{classQLogger_1_1QLoggerCrypto_a702c6d97b721bfb8de5c6dd7122876e2}} 
+enum {\bfseries Password\+Crypto\+Sha} \{ \newline
+{\bfseries Password\+Crypto\+Hash\+Sha1}, 
+{\bfseries Password\+Crypto\+Hash\+Sha224}, 
+{\bfseries Password\+Crypto\+Hash\+Sha256}, 
+{\bfseries Password\+Crypto\+Hash\+Sha384}, 
+\newline
+{\bfseries Password\+Crypto\+Hash\+Sha512}, 
+{\bfseries Password\+Crypto\+Hash\+Sha3\+\_\+224}, 
+{\bfseries Password\+Crypto\+Hash\+Sha3\+\_\+256}, 
+{\bfseries Password\+Crypto\+Hash\+Sha3\+\_\+384}, 
+\newline
+{\bfseries Password\+Crypto\+Hash\+Sha3\+\_\+512}
+ \}
+\item 
+\mbox{\Hypertarget{classQLogger_1_1QLoggerCrypto_a940d56c3b904c1a02a38d8b2d3ddcea7}\label{classQLogger_1_1QLoggerCrypto_a940d56c3b904c1a02a38d8b2d3ddcea7}} 
+enum {\bfseries Password\+Crypto\+Keccak} \{ {\bfseries Password\+Crypto\+Hash\+Keccak\+\_\+224}, 
+{\bfseries Password\+Crypto\+Hash\+Keccak\+\_\+256}, 
+{\bfseries Password\+Crypto\+Hash\+Keccak\+\_\+384}, 
+{\bfseries Password\+Crypto\+Hash\+Keccak\+\_\+512}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classQLogger_1_1QLoggerCrypto_a1b13b1132e28d87ca3f3aebc5c3f1006}\label{classQLogger_1_1QLoggerCrypto_a1b13b1132e28d87ca3f3aebc5c3f1006}} 
+void {\bfseries handel\+Settin\+Changed} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classQLogger_1_1QLoggerCrypto_a13ce406b7e2e40aa902e1f16f58523ca}{Q\+Logger\+Crypto}} ()
+\item 
+\mbox{\hyperlink{classQLogger_1_1QLoggerCrypto_ac05f8c3b760093369ec413ac7e6c71d7}{$\sim$\+Q\+Logger\+Crypto}} ()
+\item 
+\mbox{\Hypertarget{classQLogger_1_1QLoggerCrypto_a947b05486f326be60137ed182fc780e2}\label{classQLogger_1_1QLoggerCrypto_a947b05486f326be60137ed182fc780e2}} 
+{\bfseries Q\+\_\+\+E\+N\+UM} (Password\+Crypto\+Md) Q\+\_\+\+E\+N\+UM(Password\+Crypto\+Sha) Q\+\_\+\+E\+N\+UM(Password\+Crypto\+Keccak) Q\+String get\+Crypto\+Key()
+\item 
+void \mbox{\hyperlink{classQLogger_1_1QLoggerCrypto_ad39bbc65eb2a2192dc9813d5e6035c75}{set\+Crypto\+Key}} (const Q\+String \&this\+Crypto\+Key)
+\item 
+Q\+String \mbox{\hyperlink{classQLogger_1_1QLoggerCrypto_a7b4408db2881a5a5d4e830081142638c}{get\+Crypto\+Iv\+Vector}} ()
+\item 
+void \mbox{\hyperlink{classQLogger_1_1QLoggerCrypto_ab295ca1fc003d5834dd9b742dc7420f9}{set\+Crypto\+Iv\+Vector}} (const Q\+String \&this\+Crypto\+Iv\+Vector)
+\item 
+Q\+Byte\+Array \mbox{\hyperlink{classQLogger_1_1QLoggerCrypto_a70016a352b9f19b5391141824eaf0aca}{get\+Hash\+Key}} ()
+\item 
+Q\+Byte\+Array \mbox{\hyperlink{classQLogger_1_1QLoggerCrypto_a875c8a4ca68db22310a2d740d8701b2c}{get\+Hash\+IV}} ()
+\item 
+Q\+String \mbox{\hyperlink{classQLogger_1_1QLoggerCrypto_aa1f6ea0b147f3106d4b50204c74390c0}{get\+Md}} ()
+\item 
+Q\+String \mbox{\hyperlink{classQLogger_1_1QLoggerCrypto_a7087b4bada625f69f29bc2d758db6bba}{get\+Sha}} ()
+\item 
+Q\+String \mbox{\hyperlink{classQLogger_1_1QLoggerCrypto_aa83c96ac55f4df9b819673da7ac0e979}{get\+Keccak}} (const Q\+String \&this\+Iv\+Vector)
+\item 
+Q\+String \mbox{\hyperlink{classQLogger_1_1QLoggerCrypto_ae3b078ad15ec566963cfea5e7ed0ff67}{en\+Code\+Secret}} (const Q\+String \&this\+Secret\+String)
+\item 
+Q\+String \mbox{\hyperlink{classQLogger_1_1QLoggerCrypto_a561d5744efd945159f42a72b5b0cac7c}{de\+Code\+Secret}} (const Q\+String \&this\+Secret\+String)
+\item 
+void \mbox{\hyperlink{classQLogger_1_1QLoggerCrypto_a8d9706b51a1dec2dca1239b11cc98e87}{set\+Crypto\+Code\+Hashish}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+class \mbox{\hyperlink{classQLogger_1_1QLoggerCrypto}{Q\+Logger\+Crypto}} $\ast$ 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classQLogger_1_1QLoggerCrypto_a13ce406b7e2e40aa902e1f16f58523ca}\label{classQLogger_1_1QLoggerCrypto_a13ce406b7e2e40aa902e1f16f58523ca}} 
+\index{QLogger::QLoggerCrypto@{QLogger::QLoggerCrypto}!QLoggerCrypto@{QLoggerCrypto}}
+\index{QLoggerCrypto@{QLoggerCrypto}!QLogger::QLoggerCrypto@{QLogger::QLoggerCrypto}}
+\doxysubsubsection{\texorpdfstring{QLoggerCrypto()}{QLoggerCrypto()}}
+{\footnotesize\ttfamily Q\+Logger\+::\+Q\+Logger\+Crypto\+::\+Q\+Logger\+Crypto (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+\mbox{\hyperlink{classQLogger_1_1QLoggerCrypto}{Q\+Logger\+Crypto}} Constructor $\ast$ Requires Setting\+: Organization\+Name Organization\+Domain Application\+Name \mbox{\Hypertarget{classQLogger_1_1QLoggerCrypto_ac05f8c3b760093369ec413ac7e6c71d7}\label{classQLogger_1_1QLoggerCrypto_ac05f8c3b760093369ec413ac7e6c71d7}} 
+\index{QLogger::QLoggerCrypto@{QLogger::QLoggerCrypto}!````~QLoggerCrypto@{$\sim$QLoggerCrypto}}
+\index{````~QLoggerCrypto@{$\sim$QLoggerCrypto}!QLogger::QLoggerCrypto@{QLogger::QLoggerCrypto}}
+\doxysubsubsection{\texorpdfstring{$\sim$QLoggerCrypto()}{~QLoggerCrypto()}}
+{\footnotesize\ttfamily Q\+Logger\+::\+Q\+Logger\+Crypto\+::$\sim$\+Q\+Logger\+Crypto (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\hyperlink{classQLogger_1_1QLoggerCrypto}{Q\+Logger\+Crypto}} Deconstructor $\ast$ 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classQLogger_1_1QLoggerCrypto_a561d5744efd945159f42a72b5b0cac7c}\label{classQLogger_1_1QLoggerCrypto_a561d5744efd945159f42a72b5b0cac7c}} 
+\index{QLogger::QLoggerCrypto@{QLogger::QLoggerCrypto}!deCodeSecret@{deCodeSecret}}
+\index{deCodeSecret@{deCodeSecret}!QLogger::QLoggerCrypto@{QLogger::QLoggerCrypto}}
+\doxysubsubsection{\texorpdfstring{deCodeSecret()}{deCodeSecret()}}
+{\footnotesize\ttfamily Q\+String Q\+Logger\+::\+Q\+Logger\+Crypto\+::de\+Code\+Secret (\begin{DoxyParamCaption}\item[{const Q\+String \&}]{this\+Secret\+String }\end{DoxyParamCaption})}
+
+\mbox{\hyperlink{classQLogger_1_1QLoggerCrypto_a561d5744efd945159f42a72b5b0cac7c}{de\+Code\+Secret(const Q\+String \&my\+Secret\+String)}} $\ast$ \mbox{\Hypertarget{classQLogger_1_1QLoggerCrypto_ae3b078ad15ec566963cfea5e7ed0ff67}\label{classQLogger_1_1QLoggerCrypto_ae3b078ad15ec566963cfea5e7ed0ff67}} 
+\index{QLogger::QLoggerCrypto@{QLogger::QLoggerCrypto}!enCodeSecret@{enCodeSecret}}
+\index{enCodeSecret@{enCodeSecret}!QLogger::QLoggerCrypto@{QLogger::QLoggerCrypto}}
+\doxysubsubsection{\texorpdfstring{enCodeSecret()}{enCodeSecret()}}
+{\footnotesize\ttfamily Q\+String Q\+Logger\+::\+Q\+Logger\+Crypto\+::en\+Code\+Secret (\begin{DoxyParamCaption}\item[{const Q\+String \&}]{this\+Secret\+String }\end{DoxyParamCaption})}
+
+\mbox{\hyperlink{classQLogger_1_1QLoggerCrypto_ae3b078ad15ec566963cfea5e7ed0ff67}{en\+Code\+Secret(const Q\+String \&my\+Secret\+String)}} $\ast$ \mbox{\Hypertarget{classQLogger_1_1QLoggerCrypto_a7b4408db2881a5a5d4e830081142638c}\label{classQLogger_1_1QLoggerCrypto_a7b4408db2881a5a5d4e830081142638c}} 
+\index{QLogger::QLoggerCrypto@{QLogger::QLoggerCrypto}!getCryptoIvVector@{getCryptoIvVector}}
+\index{getCryptoIvVector@{getCryptoIvVector}!QLogger::QLoggerCrypto@{QLogger::QLoggerCrypto}}
+\doxysubsubsection{\texorpdfstring{getCryptoIvVector()}{getCryptoIvVector()}}
+{\footnotesize\ttfamily Q\+String Q\+Logger\+::\+Q\+Logger\+Crypto\+::get\+Crypto\+Iv\+Vector (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+get\+Crypto\+Iv\+Vector $\ast$ \mbox{\Hypertarget{classQLogger_1_1QLoggerCrypto_a875c8a4ca68db22310a2d740d8701b2c}\label{classQLogger_1_1QLoggerCrypto_a875c8a4ca68db22310a2d740d8701b2c}} 
+\index{QLogger::QLoggerCrypto@{QLogger::QLoggerCrypto}!getHashIV@{getHashIV}}
+\index{getHashIV@{getHashIV}!QLogger::QLoggerCrypto@{QLogger::QLoggerCrypto}}
+\doxysubsubsection{\texorpdfstring{getHashIV()}{getHashIV()}}
+{\footnotesize\ttfamily Q\+Byte\+Array Q\+Logger\+::\+Q\+Logger\+Crypto\+::get\+Hash\+IV (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+get\+Hash\+IV $\ast$ \mbox{\Hypertarget{classQLogger_1_1QLoggerCrypto_a70016a352b9f19b5391141824eaf0aca}\label{classQLogger_1_1QLoggerCrypto_a70016a352b9f19b5391141824eaf0aca}} 
+\index{QLogger::QLoggerCrypto@{QLogger::QLoggerCrypto}!getHashKey@{getHashKey}}
+\index{getHashKey@{getHashKey}!QLogger::QLoggerCrypto@{QLogger::QLoggerCrypto}}
+\doxysubsubsection{\texorpdfstring{getHashKey()}{getHashKey()}}
+{\footnotesize\ttfamily Q\+Byte\+Array Q\+Logger\+::\+Q\+Logger\+Crypto\+::get\+Hash\+Key (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+get\+Hash\+Key $\ast$ \mbox{\Hypertarget{classQLogger_1_1QLoggerCrypto_aa83c96ac55f4df9b819673da7ac0e979}\label{classQLogger_1_1QLoggerCrypto_aa83c96ac55f4df9b819673da7ac0e979}} 
+\index{QLogger::QLoggerCrypto@{QLogger::QLoggerCrypto}!getKeccak@{getKeccak}}
+\index{getKeccak@{getKeccak}!QLogger::QLoggerCrypto@{QLogger::QLoggerCrypto}}
+\doxysubsubsection{\texorpdfstring{getKeccak()}{getKeccak()}}
+{\footnotesize\ttfamily Q\+String Q\+Logger\+::\+Q\+Logger\+Crypto\+::get\+Keccak (\begin{DoxyParamCaption}\item[{const Q\+String \&}]{this\+Iv\+Vector }\end{DoxyParamCaption})}
+
+get\+Keccak $\ast$ \mbox{\Hypertarget{classQLogger_1_1QLoggerCrypto_aa1f6ea0b147f3106d4b50204c74390c0}\label{classQLogger_1_1QLoggerCrypto_aa1f6ea0b147f3106d4b50204c74390c0}} 
+\index{QLogger::QLoggerCrypto@{QLogger::QLoggerCrypto}!getMd@{getMd}}
+\index{getMd@{getMd}!QLogger::QLoggerCrypto@{QLogger::QLoggerCrypto}}
+\doxysubsubsection{\texorpdfstring{getMd()}{getMd()}}
+{\footnotesize\ttfamily Q\+String Q\+Logger\+::\+Q\+Logger\+Crypto\+::get\+Md (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+get\+Md $\ast$ Constant Q\+Cryptographic\+Hash\+::\+Md4 Q\+Cryptographic\+Hash\+::\+Md5 \mbox{\Hypertarget{classQLogger_1_1QLoggerCrypto_a7087b4bada625f69f29bc2d758db6bba}\label{classQLogger_1_1QLoggerCrypto_a7087b4bada625f69f29bc2d758db6bba}} 
+\index{QLogger::QLoggerCrypto@{QLogger::QLoggerCrypto}!getSha@{getSha}}
+\index{getSha@{getSha}!QLogger::QLoggerCrypto@{QLogger::QLoggerCrypto}}
+\doxysubsubsection{\texorpdfstring{getSha()}{getSha()}}
+{\footnotesize\ttfamily Q\+String Q\+Logger\+::\+Q\+Logger\+Crypto\+::get\+Sha (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+get\+Sha $\ast$ Constant Q\+Cryptographic\+Hash\+::\+Sha1 Q\+Cryptographic\+Hash\+::\+Sha224 Q\+Cryptographic\+Hash\+::\+Sha256 Q\+Cryptographic\+Hash\+::\+Sha384 Q\+Cryptographic\+Hash\+::\+Sha512 Q\+Cryptographic\+Hash\+::\+Sha3\+\_\+224 Q\+Cryptographic\+Hash\+::\+Sha3\+\_\+256 Q\+Cryptographic\+Hash\+::\+Sha3\+\_\+384 Q\+Cryptographic\+Hash\+::\+Sha3\+\_\+512 \mbox{\Hypertarget{classQLogger_1_1QLoggerCrypto_a8d9706b51a1dec2dca1239b11cc98e87}\label{classQLogger_1_1QLoggerCrypto_a8d9706b51a1dec2dca1239b11cc98e87}} 
+\index{QLogger::QLoggerCrypto@{QLogger::QLoggerCrypto}!setCryptoCodeHashish@{setCryptoCodeHashish}}
+\index{setCryptoCodeHashish@{setCryptoCodeHashish}!QLogger::QLoggerCrypto@{QLogger::QLoggerCrypto}}
+\doxysubsubsection{\texorpdfstring{setCryptoCodeHashish()}{setCryptoCodeHashish()}}
+{\footnotesize\ttfamily void Q\+Logger\+::\+Q\+Logger\+Crypto\+::set\+Crypto\+Code\+Hashish (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+set\+Crypto\+Code\+Hashish $\ast$ \mbox{\Hypertarget{classQLogger_1_1QLoggerCrypto_ab295ca1fc003d5834dd9b742dc7420f9}\label{classQLogger_1_1QLoggerCrypto_ab295ca1fc003d5834dd9b742dc7420f9}} 
+\index{QLogger::QLoggerCrypto@{QLogger::QLoggerCrypto}!setCryptoIvVector@{setCryptoIvVector}}
+\index{setCryptoIvVector@{setCryptoIvVector}!QLogger::QLoggerCrypto@{QLogger::QLoggerCrypto}}
+\doxysubsubsection{\texorpdfstring{setCryptoIvVector()}{setCryptoIvVector()}}
+{\footnotesize\ttfamily void Q\+Logger\+::\+Q\+Logger\+Crypto\+::set\+Crypto\+Iv\+Vector (\begin{DoxyParamCaption}\item[{const Q\+String \&}]{this\+Crypto\+Iv\+Vector }\end{DoxyParamCaption})}
+
+set\+Crypto\+Iv\+Vector(\+Q\+String my\+Crypokey) $\ast$ \mbox{\Hypertarget{classQLogger_1_1QLoggerCrypto_ad39bbc65eb2a2192dc9813d5e6035c75}\label{classQLogger_1_1QLoggerCrypto_ad39bbc65eb2a2192dc9813d5e6035c75}} 
+\index{QLogger::QLoggerCrypto@{QLogger::QLoggerCrypto}!setCryptoKey@{setCryptoKey}}
+\index{setCryptoKey@{setCryptoKey}!QLogger::QLoggerCrypto@{QLogger::QLoggerCrypto}}
+\doxysubsubsection{\texorpdfstring{setCryptoKey()}{setCryptoKey()}}
+{\footnotesize\ttfamily void Q\+Logger\+::\+Q\+Logger\+Crypto\+::set\+Crypto\+Key (\begin{DoxyParamCaption}\item[{const Q\+String \&}]{this\+Crypto\+Key }\end{DoxyParamCaption})}
+
+set\+Crypto\+Key(\+Q\+String my\+Crypokey) $\ast$ 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Q\+Logger/Q\+Logger\+Crypto.\+h\item 
+src/\+Q\+Logger/Q\+Logger\+Crypto.\+cpp\end{DoxyCompactItemize}

@@ -99,8 +99,8 @@ namespace QLogger
             static const int                    MaxFileSize = 1024 * 1024;
 
             /*!
-             * @brief renameFileIfFull Truncates the log file in two. Keeps the filename for the new one and renames the old one
-             * with the timestamp.
+             * @brief renameFileIfFull Truncates the log file in two.
+             * Keeps the filename for the new one and renames the old one with the timestamp.
              *
              * @return Returns the file name for the old logs.
              */

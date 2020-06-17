@@ -1,5 +1,4 @@
 # WeBookServerClient.pro
-DEFINES += LOGLEVEL_CLASS=true
 #DEFINES         *= QT_PRINTSUPPORT_LIB
 qtHaveModule(printsupport): QT *= printsupport
 # Specifies the name of the template to use when generating the project.
@@ -64,7 +63,8 @@ SOURCES     *= src/main.cpp
 FORMS       += src/MainWindow.ui
 FORMS       += src/AboutDialog.ui
 #
-DISTFILES   += data/WeBookClient.ini
+DISTFILES   += data/WeBookClient.ini \
+    WeBookClient.doxygen
 DISTFILES   += WeBookClient.qdocconf
 DISTFILES   += data/WeBook.toc
 DISTFILES   += data/WeBooks.cat

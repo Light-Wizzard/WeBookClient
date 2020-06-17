@@ -2,6 +2,12 @@
 /******************************************************************************
 ** WeBookMan Constructor                                                      *
 *******************************************************************************/
+/*!
+   \class WeBookMan
+   \brief WeBookMan is a WeBook Manager.
+   \inmodule WeBookClient
+   \inherits QAbstractListModel
+ */
 WeBookMan::WeBookMan(const QStringList &strings, QObject *parent) : QAbstractListModel(parent), myParent(parent), stringList(strings)
 {
     qLoggerCommon = new QLogger::QLoggerCommon(true);
@@ -74,14 +80,17 @@ QVariant WeBookMan::data(const QModelIndex &index, int role) const
 ** setData(const QModelIndex &index, const QVariant &value, int role)         *
 *******************************************************************************/
 /*!
-    Changes an item in the string list, but only if the following conditions
-    are met:
+    \fn bool WeBookMan::setData(const QModelIndex &index, const QVariant &value, int role)
 
-    * The index supplied is valid.
-    * The index corresponds to an item to be shown in a view.
-    * The role associated with editing text is specified.
+    Changes an item in the string list, but only if the following conditions are met:
+
+    * The index supplied is valid \c {const QModelIndex &index}.
+    * The index corresponds to an item to be shown in a view \c {const QVariant &value}.
+    * The role associated with editing text is specified \c {int role}.
 
     The dataChanged() signal is emitted if the item is changed.
+
+    Returns \c true if is valid otherwise returns \c false.
 */
 bool WeBookMan::setData(const QModelIndex &index, const QVariant &value, int role)
 {

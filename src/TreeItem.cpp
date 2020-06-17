@@ -6,6 +6,11 @@
 /******************************************************************************
 ** TreeItem Constructor                                                       *
 *******************************************************************************/
+/*!
+   \class TreeItem
+   \brief Represents a Tree Item.
+   \inmodule WeBookClient
+ */
 TreeItem::TreeItem(const QList<QVariant> &data, int myLevel, TreeItem *parent)
 {
     qLoggerCommon = new QLogger::QLoggerCommon(true);

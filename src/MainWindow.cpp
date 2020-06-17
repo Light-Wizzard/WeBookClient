@@ -19,11 +19,11 @@
 **  *
 *******************************************************************************/
 /*!
-   \qmltype MainWindow
-   \inqmlmodule WeBookClient 0.1.0
-   \ingroup WeBookClient
+   \class MainWindow
+   \title WeBook Client Main Windows
+   \brief WeBook is Pronounced Web Book, it is a Web Content Book Manager.
+   \inmodule WeBookClient
    \inherits QMainWindow
-   \brief WeBook is Pronounced Web Book, it is a Web Content Book Manager
  */
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {

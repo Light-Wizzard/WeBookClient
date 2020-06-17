@@ -6,6 +6,12 @@
 /******************************************************************************
 ** AboutDialog Constructor                                                    *
 *******************************************************************************/
+/*!
+   \class AboutDialog
+   \brief Show About Dialog Box.
+   \inmodule WeBookClient
+   \inherits QDialog
+ */
 AboutDialog::AboutDialog(QWidget *parent) : QDialog(parent), ui(new Ui::AboutDialog)
 {
     ui->setupUi(this);
