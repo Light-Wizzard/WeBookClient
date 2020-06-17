@@ -75,25 +75,20 @@ RESOURCES   += WeBookClient.qrc
 # https://github.com/Light-Wizzard/QLogger                                    #
 # Fork: https://github.com/francescmm/QLogger                                 #
 ###############################################################################
-HEADERS     *= src/QLogger/QLoggerManager.h
 HEADERS     *= src/QLogger/QLoggerLevel.h
-HEADERS     *= src/QLogger/QLoggerWriter.h
-SOURCES     *= src/QLogger/QLoggerManager.cpp
-SOURCES     *= src/QLogger/QLoggerWriter.cpp
-#
 HEADERS     *= src/QLogger/QLoggerConstants.h
+# QLoggerManager
+HEADERS     *= src/QLogger/QLoggerManager.h
+SOURCES     *= src/QLogger/QLoggerManager.cpp
+# QLoggerWriter
+HEADERS     *= src/QLogger/QLoggerWriter.h
+SOURCES     *= src/QLogger/QLoggerWriter.cpp
+# QLoggerCommon
 HEADERS     *= src/QLogger/QLoggerCommon.h
-HEADERS     *= src/QLogger/QLoggerCrypto.h
 SOURCES     *= src/QLogger/QLoggerCommon.cpp
+# QLoggerCrypto
+HEADERS     *= src/QLogger/QLoggerCrypto.h
 SOURCES     *= src/QLogger/QLoggerCrypto.cpp
-
-#HEADERS     *= src/QLogger/WeBookLogger.h
-#SOURCES     *= src/QLogger/WeBookLogger.cpp
-#HEADERS     *= src/QLogger/WeBookBug.h
-#HEADERS     *= src/QLogger/WeBookTextStream.h
-#SOURCES     *= src/QLogger/WeBookBug.cpp
-#SOURCES     *= src/QLogger/WeBookTextStream.cpp
-
 ###############################################################################
 # https://github.com/bricke/Qt-AES                                            #
 ###############################################################################

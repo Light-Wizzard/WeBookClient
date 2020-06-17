@@ -1,7 +1,6 @@
 #pragma once
 #ifndef QLOGGERCONSTANTS_H
 #define QLOGGERCONSTANTS_H
-#include <QApplication>
 #include <QtCore>
 #include <QString>
 /******************************************************************************
@@ -43,6 +42,10 @@ namespace QLogger
     const QSize   ConstDefaultGeometrySize          = QSize(1000, 666);                      // Width x Height
     const QString ConstDefaultCryptoKey             = "!1@2#3$4%5^6&7*8)9(0)NowPickRand"; // These values are for testing only
     const QString ConstDefaultCryptoIvVector        = "PutMoveVector1!2@3#4$NowPickRand"; // These values are for testing only
+
+    const QString ConstDefaultWeBookTOCName         = "WeBook.toc";       // Name of toc file for default WeBook TOC
+    const QString ConstDefaultWeBookCatName         = "WeBooks.cat";      // Name of WeBook Category file for default WeBook
+
     // Store only what you need, comment the rest
     const QString ConstDefaultHomeLocation          = QStandardPaths::writableLocation(QStandardPaths::HomeLocation);          // Home
     const QString ConstDefaultAppDataLocation       = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);       // App Data

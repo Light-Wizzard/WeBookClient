@@ -295,7 +295,7 @@ void MainWindow::setWeBookModel()
 {
     if (isDebugMessage) qDebug() << "Set WeBook Model";
     //
-    WeBooksCatFileFullPath = QString("%1%2%3").arg(qLoggerCommon->getFilelPath(), QDir::separator(), constWeBookCatName);
+    WeBooksCatFileFullPath = QString("%1%2%3").arg(qLoggerCommon->getFilelPath(), QDir::separator(), QLogger::ConstDefaultWeBookCatName);
     QFile WeBooksCatFile(WeBooksCatFileFullPath);
     if (WeBooksCatFile.exists())
     {

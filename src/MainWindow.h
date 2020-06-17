@@ -110,8 +110,6 @@ class MainWindow : public QMainWindow
         const QString constCurrentTab            = "CurrentTab";       // Current Tab Number
         const QString constCurrentWeBook         = "CurrentWeBook";    // Name of WeBook Category file for default WeBook
         const QString constCurrentWeChapter      = "CurrentWeChapter"; // Name of WeBook Chapter file for default WeBook
-        const QString constWeBookTOCName         = "WeBook.toc";       // Name of toc file for default WeBook TOC
-        const QString constWeBookCatName         = "WeBooks.cat";      // Name of WeBook Category file for default WeBook
         const QString constWeBookEditorExt       = "html";             // I do not like to hard code things, hoping for rtf, got odf, so HTML works
         //
         const QString constDefaultTOC            = "Home\tHome Page\n";//
