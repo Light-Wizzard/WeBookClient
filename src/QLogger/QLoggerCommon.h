@@ -141,27 +141,27 @@ namespace QLogger
             void handelSettinChanged(); //!< handelSettinChanged \brief Handel Settin Change.
 
         private:
-            QSettings               *mySettings             = nullptr;                          // QSettings is used for this class
-            QString                 myLogPath               = "";                               // Log Path: ${HOME}/AppName
-            QString                 myLogFolderName         = "";                               // Log Folder Name: ${HOME}/AppName/LogFolderName
-            QString                 myLogFileName           = "";                               // Log File Name, if blank, make one up using pattern
-            QString                 myLogFullPath           = "";                               // Log Full Path ${HOME}/AppName/LogFolderName/LogFileName.LogFileExtension
-            QString                 myLogNamePattern        = "";                               // Log Name Pattern: see Notes at top
-            QString                 myLogFileExtension      = "";                               // Log File Extension
-            QString                 myFilePath              = "";                               // Path to the folder that holds the data, I named it data by default
-            QString                 myFileFolderName        = "";                               // File Folder Name
-            QString                 myHomePath              = "";                               // Home Path
-            QString                 myModuleName            = "";                               // Module Name
-            QString                 myUserName              = "";                               // User Name
-            QString                 myIniFileName           = "";                               // Ini File Name
-            QString                 myOrganizationName      = "";                               // OrganizationName
-            QString                 myOrganizationDomain    = "";                               // OrganizationDomain
-            QString                 myApplicationName       = "";                               // ApplicationName
-            QString                 myUrl                   = "";                               // URL used for HTTP request for Log Server
-            quint16                 myPort                  = 0;                                // Port Number of Log Server used URL
-            QLoggerManager         *myLoggerManager         = nullptr;                          // QLogger Manager
-            QLoggerLevel::LogLevel  myLogLevel              = QLoggerLevel::LogLevel::Fatal;    // Maximum Log Level
-            bool                    isSet                   = false;                            // Track if mySettings has been set
+            QSettings               *mySettings             = nullptr;                          //!< \c mySettings              \brief QSettings is used for this class.
+            QString                 myLogPath               = "";                               //!< \c myLogPath               \brief Log Path: ${HOME}/AppName.
+            QString                 myLogFolderName         = "";                               //!< \c myLogFolderName         \brief Log Folder Name: ${HOME}/AppName/LogFolderName.
+            QString                 myLogFileName           = "";                               //!< \c myLogFileName           \brief Log File Name, if blank, make one up using pattern.
+            QString                 myLogFullPath           = "";                               //!< \c myLogFullPath           \brief Log Full Path ${HOME}/AppName/LogFolderName/LogFileName.LogFileExtension.
+            QString                 myLogNamePattern        = "";                               //!< \c myLogNamePattern        \brief Log Name Pattern: see Notes at top.
+            QString                 myLogFileExtension      = "";                               //!< \c myLogFileExtension      \brief Log File Extension.
+            QString                 myFilePath              = "";                               //!< \c myFilePath              \brief Path to the folder that holds the data, I named it data by default.
+            QString                 myFileFolderName        = "";                               //!< \c myFileFolderName        \brief File Folder Name.
+            QString                 myHomePath              = "";                               //!< \c myHomePath              \brief Home Path.
+            QString                 myModuleName            = "";                               //!< \c myModuleName            \brief Module Name.
+            QString                 myUserName              = "";                               //!< \c myUserName              \brief User Name.
+            QString                 myIniFileName           = "";                               //!< \c myIniFileName           \brief Ini File Name.
+            QString                 myOrganizationName      = "";                               //!< \c myOrganizationName      \brief Organization Name.
+            QString                 myOrganizationDomain    = "";                               //!< \c myOrganizationDomain    \brief Organization Domain.
+            QString                 myApplicationName       = "";                               //!< \c myApplicationName       \brief Application Name.
+            QString                 myUrl                   = "";                               //!< \c myUrl                   \brief URL used for HTTP request for Log Server.
+            quint16                 myPort                  = 0;                                //!< \c myPort                  \brief Port Number of Log Server used URL.
+            QLoggerManager         *myLoggerManager         = nullptr;                          //!< \c myLoggerManager         \brief QLogger Manager.
+            QLoggerLevel::LogLevel  myLogLevel              = QLoggerLevel::LogLevel::Fatal;    //!< \c myLogLevel              \brief Maximum Log Level.
+            bool                    isSet                   = false;                            //!< \c isSet                   \brief Track if mySettings has been set.
 
     }; // end class QLoggerCommon
 } // end namespace QLogger
