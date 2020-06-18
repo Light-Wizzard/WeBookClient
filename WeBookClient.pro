@@ -63,9 +63,9 @@ SOURCES     *= src/main.cpp
 FORMS       += src/MainWindow.ui
 FORMS       += src/AboutDialog.ui
 #
-DISTFILES   += data/WeBookClient.ini \
-    WeBookClient.doxygen \
-    src/QtAES/Readme.md
+DISTFILES   += data/WeBookClient.ini
+DISTFILES   += WeBookClient.doxygen
+DISTFILES   += src/QtAES/Readme.md
 DISTFILES   += WeBookClient.qdocconf
 DISTFILES   += data/WeBook.toc
 DISTFILES   += data/WeBooks.cat
@@ -74,8 +74,8 @@ DISTFILES   += README.md
 #
 RESOURCES   += WeBookClient.qrc
 ###############################################################################
-# https://github.com/Light-Wizzard/QLogger                                    #
 # Fork: https://github.com/francescmm/QLogger                                 #
+# https://github.com/Light-Wizzard/QLogger                                    #
 ###############################################################################
 HEADERS     *= src/QLogger/QLoggerLevel.h
 HEADERS     *= src/QLogger/QLoggerConstants.h
@@ -92,7 +92,8 @@ SOURCES     *= src/QLogger/QLoggerCommon.cpp
 HEADERS     *= src/QLogger/QLoggerCrypto.h
 SOURCES     *= src/QLogger/QLoggerCrypto.cpp
 ###############################################################################
-# https://github.com/bricke/Qt-AES                                            #
+# Fork: https://github.com/bricke/Qt-AES                                      #
+# https://github.com/Light-Wizzard/Qt-AES                                     #
 ###############################################################################
 INCLUDEPATH *= src/QtAES
 DEPENDSPATH *= src/QtAES
