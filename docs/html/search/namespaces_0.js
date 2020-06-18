@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['qlogger_165',['QLogger',['../namespaceQLogger.html',1,'']]]
+  ['qlogger_250',['QLogger',['../namespaceQLogger.html',1,'']]]
 ];

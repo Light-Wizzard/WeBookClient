@@ -20,8 +20,9 @@
 *******************************************************************************/
 /*!
    \class MainWindow
-   \title WeBook Client Main Windows
+   \fn MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
    \brief WeBook is Pronounced Web Book, it is a Web Content Book Manager.
+   \c parent
  */
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
@@ -1603,4 +1604,5 @@ void MainWindow::onStatusMessage(const QString &message)
         onTocUpdateActions();
     }
 } // end onStatusMessage
-/* **************************   End of File ****************************   */
+/******************************* End of File *********************************/
+

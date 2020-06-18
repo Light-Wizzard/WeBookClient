@@ -4,12 +4,14 @@
 *******************************************************************************/
 #include "TreeViewDragDropModel.h"
 /******************************************************************************
-* TreeViewDragDropModel Constructor                                          *
-* Passes strings to TreeModel                                                *
+* TreeViewDragDropModel Constructor                                           *
+* Passes strings to TreeModel                                                 *
 *******************************************************************************/
 /*!
    \class TreeViewDragDropModel
+   \fn TreeViewDragDropModel::TreeViewDragDropModel(const QString &strings, QObject *parent) : TreeModel(strings, parent)
    \brief Drag & Drop Tree View Model.
+   \c strings are like database enteries, \c parent of object.
  */
 TreeViewDragDropModel::TreeViewDragDropModel(const QString &strings, QObject *parent) : TreeModel(strings, parent)
 {
@@ -21,7 +23,7 @@ TreeViewDragDropModel::TreeViewDragDropModel(const QString &strings, QObject *pa
     if (isDebugMessage) qDebug() << "TreeViewDragDropModel::TreeViewDragDropModel(" << strings << ", parent)";
 } // end TreeViewDragDropModel
 /******************************************************************************
-* flags                                                                      *
+* flags                                                                       *
 *******************************************************************************/
 Qt::ItemFlags TreeViewDragDropModel::flags(const QModelIndex &index) const
 {
@@ -32,14 +34,14 @@ Qt::ItemFlags TreeViewDragDropModel::flags(const QModelIndex &index) const
     else                 return Qt::ItemIsDropEnabled | defaultFlags;
 } // end flags
 /******************************************************************************
-* getErrorMessage                                                            *
+* getErrorMessage                                                             *
 *******************************************************************************/
 QString TreeViewDragDropModel::getErrorMessage()
 {
     return myErrorMessage;
 } // end getErrorMessage
 /******************************************************************************
-* dropMimeData                                                               *
+* dropMimeData                                                                *
 *******************************************************************************/
 bool TreeViewDragDropModel::dropMimeData(const QMimeData *data, Qt::DropAction action, int row, int column, const QModelIndex &parent)
 {
@@ -103,7 +105,7 @@ bool TreeViewDragDropModel::dropMimeData(const QMimeData *data, Qt::DropAction a
     return true;
 } // end dropMimeData
 /******************************************************************************
-* mimeData                                                                   *
+* mimeData                                                                    *
 *******************************************************************************/
 QMimeData *TreeViewDragDropModel::mimeData(const QModelIndexList &indexes) const
 {
@@ -126,7 +128,7 @@ QMimeData *TreeViewDragDropModel::mimeData(const QModelIndexList &indexes) const
     return mimeData;
 } // end mimeData
 /******************************************************************************
-* mimeTypes                                                                  *
+* mimeTypes                                                                   *
 *******************************************************************************/
 QStringList TreeViewDragDropModel::mimeTypes() const
 {
@@ -134,12 +136,13 @@ QStringList TreeViewDragDropModel::mimeTypes() const
     return types;
 } // end mimeTypes
 /******************************************************************************
-* supportedDropActions MoveAction only                                       *
+* supportedDropActions MoveAction only                                        *
 *******************************************************************************/
 Qt::DropActions TreeViewDragDropModel::supportedDropActions() const
 {
     if (isDebugAllMessage) qDebug() << "TreeViewDragDropModel::supportedDropActions = Qt::MoveAction";
     return Qt::MoveAction;
 } // end supportedDropActions
-/* **************************   End of File ****************************   */
+/******************************* End of File *********************************/
+
 

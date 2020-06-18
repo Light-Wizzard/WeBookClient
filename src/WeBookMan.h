@@ -36,13 +36,14 @@ class WeBookMan : public QAbstractListModel
         QString getData();
 
     private:
-        QObject                 *myParent         = nullptr;    // Needed by QRegExpValidator
-        QStringList              stringList;                    //
-        QLogger::QLoggerCommon  *qLoggerCommon    = nullptr;    // Logging and QtSettings
-        QString                  weBookListItemsReturned;       //
-        QList<QVariant>          rootData          = { "ID" };  //
-        bool                     isDebugMessage    = true;      // Set to true to show debug messages
-        bool                     isDebugAllMessage = false;     // Set to true to show all debug messages
+        QObject                 *myParent         = nullptr;    //!< \c myParent                \brief Needed by QRegExpValidator
+        QStringList              stringList;                    //!< \c stringList              \brief String List
+        QLogger::QLoggerCommon  *qLoggerCommon    = nullptr;    //!< \c qLoggerCommon           \brief Logging and QtSettings
+        QString                  weBookListItemsReturned;       //!< \c weBookListItemsReturned \brief WeBook List Items Returned
+        QList<QVariant>          rootData          = { "ID" };  //!< \c rootData                \brief Root Data
+        bool                     isDebugMessage    = true;      //!< \c isDebugMessage          \brief Set to true to show debug messages
+        bool                     isDebugAllMessage = false;     //!< \c isDebugAllMessage       \brief Set to true to show all debug messages
 }; // end class WeBookMan
 //#endif // WEBOOKMAN_H
-/* **************************   End of File ****************************   */
+/******************************* End of File *********************************/
+

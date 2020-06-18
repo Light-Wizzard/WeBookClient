@@ -2,19 +2,14 @@
 \label{classTreeItem}\index{TreeItem@{TreeItem}}
 
 
-Represents a Tree Item.  
-
-
-
-
 {\ttfamily \#include $<$Tree\+Item.\+h$>$}
 
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{classTreeItem_a1f196d517ab783210165eb714c4ea6b3}\label{classTreeItem_a1f196d517ab783210165eb714c4ea6b3}} 
-{\bfseries Tree\+Item} (const Q\+List$<$ Q\+Variant $>$ \&\mbox{\hyperlink{classTreeItem_ae1decf8f5fb22c781ada09f397201a2b}{data}}, int my\+Level, \mbox{\hyperlink{classTreeItem}{Tree\+Item}} $\ast$\mbox{\hyperlink{classTreeItem_a392ec493dfab91ee474d7ff83e2c0211}{parent}}=nullptr)
-\item 
+\mbox{\hyperlink{classTreeItem_a1f196d517ab783210165eb714c4ea6b3}{Tree\+Item}} (const Q\+List$<$ Q\+Variant $>$ \&\mbox{\hyperlink{classTreeItem_ae1decf8f5fb22c781ada09f397201a2b}{data}}, int my\+Level, \mbox{\hyperlink{classTreeItem}{Tree\+Item}} $\ast$\mbox{\hyperlink{classTreeItem_a392ec493dfab91ee474d7ff83e2c0211}{parent}}=nullptr)
+\begin{DoxyCompactList}\small\item\em Represents a Tree Item, {\ttfamily data} is the Item, and {\ttfamily parent} of object. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classTreeItem_a859429185d908c3e54861bbbfb185425}{$\sim$\+Tree\+Item}} ()
 \item 
 void \mbox{\hyperlink{classTreeItem_ac7f432ac0587ca037e80857eefd622f8}{append\+Child}} (\mbox{\hyperlink{classTreeItem}{Tree\+Item}} $\ast$\mbox{\hyperlink{classTreeItem_a80ab3164e41c8a43f1a9ef7255d88249}{child}})
@@ -40,14 +35,11 @@ bool \mbox{\hyperlink{classTreeItem_a179b46fe4ca40bd8a3331401a5a12a99}{set\+Data
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classTreeItem_a9874e2b68aad9fea9f1772e54f6079f7}\label{classTreeItem_a9874e2b68aad9fea9f1772e54f6079f7}} 
-int {\bfseries level} = -\/1
-\end{DoxyCompactItemize}
+int \mbox{\hyperlink{classTreeItem_a9874e2b68aad9fea9f1772e54f6079f7}{level}} = -\/1
+\begin{DoxyCompactList}\small\item\em {\ttfamily level} \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-Represents a Tree Item. 
-
 class \mbox{\hyperlink{classTreeItem}{Tree\+Item}} $\ast$ Column is Tablature, you can define any number of columns $\ast$ Row is the number of Column pairs $\ast$
 
 We\+Book\+: Pronounced Web-\/\+Book, is a Book Content Management System (B\+C\+MS) $\ast$ Drag \& Drop Model $\ast$ \mbox{\hyperlink{classTreeItem}{Tree\+Item}} Constructor $\ast$ 
@@ -123,6 +115,19 @@ row $\ast$ \mbox{\Hypertarget{classTreeItem_a179b46fe4ca40bd8a3331401a5a12a99}\l
 {\footnotesize\ttfamily bool Tree\+Item\+::set\+Data (\begin{DoxyParamCaption}\item[{int}]{column,  }\item[{const Q\+Variant \&}]{data }\end{DoxyParamCaption})}
 
 \mbox{\hyperlink{classTreeItem_a179b46fe4ca40bd8a3331401a5a12a99}{set\+Data(int column, const Q\+Variant \&data)}} $\ast$ 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classTreeItem_a9874e2b68aad9fea9f1772e54f6079f7}\label{classTreeItem_a9874e2b68aad9fea9f1772e54f6079f7}} 
+\index{TreeItem@{TreeItem}!level@{level}}
+\index{level@{level}!TreeItem@{TreeItem}}
+\doxysubsubsection{\texorpdfstring{level}{level}}
+{\footnotesize\ttfamily int Tree\+Item\+::level = -\/1}
+
+
+
+{\ttfamily level} 
+
+Level Number 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 

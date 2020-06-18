@@ -8,6 +8,7 @@
 *******************************************************************************/
 /*!
    \class AboutDialog
+   \fn AboutDialog::AboutDialog(QWidget *parent) : QDialog(parent), ui(new Ui::AboutDialog)
    \brief Show About Dialog Box.
  */
 AboutDialog::AboutDialog(QWidget *parent) : QDialog(parent), ui(new Ui::AboutDialog)
@@ -22,4 +23,5 @@ AboutDialog::~AboutDialog()
 {
     delete ui;
 } // end ~AboutDialog
-/* **************************   End of File ****************************   */
+/******************************* End of File *********************************/
+

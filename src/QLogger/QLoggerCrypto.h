@@ -1,26 +1,6 @@
 #pragma once
 #ifndef QLOGGERCRYPTO_H
 #define QLOGGERCRYPTO_H
-/****************************************************************************************
- * QLogger is a library to register and print logs into a file.
- **
- * LinkedIn: www.linkedin.com/in/cescmm/
- * Web: www.francescmm.com
- **
- * This lbirary is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
- **
- * This library is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Lesser General Public License for more details.
- **
- * You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
- ***************************************************************************************/
 
 #include <QApplication>
 #include <QtCore>
@@ -40,7 +20,7 @@
 namespace QLogger
 {
     /******************************************************************************
-    * class QLoggerCrypto                                                        *
+    * class QLoggerCrypto                                                         *
     *******************************************************************************/
     class QLoggerCrypto : public QObject
     {
@@ -50,17 +30,49 @@ namespace QLogger
         public:
             explicit QLoggerCrypto();
             ~QLoggerCrypto();
-            //
             // Enumerators
-            enum PasswordCryptoMd     { PasswordCryptoHashMd4, PasswordCryptoHashMd5 }; // Used for data encyption
-            enum PasswordCryptoSha    { PasswordCryptoHashSha1, PasswordCryptoHashSha224, PasswordCryptoHashSha256, PasswordCryptoHashSha384, PasswordCryptoHashSha512, PasswordCryptoHashSha3_224, PasswordCryptoHashSha3_256, PasswordCryptoHashSha3_384, PasswordCryptoHashSha3_512 };
-            enum PasswordCryptoKeccak { PasswordCryptoHashKeccak_224, PasswordCryptoHashKeccak_256, PasswordCryptoHashKeccak_384, PasswordCryptoHashKeccak_512 };
-            Q_ENUM(PasswordCryptoMd)       // I use MD 4 or 5 as a Seed to AES
-            Q_ENUM(PasswordCryptoSha)      // I use SHAx also as a Seed to AES
-            Q_ENUM(PasswordCryptoKeccak)   // I am leaving this in, in case I want to use it
-
-            // Crypto Key
-            QString getCryptoKey();                                                             // myCryptoKey
+            /*!
+                \enum PasswordCryptoMd
+                \brief Password Crypto MD Hash.
+             */
+            enum PasswordCryptoMd
+            {
+                PasswordCryptoHashMd4,  //!< \c PasswordCryptoHashMd4 \brief Password Crypto Hash Md4 Minimal.
+                PasswordCryptoHashMd5   //!< \c PasswordCryptoHashMd5 \brief Password Crypto Hash Md5 Highest.
+            }; // end enum PasswordCryptoMdn
+            /*!
+                \enum PasswordCryptoSha
+                \brief Password Crypto Sha Hash.
+             */
+            enum PasswordCryptoSha
+            {
+                PasswordCryptoHashSha1,      //!< \c PasswordCryptoHashSha1     \brief Password Crypto Hash Sha1 Minimal.
+                PasswordCryptoHashSha224,    //!< \c PasswordCryptoHashSha224   \brief Password Crypto Hash Sha224 Medium Minimal.
+                PasswordCryptoHashSha256,    //!< \c PasswordCryptoHashSha256   \brief Password Crypto Hash Sha256 Medium.
+                PasswordCryptoHashSha384,    //!< \c PasswordCryptoHashSha384   \brief Password Crypto Hash Sha384 Medium High.
+                PasswordCryptoHashSha512,    //!< \c PasswordCryptoHashSha512   \brief Password Crypto Hash Sha512 Highest.
+                PasswordCryptoHashSha3_224,  //!< \c PasswordCryptoHashSha3_224 \brief Password Crypto Hash Sha3_224 Minimal.
+                PasswordCryptoHashSha3_256,  //!< \c PasswordCryptoHashSha3_256 \brief Password Crypto Hash Sha3_256 Medium.
+                PasswordCryptoHashSha3_384,  //!< \c PasswordCryptoHashSha3_384 \brief Password Crypto Hash Sha3_384 Medium High.
+                PasswordCryptoHashSha3_512   //!< \c PasswordCryptoHashSha3_512 \brief Password Crypto Hash Sha3_512 Highest.
+            }; // end enum PasswordCryptoSha
+            /*!
+                \enum PasswordCryptoKeccak
+                \brief Password Crypto Keccak.
+             */
+            enum PasswordCryptoKeccak
+            {
+                PasswordCryptoHashKeccak_224,  //!< \c PasswordCryptoHashKeccak_224 \brief Password Crypto Hash Keccak_224 Minimal.
+                PasswordCryptoHashKeccak_256,  //!< \c PasswordCryptoHashKeccak_256 \brief Password Crypto Hash Keccak_256 Medium.
+                PasswordCryptoHashKeccak_384,  //!< \c PasswordCryptoHashKeccak_384 \brief Password Crypto Hash Keccak_384 Medium High.
+                PasswordCryptoHashKeccak_512   //!< \c PasswordCryptoHashKeccak_512 \brief Password Crypto Hash Keccak_512 Highest.
+            }; // end enum PasswordCryptoKeccak
+            Q_ENUM(PasswordCryptoMd)       //!< \brief I use MD 4 or 5 as a Seed to AES.
+            Q_ENUM(PasswordCryptoSha)      //!< \brief I use SHAx also as a Seed to AES.
+            Q_ENUM(PasswordCryptoKeccak)   //!< \brief I use Keccakx for other things.
+            //
+            // No matter what function I put here, I will get a warning warning: documented symbol 'x' was not declared or defined.
+            QString getCryptoKey();
             void setCryptoKey(const QString &thisCryptoKey);
             // Crypto IV Vector
             QString getCryptoIvVector();                                                        // myCryptoIvVector
@@ -77,18 +89,19 @@ namespace QLogger
             void setCryptoCodeHashish();                                                        // set Crypto Code Hashish (Hash Like: combines both cryptoKey and cryptoIvVector, to form AES Encrytion)
 
         signals:
-            void handelSettinChanged();
+            void handelSettingChanged(); //!< \brief handel Setting Change.
 
         private:
-            QString                 myCryptoKey             = "";                               // Argument to Constructor from main.cpp
-            QString                 myCryptoIvVector        = "";                               // Argument to Constructor from main.cpp
-            PasswordCryptoMd        myCryptoMd              = PasswordCryptoHashMd5;            // PasswordCryptoHashMd4, PasswordCryptoHashMd5
-            PasswordCryptoSha       myCryptoSha             = PasswordCryptoHashSha3_512;       // PasswordCryptoHashSha1, PasswordCryptoHashSha224, PasswordCryptoHashSha256, PasswordCryptoHashSha384, PasswordCryptoHashSha512, PasswordCryptoHashSha3_224, PasswordCryptoHashSha3_256, PasswordCryptoHashSha3_384, PasswordCryptoHashSha3_512
-            PasswordCryptoKeccak    myCryptoKeccak          = PasswordCryptoHashKeccak_512;     // PasswordCryptoHashKeccak_224, PasswordCryptoHashKeccak_256, PasswordCryptoHashKeccak_384, PasswordCryptoHashKeccak_512
-            QByteArray              myHashKey;                                                  // used for Encryption and Decrytion
-            QByteArray              myHashIV;                                                   // used for Encryption and Decrytion
-            QLoggerCommon          *qLoggerCommon           = nullptr;                          //
+            QString                 myCryptoKey             = "";                               //!< \c myCryptoKey         \brief Argument to Constructor from main.cpp.
+            QString                 myCryptoIvVector        = "";                               //!< \c myCryptoIvVector    \brief Argument to Constructor from main.cpp.
+            PasswordCryptoMd        myCryptoMd              = PasswordCryptoHashMd5;            //!< \c myCryptoMd          \brief PasswordCryptoHashMd4, PasswordCryptoHashMd5.
+            PasswordCryptoSha       myCryptoSha             = PasswordCryptoHashSha3_512;       //!< \c myCryptoSha         \brief PasswordCryptoHashSha1, PasswordCryptoHashSha224, PasswordCryptoHashSha256, PasswordCryptoHashSha384, PasswordCryptoHashSha512, PasswordCryptoHashSha3_224, PasswordCryptoHashSha3_256, PasswordCryptoHashSha3_384, PasswordCryptoHashSha3_512.
+            PasswordCryptoKeccak    myCryptoKeccak          = PasswordCryptoHashKeccak_512;     //!< \c myCryptoKeccak      \brief PasswordCryptoHashKeccak_224, PasswordCryptoHashKeccak_256, PasswordCryptoHashKeccak_384, PasswordCryptoHashKeccak_512.
+            QByteArray              myHashKey;                                                  //!< \c myHashKey           \brief used for Encryption and Decrytion.
+            QByteArray              myHashIV;                                                   //!< \c myHashIV            \brief used for Encryption and Decrytion.
+            QLoggerCommon          *qLoggerCommon           = nullptr;                          //!< \c qLoggerCommon       \brief Logger Common Instance.
     }; // end class QLoggerCrypto
 } // end namespace QLogger
 #endif // QLOGGERCRYPTO_H
-/* **************************   End of File ****************************   */
+/******************************* End of File *********************************/
+

@@ -751,4 +751,5 @@ namespace QLogger
         return getSetting(ConstSettingsGeometryMin, thisDefaultValue).toBool();
     } // end getGeometryMin
 } // end namespace QLogger
-/* **************************   End of File ****************************   */
+/******************************* End of File *********************************/
+

@@ -73,13 +73,14 @@ namespace QLogger
             bool addDestination(const QString &fileDest, const QStringList &modules, QLoggerLevel::LogLevel level);
 
             /*!
+               \fn void enqueueMessage(const QString &module, QLoggerLevel::LogLevel level, const QString &message, QString file, int line, const QString &theFunction);
              * @brief enqueueMessage Enqueues a message in the corresponding QLoggerWritter.
              * @param module The module that writes the message.
              * @param level The level of the message.
              * @param message The message to log.
              * @param file The file that logs.
              * @param line The line in the file where the log comes from.
-             * @param Function The Function Name where the call in the file where the log comes from.
+             * @param theFunction The Function Name where the call in the file where the log comes from.
              */
             void enqueueMessage(const QString &module, QLoggerLevel::LogLevel level, const QString &message, QString file, int line, const QString &theFunction);
 
@@ -208,4 +209,5 @@ void QLog_(const QString &module, QLoggerLevel::LogLevel level, const QString &m
     QLogger::QLoggerManager::getInstance()->enqueueMessage(module, QLoggerLevel::LogLevel::Fatal, message, QLOGGER_MESSAGELOG_FILE, QLOGGER_MESSAGELOG_LINE, QLOGGER_MESSAGELOG_FUNC)
 #endif
 
-/* **************************   End of File ****************************   */
+/******************************* End of File *********************************/
+

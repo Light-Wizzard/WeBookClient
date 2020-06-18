@@ -14,22 +14,24 @@
 *******************************************************************************/
 /*!
    \class QAESEncryption
-   \inmodule WeBookClient
-   \since 5.13
-   \inherits QObject
    \brief Q-AES Encryption.
  */
 class QAESEncryption : public QObject
 {
         Q_OBJECT
     public:
+        /*!
+         * \brief The Aes enum
+         */
         enum Aes
         {
             AES_128,
             AES_192,
             AES_256
         };
-
+        /*!
+         * \brief The Mode enum
+         */
         enum Mode
         {
             ECB,
@@ -37,7 +39,9 @@ class QAESEncryption : public QObject
             CFB,
             OFB
         };
-
+        /*!
+         * \brief The Padding enum
+         */
         enum Padding
         {
             ZERO,
@@ -160,4 +164,5 @@ class QAESEncryption : public QObject
         const quint8 Rcon[14] = { 0x8d, 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80, 0x1b, 0x36, 0x6c, 0xd8, 0xab };
 }; // end class QAESEncryption
 #endif // QAESENCRYPTION_H
-/* **************************   End of File ****************************   */
+/******************************* End of File *********************************/
+

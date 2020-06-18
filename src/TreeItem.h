@@ -41,17 +41,18 @@ class TreeItem
 
         bool setData(int column, const QVariant &data);     //
 
-        int                 level             = -1;         // Level Number
+        int                 level             = -1;         //!< \c level \brief Level Number
 
     private:
-        QLogger::QLoggerCommon  *qLoggerCommon     = nullptr;    // Logging and QtSettings
-        QList<TreeItem*>         childItems;                     // child Items
-        QList<QVariant>          itemData;                       // item Data
-        TreeItem                *parentItem        = nullptr;    // parent Item
-        bool                     isDebugMessage    = true;       // Set to true to show debug messages
-        bool                     isDebugAllMessage = false;      // Set to true to show all debug messages
+        QLogger::QLoggerCommon  *qLoggerCommon     = nullptr;    //!< \c qLoggerCommon     \brief Logging and QtSettings
+        QList<TreeItem*>         childItems;                     //!< \c childItems        \brief child Items
+        QList<QVariant>          itemData;                       //!< \c itemData          \brief item Data
+        TreeItem                *parentItem        = nullptr;    //!< \c parentItem        \brief parent Item
+        bool                     isDebugMessage    = true;       //!< \c isDebugMessage    \brief Set to true to show debug messages
+        bool                     isDebugAllMessage = false;      //!< \c isDebugAllMessage \brief Set to true to show all debug messages
 
 }; // end class TreeItem
 #endif // TREEITEM_H
-/* **************************   End of File ****************************   */
+/******************************* End of File *********************************/
+
 

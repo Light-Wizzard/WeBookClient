@@ -13,6 +13,10 @@ Q_DECLARE_METATYPE(QLoggerLevel::LogLevel);
 *******************************************************************************/
 namespace QLogger
 {
+    /*!
+       \class QLoggerManager
+       \brief Logger Manager.
+     */
     /**************************************************************************
     * QLog_                                                                  *
     ***************************************************************************/
@@ -200,4 +204,5 @@ namespace QLogger
         for (auto &logWriter : mModuleDest) logWriter->setLogLevel(level);
     }
 } // end namespace QLogger
-/* **************************   End of File ****************************   */
+/******************************* End of File *********************************/
+

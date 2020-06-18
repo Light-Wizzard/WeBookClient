@@ -45,8 +45,8 @@ class TreeModel : public QAbstractItemModel
 
         QString getData();
 
-        TreeItem        *rootTreeItem;
-        QString          treeListItemsReturned;
+        TreeItem        *rootTreeItem;          //!< \c rootTreeItem          \brief Root Tree Item.
+        QString          treeListItemsReturned; //!< \c treeListItemsReturned \brief Tree List Items Returned.
 
         //void forEach(QAbstractItemModel* model, const QModelIndex &parent);
         void forEachSave(const QModelIndex &parent, bool isChild);
@@ -59,12 +59,13 @@ class TreeModel : public QAbstractItemModel
         void setupModelData(const QStringList &lines, TreeItem *parent);
 
     private:
-        QLogger::QLoggerCommon  *qLoggerCommon     = nullptr;            // Logging and QtSettings
-        QObject                 *myParent          = nullptr;            // required by setData
-        QList<QVariant>          rootData          = { "ID", "Title" };  //
-        bool                     isDebugMessage    = true;               // Set to true to show debug messages
-        bool                     isDebugAllMessage = false;              // Set to true to show all debug messages
+        QLogger::QLoggerCommon  *qLoggerCommon     = nullptr;            //!< \c qLoggerCommon      \brief Logging and QtSettings.
+        QObject                 *myParent          = nullptr;            //!< \c myParent           \brief required by setData.
+        QList<QVariant>          rootData          = { "ID", "Title" };  //!< \c rootData           \brief Root Data.
+        bool                     isDebugMessage    = true;               //!< \c isDebugMessage     \brief Set to true to show debug messages.
+        bool                     isDebugAllMessage = false;              //!< \c isDebugAllMessage  \brief Set to true to show all debug messages.
 }; // end class TreeModel
 #endif // TREEMODEL_H
-/* **************************   End of File ****************************   */
+/******************************* End of File *********************************/
+
 

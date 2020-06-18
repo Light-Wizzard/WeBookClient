@@ -10,7 +10,7 @@
 
 namespace Ui { class AboutDialog; }
 /******************************************************************************
-* class AboutDialog : public QDialog                                         *
+* class AboutDialog : public QDialog                                          *
 *******************************************************************************/
 class AboutDialog : public QDialog
 {
@@ -24,4 +24,4 @@ class AboutDialog : public QDialog
         Ui::AboutDialog *ui;
 }; // end class AboutDialog
 #endif // ABOUTDIALOG_H
-/* **************************   End of File ****************************   */
+/******************************* End of File *********************************/

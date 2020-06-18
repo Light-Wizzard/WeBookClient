@@ -8,25 +8,29 @@
 namespace QLogger
 {
     /**************************************************************************
-    * QLoggerCrypto Constructor                                              *
+    * QLoggerCrypto Constructor                                               *
     * Requires Setting:
     * OrganizationName
     * OrganizationDomain
     * ApplicationName
     ***************************************************************************/
+    /*!
+     * \fn QLoggerCrypto::QLoggerCrypto() : QObject()
+     * \brief QLoggerCrypto::QLoggerCrypto
+     */
     QLoggerCrypto::QLoggerCrypto() : QObject()
     {
         qLoggerCommon = new QLoggerCommon(true);
     } // end QLoggerCrypto
     /**************************************************************************
-    * QLoggerCrypto Deconstructor                                            *
+    * QLoggerCrypto Deconstructor                                             *
     ***************************************************************************/
     QLoggerCrypto::~QLoggerCrypto()
     {
 
     } // end ~QLoggerCrypto
     /**************************************************************************
-    * enCodeSecret(const QString &mySecretString)                            *
+    * enCodeSecret(const QString &mySecretString)                             *
     ***************************************************************************/
     QString QLoggerCrypto::enCodeSecret(const QString &thisSecretString)
     {
@@ -37,7 +41,7 @@ namespace QLogger
         return encodeText;
     } // end enCodeSecret
     /**************************************************************************
-    * deCodeSecret(const QString &mySecretString)                            *
+    * deCodeSecret(const QString &mySecretString)                             *
     ***************************************************************************/
     QString QLoggerCrypto::deCodeSecret(const QString &thisSecretString)
     {
@@ -49,7 +53,7 @@ namespace QLogger
         return decodedString;
     } // end deCodeSecret
     /**************************************************************************
-    * setCryptoCodeHashish                                                   *
+    * setCryptoCodeHashish                                                    *
     ***************************************************************************/
     void QLoggerCrypto::setCryptoCodeHashish()
     {
@@ -57,45 +61,45 @@ namespace QLogger
         getSha();
     } // end setCryptoCodeHashish
     /**************************************************************************
-    * getCryptoKey                                                           *
-    ***************************************************************************/
+     * \brief QLoggerCrypto::getCryptoKey.
+     **************************************************************************/
     QString QLoggerCrypto::getCryptoKey()
     {
-        myCryptoKey = ConstDefaultCryptoKey;
+        if (myCryptoKey.isEmpty()) myCryptoKey = ConstDefaultCryptoKey;
         return myCryptoKey;
     } // end getCryptoKey
     /**************************************************************************
-    * setCryptoKey(QString myCrypokey)                                       *
+    * setCryptoKey(QString myCrypokey)                                        *
     ***************************************************************************/
     void QLoggerCrypto::setCryptoKey(const QString &thisCryptoKey)
     {
         if (myCryptoKey.isEmpty() || myCryptoKey != thisCryptoKey)
         {
             myCryptoKey = thisCryptoKey;
-            emit handelSettinChanged();
+            emit handelSettingChanged();
         }
     } // end setCryptoKey
     /**************************************************************************
-    * getCryptoIvVector                                                      *
+    * getCryptoIvVector                                                       *
     ***************************************************************************/
     QString QLoggerCrypto::getCryptoIvVector()
     {
-        myCryptoIvVector = ConstDefaultCryptoIvVector;
+        if (myCryptoIvVector.isEmpty()) myCryptoIvVector = ConstDefaultCryptoIvVector;
         return myCryptoIvVector;
     } // end getCryptoIvVector
     /**************************************************************************
-    * setCryptoIvVector(QString myCrypokey)                                  *
+    * setCryptoIvVector(QString myCrypokey)                                   *
     ***************************************************************************/
     void QLoggerCrypto::setCryptoIvVector(const QString &thisCryptoIvVector)
     {
         if (myCryptoIvVector.isEmpty() || myCryptoIvVector != thisCryptoIvVector)
         {
             myCryptoIvVector = thisCryptoIvVector;
-            emit handelSettinChanged();
+            emit handelSettingChanged();
         }
     } // end setCryptoIvVector
     /**************************************************************************
-    * getHashKey                                                             *
+    * getHashKey                                                              *
     ***************************************************************************/
     QByteArray QLoggerCrypto::getHashKey()
     {
@@ -103,7 +107,7 @@ namespace QLogger
         return myHashKey;
     } // end getHashKey
     /**************************************************************************
-    * getHashIV                                                              *
+    * getHashIV                                                               *
     ***************************************************************************/
     QByteArray QLoggerCrypto::getHashIV()
     {
@@ -111,7 +115,7 @@ namespace QLogger
         return myHashIV;
     } // end getHashIV
     /**************************************************************************
-    * getKeccak                                                              *
+    * getKeccak                                                               *
     ***************************************************************************/
     QString QLoggerCrypto::getKeccak(const QString &thisIvVector)
     {
@@ -134,7 +138,7 @@ namespace QLogger
         return securePassword;
     } // end getKeccak
     /**************************************************************************
-    * getMd                                                                  *
+    * getMd                                                                   *
     * Constant
     QCryptographicHash::Md4
     QCryptographicHash::Md5
@@ -156,7 +160,7 @@ namespace QLogger
         return securePassword;
     } // end getMd
     /**************************************************************************
-    * getSha                                                                 *
+    * getSha                                                                  *
     * Constant
     QCryptographicHash::Sha1
     QCryptographicHash::Sha224
@@ -213,4 +217,5 @@ namespace QLogger
         return securePassword;
     } // end getSha
 } // end namespace QLogger
-/* **************************   End of File ****************************   */
+/******************************* End of File *********************************/
+

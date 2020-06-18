@@ -13,14 +13,14 @@
 #include "TreeModel.h"
 
 /******************************************************************************
-* class TreeViewDragDropModel                                                *
+* class TreeViewDragDropModel                                                 *
 *******************************************************************************/
 class TreeViewDragDropModel : public TreeModel
 {
         Q_OBJECT
 
     public:
-        explicit TreeViewDragDropModel(const QString &strings, QObject *parent = 0);
+        explicit TreeViewDragDropModel(const QString &strings, QObject *parent = nullptr);
 
         Qt::ItemFlags   flags(const QModelIndex &index) const;
         bool            dropMimeData(const QMimeData *data, Qt::DropAction action, int row, int column, const QModelIndex &parent);
@@ -30,12 +30,13 @@ class TreeViewDragDropModel : public TreeModel
         QString getErrorMessage();
 
     private:
-        QLogger::QLoggerCommon  *qLoggerCommon       = nullptr;          // Logging and QtSettings
-        QString                  myErrorMessage      = "";               // my Error Message
-        const QStringList        types               = { "text/plain" }; // This only supports this type so make it const
-        bool                     isDebugMessage      = true;             // Set to true to show debug messages
-        bool                     isDebugAllMessage   = false;            // Set to true to show all debug messages
+        QLogger::QLoggerCommon  *qLoggerCommon       = nullptr;          //!< \c qLoggerCommon      \brief Logging and QtSettings
+        QString                  myErrorMessage      = "";               //!< \c myErrorMessage     \brief my Error Message
+        const QStringList        types               = { "text/plain" }; //!< \c types              \brief This only supports this type so make it const
+        bool                     isDebugMessage      = true;             //!< \c isDebugMessage     \brief Set to true to show debug messages
+        bool                     isDebugAllMessage   = false;            //!< \c isDebugAllMessage  \brief Set to true to show all debug messages
 };
 #endif
-/* **************************   End of File ****************************   */
+/******************************* End of File *********************************/
+
 

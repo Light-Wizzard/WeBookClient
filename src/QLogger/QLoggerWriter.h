@@ -61,6 +61,7 @@ namespace QLogger
             void setLogLevel(QLoggerLevel::LogLevel level) { mLevel = level; }
 
             /*!
+               \fn void enqueue(const QDateTime &date, const QString &threadId, const QString &module, QLoggerLevel::LogLevel level, const QString &fileName, int line, const QString &theFunction, const QString &message);
              * @brief enqueue Enqueues a message to be written in the destiantion.
              * @param date The date and time of the log message.
              * @param threadId The thread where the message comes from.
@@ -68,6 +69,7 @@ namespace QLogger
              * @param level The log level of the message.
              * @param fileName The file name that prints the log.
              * @param line The line of the file name that prints the log.
+             * @param theFunction The Function name of the file name that prints the log.
              * @param message The message to log.
              */
             void enqueue(const QDateTime &date, const QString &threadId, const QString &module, QLoggerLevel::LogLevel level, const QString &fileName, int line, const QString &theFunction, const QString &message);
@@ -116,4 +118,5 @@ namespace QLogger
     }; // end class QLoggerWriter
 } // end namespace QLogger
 //#endif // QLOGGERWRITER_H
-/* **************************   End of File ****************************   */
+/******************************* End of File *********************************/
+

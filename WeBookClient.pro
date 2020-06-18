@@ -64,7 +64,8 @@ FORMS       += src/MainWindow.ui
 FORMS       += src/AboutDialog.ui
 #
 DISTFILES   += data/WeBookClient.ini \
-    WeBookClient.doxygen
+    WeBookClient.doxygen \
+    src/QtAES/Readme.md
 DISTFILES   += WeBookClient.qdocconf
 DISTFILES   += data/WeBook.toc
 DISTFILES   += data/WeBooks.cat

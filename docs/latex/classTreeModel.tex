@@ -2,11 +2,6 @@
 \label{classTreeModel}\index{TreeModel@{TreeModel}}
 
 
-Show data using a Tree Model.  
-
-
-
-
 {\ttfamily \#include $<$Tree\+Model.\+h$>$}
 
 Inheritance diagram for Tree\+Model\+:\begin{figure}[H]
@@ -19,8 +14,8 @@ Inheritance diagram for Tree\+Model\+:\begin{figure}[H]
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{classTreeModel_a954051a79b9b2db45ed3aab576f6eb80}\label{classTreeModel_a954051a79b9b2db45ed3aab576f6eb80}} 
-{\bfseries Tree\+Model} (const Q\+String \&strings, Q\+Object $\ast$\mbox{\hyperlink{classTreeModel_ad29cef85c6bb0db25fb3d5b844c22e94}{parent}}=0)
-\item 
+\mbox{\hyperlink{classTreeModel_a954051a79b9b2db45ed3aab576f6eb80}{Tree\+Model}} (const Q\+String \&strings, Q\+Object $\ast$\mbox{\hyperlink{classTreeModel_ad29cef85c6bb0db25fb3d5b844c22e94}{parent}}=0)
+\begin{DoxyCompactList}\small\item\em Show data using a Tree Model. {\ttfamily strings} is database enteries. {\ttfamily parent} object. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classTreeModel_af0998d55a63c2b18be1f03e4e8567926}{$\sim$\+Tree\+Model}} ()
 \item 
 Qt\+::\+Item\+Flags \mbox{\hyperlink{classTreeModel_a2f793c5b11ec3c46571e4598ee2398e7}{flags}} (const Q\+Model\+Index \&\mbox{\hyperlink{classTreeModel_a0e6e6bbdb55d08be64cab7bafba2ce21}{index}}) const
@@ -56,12 +51,10 @@ Q\+Model\+Index \mbox{\hyperlink{classTreeModel_af7c88f45f0549188ea0fb2feacfdb25
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classTreeModel_a55f7ef387aec827578b5a37381cc9aea}\label{classTreeModel_a55f7ef387aec827578b5a37381cc9aea}} 
-\mbox{\hyperlink{classTreeItem}{Tree\+Item}} $\ast$ {\bfseries root\+Tree\+Item}
-\item 
-\mbox{\Hypertarget{classTreeModel_a772c97f3f9af3774028ed84b772798df}\label{classTreeModel_a772c97f3f9af3774028ed84b772798df}} 
-Q\+String {\bfseries tree\+List\+Items\+Returned}
-\end{DoxyCompactItemize}
+\mbox{\hyperlink{classTreeItem}{Tree\+Item}} $\ast$ \mbox{\hyperlink{classTreeModel_a55f7ef387aec827578b5a37381cc9aea}{root\+Tree\+Item}}
+\begin{DoxyCompactList}\small\item\em {\ttfamily root\+Tree\+Item} \end{DoxyCompactList}\item 
+Q\+String \mbox{\hyperlink{classTreeModel_a772c97f3f9af3774028ed84b772798df}{tree\+List\+Items\+Returned}}
+\begin{DoxyCompactList}\small\item\em {\ttfamily tree\+List\+Items\+Returned} \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -70,8 +63,6 @@ void \mbox{\hyperlink{classTreeModel_a29ef8c31bf8c8f0ce6e67122ed4d3373}{setup\+M
 
 
 \doxysubsection{Detailed Description}
-Show data using a Tree Model. 
-
 class \mbox{\hyperlink{classTreeModel}{Tree\+Model}} $\ast$
 
 We\+Book\+: Pronounced Web-\/\+Book, is a Book Content Management System (B\+C\+MS) $\ast$ Drag \& Drop Model $\ast$ \mbox{\hyperlink{classTreeModel}{Tree\+Model}} Constructor $\ast$ The Q\+Model\+Index class is used to locate data in a data model. $\ast$ 
@@ -120,7 +111,7 @@ for\+Each $\ast$
 \begin{DoxyEnumerate}
 \item Clear Q\+String\+List\+: tree\+List\+Items\+Returned.\+clear(); $\ast$
 \item Call on root\+: for\+Each(\+Q\+Model\+Index(), false); $\ast$
-\item for\+Each is initally set to false, and set to true in has\+Chilren iterator$\ast$
+\item for\+Each is initally set to false, and set to true in has\+Chilren iterator $\ast$
 \item Depending on is\+Child, format the values $\ast$ 
 \end{DoxyEnumerate}\mbox{\Hypertarget{classTreeModel_a770ea398e33d065361102c7ef2b44d69}\label{classTreeModel_a770ea398e33d065361102c7ef2b44d69}} 
 \index{TreeModel@{TreeModel}!getData@{getData}}
@@ -189,6 +180,29 @@ set\+Active $\ast$ set\+Active(\char`\"{}\+Column\+I\+D\char`\"{}, Q\+Model\+Ind
 {\footnotesize\ttfamily void Tree\+Model\+::setup\+Model\+Data (\begin{DoxyParamCaption}\item[{const Q\+String\+List \&}]{lines,  }\item[{\mbox{\hyperlink{classTreeItem}{Tree\+Item}} $\ast$}]{parent }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 \mbox{\hyperlink{classTreeModel_a29ef8c31bf8c8f0ce6e67122ed4d3373}{setup\+Model\+Data(const Q\+String\+List \&lines, Tree\+Item $\ast$parent)}} $\ast$ lines is from book\+List\+Items in mainwindow constructor $\ast$ 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classTreeModel_a55f7ef387aec827578b5a37381cc9aea}\label{classTreeModel_a55f7ef387aec827578b5a37381cc9aea}} 
+\index{TreeModel@{TreeModel}!rootTreeItem@{rootTreeItem}}
+\index{rootTreeItem@{rootTreeItem}!TreeModel@{TreeModel}}
+\doxysubsubsection{\texorpdfstring{rootTreeItem}{rootTreeItem}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classTreeItem}{Tree\+Item}}$\ast$ Tree\+Model\+::root\+Tree\+Item}
+
+
+
+{\ttfamily root\+Tree\+Item} 
+
+Root Tree Item. \mbox{\Hypertarget{classTreeModel_a772c97f3f9af3774028ed84b772798df}\label{classTreeModel_a772c97f3f9af3774028ed84b772798df}} 
+\index{TreeModel@{TreeModel}!treeListItemsReturned@{treeListItemsReturned}}
+\index{treeListItemsReturned@{treeListItemsReturned}!TreeModel@{TreeModel}}
+\doxysubsubsection{\texorpdfstring{treeListItemsReturned}{treeListItemsReturned}}
+{\footnotesize\ttfamily Q\+String Tree\+Model\+::tree\+List\+Items\+Returned}
+
+
+
+{\ttfamily tree\+List\+Items\+Returned} 
+
+Tree List Items Returned. 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 

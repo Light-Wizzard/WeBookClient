@@ -138,7 +138,7 @@ namespace QLogger
             void onSettinChanged();
 
         signals:
-            void handelSettinChanged();
+            void handelSettinChanged(); //!< handelSettinChanged \brief Handel Settin Change.
 
         private:
             QSettings               *mySettings             = nullptr;                          // QSettings is used for this class

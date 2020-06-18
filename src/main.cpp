@@ -5,7 +5,8 @@
 
 static bool isLogToFile = true;
 /******************************************************************************
-* mainEventHandler                                                           *
+* \fn void mainEventHandler(int eventValue)                                   *
+* \brief main Event Handler.
 *******************************************************************************/
 void mainEventHandler(int eventValue)
 {
@@ -19,10 +20,10 @@ void mainEventHandler(int eventValue)
     }
 } // end mainEventHandler
 /******************************************************************************
-* WeBookMessenger                                                            *
-* This uses Qt qInstallMessageHandler(WeBookMessenger);                      *
-* I have no idea if this gets called in a Thread, but Qt should handle it,   *
-* ensuring thread safe way to open and write to a log file.                  *
+* \fn void WeBookMessenger(QtMsgType type, const QMessageLogContext &context, const QString &msg)
+* \brief This uses Qt qInstallMessageHandler(WeBookMessenger);                *
+* I have no idea if this gets called in a Thread, but Qt should handle it,    *
+* ensuring thread safe way to open and write to a log file.                   *
 *******************************************************************************/
 void WeBookMessenger(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
@@ -60,22 +61,22 @@ void WeBookMessenger(QtMsgType type, const QMessageLogContext &context, const QS
     if (type == QtFatalMsg) abort();
 } // end
 /******************************************************************************
-* main                                                                       *
-* This is a Qt GUI Application written to be a Conent Manager                *
-* The concept is WeBook, or Web Book, meaning it can manage my Web Conent    *
-* The WeBookClient concept is based on a fully integrated system             *
-* I use QSettings, and Qt for that matter, so I try to set things up right   *
-* Settings that the Application requires:                                    *
-* iniFileName: settings.ini, sounds simple if everyone wanted to call it that*
-* I do not like hard coding things that should not be, but it is required    *
-* applicationName                                                            *
-* organizationName                                                           *
-* organizationDomain                                                         *
-* https://doc.qt.io/qt-5/qstandardpaths.html                                 *
-* CryptoKey and CryptoIvVector are passed in from Command Line for Security  *
-* If you change these once in use, you will have to reset all the Passwords  *
-* Never use the Defaults ConstDefaultCryptoKey/ConstDefaultCryptoIvVector    *
-* These are only for testing, and for an example                             *
+* \fn int main(int argc, char *argv[])                                        *
+* \breif This is a Qt GUI Application written to be a Conent Manager          *
+* The concept is WeBook, or Web Book, meaning it can manage my Web Conent.    *
+* The WeBookClient concept is based on a fully integrated system.             *
+* I use QSettings, and Qt for that matter, so I try to set things up right    *
+* Settings that the Application requires:                                     *
+* iniFileName: settings.ini, sounds simple if everyone wanted to call it that *
+* I do not like hard coding things that should not be, but it is required     *
+* applicationName                                                             *
+* organizationName                                                            *
+* organizationDomain                                                          *
+* https://doc.qt.io/qt-5/qstandardpaths.html                                  *
+* CryptoKey and CryptoIvVector are passed in from Command Line for Security   *
+* If you change these once in use, you will have to reset all the Passwords   *
+* Never use the Defaults ConstDefaultCryptoKey/ConstDefaultCryptoIvVector     *
+* These are only for testing, and for an example                              *
 *******************************************************************************/
 int main(int argc, char *argv[])
 {
@@ -170,4 +171,5 @@ int main(int argc, char *argv[])
     // qDebugTS << "QStyleFactory::keys=" << QStyleFactory::keys();
     return app.exec();
 } // end main
-/* **************************   End of File ****************************   */
+/******************************* End of File *********************************/
+

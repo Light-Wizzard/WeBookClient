@@ -4,7 +4,10 @@
 *******************************************************************************/
 /*!
    \class WeBookMan
+   \fn WeBookMan::WeBookMan(const QStringList &strings, QObject *parent) : QAbstractListModel(parent), myParent(parent), stringList(strings)
    \brief WeBookMan is a WeBook Manager.
+   \c strings is used as database enteries.
+   \c parent of object.
  */
 WeBookMan::WeBookMan(const QStringList &strings, QObject *parent) : QAbstractListModel(parent), myParent(parent), stringList(strings)
 {
@@ -163,8 +166,8 @@ bool WeBookMan::insertRows(int position, int rows, const QModelIndex &parent)
     return true;
 } // end insertRows
 /******************************************************************************
-*  removeRows(int position, int rows, const QModelIndex &parent)              *
-*  Removes a number of rows from the model at the specified position.
+*  \fn bool WeBookMan::removeRows(int position, int rows, const QModelIndex &parent)
+*  \brief Removes a number of rows from the model at the specified position.
 *******************************************************************************/
 bool WeBookMan::removeRows(int position, int rows, const QModelIndex &parent)
 {
@@ -181,4 +184,5 @@ bool WeBookMan::removeRows(int position, int rows, const QModelIndex &parent)
     return true;
 
 } // end removeRows
-/* ***************************   End of File *****************************   */
+/******************************* End of File *********************************/
+
