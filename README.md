@@ -118,10 +118,10 @@ without effecting Clients.
 
 ## Windows
 
-Not Working.
+Not Working on AppVeyor due to MSVC, I might need to switch to [mingw](http://www.mingw.org/),
+if I cannot figure this out.
 
-Of all days for Qt Download server to go down,
-I need to compile this on Windows, but cannot download Qt today.
+I can compile and run this in Windows using mingw.
 
 ## QTextEdit
 
