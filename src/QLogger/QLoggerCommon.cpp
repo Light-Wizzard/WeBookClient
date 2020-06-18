@@ -134,12 +134,12 @@ namespace QLogger
     {
         // organizationName, organizationDomain, applicationName and applicationName
         // are set in main.cpp, and passed into Constuctor, so they are set
-        QApplication::setOrganizationName(getOrgName());
-        QApplication::setOrganizationDomain(getOrgDomain());
-        QApplication::setApplicationName(getAppName());
-        QApplication::setApplicationDisplayName(getAppName());
+        QCoreApplication::setOrganizationName(getOrgName());
+        QCoreApplication::setOrganizationDomain(getOrgDomain());
+        QCoreApplication::setApplicationName(getAppName());
+        //QCoreApplication::setApplicationDisplayName(getAppName());
         // see *.pro file where it is: DEFINES *= APP_VERSION=$${VERSION}
-        QApplication::setApplicationVersion(QObject::tr(APP_VERSION));
+        QCoreApplication::setApplicationVersion(QObject::tr(APP_VERSION));
         QString myIni = getFullFilePathName(getIniFileName());
 
         if (!isFileMake(getFilelPath(), getIniFileName()))

@@ -2,7 +2,7 @@
 #ifndef QLOGGERCRYPTO_H
 #define QLOGGERCRYPTO_H
 
-#include <QApplication>
+#include <QCoreApplication>
 #include <QtCore>
 #include <QCryptographicHash>
 #include <QtGlobal>

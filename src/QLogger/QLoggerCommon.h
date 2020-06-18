@@ -31,7 +31,7 @@
  * h:m:s ap	    2:13:9 pm
  *****************************************************************************/
 
-#include <QApplication>
+#include <QCoreApplication>
 #include <QtCore>
 // QLogger Constants
 #include "QLoggerConstants.h"
