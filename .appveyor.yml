@@ -126,8 +126,8 @@ build_script:
   - if [%COMPILER%]==[gcc] (
       echo ----- &&
       C:\MinGW\bin\make.exe -v &&
-      echo ----- && C:\MinGW\bin\make.exe clean &&
-      C:\MinGW\bin\make.exe -C %APPVEYOR_BUILD_FOLDER%-build WeBookClient CC=clang MOREFLAGS="--target=x86_64-w64-mingw32 -Werror -Wconversion -Wno-sign-conversion"
+      echo ----- &&
+      C:\MinGW\bin\make.exe -f Makefile.Release -C %APPVEYOR_BUILD_FOLDER%-build WeBookClient CC=clang MOREFLAGS="--target=x86_64-w64-mingw32 -Werror -Wconversion -Wno-sign-conversion"
     ) ELSE (
       cd %APPVEYOR_BUILD_FOLDER%-build && '%make%'
     )
