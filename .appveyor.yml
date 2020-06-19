@@ -118,6 +118,7 @@ before_build:
     )
   - cd %APPVEYOR_BUILD_FOLDER%-build
   - dir
+  - more Makefile.Release
 
 build_script:
   # Compile it and check for .exe
