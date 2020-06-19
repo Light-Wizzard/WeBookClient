@@ -116,7 +116,8 @@ before_build:
     ) ELSE (
         qmake -o %APPVEYOR_BUILD_FOLDER%-build -r -Wall -Wlogic -Wparser CONFIG+=Release %APPVEYOR_BUILD_FOLDER%
     )
-  - dir %APPVEYOR_BUILD_FOLDER%-build
+  - cd %APPVEYOR_BUILD_FOLDER%-build
+  - dir
 
 build_script:
   # Compile it and check for .exe
