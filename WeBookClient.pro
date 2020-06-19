@@ -63,11 +63,10 @@ SOURCES     *= src/main.cpp
 FORMS       += src/MainWindow.ui
 FORMS       += src/AboutDialog.ui
 #
-DISTFILES   += .appveyor.yml
-DISTFILES   += .travis.yml
-DISTFILES   += WeBookClient.doxygen
-DISTFILES   += src/QtAES/Readme.md
-DISTFILES   += WeBookClient.qdocconf
+#DISTFILES   += .appveyor.yml
+#DISTFILES   += .travis.yml
+#DISTFILES   += WeBookClient.doxygen
+#DISTFILES   += WeBookClient.qdocconf
 DISTFILES   += data/WeBookClient.ini
 DISTFILES   += data/WeBook.toc
 DISTFILES   += data/WeBooks.cat
@@ -109,6 +108,7 @@ HEADERS     *= src/QtAES/QAESEncryption.h
 ##
 #DISTFILES   *= src/QtAES/unit_test/longText.txt
 #RESOURCES   *= src/QtAES/res.qrc
+#DISTFILES   += src/QtAES/Readme.md
 ###############################################################################
 #
 # The following define makes your compiler emit warnings if you use
@@ -123,9 +123,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 #
 macos:QMAKE_INFO_PLIST = macos/Info.plist
-ios:QMAKE_INFO_PLIST = ios/Info.plist
+ios:QMAKE_INFO_PLIST   = ios/Info.plist
 #
 DESTDIR = "$${OUT_PWD}"
+message("OUT_PWD=$${OUT_PWD}")
 #release: DESTDIR = "$${OUT_PWD}/build/release"
 #debug:   DESTDIR = "$${OUT_PWD}/build/debug"
 
