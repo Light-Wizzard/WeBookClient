@@ -20,7 +20,7 @@ QT              += core
 QT              += widgets
 #QT              *= core-private
 !win32:QT       *= network
-
+#win32:CONFIG    *= -platform win32-g++
 CONFIG          *= qt
 CONFIG         *= "c++11"
 #CONFIG         *= "c++14"
