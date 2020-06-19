@@ -117,7 +117,7 @@ before_build:
   #- dir %APPVEYOR_BUILD_FOLDER%
   # '%QTDIR%\bin\configure.exe'
   - if [%COMPILER%]==[gcc] (
-      configure -static -release -opensource -confirm-license -platform win32-g+ -no-exceptions -dont-process -no-qt3support -no-webkit -qt-sql-sqlite -qt-zlib -qt-libpng -qt-libjpeg &&
+      ./configure -static -release -opensource -confirm-license -platform win32-g+ -no-exceptions -dont-process -no-qt3support -no-webkit -qt-sql-sqlite -qt-zlib -qt-libpng -qt-libjpeg &&
       qmake -o %APPVEYOR_BUILD_FOLDER%-build -r -Wall -Wlogic -Wparser CONFIG+=Release %APPVEYOR_BUILD_FOLDER%
     ) ELSE (
         qmake -o %APPVEYOR_BUILD_FOLDER%-build -r -Wall -Wlogic -Wparser CONFIG+=Release %APPVEYOR_BUILD_FOLDER%
