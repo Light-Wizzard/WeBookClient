@@ -116,8 +116,12 @@ before_build:
   - call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86_amd64
   #- dir %APPVEYOR_BUILD_FOLDER%
   # '%QTDIR%\bin\configure.exe'
+
+  - if exist C:\Qt\5.13 (dir C:\Qt\5.13)
+  - if exist C:\Qt\5.13\bin (dir C:\Qt\5.13\bin)
+
   - if [%COMPILER%]==[gcc] (
-      ./configure -static -release -opensource -confirm-license -platform win32-g+ -no-exceptions -dont-process -no-qt3support -no-webkit -qt-sql-sqlite -qt-zlib -qt-libpng -qt-libjpeg &&
+      configure.exe -static -release -opensource -confirm-license -platform win32-g+ -no-exceptions -dont-process -no-qt3support -no-webkit -qt-sql-sqlite -qt-zlib -qt-libpng -qt-libjpeg &&
       qmake -o %APPVEYOR_BUILD_FOLDER%-build -r -Wall -Wlogic -Wparser CONFIG+=Release %APPVEYOR_BUILD_FOLDER%
     ) ELSE (
         qmake -o %APPVEYOR_BUILD_FOLDER%-build -r -Wall -Wlogic -Wparser CONFIG+=Release %APPVEYOR_BUILD_FOLDER%
