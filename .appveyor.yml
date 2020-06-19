@@ -117,15 +117,14 @@ before_build:
 build_script:
   # Compile it and check for .exe
   - echo build_script
-  - cd %APPVEYOR_BUILD_FOLDER%-build
   - if [%PLATFORM%]==[mingw64] SET PATH=%PATH_MINGW64%;%PATH_ORIGINAL%
   - if [%COMPILER%]==[gcc] (
       echo ----- &&
       C:\MinGW\bin\make.exe -v &&
       echo ----- &&
-      C:\MinGW\bin\make.exe -C ../src WeBookClient CC=clang MOREFLAGS="--target=x86_64-w64-mingw32 -Werror -Wconversion -Wno-sign-conversion"
+      C:\MinGW\bin\make.exe -C src WeBookClient CC=clang MOREFLAGS="--target=x86_64-w64-mingw32 -Werror -Wconversion -Wno-sign-conversion"
     ) ELSE (
-      '%make%'
+      cd %APPVEYOR_BUILD_FOLDER%-build && '%make%'
     )
   - dir /b /s *.exe
   - echo Current Path is %cd%
