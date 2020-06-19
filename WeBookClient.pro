@@ -63,13 +63,14 @@ SOURCES     *= src/main.cpp
 FORMS       += src/MainWindow.ui
 FORMS       += src/AboutDialog.ui
 #
-DISTFILES   += data/WeBookClient.ini
+DISTFILES   += .appveyor.yml
+DISTFILES   += .travis.yml
 DISTFILES   += WeBookClient.doxygen
 DISTFILES   += src/QtAES/Readme.md
 DISTFILES   += WeBookClient.qdocconf
+DISTFILES   += data/WeBookClient.ini
 DISTFILES   += data/WeBook.toc
 DISTFILES   += data/WeBooks.cat
-DISTFILES   += data/urllist.txt
 DISTFILES   += README.md
 #
 RESOURCES   += WeBookClient.qrc

@@ -1,4 +1,4 @@
-# Galaxy Calculator appveyor configuration files
+# WeBookClient appveyor configuration files
 version: '{branch}-{build}'
 
 os:
@@ -31,13 +31,15 @@ environment:
       BIN: WeBookClient
       MY_ENV: AppVeyor
       QIF_PACKAGE_URI: 'packages\com.lightwizzard.WeBookClient\data'
+    - COMPILER: "gcc"
+      PLATFORM: "mingw64"
 
 configuration:
     - release
 #    - debug
-#platform:
+platform:
 #    - Win32
-#    - x64
+    - x64
 
 install:
   - echo install
@@ -80,6 +82,12 @@ install:
   #- dir %QTDIR%\plugins
   #- echo C:\Qt
   #- dir C:\Qt
+  - if [%COMPILER%]==[gcc] (
+        SET "PATH_MINGW32=c:\MinGW\bin;c:\MinGW\usr\bin" &&
+        SET "PATH_MINGW64=c:\msys64\mingw64\bin;c:\msys64\usr\bin" &&
+        COPY C:\MinGW\bin\mingw32-make.exe C:\MinGW\bin\make.exe &&
+        COPY C:\MinGW\bin\gcc.exe C:\MinGW\bin\cc.exe
+      )
 
 before_build:
   # Prepare the out-of-source build directory.
@@ -87,6 +95,8 @@ before_build:
   #- dir
   - cd %APPVEYOR_BUILD_FOLDER%
   - mkdir %APPVEYOR_BUILD_FOLDER%-build
+  - call "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64
+  - call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86_amd64
   #- dir %APPVEYOR_BUILD_FOLDER%
   - qmake -o %APPVEYOR_BUILD_FOLDER%-build -r -Wall -Wlogic -Wparser CONFIG+=%CONFIGURATION% %APPVEYOR_BUILD_FOLDER%
   #- dir %APPVEYOR_BUILD_FOLDER%-build
@@ -95,10 +105,17 @@ build_script:
   # Compile it and check for .exe
   - echo build_script
   - cd %APPVEYOR_BUILD_FOLDER%-build
-  - '%make%'
+  - if [%PLATFORM%]==[mingw64] SET PATH=%PATH_MINGW64%;%PATH_ORIGINAL%
+  - if [%COMPILER%]==[gcc] (
+      echo ----- &&
+      make -v &&
+      echo ----- &&
+      make -C programs lz4 CC=clang MOREFLAGS="--target=x86_64-w64-mingw32 -Werror -Wconversion -Wno-sign-conversion"
+    ) ELSE (
+      '%make%'
+    )
   - dir /b /s *.exe
   - echo Current Path is %cd%
-
 after_build:
   # Add a link to the build output within the source directory. This is needed because AppVeyor does
   # not support extracting artifacts from out-of-source build directories. See 'artifacts' below.
