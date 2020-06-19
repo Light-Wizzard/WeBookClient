@@ -33,11 +33,9 @@ CONFIG          *= warn_on utf8_source executable
 win32:VERSION   = 0.1.0.0 # major.minor.patch.build
 else:VERSION    = 0.1.0   # major.minor.patch
 DEFINES         = APP_VERSION=\\\"$${VERSION}\\\"
-
-#win32:CONFIG    *= -platform win32-g++
+#
 win32:QMAKE_CXXFLAGS  *= -platform win32-g++
-win32:CONFIG    += -platform win32-g++
-
+win32:CONFIG          += -platform win32-g++
 #
 # Headers files
 HEADERS     *= src/AboutDialog.h
