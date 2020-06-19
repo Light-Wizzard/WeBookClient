@@ -126,14 +126,13 @@ macos:QMAKE_INFO_PLIST = macos/Info.plist
 ios:QMAKE_INFO_PLIST   = ios/Info.plist
 #
 DESTDIR = "$${OUT_PWD}"
-message("OUT_PWD=$${OUT_PWD}")
 #release: DESTDIR = "$${OUT_PWD}/build/release"
 #debug:   DESTDIR = "$${OUT_PWD}/build/debug"
 
-OBJECTS_DIR = "$${DESTDIR}/obj"
-MOC_DIR     = "$${DESTDIR}/moc"
-RCC_DIR     = "$${DESTDIR}/qrc"
-UI_DIR      = "$${DESTDIR}/ui"
+#OBJECTS_DIR = "$${DESTDIR}/obj"
+#MOC_DIR     = "$${DESTDIR}/moc"
+#RCC_DIR     = "$${DESTDIR}/qrc"
+#UI_DIR      = "$${DESTDIR}/ui"
 #
 unix {
     isEmpty(PREFIX) {

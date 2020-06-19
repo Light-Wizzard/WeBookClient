@@ -128,7 +128,8 @@ build_script:
       echo ----- &&
       C:\MinGW\bin\make.exe -v &&
       echo ----- &&
-      C:\MinGW\bin\make.exe -f Makefile.Release -C %APPVEYOR_BUILD_FOLDER%-build WeBookClient CC=clang MOREFLAGS="--target=x86_64-w64-mingw32 -Werror -Wconversion -Wno-sign-conversion"
+      C:\MinGW\bin\make.exe -f Makefile.Release -C %APPVEYOR_BUILD_FOLDER%-build WeBookClient CC=clang MOREFLAGS="--target=x86_64-w64-mingw32 -Werror -Wconversion -Wno-sign-conversion" &&
+      C:\MinGW\bin\make.exe install
     ) ELSE (
       cd %APPVEYOR_BUILD_FOLDER%-build && '%make%'
     )
