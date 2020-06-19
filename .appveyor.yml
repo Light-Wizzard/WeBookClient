@@ -58,7 +58,7 @@ install:
   # Set some vars
   # C:\projects\galaxy-calculator
   #- cmd: echo '%QTDIR%'
-  #- dir C:\Qt\5.12
+  #- dir C:\Qt\5.13
   # - dir 'C:\Program Files (x86)\Windows Kits\10\bin'
   # 10.0.14393.0
   # 10.0.15063.0
@@ -112,8 +112,8 @@ before_build:
   - call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86_amd64
   #- dir %APPVEYOR_BUILD_FOLDER%
   - if [%COMPILER%]==[gcc] (
-      configure.exe -static -release -opensource -confirm-license -platform win32-g+ -no-exceptions -dont-process -no-qt3support -no-webkit -qt-sql-sqlite -qt-zlib -qt-libpng -qt-libjpeg &&
-      qmake -o %APPVEYOR_BUILD_FOLDER%-build -r -Wall -Wlogic -Wparser -spec win32-g++ CONFIG+=Release %APPVEYOR_BUILD_FOLDER%
+      '%QTDIR%\bin\configure.exe' -static -release -opensource -confirm-license -platform win32-g+ -no-exceptions -dont-process -no-qt3support -no-webkit -qt-sql-sqlite -qt-zlib -qt-libpng -qt-libjpeg &&
+      qmake -o %APPVEYOR_BUILD_FOLDER%-build -r -Wall -Wlogic -Wparser CONFIG+=Release %APPVEYOR_BUILD_FOLDER%
     ) ELSE (
         qmake -o %APPVEYOR_BUILD_FOLDER%-build -r -Wall -Wlogic -Wparser CONFIG+=Release %APPVEYOR_BUILD_FOLDER%
     )
