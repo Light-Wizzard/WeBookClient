@@ -46,11 +46,15 @@ environment:
       QIF_PACKAGE_URI: 'packages\com.lightwizzard.WeBookClient\data'
 
 configuration:
-    - release
-#    - debug
+  - release
+  #- debug
 platform:
-#    - Win32
-    - x64
+  - x64
+  #- Win32
+
+cache:
+  - C:\Strawberry-x64 -> AppVeyor\Install.cmd
+  #- C:\Strawberry-x86 -> AppVeyor\Install.cmd
 
 install:
   - echo install
@@ -111,8 +115,9 @@ before_build:
   - call "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /Release /x64 /win7
   - call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86_amd64
   #- dir %APPVEYOR_BUILD_FOLDER%
+  # '%QTDIR%\bin\configure.exe'
   - if [%COMPILER%]==[gcc] (
-      '%QTDIR%\bin\configure.exe' -static -release -opensource -confirm-license -platform win32-g+ -no-exceptions -dont-process -no-qt3support -no-webkit -qt-sql-sqlite -qt-zlib -qt-libpng -qt-libjpeg &&
+      configure -static -release -opensource -confirm-license -platform win32-g+ -no-exceptions -dont-process -no-qt3support -no-webkit -qt-sql-sqlite -qt-zlib -qt-libpng -qt-libjpeg &&
       qmake -o %APPVEYOR_BUILD_FOLDER%-build -r -Wall -Wlogic -Wparser CONFIG+=Release %APPVEYOR_BUILD_FOLDER%
     ) ELSE (
         qmake -o %APPVEYOR_BUILD_FOLDER%-build -r -Wall -Wlogic -Wparser CONFIG+=Release %APPVEYOR_BUILD_FOLDER%
