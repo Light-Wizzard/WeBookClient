@@ -19,18 +19,18 @@ image:
 environment:
   VSVER: 14.0
   matrix:
-#    - MSVC_VERSION: 15
-#      RUNTIME_LINKAGE: static
-#      QT_VERSION: 5.13
-#      QT_LINKAGE: static
-#      COVERITY_BUILD_CANDIDATE: True
+    - MSVC_VERSION: 15
+      RUNTIME_LINKAGE: static
+      QT_VERSION: 5.13
+      QT_LINKAGE: static
+      COVERITY_BUILD_CANDIDATE: True
       #https://www.appveyor.com/docs/build-environment/#qt
-#      QTDIR: C:\Qt\5.13\msvc2015_64
-#      QT_IF_VERSION: '3.0.1'
-#      PRJLIBS: VCRUNTIME140.dll MSVCP140.dll
-#      BIN: WeBookClient
-#      MY_ENV: AppVeyor
-#      QIF_PACKAGE_URI: 'packages\com.lightwizzard.WeBookClient\data'
+      QTDIR: C:\Qt\5.13\msvc2015_64
+      QT_IF_VERSION: '3.0.1'
+      PRJLIBS: VCRUNTIME140.dll MSVCP140.dll
+      BIN: WeBookClient
+      MY_ENV: AppVeyor
+      QIF_PACKAGE_URI: 'packages\com.lightwizzard.WeBookClient\data'
     - COMPILER: "gcc"
       PLATFORM: "mingw64"
       RUNTIME_LINKAGE: static
@@ -116,8 +116,9 @@ before_build:
   - call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86_amd64
   #- dir %APPVEYOR_BUILD_FOLDER%
   - if [%COMPILER%]==[gcc] (
-      qmake -o %APPVEYOR_BUILD_FOLDER%-build -spec "win32-g++" -r -Wall -Wlogic -Wparser CONFIG*=Release
+      qmake -o %APPVEYOR_BUILD_FOLDER%-build/Makefile WeBookClient.pro -r -spec "win32-gcc" -Wall -Wlogic -Wparser CONFIG*=Release
     ) ELSE (
+        qmake -tp vc WeBookClient.pro &&
         qmake -o %APPVEYOR_BUILD_FOLDER%-build -r -Wall -Wlogic -Wparser CONFIG+=Release
     )
   - cd %APPVEYOR_BUILD_FOLDER%-build
