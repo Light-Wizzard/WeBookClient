@@ -108,11 +108,11 @@ before_build:
   - cd %APPVEYOR_BUILD_FOLDER%
   - mkdir %APPVEYOR_BUILD_FOLDER%-build
   #
-  - call "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" "/x64" "/win7"
+  - call "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64 /win7
   - call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86_amd64
   #- dir %APPVEYOR_BUILD_FOLDER%
   - if [%COMPILER%]==[gcc] (
-        qmake -o %APPVEYOR_BUILD_FOLDER% -r -Wall -Wlogic -Wparser CONFIG+=%CONFIGURATION% %APPVEYOR_BUILD_FOLDER%
+        qmake -makefile -r -Wall -Wlogic -Wparser CONFIG+=%CONFIGURATION% %APPVEYOR_BUILD_FOLDER%
     ) ELSE (
         qmake -o %APPVEYOR_BUILD_FOLDER%-build -r -Wall -Wlogic -Wparser CONFIG+=%CONFIGURATION% %APPVEYOR_BUILD_FOLDER%
     )
