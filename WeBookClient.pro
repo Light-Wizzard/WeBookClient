@@ -10,10 +10,10 @@ TEMPLATE     = "app"
 TARGET       = "WeBookClient"
 #
 INCLUDEPATH     += .
-INCLUDEPATH     += src/
+INCLUDEPATH     += src
 INCLUDEPATH     += "${QT_INSTALL_LIBS}/qt"
 #
-DEPENDPATH      += src/
+DEPENDPATH      += src
 #
 QT              += gui
 QT              += core
@@ -22,10 +22,10 @@ QT              += widgets
 !win32:QT       *= network
 
 CONFIG          *= qt
-#CONFIG         *= "c++11"
+CONFIG         *= "c++11"
 #CONFIG         *= "c++14"
 #CONFIG         *= "c++1z"
-CONFIG          *= "c++17"
+#CONFIG          *= "c++17"
 #CONFIG         *= "c++2a"
 #CONFIG         *= "c++latest"
 #TRANSLATIONS    += src/WeBookServer_en_US.ts
@@ -35,15 +35,6 @@ win32:VERSION   = 0.1.0.0 # major.minor.patch.build
 else:VERSION    = 0.1.0   # major.minor.patch
 DEFINES         = APP_VERSION=\\\"$${VERSION}\\\"
 #
-#include(src/WeBookClient.pri)
-#include(WeBookClient.pri)
-# Include Path Current path, defined in MY_CUSTOM_SOURCE_HEADER_UI_FOLDER_NAME i.e. src
-INCLUDEPATH *= .
-INCLUDEPATH *= src/
-
-DEPENDSPATH *= .
-DEPENDSPATH *= src/
-
 # Headers files
 HEADERS     *= src/AboutDialog.h
 HEADERS     *= src/MainWindow.h
