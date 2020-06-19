@@ -106,7 +106,7 @@ before_build:
   #- dir
   - cd %APPVEYOR_BUILD_FOLDER%
   - mkdir %APPVEYOR_BUILD_FOLDER%-build
-  - call "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64
+  - call "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64 /win7
   - call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86_amd64
   #- dir %APPVEYOR_BUILD_FOLDER%
   - qmake -o %APPVEYOR_BUILD_FOLDER%-build -r -Wall -Wlogic -Wparser CONFIG+=%CONFIGURATION% %APPVEYOR_BUILD_FOLDER%
@@ -119,9 +119,9 @@ build_script:
   - if [%PLATFORM%]==[mingw64] SET PATH=%PATH_MINGW64%;%PATH_ORIGINAL%
   - if [%COMPILER%]==[gcc] (
       echo ----- &&
-      make -v &&
+      C:\MinGW\bin\make.exe -v &&
       echo ----- &&
-      make -C programs lz4 CC=clang MOREFLAGS="--target=x86_64-w64-mingw32 -Werror -Wconversion -Wno-sign-conversion"
+      C:\MinGW\bin\make.exe -C programs lz4 CC=clang MOREFLAGS="--target=x86_64-w64-mingw32 -Werror -Wconversion -Wno-sign-conversion"
     ) ELSE (
       '%make%'
     )
