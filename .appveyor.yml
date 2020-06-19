@@ -54,6 +54,7 @@ platform:
 
 install:
   - echo install
+  - if [%COMPILER%]==[gcc] SET PATH_ORIGINAL=%PATH%
   # Set some vars
   # C:\projects\galaxy-calculator
   #- cmd: echo '%QTDIR%'
@@ -107,7 +108,7 @@ before_build:
   - cd %APPVEYOR_BUILD_FOLDER%
   - mkdir %APPVEYOR_BUILD_FOLDER%-build
   #  /x64
-  - call "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /win7
+  - call "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd /win7"
   - call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86_amd64
   #- dir %APPVEYOR_BUILD_FOLDER%
   - qmake -o %APPVEYOR_BUILD_FOLDER%-build -r -Wall -Wlogic -Wparser CONFIG+=%CONFIGURATION% %APPVEYOR_BUILD_FOLDER%
@@ -122,7 +123,7 @@ build_script:
       echo ----- &&
       C:\MinGW\bin\make.exe -v &&
       echo ----- &&
-      C:\MinGW\bin\make.exe -C src WeBookClient CC=clang MOREFLAGS="--target=x86_64-w64-mingw32 -Werror -Wconversion -Wno-sign-conversion"
+      C:\MinGW\bin\make.exe -C ../src WeBookClient CC=clang MOREFLAGS="--target=x86_64-w64-mingw32 -Werror -Wconversion -Wno-sign-conversion"
     ) ELSE (
       '%make%'
     )
