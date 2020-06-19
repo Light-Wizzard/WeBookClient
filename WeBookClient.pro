@@ -126,8 +126,8 @@ macos:QMAKE_INFO_PLIST = macos/Info.plist
 ios:QMAKE_INFO_PLIST = ios/Info.plist
 #
 DESTDIR = "$${OUT_PWD}"
-release: DESTDIR = "$${OUT_PWD}/build/release"
-debug:   DESTDIR = "$${OUT_PWD}/build/debug"
+#release: DESTDIR = "$${OUT_PWD}/build/release"
+#debug:   DESTDIR = "$${OUT_PWD}/build/debug"
 
 OBJECTS_DIR = "$${DESTDIR}/obj"
 MOC_DIR     = "$${DESTDIR}/moc"
@@ -149,7 +149,20 @@ unix {
     macx {
         RC_FILE = macos/Icon.icns
     }
+} else {
+    isEmpty(PREFIX) {
+        PREFIX = /usr
+    }
+    target.path         = "$${PREFIX}/bin"
+    shortcutfiles.files = "usr/share/applications/$${TARGET}.desktop"
+    shortcutfiles.path  = usr/share/applications
+    data.files         += "usr/share/icons/hicolor/48x48/apps/$${TARGET}.png"
+    data.path           = usr/share/pixmaps
+    INSTALLS           += shortcutfiles
+    INSTALLS           += data
+    INSTALLS           += target
 }
+
 ################################ End of File ##################################
 
 
