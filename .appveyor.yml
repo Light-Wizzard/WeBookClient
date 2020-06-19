@@ -116,7 +116,7 @@ before_build:
   - call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86_amd64
   #- dir %APPVEYOR_BUILD_FOLDER%
   - if [%COMPILER%]==[gcc] (
-      qmake -o %APPVEYOR_BUILD_FOLDER%-build/Makefile WeBookClient.pro -r -spec "win32-gcc" -Wall -Wlogic -Wparser CONFIG*=Release
+      qmake -o %APPVEYOR_BUILD_FOLDER%-build/Makefile WeBookClient.pro -r -spec "win32-g++" -Wall -Wlogic -Wparser CONFIG*=Release
     ) ELSE (
         qmake -tp vc WeBookClient.pro &&
         qmake -o %APPVEYOR_BUILD_FOLDER%-build -r -Wall -Wlogic -Wparser CONFIG+=Release
@@ -133,7 +133,7 @@ build_script:
       echo ----- &&
       C:\MinGW\bin\make.exe -v &&
       echo ----- &&
-      C:\MinGW\bin\make.exe -f Makefile.Release -C %APPVEYOR_BUILD_FOLDER%-build WeBookClient CC=clang MOREFLAGS="--target=x86_64-w64-mingw32 -Werror -Wconversion -Wno-sign-conversion" &&
+      C:\MinGW\bin\make.exe -f Makefile.Release -C %APPVEYOR_BUILD_FOLDER%-build WeBookClient CC=g++ MOREFLAGS="--target=x86_64-w64-mingw32 -Werror -Wconversion -Wno-sign-conversion" &&
       C:\MinGW\bin\make.exe install
     ) ELSE (
       cd %APPVEYOR_BUILD_FOLDER%-build && '%make%'
