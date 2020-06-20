@@ -2,7 +2,7 @@
 version: '{branch}-{build}'
 
 os:
-  - Visual Studio 2015
+  - Visual Studio 2019
 
 branches:
   only:
@@ -14,19 +14,19 @@ init:
   - ps: Update-AppveyorBuild -Version ("{0}-{1}-{2}" -f $env:appveyor_repo_branch,$env:appveyor_build_number,$env:commit )
 
 image:
-  - Visual Studio 2015
+  - Visual Studio 2019
 
 environment:
   VSVER: 14.0
   matrix:
     - MSVC_VERSION: 15
       RUNTIME_LINKAGE: static
-      QT_VERSION: 5.13
+      QT_VERSION: 5.14.2
       QT_LINKAGE: static
       COVERITY_BUILD_CANDIDATE: True
       #https://www.appveyor.com/docs/build-environment/#qt
-      QTDIR: C:\Qt\5.13\msvc2015_64
-      QT_IF_VERSION: '3.0.1'
+      QTDIR: C:\Qt\5.14.2\mingw73_64
+      QT_IF_VERSION: '3.1.1'
       PRJLIBS: VCRUNTIME140.dll MSVCP140.dll
       BIN: WeBookClient
       MY_ENV: AppVeyor
@@ -34,12 +34,12 @@ environment:
     - COMPILER: "gcc"
       PLATFORM: "mingw64"
       RUNTIME_LINKAGE: static
-      QT_VERSION: 5.13
+      QT_VERSION: 5.14.2
       QT_LINKAGE: static
       COVERITY_BUILD_CANDIDATE: True
       #https://www.appveyor.com/docs/build-environment/#qt
-      QTDIR: C:\Qt\5.13\msvc2015_64
-      QT_IF_VERSION: '3.0.1'
+      QTDIR: C:\Qt\5.14.2\mingw73_64
+      QT_IF_VERSION: '3.1.1'
       PRJLIBS: VCRUNTIME140.dll MSVCP140.dll
       BIN: WeBookClient
       MY_ENV: AppVeyor
@@ -58,6 +58,11 @@ cache:
 
 install:
   - echo install
+  - ps: |
+    iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/build-images/master/scripts/Windows/install_qt_module.ps1'))
+    Install-QtComponent -Id 'qt.tools.vcredist_msvc2017_x86' -ExcludeDocs -ExcludeExamples
+    Install-QtComponent -Id 'qt.tools.vcredist_msvc2017_x64' -ExcludeDocs -ExcludeExamples
+  
   - if [%COMPILER%]==[gcc] SET PATH_ORIGINAL=%PATH%
   # Set some vars
   # C:\projects\galaxy-calculator
@@ -93,6 +98,9 @@ install:
   - if not %QTDIR:msvc=%==%QTDIR% set make=nmake.exe
   - if not %QTDIR:msvc=%==%QTDIR% %make% /? > nul
   - echo QTDIR=%QTDIR%
+  # Use the mingw-w64 provided by Appveyor (must be placed before Perl in the path)
+  - cmd: SET PATH=C:\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\;%PATH%
+
   #- dir %QTDIR%
   #- dir %QTDIR%\bin
   #- dir %QTDIR%\plugins
@@ -113,7 +121,7 @@ before_build:
   - mkdir %APPVEYOR_BUILD_FOLDER%-build
   #  /Release /x64 /win7
   - call "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /Release /x64 /win7
-  - call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86_amd64
+  - call "%ProgramFiles(x86)%\Microsoft Visual Studio %VSVER%\VC\vcvarsall.bat" x86_amd64
   #- perl Configure VC-WIN32
   #- dir %APPVEYOR_BUILD_FOLDER%  
   # -spec "win32-g++" 
@@ -161,11 +169,11 @@ after_build:
   - if exist C:\projects\ (dir C:\projects\)
   - if exist C:\projects\ (dir "%APPVEYOR_BUILD_FOLDER%-build\")
   - if exist C:\projects\ (dir "%APPVEYOR_BUILD_FOLDER%-build\deploy\")
-  - if exist C:\Qt\QtIFW-3.0.1\ (dir C:\Qt\QtIFW-3.0.1)
-  - if exist C:\Qt\QtIFW-3.0.1\bin\ (dir C:\Qt\QtIFW-3.0.1\bin\)
-  - if exist C:\Qt\QtIFW-3.0.1\bin\binarycreator.exe (echo C:\Qt\QtIFW-3.0.1\bin\binarycreator.exe exists) else (echo C:\Qt\QtIFW-3.0.1\bin\binarycreator.exe does not exists)
+  - if exist C:\Qt\QtIFW-3.1.1\ (dir C:\Qt\QtIFW-3.1.1)
+  - if exist C:\Qt\QtIFW-3.1.1\bin\ (dir C:\Qt\QtIFW-3.1.1\bin\)
+  - if exist C:\Qt\QtIFW-3.1.1\bin\binarycreator.exe (echo C:\Qt\QtIFW-3.1.1\bin\binarycreator.exe exists) else (echo C:\Qt\QtIFW-3.1.1\bin\binarycreator.exe does not exists)
   - xcopy /s /e /f "%APPVEYOR_BUILD_FOLDER%-build\deploy" "%APPVEYOR_BUILD_FOLDER%\%QIF_PACKAGE_URI%"
-  - C:\Qt\QtIFW-3.0.1\bin\binarycreator.exe --offline-only -c "%APPVEYOR_BUILD_FOLDER%\config\config.xml" -p "%APPVEYOR_BUILD_FOLDER%\packages" "%BIN%-Installer.exe"
+  - C:\Qt\QtIFW-3.1.1\bin\binarycreator.exe --offline-only -c "%APPVEYOR_BUILD_FOLDER%\config\config.xml" -p "%APPVEYOR_BUILD_FOLDER%\packages" "%BIN%-Installer.exe"
   - 7z a -tzip "%BIN%-Installer.zip" "%BIN%-Installer.exe"
   - dir /b /s *.zip
   - dir /b /s *.exe
