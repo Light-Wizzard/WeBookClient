@@ -12,6 +12,11 @@ init:
   # Create our AppVeyor version
   - ps: $env:commit = $env:appveyor_repo_commit.SubString(0,7)
   - ps: Update-AppveyorBuild -Version ("{0}-{1}-{2}" -f $env:appveyor_repo_branch,$env:appveyor_build_number,$env:commit )
+  #- ps: | iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/build-images/master/scripts/Windows/install_qt_module.ps1'))
+  #  Install-QtComponent -Id 'qt.tools.vcredist_msvc2019_x64' -ExcludeDocs -ExcludeExamples
+  # Install-QtComponent -Id 'qt.tools.vcredist_msvc2019_x86' -ExcludeDocs -ExcludeExamples
+  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/build-images/master/scripts/Windows/install_mingw.ps1'))
+  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/build-images/master/scripts/Windows/install_cygwin.ps1'))
 
 image:
   - Visual Studio 2019
@@ -58,13 +63,6 @@ cache:
 
 install:
   - echo install
-  #- ps: | iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/build-images/master/scripts/Windows/install_qt_module.ps1'))
-  #  Install-QtComponent -Id 'qt.tools.vcredist_msvc2019_x64' -ExcludeDocs -ExcludeExamples
-  # Install-QtComponent -Id 'qt.tools.vcredist_msvc2019_x86' -ExcludeDocs -ExcludeExamples
-  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/build-images/master/scripts/Windows/install_mingw.ps1'))
-  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/build-images/master/scripts/Windows/install_cygwin.ps1'))
-  
-  
   - if [%COMPILER%]==[gcc] SET PATH_ORIGINAL=%PATH%
   # Set some vars
   #- cmd: echo '%QTDIR%'
