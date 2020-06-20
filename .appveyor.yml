@@ -28,7 +28,7 @@ environment:
   
   matrix:
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
-      VSVER: 15    
+      VSVER: 2017    
       ARCH: x86_64-w64-mingw32
       HOST_ARCH_ARG: --host=x86_64-w64-mingw32 --enable-cbc-parallel
       CXXFLAGS:
@@ -75,12 +75,12 @@ install:
   #- cmd: echo '%QTDIR%'
   #- dir C:\Qt\5.13
   - echo Copy rc files
-  - xcopy /f "C:\Program Files (x86)\Windows Kits\10\bin\10.0.18362.0\x86\rc.exe"    "%ProgramFiles(x86)%\Microsoft Visual Studio %VSVER%\VC\BIN\"
-  - xcopy /f "C:\Program Files (x86)\Windows Kits\10\bin\10.0.18362.0\x86\rcdll.dll" "%ProgramFiles(x86)%\Microsoft Visual Studio %VSVER%\VC\BIN\"
-  - xcopy /f "C:\Program Files (x86)\Windows Kits\10\bin\10.0.18362.0\x86\rc.exe"    "%ProgramFiles(x86)%\Microsoft Visual Studio %VSVER%\VC\BIN\amd64_x86"
-  - xcopy /f "C:\Program Files (x86)\Windows Kits\10\bin\10.0.18362.0\x86\rcdll.dll" "%ProgramFiles(x86)%\Microsoft Visual Studio %VSVER%\VC\BIN\amd64_x86"
-  - xcopy /f "C:\Program Files (x86)\Windows Kits\10\bin\10.0.18362.0\x86\rc.exe"    "%ProgramFiles(x86)%\Microsoft Visual Studio %VSVER%\VC\BIN\amd64"
-  - xcopy /f "C:\Program Files (x86)\Windows Kits\10\bin\10.0.18362.0\x86\rcdll.dll" "%ProgramFiles(x86)%\Microsoft Visual Studio %VSVER%\VC\BIN\amd64"
+  - xcopy /f "C:\Program Files (x86)\Windows Kits\10\bin\10.0.18362.0\x86\rc.exe"    "%ProgramFiles(x86)%\Microsoft Visual Studio\%VSVER%\VC\BIN\"
+  - xcopy /f "C:\Program Files (x86)\Windows Kits\10\bin\10.0.18362.0\x86\rcdll.dll" "%ProgramFiles(x86)%\Microsoft Visual Studio\%VSVER%\VC\BIN\"
+  - xcopy /f "C:\Program Files (x86)\Windows Kits\10\bin\10.0.18362.0\x86\rc.exe"    "%ProgramFiles(x86)%\Microsoft Visual Studio\%VSVER%\VC\BIN\amd64_x86"
+  - xcopy /f "C:\Program Files (x86)\Windows Kits\10\bin\10.0.18362.0\x86\rcdll.dll" "%ProgramFiles(x86)%\Microsoft Visual Studio\%VSVER%\VC\BIN\amd64_x86"
+  - xcopy /f "C:\Program Files (x86)\Windows Kits\10\bin\10.0.18362.0\x86\rc.exe"    "%ProgramFiles(x86)%\Microsoft Visual Studio\%VSVER%\VC\BIN\amd64"
+  - xcopy /f "C:\Program Files (x86)\Windows Kits\10\bin\10.0.18362.0\x86\rcdll.dll" "%ProgramFiles(x86)%\Microsoft Visual Studio\%VSVER%\VC\BIN\amd64"
   - '%QTDIR%\bin\qtenv2.bat'
   - echo Qt Version
   - qmake -v
@@ -90,7 +90,7 @@ install:
   - if %QTDIR:msvc=%==%QTDIR% g++ --version
   - if %QTDIR:msvc=%==%QTDIR% set make=mingw32-make.exe
   - if %QTDIR:msvc=%==%QTDIR% %make% --version
-  - if not %QTDIR:msvc=%==%QTDIR% call "%ProgramFiles(x86)%\Microsoft Visual Studio %VSVER%\VC\vcvarsall.bat" %ARCH%
+  - if not %QTDIR:msvc=%==%QTDIR% call "%ProgramFiles(x86)%\Microsoft Visual Studio\%VSVER%\VC\vcvarsall.bat" %ARCH%
   - if not %QTDIR:msvc=%==%QTDIR% set make=nmake.exe
   - if not %QTDIR:msvc=%==%QTDIR% %make% /? > nul
   - echo QTDIR=%QTDIR%
@@ -117,7 +117,7 @@ before_build:
   - mkdir %APPVEYOR_BUILD_FOLDER%-build
   #  /Release /x64 /win7
   - call "C:\Program Files\Microsoft SDKs\Windows\v8.1\Bin\SetEnv.cmd" /Release /x64 /win7
-  - call "%ProgramFiles(x86)%\Microsoft Visual Studio %VSVER%\VC\vcvarsall.bat" x86_amd64
+  - call "%ProgramFiles(x86)%\Microsoft Visual Studio\%VSVER%\VC\vcvarsall.bat" x86_amd64
   #- perl Configure VC-WIN32
   #- dir %APPVEYOR_BUILD_FOLDER%  
   # -spec "win32-g++" 
@@ -145,7 +145,7 @@ build_script:
   #    C:\MinGW\bin\make.exe -f Makefile.Release -C %APPVEYOR_BUILD_FOLDER%-build WeBookClient CC=clang MOREFLAGS="--target=x86_64-w64-mingw32 -Werror -Wconversion -Wno-sign-conversion" &&
   #    C:\MinGW\bin\make.exe install
   #  ) ELSE (
-  #    "%ProgramFiles(x86)%\Microsoft Visual Studio %VSVER%\VC\BIN\%make%"
+  #    "%ProgramFiles(x86)%\Microsoft Visual Studio\%VSVER%\VC\BIN\%make%"
   #  )
   - dir /b /s *.exe
   - echo Current Path is %cd%
