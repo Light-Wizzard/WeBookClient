@@ -17,9 +17,9 @@ image:
   - Visual Studio 2019
 
 environment:
-  VSVER: 14.0
+  VSVER: 16.5.5
   matrix:
-    - MSVC_VERSION: 15
+    - MSVC_VERSION: 16.5.5
       RUNTIME_LINKAGE: static
       QT_VERSION: 5.14.2
       QT_LINKAGE: static
@@ -61,7 +61,8 @@ install:
   - ps: |
     iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/build-images/master/scripts/Windows/install_qt_module.ps1'))
     Install-QtComponent -Id 'qt.tools.vcredist_msvc2017_x64' -ExcludeDocs -ExcludeExamples
-  #  Install-QtComponent -Id 'qt.tools.vcredist_msvc2017_x86' -ExcludeDocs -ExcludeExamples
+    
+  # Install-QtComponent -Id 'qt.tools.vcredist_msvc2017_x86' -ExcludeDocs -ExcludeExamples
   
   - if [%COMPILER%]==[gcc] SET PATH_ORIGINAL=%PATH%
   # Set some vars
