@@ -22,9 +22,9 @@ image:
   - Visual Studio 2019
 
 environment:
-  - BIN: WeBookClient
-  - MY_ENV: AppVeyor
-  - QIF_PACKAGE_URI: 'packages\com.lightwizzard.WeBookClient\data'
+  BIN: WeBookClient
+  MY_ENV: AppVeyor
+  QIF_PACKAGE_URI: 'packages\com.lightwizzard.WeBookClient\data'
   
   matrix:
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
