@@ -22,9 +22,9 @@ image:
   - Visual Studio 2019
 
 environment:
-  VSVER: 16
+  VSVER: 15
   matrix:
-    - MSVC_VERSION: 16
+    - MSVC_VERSION: 15
       RUNTIME_LINKAGE: static
       QT_VERSION: 5.14.2
       QT_LINKAGE: static
