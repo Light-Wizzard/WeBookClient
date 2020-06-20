@@ -95,12 +95,12 @@ install:
   #- dir %QTDIR%\plugins
   #- echo C:\Qt
   #- dir C:\Qt
-  - if [%COMPILER%]==[gcc] (
-        SET "PATH_MINGW32=c:\MinGW\bin;c:\MinGW\usr\bin" &&
-        SET "PATH_MINGW64=c:\msys64\mingw64\bin;c:\msys64\usr\bin" &&
-        COPY C:\MinGW\bin\mingw32-make.exe C:\MinGW\bin\make.exe &&
-        COPY C:\MinGW\bin\gcc.exe C:\MinGW\bin\cc.exe
-      )
+  #- if [%COMPILER%]==[gcc] (
+  #      SET "PATH_MINGW32=c:\MinGW\bin;c:\MinGW\usr\bin" &&
+  #      SET "PATH_MINGW64=c:\msys64\mingw64\bin;c:\msys64\usr\bin" &&
+  #      COPY C:\MinGW\bin\mingw32-make.exe C:\MinGW\bin\make.exe &&
+  #      COPY C:\MinGW\bin\gcc.exe C:\MinGW\bin\cc.exe
+  #    )
 
 before_build:
   # Prepare the out-of-source build directory.
@@ -128,15 +128,17 @@ build_script:
   # Compile it and check for .exe
   - echo build_script
   - if [%PLATFORM%]==[mingw64] SET PATH=%PATH_MINGW64%;%PATH_ORIGINAL%
-  - if [%COMPILER%]==[gcc] (
-      echo ----- &&
-      C:\MinGW\bin\make.exe -v &&
-      echo ----- &&
-      C:\MinGW\bin\make.exe -f Makefile.Release -C %APPVEYOR_BUILD_FOLDER%-build WeBookClient CC=clang MOREFLAGS="--target=x86_64-w64-mingw32 -Werror -Wconversion -Wno-sign-conversion" &&
-      C:\MinGW\bin\make.exe install
-    ) ELSE (
-      "%ProgramFiles(x86)%\Microsoft Visual Studio %VSVER%\VC\BIN\%make%"
-    )
+  - cmake -G "Ninja" "-DCMAKE_PREFIX_PATH=%QTDIR%" "-DCMAKE_BUILD_TYPE=RelWithDebInfo" 
+  - cmake --build . --config Release  
+  #- if [%COMPILER%]==[gcc] (
+  #    echo ----- &&
+  #    C:\MinGW\bin\make.exe -v &&
+  #    echo ----- &&
+  #    C:\MinGW\bin\make.exe -f Makefile.Release -C %APPVEYOR_BUILD_FOLDER%-build WeBookClient CC=clang MOREFLAGS="--target=x86_64-w64-mingw32 -Werror -Wconversion -Wno-sign-conversion" &&
+  #    C:\MinGW\bin\make.exe install
+  #  ) ELSE (
+  #    "%ProgramFiles(x86)%\Microsoft Visual Studio %VSVER%\VC\BIN\%make%"
+  #  )
   - dir /b /s *.exe
   - echo Current Path is %cd%
 after_build:
@@ -144,6 +146,8 @@ after_build:
   # not support extracting artifacts from out-of-source build directories. See 'artifacts' below.
   - echo after_build
   - echo Current Path is %cd%
+  - cmake --build . --config Release --target install
+  - cmake --build . --config Release --target package  
   #- dir
   - dir /b /s *.exe
   - mkdir deploy
