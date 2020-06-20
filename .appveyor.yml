@@ -60,25 +60,13 @@ install:
   - echo install
   - ps: |
     iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/build-images/master/scripts/Windows/install_qt_module.ps1'))
-    Install-QtComponent -Id 'qt.tools.vcredist_msvc2017_x64' -ExcludeDocs -ExcludeExamples
-    
-  # Install-QtComponent -Id 'qt.tools.vcredist_msvc2017_x86' -ExcludeDocs -ExcludeExamples
+    Install-QtComponent -Id 'qt.tools.vcredist_msvc2019_x64' -ExcludeDocs -ExcludeExamples
+  # Install-QtComponent -Id 'qt.tools.vcredist_msvc2019_x86' -ExcludeDocs -ExcludeExamples
   
   - if [%COMPILER%]==[gcc] SET PATH_ORIGINAL=%PATH%
   # Set some vars
-  # C:\projects\galaxy-calculator
   #- cmd: echo '%QTDIR%'
   #- dir C:\Qt\5.13
-  # - dir 'C:\Program Files (x86)\Windows Kits\10\bin'
-  # 10.0.14393.0
-  # 10.0.15063.0
-  # 10.0.16299.0
-  # 10.0.17134.0
-  # 10.0.17763.0
-  # 10.0.18362.0
-  # arm
-  # arm64
-  #- dir "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\BIN"
   - echo Copy rc files
   - xcopy /f "C:\Program Files (x86)\Windows Kits\10\bin\10.0.18362.0\x86\rc.exe"    "%ProgramFiles(x86)%\Microsoft Visual Studio %VSVER%\VC\BIN\"
   - xcopy /f "C:\Program Files (x86)\Windows Kits\10\bin\10.0.18362.0\x86\rcdll.dll" "%ProgramFiles(x86)%\Microsoft Visual Studio %VSVER%\VC\BIN\"
@@ -121,7 +109,7 @@ before_build:
   - cd %APPVEYOR_BUILD_FOLDER%
   - mkdir %APPVEYOR_BUILD_FOLDER%-build
   #  /Release /x64 /win7
-  - call "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /Release /x64 /win7
+  - call "C:\Program Files\Microsoft SDKs\Windows\v8.1\Bin\SetEnv.cmd" /Release /x64 /win7
   - call "%ProgramFiles(x86)%\Microsoft Visual Studio %VSVER%\VC\vcvarsall.bat" x86_amd64
   #- perl Configure VC-WIN32
   #- dir %APPVEYOR_BUILD_FOLDER%  
