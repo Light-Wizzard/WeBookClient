@@ -124,7 +124,7 @@ before_build:
         qmake -o %APPVEYOR_BUILD_FOLDER%-build -r -Wall -Wlogic -Wparser CONFIG+=Release
     )
   - cd %APPVEYOR_BUILD_FOLDER%-build
-  - dir
+  - dir release
   #- more Makefile.Release
 
 build_script:
