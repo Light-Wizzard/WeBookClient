@@ -5,23 +5,6 @@
 /******************************************************************************
  * QLogger is a library to register and print logs into a file.
  **
- * LinkedIn: www.linkedin.com/in/cescmm/
- * Web: www.francescmm.com
- **
- * This lbirary is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
- **
- * This library is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Lesser General Public License for more details.
- **
- * You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
- **
  * Notes on format for Log File Names:
  * Format	        Result
  * dd.MM.yyyy	    21.05.2001
@@ -76,8 +59,14 @@ namespace QLogger
             QString getAppName();                                                               // myApplicationName
             void setAppName(const QString &thisAppName);
             // UserName
-            QString getUserName();                                                               // myUserName
+            QString getUserName();                                                              // myUserName
             void setUserName(const QString &thisUserName);
+            //
+            QString getPassword();                                                              // myPassword
+            void setPassword(const QString &thisPassword);
+            //
+            QString getUrl();                                                                   // myUrl
+            void setUrl(const QString &thisUrl);
             // QSetter
             void qSettingsInstance();                                                           // QSetter
             bool     isSetting(const QString &thisFieldName);                                   // isSetting
@@ -153,6 +142,7 @@ namespace QLogger
             QString                 myHomePath              = "";                               //!< \c myHomePath              \brief Home Path.
             QString                 myModuleName            = "";                               //!< \c myModuleName            \brief Module Name.
             QString                 myUserName              = "";                               //!< \c myUserName              \brief User Name.
+            QString                 myPassword              = "";                               //!< \c myPassword             \brief User Name.
             QString                 myIniFileName           = "";                               //!< \c myIniFileName           \brief Ini File Name.
             QString                 myOrganizationName      = "";                               //!< \c myOrganizationName      \brief Organization Name.
             QString                 myOrganizationDomain    = "";                               //!< \c myOrganizationDomain    \brief Organization Domain.

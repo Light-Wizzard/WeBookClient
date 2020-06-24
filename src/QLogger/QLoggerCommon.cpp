@@ -125,8 +125,47 @@ namespace QLogger
             emit handelSettinChanged();
         }
     } // end setUserName
+    /******************************************************************************
+    * \fn QString QLoggerCommon::getPassword()
+    *
+    *******************************************************************************/
+    QString QLoggerCommon::getPassword()
+    {
+        return myPassword;
+    } // end getPassword
+    /******************************************************************************
+    * \fn void QLoggerCommon::setPassword(const QString &thisPassword)
+    *
+    *******************************************************************************/
+    void QLoggerCommon::setPassword(const QString &thisPassword)
+    {
+        if (myPassword.isEmpty() || myPassword != thisPassword)
+        {
+            myPassword = thisPassword;
+        }
+    } // end setPassword
+    /******************************************************************************
+    * \fn QString QLoggerCommon::getUrl()
+    *
+    *******************************************************************************/
+    QString QLoggerCommon::getUrl()
+    {
+        if (myUrl.isEmpty()) myUrl = ConstDefaultUrl;
+        return myUrl;
+    } // end getUrl
+    /******************************************************************************
+    * \fn void QLoggerCommon::setUrl(const QString &thisUrl)
+    *
+    *******************************************************************************/
+    void QLoggerCommon::setUrl(const QString &thisUrl)
+    {
+        if (myUrl.isEmpty() || myUrl != thisUrl)
+        {
+            myUrl = thisUrl;
+        }
+    } // end setUrl
     /**************************************************************************
-    * qSettingsInstance                                                      *
+    * qSettingsInstance                                                       *
     * Creates QSettings for organizationName, organizationDomain, applicationName*
     **
     ***************************************************************************/

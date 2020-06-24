@@ -1,61 +1,14 @@
-# WeBookClient appveyor configuration files
-version: '{branch}-{build}'
+# WeBookClient AppVeyor configuration files
 
-os:
-  - Visual Studio 2017
-
-branches:
-  only:
-    - master
-
-init:
-  # Create our AppVeyor version
-  - ps: $env:commit = $env:appveyor_repo_commit.SubString(0,7)
-  - ps: Update-AppveyorBuild -Version ("{0}-{1}-{2}" -f $env:appveyor_repo_branch,$env:appveyor_build_number,$env:commit )
-  #- ps: | iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/build-images/master/scripts/Windows/install_qt_module.ps1'))
-  #  Install-QtComponent -Id 'qt.tools.vcredist_msvc2019_x64' -ExcludeDocs -ExcludeExamples
-  # Install-QtComponent -Id 'qt.tools.vcredist_msvc2019_x86' -ExcludeDocs -ExcludeExamples
-  #- ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/build-images/master/scripts/Windows/install_mingw.ps1'))
-  #- ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/build-images/master/scripts/Windows/install_cygwin.ps1'))
-
-image:
-  - image: Visual Studio 2017
+install:
+  - set QTDIR=C:\Qt\5.13\mingw73_32
+  - choco install -y InnoSetup
+  - set PATH=%QTDIR%\bin;C:\Qt\Tools\mingw530_32\bin;%PATH%;"C:\Program Files (x86)\Inno Setup 5"
 
 environment:
   BIN: WeBookClient
   MY_ENV: AppVeyor
   QIF_PACKAGE_URI: 'packages\com.lightwizzard.WeBookClient\data'
-  
-  matrix:
-    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
-      VSVER: 2017    
-      ARCH: x86_64-w64-mingw32
-      HOST_ARCH_ARG: --host=x86_64-w64-mingw32 --enable-cbc-parallel
-      CXXFLAGS:
-      CFLAGS:
-      ADD_PATH: /mingw64/bin
-#    - MSVC_VERSION: 15
-#      RUNTIME_LINKAGE: static
-#      QT_VERSION: 5.14.2
-#      QT_LINKAGE: static
-#      COVERITY_BUILD_CANDIDATE: True
-#      #https://www.appveyor.com/docs/build-environment/#qt
-#      QTDIR: C:\Qt\5.14.2\mingw73_64
-#      QT_IF_VERSION: '3.1.1'
-#      PRJLIBS: VCRUNTIME140.dll MSVCP140.dll
-#      BIN: WeBookClient
-#      MY_ENV: AppVeyor
-#      QIF_PACKAGE_URI: 'packages\com.lightwizzard.WeBookClient\data'
-#    - COMPILER: "gcc"
-      PLATFORM: "mingw64"
-      RUNTIME_LINKAGE: static
-      QT_VERSION: 5.13.2
-      QT_LINKAGE: static
-      COVERITY_BUILD_CANDIDATE: True
-#      #https://www.appveyor.com/docs/build-environment/#qt
-      QTDIR: C:\Qt\5.13.2\mingw73_64
-      QT_IF_VERSION: '3.1.1'
-      PRJLIBS: VCRUNTIME140.dll MSVCP140.dll
 
 configuration:
   - release
@@ -64,99 +17,18 @@ platform:
   - x64
   #- Win32
 
-cache:
-  - C:\Strawberry-x64 -> AppVeyor\Install.cmd
-  #- C:\Strawberry-x86 -> AppVeyor\Install.cmd
-
-install:
-  - echo install
-  - if [%COMPILER%]==[gcc] SET PATH_ORIGINAL=%PATH%
-  # Set some vars
-  #- cmd: echo '%QTDIR%'
-  #- dir C:\Qt\5.13
-  - echo Copy rc files
-  - xcopy /f "C:\Program Files (x86)\Windows Kits\10\bin\10.0.18362.0\x86\rc.exe"    "%ProgramFiles(x86)%\Microsoft Visual Studio\%VSVER%\VC\BIN\"
-  - xcopy /f "C:\Program Files (x86)\Windows Kits\10\bin\10.0.18362.0\x86\rcdll.dll" "%ProgramFiles(x86)%\Microsoft Visual Studio\%VSVER%\VC\BIN\"
-  - xcopy /f "C:\Program Files (x86)\Windows Kits\10\bin\10.0.18362.0\x86\rc.exe"    "%ProgramFiles(x86)%\Microsoft Visual Studio\%VSVER%\VC\BIN\amd64_x86"
-  - xcopy /f "C:\Program Files (x86)\Windows Kits\10\bin\10.0.18362.0\x86\rcdll.dll" "%ProgramFiles(x86)%\Microsoft Visual Studio\%VSVER%\VC\BIN\amd64_x86"
-  - xcopy /f "C:\Program Files (x86)\Windows Kits\10\bin\10.0.18362.0\x86\rc.exe"    "%ProgramFiles(x86)%\Microsoft Visual Studio\%VSVER%\VC\BIN\amd64"
-  - xcopy /f "C:\Program Files (x86)\Windows Kits\10\bin\10.0.18362.0\x86\rcdll.dll" "%ProgramFiles(x86)%\Microsoft Visual Studio\%VSVER%\VC\BIN\amd64"
-  - '%QTDIR%\bin\qtenv2.bat'
-  - echo Qt Version
-  - qmake -v
-  - set PRJLIBDIR=%WINDIR%\SysWOW64 # Find vclibs
-  - set QTDIR
-  - if %QTDIR:_64=%==%QTDIR% ( set ARCH=x86 ) else set ARCH=x64
-  - if %QTDIR:msvc=%==%QTDIR% g++ --version
-  - if %QTDIR:msvc=%==%QTDIR% set make=mingw32-make.exe
-  - if %QTDIR:msvc=%==%QTDIR% %make% --version
-  - if not %QTDIR:msvc=%==%QTDIR% call "%ProgramFiles(x86)%\Microsoft Visual Studio\%VSVER%\VC\vcvarsall.bat" %ARCH%
-  - if not %QTDIR:msvc=%==%QTDIR% set make=nmake.exe
-  - if not %QTDIR:msvc=%==%QTDIR% %make% /? > nul
-  - echo QTDIR=%QTDIR%
-  # Use the mingw-w64 provided by Appveyor (must be placed before Perl in the path)
-  - cmd: SET PATH=C:\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\;%PATH%
-
-  #- dir %QTDIR%
-  #- dir %QTDIR%\bin
-  #- dir %QTDIR%\plugins
-  #- echo C:\Qt
-  #- dir C:\Qt
-  #- if [%COMPILER%]==[gcc] (
-  #      SET "PATH_MINGW32=c:\MinGW\bin;c:\MinGW\usr\bin" &&
-  #      SET "PATH_MINGW64=c:\msys64\mingw64\bin;c:\msys64\usr\bin" &&
-  #      COPY C:\MinGW\bin\mingw32-make.exe C:\MinGW\bin\make.exe &&
-  #      COPY C:\MinGW\bin\gcc.exe C:\MinGW\bin\cc.exe
-  #    )
-
-before_build:
-  # Prepare the out-of-source build directory.
-  - echo before_build ~ APPVEYOR_BUILD_FOLDER=%APPVEYOR_BUILD_FOLDER%
-  #- dir
-  - cd %APPVEYOR_BUILD_FOLDER%
-  - mkdir %APPVEYOR_BUILD_FOLDER%-build
-  #  /Release /x64 /win7
-  - call "C:\Program Files\Microsoft SDKs\Windows\v8.1\Bin\SetEnv.cmd" /Release /x64 /win7
-  - call "%ProgramFiles(x86)%\Microsoft Visual Studio\%VSVER%\VC\vcvarsall.bat" x86_amd64
-  #- perl Configure VC-WIN32
-  #- dir %APPVEYOR_BUILD_FOLDER%  
-  # -spec "win32-g++" 
-  - qmake -o %APPVEYOR_BUILD_FOLDER%-build/Makefile WeBookClient.pro -r -Wall -Wlogic -Wparser CONFIG*=Release
-  - if [%COMPILER%]==[gcc] (
-      qmake -o %APPVEYOR_BUILD_FOLDER%-build/Makefile WeBookClient.pro -r -Wall -Wlogic -Wparser CONFIG*=Release
-    ) ELSE (
-        qmake -tp vc WeBookClient.pro &&
-        qmake -o %APPVEYOR_BUILD_FOLDER%-build -r -Wall -Wlogic -Wparser CONFIG+=Release
-    )
-  - cd %APPVEYOR_BUILD_FOLDER%-build
-  - dir release
-  #- more Makefile.Release
-
 build_script:
-  # Compile it and check for .exe
-  - echo build_script
-  - if [%PLATFORM%]==[mingw64] SET PATH=%PATH_MINGW64%;%PATH_ORIGINAL%
-  - cmake -G "Ninja" "-DCMAKE_PREFIX_PATH=%QTDIR%" "-DCMAKE_BUILD_TYPE=RelWithDebInfo" 
-  - cmake --build . --config Release  
-  #- if [%COMPILER%]==[gcc] (
-  #    echo ----- &&
-  #    C:\MinGW\bin\make.exe -v &&
-  #    echo ----- &&
-  #    C:\MinGW\bin\make.exe -f Makefile.Release -C %APPVEYOR_BUILD_FOLDER%-build WeBookClient CC=clang MOREFLAGS="--target=x86_64-w64-mingw32 -Werror -Wconversion -Wno-sign-conversion" &&
-  #    C:\MinGW\bin\make.exe install
-  #  ) ELSE (
-  #    "%ProgramFiles(x86)%\Microsoft Visual Studio\%VSVER%\VC\BIN\%make%"
-  #  )
-  - dir /b /s *.exe
-  - echo Current Path is %cd%
+  - qmake qtpass.pro CONFIG+=static
+  - mingw32-make
+
 after_build:
   # Add a link to the build output within the source directory. This is needed because AppVeyor does
   # not support extracting artifacts from out-of-source build directories. See 'artifacts' below.
-  - echo after_build
-  - echo Current Path is %cd%
-  - cmake --build . --config Release --target install
-  - cmake --build . --config Release --target package  
-  #- dir
+  #- echo after_build
+  #- echo Current Path is %cd%
+  #- cmake --build . --config Release --target install
+  #- cmake --build . --config Release --target package
+  - dir
   - dir /b /s *.exe
   - mkdir deploy
   - copy "%APPVEYOR_BUILD_FOLDER%-build\%CONFIGURATION%\%BIN%.exe" "deploy\%BIN%.exe"

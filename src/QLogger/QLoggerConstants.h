@@ -35,11 +35,13 @@ namespace QLogger
     // I hard code these values here for a reason, not that I would use them, set the Link to include this data, pass in as Arguments
     // These values are for testing only
     // Default Log Server Port
-    const quint16 ConstDefaultPort                  = 9696;             //!< \c ConstDefaultPort            \brief Port Number of Log Server.
-    const QString ConstDefaultLogNamePattern        = "-Log.yyyy-MM";   //!< \c ConstDefaultLogNamePattern  \brief Log File Name Pattern (See Notes in QLoggerCommon.h).
-    const QString ConstDefaultModuleName            = "WeBook";         //!< \c ConstDefaultModuleName      \brief Default Module Name.
-    const QPoint  ConstDefaultGeometryPos           = QPoint(10, 10);   //!< \c ConstDefaultGeometryPos     \brief Top, Left.
-    const QSize   ConstDefaultGeometrySize          = QSize(1000, 666); //!< \c ConstDefaultGeometrySize    \brief Width x Height.
+    const quint16 ConstDefaultPort                  = 9696;               //!< \c ConstDefaultPort            \brief Port Number of Log Server.
+    // Default Log Server URL
+    const QString ConstDefaultUrl                   = "lightwizzard.com"; //!< \c ConstDefaultUrl             \brief Default URL of Log Server.
+    const QString ConstDefaultLogNamePattern        = "-Log.yyyy-MM";     //!< \c ConstDefaultLogNamePattern  \brief Log File Name Pattern (See Notes in QLoggerCommon.h).
+    const QString ConstDefaultModuleName            = "WeBook";           //!< \c ConstDefaultModuleName      \brief Default Module Name.
+    const QPoint  ConstDefaultGeometryPos           = QPoint(10, 10);     //!< \c ConstDefaultGeometryPos     \brief Top, Left.
+    const QSize   ConstDefaultGeometrySize          = QSize(1000, 666);   //!< \c ConstDefaultGeometrySize    \brief Width x Height.
     const QString ConstDefaultCryptoKey             = "!1@2#3$4%5^6&7*8)9(0)NowPickRand"; //!< \c ConstDefaultCryptoKey      \brief Default Crypto Key these values are for testing only.
     const QString ConstDefaultCryptoIvVector        = "PutMoveVector1!2@3#4$NowPickRand"; //!< \c ConstDefaultCryptoIvVector \brief Default Crypto IV Vector these values are for testing only.
 

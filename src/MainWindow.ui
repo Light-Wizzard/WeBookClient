@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>866</width>
-    <height>734</height>
+    <width>1020</width>
+    <height>826</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,7 +18,7 @@
     <item>
      <widget class="QTabWidget" name="widgetTab">
       <property name="currentIndex">
-       <number>4</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tabSettings">
        <attribute name="title">
@@ -212,6 +212,16 @@
             </widget>
            </item>
            <item row="4" column="0">
+            <widget class="QLabel" name="labelConnectVpsPath">
+             <property name="text">
+              <string>Path:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1">
+            <widget class="QLineEdit" name="editConnectVpsPath"/>
+           </item>
+           <item row="8" column="0">
             <widget class="QLabel" name="labelConnectionManVpsDomainNameList">
              <property name="text">
               <string>Domain Name List</string>
@@ -221,8 +231,44 @@
              </property>
             </widget>
            </item>
-           <item row="4" column="1">
+           <item row="8" column="1">
             <widget class="QLineEdit" name="editConnectionManVpsDomainNameList"/>
+           </item>
+           <item row="10" column="0">
+            <widget class="QLabel" name="label">
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item row="10" column="1">
+            <widget class="QPushButton" name="pushButtonConnectVpsUpload">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="toolTip">
+              <string>Upload</string>
+             </property>
+             <property name="statusTip">
+              <string>Upload</string>
+             </property>
+             <property name="text">
+              <string>Upload</string>
+             </property>
+             <property name="icon">
+              <iconset resource="../WeBookClient.qrc">
+               <normaloff>:/images/win/upload.png</normaloff>:/images/win/upload.png</iconset>
+             </property>
+            </widget>
            </item>
           </layout>
          </widget>
@@ -492,7 +538,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>866</width>
+     <width>1020</width>
      <height>25</height>
     </rect>
    </property>
@@ -505,6 +551,7 @@
     </property>
     <addaction name="actionNew"/>
     <addaction name="separator"/>
+    <addaction name="actionConnectUpload"/>
     <addaction name="actionSave"/>
     <addaction name="separator"/>
     <addaction name="actionPrint"/>
@@ -1050,7 +1097,22 @@
     <string>Ctrl+N</string>
    </property>
   </action>
+  <action name="actionConnectUpload">
+   <property name="icon">
+    <iconset>
+     <normalon>:/images/win/upload.png</normalon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>Upload</string>
+   </property>
+   <property name="toolTip">
+    <string>Upload</string>
+   </property>
+  </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="../WeBookClient.qrc"/>
+ </resources>
  <connections/>
 </ui>

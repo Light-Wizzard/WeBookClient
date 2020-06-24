@@ -38,14 +38,16 @@ win32:QMAKE_CXXFLAGS  *= -platform win32-g++
 win32:CONFIG          += -platform win32-g++
 #
 # Headers files
-HEADERS     *= src/AboutDialog.h
+HEADERS     *= src/AboutDialog.h \
+    src/WeBookFtpClient.h
 HEADERS     *= src/MainWindow.h
 HEADERS     *= src/WeBookMan.h
 HEADERS     *= src/TreeItem.h
 HEADERS     *= src/TreeModel.h
 HEADERS     *= src/TreeViewDragDropModel.h
 # Source files
-SOURCES     *= src/AboutDialog.cpp
+SOURCES     *= src/AboutDialog.cpp \
+    src/WeBookFtpClient.cpp
 SOURCES     *= src/MainWindow.cpp
 SOURCES     *= src/WeBookMan.cpp
 SOURCES     *= src/TreeItem.cpp
@@ -56,7 +58,7 @@ SOURCES     *= src/main.cpp
 FORMS       += src/MainWindow.ui
 FORMS       += src/AboutDialog.ui
 #
-#DISTFILES   += .appveyor.yml
+DISTFILES   += .appveyor.yml
 #DISTFILES   += .travis.yml
 #DISTFILES   += WeBookClient.doxygen
 #DISTFILES   += WeBookClient.qdocconf
