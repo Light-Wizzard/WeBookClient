@@ -28,21 +28,24 @@ I used the Qt Rich Text Editor Project and documentation.
 
 ## Status
 
-Linux: [![Travis Build Status](https://travis-ci.org/Light-Wizzard/WeBookClient.svg?branch=master)](https://travis-ci.org/Light-Wizzard/WeBookClient)
+Unix: Linux & Mac: [![Travis Build Status](https://travis-ci.org/Light-Wizzard/WeBookClient.svg?branch=master)](https://travis-ci.org/Light-Wizzard/WeBookClient)
+
+Windows: [![Travis Build Status](https://ci.appveyor.com/api/projects/status/l72fncva61fru2h4?svg=true)](https://ci.appveyor.com/project/Light-Wizzard/WeBookClient)
 
 I am posting this only so I can get the Travis and AppVeyor Builds to work.
 
 Currently it works somewhat, and missing a lot of features,
 it currently does not talk with the WeBookServer.
 
-It will run on Windows 10, but building the Deploy file failed.
-
-MSVC has an Error in the MakeFile line 141, its a Private Class.
-
 ## Downloads
 
 - :penguin: [Linux](https://github.com/Light-Wizzard/WeBookClient/releases/download/continuous/WeBookClient-travis-x86_64.AppImage)
 - :penguin: :inbox_tray: [Linux ZSync](https://github.com/Light-Wizzard/WeBookClient/releases/download/continuous/WeBookClient-travis-x86_64.AppImage.zsync)
+- :office: [Windows zip exe](https://github.com/Light-Wizzard/WeBookClient/releases/download/continuous/WeBookClient-release.zip)
+- :office: :outbox_tray: [Windows Installer exe](https://github.com/Light-Wizzard/WeBookClient/releases/download/continuous/WeBookClient-Installer.exe)
+- :office: :outbox_tray: [Windows Installer zip](https://github.com/Light-Wizzard/WeBookClient/releases/download/continuous/WeBookClient-Installer.zip)
+- :apple: [Apple](https://github.com/Light-Wizzard/WeBookClient/releases/download/continuous/WeBookClient.dmg)
+
 
 ## Concept
 
