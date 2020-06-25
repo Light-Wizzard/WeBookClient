@@ -645,12 +645,12 @@ bool MainWindow::load(const QString &f)
     else
     {
         // mimetypeapplication/vnd.oasis.opendocument.textPK
-    #if QT_CONFIG(textmarkdownreader)
+    //#if QT_CONFIG(textmarkdownreader)
         QMimeDatabase db;
         if (db.mimeTypeForFileNameAndData(f, data).name() == QLatin1String("text/markdown"))
             ui->textEdit->setMarkdown(QString::fromUtf8(data));
         else
-    #endif
+    //#endif
             ui->textEdit->setPlainText(QString::fromUtf8(data));
     }
 
@@ -748,12 +748,12 @@ void MainWindow::onFileOpen()
     fileDialog.setAcceptMode(QFileDialog::AcceptOpen);
     fileDialog.setFileMode(QFileDialog::ExistingFile);
     fileDialog.setMimeTypeFilters(QStringList()
-                              #if QT_CONFIG(texthtmlparser)
+                              //#if QT_CONFIG(texthtmlparser)
                                   << "text/html"
-                              #endif
-                              #if QT_CONFIG(textmarkdownreader)
+                              //#endif
+                              //#if QT_CONFIG(textmarkdownreader)
                                   << "text/markdown"
-                              #endif
+                              //#endif
                                   << "text/plain");
     if (fileDialog.exec() != QDialog::Accepted) return;
     const QString fn = fileDialog.selectedFiles().first();
@@ -805,17 +805,17 @@ bool MainWindow::onFileSaveAs()
     fileDialog.setAcceptMode(QFileDialog::AcceptSave);
     QStringList mimeTypes;
     mimeTypes << "text/plain"
-             #if QT_CONFIG(textodfwriter)
+             //#if QT_CONFIG(textodfwriter)
               << "application/vnd.oasis.opendocument.text"
-             #endif
-             #if QT_CONFIG(textmarkdownwriter)
+             //#endif
+             //#if QT_CONFIG(textmarkdownwriter)
               << "text/markdown"
-             #endif
+             //#endif
               << "text/html";
     fileDialog.setMimeTypeFilters(mimeTypes);
-    #if QT_CONFIG(textodfwriter)
+    //#if QT_CONFIG(textodfwriter)
         fileDialog.setDefaultSuffix("odt");
-    #endif
+    //#endif
     if (fileDialog.exec() != QDialog::Accepted)
         return false;
     const QString fn = fileDialog.selectedFiles().first();
@@ -828,14 +828,14 @@ bool MainWindow::onFileSaveAs()
 void MainWindow::onFilePrint()
 {
     if (isDebugMessage) qDebug() << "onFilePrint";
-    #if defined(QT_PRINTSUPPORT_LIB) && QT_CONFIG(printdialog)
+    //#if defined(QT_PRINTSUPPORT_LIB) && QT_CONFIG(printdialog)
         QPrinter printer(QPrinter::HighResolution);
         QPrintDialog *dlg = new QPrintDialog(&printer, this);
         if (ui->textEdit->textCursor().hasSelection()) dlg->addEnabledOption(QAbstractPrintDialog::PrintSelection);
         dlg->setWindowTitle(tr("Print Document"));
         if (dlg->exec() == QDialog::Accepted) ui->textEdit->print(&printer);
         delete dlg;
-    #endif
+    //#endif
 } // end onFilePrint
 /******************************************************************************
 * onFilePrintPreview                                                         *
@@ -843,12 +843,12 @@ void MainWindow::onFilePrint()
 void MainWindow::onFilePrintPreview()
 {
     if (isDebugMessage) qDebug() << "onFilePrintPreview";
-    #if defined(QT_PRINTSUPPORT_LIB) && QT_CONFIG(printpreviewdialog)
+    //#if defined(QT_PRINTSUPPORT_LIB) && QT_CONFIG(printpreviewdialog)
         QPrinter printer(QPrinter::HighResolution);
         QPrintPreviewDialog preview(&printer, this);
         connect(&preview, &QPrintPreviewDialog::paintRequested, this, &MainWindow::onPrintPreview);
         preview.exec();
-    #endif
+    //#endif
 } // end onFilePrintPreview
 /******************************************************************************
 * onPrintPreview FIXME see below                                             *
@@ -856,11 +856,11 @@ void MainWindow::onFilePrintPreview()
 void MainWindow::onPrintPreview(QPrinter *printer)
 {
     if (isDebugMessage) qDebug() << "onPrintPreview";
-    #if defined(QT_PRINTSUPPORT_LIB) && QT_CONFIG(printer)
+    //#if defined(QT_PRINTSUPPORT_LIB) && QT_CONFIG(printer)
         ui->textEdit->print(printer);
-    #else
-        Q_UNUSED(printer)
-    #endif
+    //#else
+    //    Q_UNUSED(printer)
+    //#endif
 } // end onPrintPreview
 /******************************************************************************
 * onFilePrintPdf FIXME this only works on current page, add option to tree   *
@@ -868,7 +868,7 @@ void MainWindow::onPrintPreview(QPrinter *printer)
 void MainWindow::onFilePrintPdf()
 {
     if (isDebugMessage) qDebug() << "onFilePrintPdf";
-    #if defined(QT_PRINTSUPPORT_LIB) && QT_CONFIG(printer)
+    //#if defined(QT_PRINTSUPPORT_LIB) && QT_CONFIG(printer)
         QFileDialog fileDialog(this, tr("Export PDF"));
         fileDialog.setAcceptMode(QFileDialog::AcceptSave);
         fileDialog.setMimeTypeFilters(QStringList("application/pdf"));
@@ -880,7 +880,7 @@ void MainWindow::onFilePrintPdf()
         printer.setOutputFileName(fileName);
         ui->textEdit->document()->print(&printer);
         statusBar()->showMessage(tr("Exported \"%1\"").arg(QDir::toNativeSeparators(fileName)));
-    #endif
+    //#endif
 } // end onFilePrintPdf
 /******************************************************************************
 * onTextBold                                                                 *
