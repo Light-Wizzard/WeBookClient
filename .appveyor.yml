@@ -32,27 +32,27 @@ after_build:
   - dir
   - dir /b /s *.exe
   - mkdir deploy
-  - copy "%APPVEYOR_BUILD_FOLDER%-build\%CONFIGURATION%\%BIN%.exe" "deploy\%BIN%.exe"
+  - copy "%APPVEYOR_BUILD_FOLDER%\%CONFIGURATION%\%BIN%.exe" "deploy\%BIN%.exe"
   - windeployqt --%CONFIGURATION% "deploy/%BIN%.exe" --verbose=2
   - for %%I in (%PRJLIBS%) do copy %PRJLIBDIR%\%%I deploy\
   - 7z a -tzip "%BIN%-%CONFIGURATION%.zip" deploy -r
-  - copy "%APPVEYOR_BUILD_FOLDER%-build\%BIN%-%CONFIGURATION%.zip" "%APPVEYOR_BUILD_FOLDER%\%BIN%-%CONFIGURATION%.zip"
+  - copy "%APPVEYOR_BUILD_FOLDER%\%BIN%-%CONFIGURATION%.zip" "%APPVEYOR_BUILD_FOLDER%\%BIN%-%CONFIGURATION%.zip"
   - echo APPVEYOR_BUILD_FOLDER=%APPVEYOR_BUILD_FOLDER%
   - if exist C:\projects\ (echo C:\projects exists)
   - if exist C:\projects\ (dir )
   - if exist C:\projects\ (dir C:\projects\)
-  - if exist C:\projects\ (dir "%APPVEYOR_BUILD_FOLDER%-build\")
-  - if exist C:\projects\ (dir "%APPVEYOR_BUILD_FOLDER%-build\deploy\")
+  - if exist C:\projects\ (dir "%APPVEYOR_BUILD_FOLDER%\")
+  - if exist C:\projects\ (dir "%APPVEYOR_BUILD_FOLDER%\deploy\")
   - if exist C:\Qt\QtIFW-3.1.1\ (dir C:\Qt\QtIFW-3.1.1)
   - if exist C:\Qt\QtIFW-3.1.1\bin\ (dir C:\Qt\QtIFW-3.1.1\bin\)
   - if exist C:\Qt\QtIFW-3.1.1\bin\binarycreator.exe (echo C:\Qt\QtIFW-3.1.1\bin\binarycreator.exe exists) else (echo C:\Qt\QtIFW-3.1.1\bin\binarycreator.exe does not exists)
-  - xcopy /s /e /f "%APPVEYOR_BUILD_FOLDER%-build\deploy" "%APPVEYOR_BUILD_FOLDER%\%QIF_PACKAGE_URI%"
+  - xcopy /s /e /f "%APPVEYOR_BUILD_FOLDER%\deploy" "%APPVEYOR_BUILD_FOLDER%\%QIF_PACKAGE_URI%"
   - C:\Qt\QtIFW-3.1.1\bin\binarycreator.exe --offline-only -c "%APPVEYOR_BUILD_FOLDER%\config\config.xml" -p "%APPVEYOR_BUILD_FOLDER%\packages" "%BIN%-Installer.exe"
   - 7z a -tzip "%BIN%-Installer.zip" "%BIN%-Installer.exe"
   - dir /b /s *.zip
   - dir /b /s *.exe
   - dir
-  - echo Completed-Build
+  - echo Completed
   
 artifacts:
   - path: '%BIN%-%CONFIGURATION%.zip'
