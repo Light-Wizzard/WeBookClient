@@ -13,18 +13,18 @@ I used the Qt Rich Text Editor Project and documentation.
 
 ## Table of Content
 
-[Status](#Status)
-[Downloads](#Downloads)
-[Concept](#Concept)
-[Windows](#Windows)
-[QTextEdit](#QTextEdit)
-[Font and Paragraph Styles](#Font-and-Paragraph-Styles)
-[Lists](#Lists)
-[Images](#Images)
-[Tables](#Tables)
-[Hyperlinks](#Hyperlinks)
-[Undo and Redo](#Undo-and-Redo)
-[QLogger](#QLogger)
+* [Status](#Status)
+* [Downloads](#Downloads)
+* [Concept](#Concept)
+* [Windows](#Windows)
+* [QTextEdit](#QTextEdit)
+* [Font and Paragraph Styles](#Font-and-Paragraph-Styles)
+* [Lists](#Lists)
+* [Images](#Images)
+* [Tables](#Tables)
+* [Hyperlinks](#Hyperlinks)
+* [Undo and Redo](#Undo-and-Redo)
+* [QLogger](#QLogger)
 
 ## Status
 
