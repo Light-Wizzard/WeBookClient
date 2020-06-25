@@ -121,10 +121,7 @@ without effecting Clients.
 
 ## Windows
 
-Not Working on AppVeyor due to MSVC, I might need to switch to [mingw](http://www.mingw.org/),
-if I cannot figure this out.
-
-I can compile and run this in Windows using mingw.
+Works on Windows 10, have not tested the installer yet.
 
 ## QTextEdit
 
