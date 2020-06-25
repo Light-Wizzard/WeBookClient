@@ -33,7 +33,8 @@ after_build:
   - dir /b /s *.exe
   - mkdir deploy
   - copy "%APPVEYOR_BUILD_FOLDER%\%CONFIGURATION%\%BIN%.exe" "deploy\%BIN%.exe"
-  - windeployqt --%CONFIGURATION% "deploy/%BIN%.exe" --verbose=2
+  #- windeployqt --%CONFIGURATION% "deploy/%BIN%.exe" --verbose=2
+  - windeployqt "deploy/%BIN%.exe" --verbose=2
   - for %%I in (%PRJLIBS%) do copy %PRJLIBDIR%\%%I deploy\
   - 7z a -tzip "%BIN%-%CONFIGURATION%.zip" deploy -r
   - copy "%APPVEYOR_BUILD_FOLDER%\%BIN%-%CONFIGURATION%.zip" "%APPVEYOR_BUILD_FOLDER%\%BIN%-%CONFIGURATION%.zip"
