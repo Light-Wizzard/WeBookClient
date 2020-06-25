@@ -19,7 +19,8 @@ QT              += gui
 QT              += core
 QT              += widgets
 #QT              *= core-private
-!win32:QT       *= network
+QT              *= network
+#!win32:QT       *= network
 CONFIG          *= qt
 CONFIG         *= "c++11"
 #CONFIG         *= "c++14"
@@ -38,16 +39,16 @@ DEFINES         = APP_VERSION=\\\"$${VERSION}\\\"
 #win32:CONFIG          += -platform win32-g++
 #
 # Headers files
-HEADERS     *= src/AboutDialog.h \
-    src/WeBookFtpClient.h
+HEADERS     *= src/AboutDialog.h
 HEADERS     *= src/MainWindow.h
 HEADERS     *= src/WeBookMan.h
 HEADERS     *= src/TreeItem.h
 HEADERS     *= src/TreeModel.h
 HEADERS     *= src/TreeViewDragDropModel.h
+HEADERS     *= src/WeBookFtpClient.h
 # Source files
-SOURCES     *= src/AboutDialog.cpp \
-    src/WeBookFtpClient.cpp
+SOURCES     *= src/AboutDialog.cpp
+SOURCES     *= src/WeBookFtpClient.cpp
 SOURCES     *= src/MainWindow.cpp
 SOURCES     *= src/WeBookMan.cpp
 SOURCES     *= src/TreeItem.cpp
