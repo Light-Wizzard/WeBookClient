@@ -29,7 +29,6 @@ after_build:
   #- echo Current Path is %cd%
   #- cmake --build . --config Release --target install
   #- cmake --build . --config Release --target package
-  - dir
   - dir /b /s *.exe
   - mkdir deploy
   - copy "%APPVEYOR_BUILD_FOLDER%\%CONFIGURATION%\%BIN%.exe" "deploy\%BIN%.exe"
@@ -37,7 +36,8 @@ after_build:
   - windeployqt "deploy/%BIN%.exe" --verbose=2
   - for %%I in (%PRJLIBS%) do copy %PRJLIBDIR%\%%I deploy\
   - 7z a -tzip "%BIN%-%CONFIGURATION%.zip" deploy -r
-  #- copy "%APPVEYOR_BUILD_FOLDER%\%BIN%-%CONFIGURATION%.zip" "%APPVEYOR_BUILD_FOLDER%\%BIN%-%CONFIGURATION%.zip"
+  - dir
+  - copy "%BIN%-%CONFIGURATION%.zip" "%APPVEYOR_BUILD_FOLDER%\%BIN%-%CONFIGURATION%.zip"
   - echo APPVEYOR_BUILD_FOLDER=%APPVEYOR_BUILD_FOLDER%
   - if exist C:\projects\ (echo C:\projects exists)
   - if exist C:\projects\ (dir )
