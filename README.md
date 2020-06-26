@@ -16,6 +16,8 @@ I used the Qt Rich Text Editor Project and documentation.
 * [Status](#Status)
 * [Downloads](#Downloads)
 * [Windows](#Windows)
+* [Mac](#Mac)
+* [Linux](#Linux)
 * [Concept](#Concept)
 * [QTextEdit](#QTextEdit)
 * [Font and Paragraph Styles](#Font-and-Paragraph-Styles)
@@ -53,16 +55,19 @@ Mac
 
 ## Windows
 
-AppVeyor is not working for some reason,
-its not linked correctly with Qt Library,
-I cannot reproduce this on my Windows 10 Machine, it just works for MinGW only,
-and has an issues with any version of MSVC,
-[Get Bill Gates in here....](https://youtu.be/EPfsr8BBdA8),
-till I figure it out,
-this is a link to a zip of the Qt Installer for WeBookClient that works on Windows 10 maybe 8, but not below that:
-https://LightWizzard.com/installers/windows/WeBookClient.zip,
-download it, extract it, and install it,
-I have tested the Installer and Uninstaller, both work.
+I have tested the WeBookClient Installer and Uninstaller, both are working.
+
+The App should work on Windows 7 or greater.
+
+I test on Windows 10 Pro.
+
+## Mac
+
+I do not own a Mac, so I cannot test it.
+
+## Linux
+
+This app was written and tested on Arch Linux Manjaro, as well as Ubuntu LTS.
 
 ## Concept
 
