@@ -39,11 +39,14 @@ it currently does not talk with the WeBookServer.
 
 ## Downloads
 
+Linux
 - :penguin: [Linux](https://github.com/Light-Wizzard/WeBookClient/releases/download/continuous/WeBookClient-travis-x86_64.AppImage)
 - :penguin: :inbox_tray: [Linux ZSync](https://github.com/Light-Wizzard/WeBookClient/releases/download/continuous/WeBookClient-travis-x86_64.AppImage.zsync)
+Windows see [Windows](#Windows)
 - :office: [Windows zip exe](https://github.com/Light-Wizzard/WeBookClient/releases/download/continuous/WeBookClient-release.zip)
 - :office: :outbox_tray: [Windows Installer exe](https://github.com/Light-Wizzard/WeBookClient/releases/download/continuous/WeBookClient-Installer.exe)
 - :office: :outbox_tray: [Windows Installer zip](https://github.com/Light-Wizzard/WeBookClient/releases/download/continuous/WeBookClient-Installer.zip)
+Mac
 - :apple: [Apple](https://github.com/Light-Wizzard/WeBookClient/releases/download/continuous/WeBookClient.dmg)
 
 
