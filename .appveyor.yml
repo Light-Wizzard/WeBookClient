@@ -29,6 +29,7 @@ platform:
   #- Win32
 
 build_script:
+  - cd %APPVEYOR_BUILD_FOLDER%
   - qmake %BIN%.pro CONFIG+=static
   - mingw32-make
 
