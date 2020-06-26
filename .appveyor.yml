@@ -17,9 +17,11 @@ environment:
 install:
   - choco install -y InnoSetup
   - cinst mingw
+  - refreshenv
   - set PATH=%QTDIR%\bin;%PATH%;"C:\Program Files (x86)\Inno Setup 6"
   - echo Copy rc files
   - '%QTDIR%\bin\qtenv2.bat'
+  - set PRJLIBDIR=%WINDIR%\SysWOW64 # Find vclibs
 
 configuration:
   - release
