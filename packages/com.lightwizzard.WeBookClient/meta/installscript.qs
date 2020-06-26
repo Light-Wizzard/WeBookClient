@@ -43,7 +43,7 @@ Component.prototype.createOperations = function()
     {
         component.addOperation("CreateShortcut", "@TargetDir@/WeBookClient.exe", "@StartMenuDir@/WeBookClient.lnk",
             "workingDirectory=@TargetDir@", "iconPath=%SystemRoot%/system32/SHELL32.dll", "iconId=2", 
-            "description=Galaxy Calculator by the Light Wizzard");
+            "description=WeBookClient by the Light Wizzard in the Flesh");
     }
     /* ************************************************************************
         currentCpuArchitecture:"i386" "x86_64"

@@ -15,8 +15,8 @@ I used the Qt Rich Text Editor Project and documentation.
 
 * [Status](#Status)
 * [Downloads](#Downloads)
-* [Concept](#Concept)
 * [Windows](#Windows)
+* [Concept](#Concept)
 * [QTextEdit](#QTextEdit)
 * [Font and Paragraph Styles](#Font-and-Paragraph-Styles)
 * [Lists](#Lists)
@@ -50,6 +50,19 @@ Windows see [Windows](#Windows)
 
 Mac
 - :apple: [Apple](https://github.com/Light-Wizzard/WeBookClient/releases/download/continuous/WeBookClient.dmg)
+
+## Windows
+
+AppVeyor is not working for some reason,
+its not linked correctly with Qt Library,
+I cannot reproduce this on my Windows 10 Machine, it just works for MinGW only,
+and has an issues with any version of MSVC,
+[Get Bill Gates in here....](https://youtu.be/EPfsr8BBdA8),
+till I figure it out,
+this is a link to a zip of the Qt Installer for WeBookClient that works on Windows 10 maybe 8, but not below that:
+https://LightWizzard.com/installers/windows/WeBookClient.zip,
+download it, extract it, and install it,
+I have tested the Installer and Uninstaller, both work.
 
 ## Concept
 
@@ -123,19 +136,13 @@ and just let it go, with no abnormal administration,
 just normal usage, to prove it can sustain a DoS or Brute Force attacks,
 without effecting Clients.
 
-## Windows
-
-AppVeyor is not working for some reason,
-its not linked correctly with Qt Library,
-I cannot reproduce this on my Windows 10 Machine, it just works for MinGW only,
-and has an issues with any version of MSVC,
-[Get Bill Gates in here....](https://youtu.be/EPfsr8BBdA8),
-till I figure it out,
-this is a link to a zip of the Qt Installer for WeBookClient that works on Windows 10 maybe 8, but not below that:
-https://LightWizzard.com/installers/windows/WeBookClient.zip,
-download it, extract it, and install it,
-I have tested the Installer and Uninstaller, both work.
-
+The Reason I wrote this Content Management System,
+is to document the End of Times,
+according to Sir Isaac Newton,
+who Calculated this would happen in the year of 2060 under the Julian Calendar,
+this can be confirmed by calculating when the Magnetosphere will be gone,
+and that is in the year 2103, and Newton Calculated it would happen 42 years before that,
+see https://github.com/Light-Wizzard/galaxy-calculator for more details.
 
 ## QTextEdit
 
