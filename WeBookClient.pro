@@ -33,7 +33,7 @@ CONFIG         *= "c++11"
 #TRANSLATIONS    += src/WeBookServer_en_US.ts
 CONFIG          *= warn_on utf8_source executable
 #
-win32:LIBS     *= static
+win32:LIBS     *= -static
 win32:CONFIG   *= windeployqt
 win32:CONFIG   *= windows
 # Version Numver Controls
