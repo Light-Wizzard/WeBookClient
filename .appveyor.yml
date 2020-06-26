@@ -1,15 +1,20 @@
 # WeBookClient AppVeyor configuration files
 image: Visual Studio 2019
 
-install:
-  - set QTDIR=C:\Qt\5.14\mingw73_32
-  - choco install -y InnoSetup
-  - set PATH=%QTDIR%\bin;C:\Qt\Tools\mingw530_32\bin;%PATH%;"C:\Program Files (x86)\Inno Setup 5"
-
 environment:
-  BIN: WeBookClient
-  MY_ENV: AppVeyor
-  QIF_PACKAGE_URI: 'packages\com.lightwizzard.WeBookClient\data'
+  global:
+    BIN: WeBookClient
+    MY_ENV: AppVeyor
+    QIF_PACKAGE_URI: 'packages\com.lightwizzard.WeBookClient\data'
+  matrix:  
+    - ARCH: x64
+      COMPILER: MinGW
+      QTDIR: C:\Qt\5.14.2\mingw73_64  
+  
+install:
+  - choco install -y InnoSetup
+  - set PATH=%QTDIR%\bin;%PATH%;"C:\Program Files (x86)\Inno Setup 5"
+
 
 configuration:
   - release
