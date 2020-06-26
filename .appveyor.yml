@@ -6,7 +6,7 @@ environment:
     BIN: WeBookClient
     MY_ENV: AppVeyor
     QIF_PACKAGE_URI: 'packages\com.lightwizzard.WeBookClient\data'
-    QT_IF_VERSION: '3.1.1'
+    QT_IF_VERSION: '3.2'
     PRJLIBS: VCRUNTIME140.dll MSVCP140.dll
     RUNTIME_LINKAGE: static
   matrix:  
@@ -18,6 +18,7 @@ install:
   - choco install -y InnoSetup
   - cinst mingw
   - set PATH=%QTDIR%\bin;%PATH%;"C:\Program Files (x86)\Inno Setup 6"
+  - echo Copy rc files
   - '%QTDIR%\bin\qtenv2.bat'
 
 configuration:
@@ -39,14 +40,7 @@ after_build:
   - for %%I in (%PRJLIBS%) do copy %PRJLIBDIR%\%%I deploy\
   - 7z a -r -tzip "%BIN%-%CONFIGURATION%.zip" deploy\*
   - echo APPVEYOR_BUILD_FOLDER=%APPVEYOR_BUILD_FOLDER%
-  - if exist C:\projects\ (echo C:\projects exists)
-  - if exist C:\projects\ (dir )
-  - if exist C:\projects\ (dir C:\projects\)
-  - if exist C:\projects\ (dir "%APPVEYOR_BUILD_FOLDER%\")
-  - if exist C:\projects\ (dir "%APPVEYOR_BUILD_FOLDER%\deploy\")
-  - if exist C:\Qt\QtIFW-3.1.1\ (dir C:\Qt\QtIFW-3.1.1)
-  - if exist C:\Qt\QtIFW-3.1.1\bin\ (dir C:\Qt\QtIFW-3.1.1\bin\)
-  - if exist C:\Qt\QtIFW-3.1.1\bin\binarycreator.exe (echo C:\Qt\QtIFW-3.1.1\bin\binarycreator.exe exists) else (echo C:\Qt\QtIFW-3.1.1\bin\binarycreator.exe does not exists)
+  #- if exist C:\projects\ (echo C:\projects exists)
   - xcopy /s /e /f "%APPVEYOR_BUILD_FOLDER%\deploy" "%APPVEYOR_BUILD_FOLDER%\%QIF_PACKAGE_URI%"
   - C:\Qt\Tools\QtInstallerFramework\3.2\bin\binarycreator.exe --offline-only -c "%APPVEYOR_BUILD_FOLDER%\config\config.xml" -p "%APPVEYOR_BUILD_FOLDER%\packages" "%BIN%-Installer.exe"
   - 7z a -tzip "%BIN%-Installer.zip" "%BIN%-Installer.exe"
