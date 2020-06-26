@@ -6,6 +6,9 @@ environment:
     BIN: WeBookClient
     MY_ENV: AppVeyor
     QIF_PACKAGE_URI: 'packages\com.lightwizzard.WeBookClient\data'
+    QT_IF_VERSION: '3.1.1'
+    PRJLIBS: VCRUNTIME140.dll MSVCP140.dll
+    RUNTIME_LINKAGE: static
   matrix:  
     - ARCH: x64
       COMPILER: MinGW
@@ -14,7 +17,8 @@ environment:
 install:
   - choco install -y InnoSetup
   - cinst mingw
-  - set PATH=%QTDIR%\bin;%PATH%;"C:\Program Files (x86)\Inno Setup 5"
+  - set PATH=%QTDIR%\bin;%PATH%;"C:\Program Files (x86)\Inno Setup 6"
+  - '%QTDIR%\bin\qtenv2.bat'
 
 configuration:
   - release
