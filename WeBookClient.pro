@@ -1,6 +1,7 @@
 # WeBookServerClient.pro
 #DEFINES         *= QT_PRINTSUPPORT_LIB
 #qtHaveModule(printsupport): QT *= printsupport
+#unix:QT *= printsupport
 QT *= printsupport
 # Specifies the name of the template to use when generating the project.
 # The allowed values are: app, lib, subdirs, aux, vcapp or vclib
@@ -31,6 +32,10 @@ CONFIG         *= "c++11"
 #CONFIG         *= "c++latest"
 #TRANSLATIONS    += src/WeBookServer_en_US.ts
 CONFIG          *= warn_on utf8_source executable
+#
+win32:LIBS     *= static
+win32:CONFIG   *= windeployqt
+win32:CONFIG   *= windows
 # Version Numver Controls
 win32:VERSION   = 0.1.0.0 # major.minor.patch.build
 else:VERSION    = 0.1.0   # major.minor.patch

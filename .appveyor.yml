@@ -28,7 +28,7 @@ after_build:
   - copy "%APPVEYOR_BUILD_FOLDER%\%CONFIGURATION%\%BIN%.exe" "deploy\%BIN%.exe"
   - windeployqt "deploy/%BIN%.exe" --verbose=2
   - for %%I in (%PRJLIBS%) do copy %PRJLIBDIR%\%%I deploy\
-  - 7z a -tzip "%BIN%-%CONFIGURATION%.zip" deploy -r
+  - 7z a -r -tzip "%BIN%-%CONFIGURATION%.zip" deploy\*
   - echo APPVEYOR_BUILD_FOLDER=%APPVEYOR_BUILD_FOLDER%
   - if exist C:\projects\ (echo C:\projects exists)
   - if exist C:\projects\ (dir )

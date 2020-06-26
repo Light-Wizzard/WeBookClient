@@ -50,16 +50,16 @@ it currently does not talk with the WeBookServer.
 ## Concept
 
 The WeBook Concept is to have a Client known as WeBookClient,
-commumicate and control the Server known as WeBookServer,
-in a multi-user collabration, designed for managing Web-Books.
+communicate and control the Server known as WeBookServer,
+in a multi-user collaboration, designed for managing Web-Books.
 
 A Web-Book also known as a WeBook,
-is an HTML Document that is edited using Qt C++ Rich Text Widet,
+is an HTML Document that is edited using Qt C++ Rich Text Widget,
 and saves it as an HTML Document, and when published with send it to the WeBookServer,
 which can be running on your Local Machine, on a Machine in your Local Network,
 or a Public VPS account, where every WeBook can be its own Website.
 
-When completed, it will allow multile users, the ability join your Domain,
+When completed, it will allow multiple users, the ability join your Domain,
 or you can join others, the concept is to Fork this Project,
 and make your own WeBook Domains,
 the concept of Forking, is so you have your Own GitHub Repository,
@@ -69,33 +69,33 @@ the End Users who Fork it,
 only need to do pulls to keep it up to date.
 
 This Project uses Zsync2, I am going to write a full Tutorial on how to use it,
-bascially it allows you to push updates to your Travis and AppVeyor builds,
+basically it allows you to push updates to your Travis and AppVeyor builds,
 and anyone that has this App installed, will get a notification of the Update,
 and it self updates, so no need to make a Linux Repository,
 since you only need to install the App, I use Qt Installation Framework,
 so you have a nice Uninstaller also.
 
-I am writting this for Individuals who want to write a book,
-but want more control over it than Word or Writter can offer,
+I am writing this for Individuals who want to write a book,
+but want more control over it than Word or Writer can offer,
 this is not to replace them, in fact it creates documents for them.
 
-Why use WeBook instead of Word or Writter or other Word Processors?
+Why use WeBook instead of Word or Writer or other Word Processors?
 
 WeBook creates Documents for all Word Processors, that is its only job,
 so the question is, why use WeBook to make Documents.
 
 The really of Word Processors is called Malware and Viruses,
-WeBook only uses Rich Text HTML, to eleminate this threat,
+WeBook only uses Rich Text HTML, to eliminate this threat,
 currently if saves PDF and HTML,
 I will expand this to ePub, Docx, RTF, Text, and others,
-and all of them will be less likly to contain malicious code,
+and all of them will be less likely to contain malicious code,
 its really up to the User who inputs the code,
 and by code, I am talking about the HTML code in the Document itself,
 and there is not much you can do with HTML that is malicious,
 and why its better to use WeBook than normal Word Processors.
 
-I have a Windows 360 account, and for one reason, I want this app to inferface with it,
-and that is not a program, in fact, it will make it very easy to manage documents from Onedrive,
+I have a Windows 360 account, and for one reason, I want this app to interface with it,
+and that is not a program, in fact, it will make it very easy to manage documents from One-drive,
 as it is Google Drive, or others.
 
 Currently I do not have an Import feature,
@@ -115,13 +115,23 @@ making it hard to attack, and no reason to hack it to try to use it to attack,
 and I got into great deal about how the WeBook Security System Works,
 and when completed, I will set up a Hack Server,
 and invite the World to try to Hack in,
-and just let it go, with no adnormal admitistration,
-just normal useage, to prove it can sussain a DoS or Brute Force attacks,
+and just let it go, with no abnormal administration,
+just normal usage, to prove it can sustain a DoS or Brute Force attacks,
 without effecting Clients.
 
 ## Windows
 
-Works on Windows 10, have not tested the installer yet.
+AppVeyor is not working for some reason,
+its not linked correctly with Qt Library,
+I cannot reproduce this on my Windows 10 Machine, it just works for MinGW only,
+and has an issues with any version of MSVC,
+[Get Bill Gates in here....](https://youtu.be/EPfsr8BBdA8),
+till I figure it out,
+this is a link to a zip of the Qt Installer for WeBookClient that works on Windows 10 maybe 8, but not below that:
+https://LightWizzard.com/installers/windows/WeBookClient.zip,
+download it, extract it, and install it,
+I have tested the Installer and Uninstaller, both work.
+
 
 ## QTextEdit
 
@@ -214,7 +224,7 @@ is used extensively in
 [Qt Assistant](http://doc.qt.io/qt-5/qtassistant-index.html). Hyperlinks are
 automatically created when an HTML file is imported into an editor. Since the
 rich text framework supports hyperlinks natively, they can also be created
-programatically.
+programmatically.
 
 ## Undo and Redo
 
