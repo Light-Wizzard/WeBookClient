@@ -34,8 +34,8 @@ CONFIG         *= "c++11"
 CONFIG          *= warn_on utf8_source executable
 #
 win32:LIBS     *= -static
-win32:CONFIG   *= windeployqt
-win32:CONFIG   *= windows
+#win32:CONFIG   *= windeployqt
+#win32:CONFIG   *= windows
 # Version Numver Controls
 win32:VERSION   = 0.1.0.0 # major.minor.patch.build
 else:VERSION    = 0.1.0   # major.minor.patch
@@ -65,7 +65,7 @@ SOURCES     *= src/main.cpp
 FORMS       += src/MainWindow.ui
 FORMS       += src/AboutDialog.ui
 #
-DISTFILES   += .appveyor.yml
+#DISTFILES   += .appveyor.yml
 #DISTFILES   += .travis.yml
 #DISTFILES   += WeBookClient.doxygen
 #DISTFILES   += WeBookClient.qdocconf
