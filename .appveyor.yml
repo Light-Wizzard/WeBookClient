@@ -13,8 +13,8 @@ environment:
   
 install:
   - choco install -y InnoSetup
+  - cinst mingw
   - set PATH=%QTDIR%\bin;%PATH%;"C:\Program Files (x86)\Inno Setup 5"
-
 
 configuration:
   - release
