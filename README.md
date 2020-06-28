@@ -11,8 +11,9 @@ You can find more information at the Wiki's [WeBook Wiki](https://github.com/Lig
 
 I used the Qt Rich Text Editor Project and documentation.
 
-## Table of Content
+## Table Of Content
 
+* [Table Of Content](#Table-Of-Content)
 * [Status](#Status)
 * [Downloads](#Downloads)
 * [Windows](#Windows)
@@ -260,3 +261,5 @@ please see the Wiki https://github.com/Light-Wizzard/WeBookClient/wiki/3.Logging
 I changed this to use qInstallMessageHandler in main.cpp, so it just uses normal qDebug.
 
 ## End of Read me.
+
+You can stop reading now, or see the [Table Of Content](#Table-Of-Content)
