@@ -11,7 +11,7 @@
  */
 WeBookMan::WeBookMan(const QStringList &strings, QObject *parent) : QAbstractListModel(parent), myParent(parent), stringList(strings)
 {
-    qLoggerCommon = new QLogger::QLoggerCommon(true);
+    weBookSettings = new WeBookSettings(this);
     qDebug() << "WeBookMan Constructor";
 } // end WeBookMan
 /******************************************************************************

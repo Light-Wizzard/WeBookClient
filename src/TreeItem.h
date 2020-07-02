@@ -10,7 +10,7 @@
 #include <QVariant>
 #include <QtGui>
 
-#include "QLogger/QLoggerCommon.h"
+#include "WeBookSettings.h"
 
 /******************************************************************************
 * class TreeItem                                                             *
@@ -44,7 +44,7 @@ class TreeItem
         int                 level             = -1;         //!< \c level \brief Level Number
 
     private:
-        QLogger::QLoggerCommon  *qLoggerCommon     = nullptr;    //!< \c qLoggerCommon     \brief Logging and QtSettings
+        WeBookSettings          *weBookSettings    = nullptr;    //!< \c weBookSettings    \brief QtSettings
         QList<TreeItem*>         childItems;                     //!< \c childItems        \brief child Items
         QList<QVariant>          itemData;                       //!< \c itemData          \brief item Data
         TreeItem                *parentItem        = nullptr;    //!< \c parentItem        \brief parent Item

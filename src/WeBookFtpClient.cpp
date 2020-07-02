@@ -4,7 +4,7 @@
 *******************************************************************************/
 WeBookFtpClient::WeBookFtpClient(QObject *parent): QObject(parent)
 {
-    qLoggerCommon = new QLogger::QLoggerCommon(true);
+    weBookSettings = new WeBookSettings(this);
 }
 /******************************************************************************
 * \fn WeBookFtpClient::~WeBookFtpClient()
@@ -46,10 +46,10 @@ void WeBookFtpClient::upload(const QString &file)
     QFileInfo fi(file);
     QString thatFileName = fi.fileName();
 
-    QString thatUrl = QString("ftp://%1:%2/%3").arg(qLoggerCommon->getUrl()).arg(qLoggerCommon->getPort()).arg(thatFileName);
+    QString thatUrl = QString("ftp://%1:%2/%3").arg(weBookSettings->getUrl()).arg(weBookSettings->getPort()).arg(thatFileName);
     QUrl url(thatUrl); // "ftp://url:port/fileName"
-    url.setUserName(qLoggerCommon->getUserName());
-    url.setPassword(qLoggerCommon->getPassword());
+    url.setUserName(weBookSettings->getUserName());
+    url.setPassword(weBookSettings->getPassword());
     url.setScheme("ftp");
 
     fileHandle = new QFile(file, this);

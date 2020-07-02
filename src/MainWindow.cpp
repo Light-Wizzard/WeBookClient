@@ -26,7 +26,80 @@
  */
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
-    qLoggerCommon = new QLogger::QLoggerCommon(true);
+    weBookSettings = new WeBookSettings(this);
+    weBookCrypto = new WeBookCrypto(this);
+
+    QString applicationName;
+    //#define USE_REAL_FILENAME
+    #ifdef USE_REAL_FILENAME
+        applicationName = QFileInfo(QApplication::applicationFilePath()).fileName();
+        if (applicationName.isEmpty()) applicationName = weBookSettings->getAppName(); // This can happen in compile envirnoment
+    #else
+        applicationName    = weBookSettings->getAppName();
+    #endif
+    // From *.pro file TARGET   = WeBook, maybe getTarget?
+    QApplication::setWindowIcon(QIcon(":/images/logo32.png"));
+    QCommandLineParser parser;
+    QApplication::setApplicationVersion(QT_VERSION_STR);
+    parser.setApplicationDescription(QApplication::applicationDisplayName());
+    parser.addHelpOption();
+    parser.addVersionOption();
+    // a b c d f i k l n p
+    QCommandLineOption a_opt({"a","appname"},       QApplication::translate("main", "Application Name if you want it different then executable name."), "appname");
+    QCommandLineOption b_opt({"b","blogfolder"},    QApplication::translate("main", "The Log Folder Name: logs"), "blogfolder");
+    QCommandLineOption c_opt({"c","cryptoiv"},      QApplication::translate("main", "The Crypto IV Vector String"), "cryptoiv");
+    QCommandLineOption d_opt({"d","orgdomain"},     QApplication::translate("main", "The Organization Domain URL: https://github.com/USERNAME/PROJECT"), "orgdomain");
+    QCommandLineOption f_opt({"f","filepath"},      QApplication::translate("main", "The Full Path to Files like ini: /path"), "filepath");
+    QCommandLineOption i_opt({"i","inifile"},       QApplication::translate("main", "The Ini File Name: WeBookClient.ini"), "inifile");
+    QCommandLineOption k_opt({"k","key"},           QApplication::translate("main", "The Crypto Key String"), "key");
+    QCommandLineOption l_opt({"l","logpath"},       QApplication::translate("main", "The Full Path to Log Fils: /path"), "logpath");
+    QCommandLineOption n_opt({"n","orgname"},       QApplication::translate("main", "The Organization Name going to be the Window Title"), "orgname");
+    QCommandLineOption p_opt({"p","port"},          QApplication::translate("main", "The Port Number of Server"), "port");
+    parser.addOption(a_opt);
+    parser.addOption(b_opt);
+    parser.addOption(c_opt);
+    parser.addOption(d_opt);
+    parser.addOption(f_opt);
+    parser.addOption(i_opt);
+    parser.addOption(k_opt);
+    parser.addOption(l_opt);
+    parser.addOption(n_opt);
+    parser.addOption(p_opt);
+    parser.process(QApplication::arguments());
+    QString thatAppName      = parser.value("appname");
+    QString thatInit         = parser.value("inifile");
+    QString thatOrgName      = parser.value("orgname");
+    QString thatOrgDomain    = parser.value("orgdomain");
+    QString thatCryptoKey    = parser.value("key");
+    QString thatCryptoIv     = parser.value("cryptoiv");
+    QString thatPort         = parser.value("port");
+    QString thatLogPath      = parser.value("logpath");
+    QString thatFilePath     = parser.value("filepath");
+    QString thatLogFolder    = parser.value("blogfolder");
+    //
+    if (thatAppName.isEmpty())   thatAppName      = applicationName;
+    if (thatInit.isEmpty())      thatInit         = weBookSettings->getIniFileName();
+    if (thatOrgName.isEmpty())   thatOrgName      = weBookSettings->getOrgName();
+    if (thatOrgDomain.isEmpty()) thatOrgDomain    = weBookSettings->getOrgDomain();
+    if (thatPort.isEmpty())      thatPort         = weBookSettings->portToString();
+    if (thatLogPath.isEmpty())   thatLogPath      = weBookSettings->getLogPath();
+    if (thatFilePath.isEmpty())  thatFilePath     = weBookSettings->getFilelPath();
+    if (thatLogFolder.isEmpty()) thatLogFolder    = weBookSettings->getLogFolderName();
+    //
+    if (thatCryptoKey.isEmpty()) thatCryptoKey    = weBookCrypto->getCryptoKey();
+    if (thatCryptoIv.isEmpty())  thatCryptoIv     = weBookCrypto->getCryptoIvVector();
+    //
+    weBookSettings->setAppName(thatAppName);
+    weBookSettings->setIniFileName(thatInit);
+    weBookSettings->setOrgName(thatOrgName);
+    weBookSettings->setOrgDomain(thatOrgDomain);
+    weBookSettings->setPort(thatPort.toInt());
+    weBookSettings->setLogPath(thatLogPath);
+    weBookSettings->setFilePath(thatFilePath);
+    weBookSettings->setLogFolderName(thatLogFolder);
+    //
+    weBookCrypto->setCryptoKey(thatCryptoKey);
+    weBookCrypto->setCryptoIvVector(thatCryptoIv);
 
     // Set up UI and set defaults just so we know all the ui conttrols we are working with
     ui->setupUi(this);
@@ -85,17 +158,17 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     //
     setWeBookModel();
     //    Settings
-    ui->editSettingsIniFileName->setText(qLoggerCommon->getSetting(QLogger::ConstSettingsIniFileName, qLoggerCommon->combinePathFileName(qLoggerCommon->getFilelPath(), qLoggerCommon->getIniFileName())).toString());
-    ui->editSettingsApplicationName->setText(qLoggerCommon->getSetting(QLogger::ConstSettingsApplicationName, qLoggerCommon->getAppName()).toString());
-    ui->editSettingsOrgName->setText(qLoggerCommon->getSetting(QLogger::ConstSettingsOrgName, qLoggerCommon->getOrgName()).toString());
-    ui->editSettingsOrgDomain->setText(qLoggerCommon->getSetting(QLogger::ConstSettingsOrgDomain, qLoggerCommon->getOrgDomain()).toString());
+    ui->editSettingsIniFileName->setText(weBookSettings->getSetting(weBookSettings->ConstSettingsIniFileName, weBookSettings->combinePathFileName(weBookSettings->getFilelPath(), weBookSettings->getIniFileName())).toString());
+    ui->editSettingsApplicationName->setText(weBookSettings->getSetting(weBookSettings->ConstSettingsApplicationName, weBookSettings->getAppName()).toString());
+    ui->editSettingsOrgName->setText(weBookSettings->getSetting(weBookSettings->ConstSettingsOrgName, weBookSettings->getOrgName()).toString());
+    ui->editSettingsOrgDomain->setText(weBookSettings->getSetting(weBookSettings->ConstSettingsOrgDomain, weBookSettings->getOrgDomain()).toString());
     //    Database
     //    spinBoxDbPort               Spinbox
 
     //    WeBookMan
     //    spinBoxWeBookManYear        Spinbox
     //    spinBoxWeBookManRating      Spinbox
-    ui->editWeBookManTitle->setText(qLoggerCommon->getSetting("WeBookManTitle", "").toString());
+    ui->editWeBookManTitle->setText(weBookSettings->getSetting("WeBookManTitle", "").toString());
     // Connect Signals to Slots
     // external
     connect(ui->actionQt,                   &QAction::triggered,            qApp,           &QApplication::aboutQt);
@@ -221,8 +294,8 @@ void MainWindow::setTocTreeViewModel(QString modelName)
     if (modelName.isEmpty())
     {
         // Current Book
-        modelName = myCurrentBook = qLoggerCommon->getSetting(constCurrentWeBook, QLogger::ConstDefaultAppFolder).toString(); // Defaults to the same as the default folder name
-        myTocPath = QString("%1%2%3.toc").arg(qLoggerCommon->getFilelPath(), QDir::separator(), modelName);
+        modelName = myCurrentBook = weBookSettings->getSetting(constCurrentWeBook, weBookSettings->ConstDefaultAppFolder).toString(); // Defaults to the same as the default folder name
+        myTocPath = QString("%1%2%3.toc").arg(weBookSettings->getFilelPath(), QDir::separator(), modelName);
     }
     else
     {
@@ -230,7 +303,7 @@ void MainWindow::setTocTreeViewModel(QString modelName)
     }
     if (!myTocPath.contains(QDir::separator()))
     {
-        myTocPath = QString("%1%2%3.toc").arg(qLoggerCommon->getFilelPath(), QDir::separator(), modelName);
+        myTocPath = QString("%1%2%3.toc").arg(weBookSettings->getFilelPath(), QDir::separator(), modelName);
     }
     QFile booksResourceFile(myTocPath);
     if (booksResourceFile.exists())
@@ -294,7 +367,7 @@ void MainWindow::setWeBookModel()
 {
     if (isDebugMessage) qDebug() << "Set WeBook Model";
     //
-    WeBooksCatFileFullPath = QString("%1%2%3").arg(qLoggerCommon->getFilelPath(), QDir::separator(), QLogger::ConstDefaultWeBookCatName);
+    WeBooksCatFileFullPath = QString("%1%2%3").arg(weBookSettings->getFilelPath(), QDir::separator(), weBookSettings->ConstDefaultWeBookCatName);
     QFile WeBooksCatFile(WeBooksCatFileFullPath);
     if (WeBooksCatFile.exists())
     {
@@ -705,12 +778,12 @@ QString MainWindow::getSetFullPathFileNameExt(QString thisFileName)
         if (isDebugMessage) qDebug() << "thisFileName and myCurrentChapter are empty";
     }
     // Setter
-    fullPathFileNameExt = QString("%1%2%3%4%5.%6").arg(qLoggerCommon->getFilelPath(), QDir::separator(), myCurrentBook, QDir::separator(), thisFileName, constWeBookEditorExt);
+    fullPathFileNameExt = QString("%1%2%3%4%5.%6").arg(weBookSettings->getFilelPath(), QDir::separator(), myCurrentBook, QDir::separator(), thisFileName, constWeBookEditorExt);
     // Make Sure File and Path exist
     QFile booksResourceFile(fullPathFileNameExt);
     if (!booksResourceFile.exists())
     {
-        QString myFolderName = QString("%1%2%3").arg(qLoggerCommon->getFilelPath(), QDir::separator(), myCurrentBook);
+        QString myFolderName = QString("%1%2%3").arg(weBookSettings->getFilelPath(), QDir::separator(), myCurrentBook);
         if (!QDir(myFolderName).exists()) { QDir().mkdir(myFolderName); }
         if (booksResourceFile.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text))
         {
@@ -1387,11 +1460,11 @@ void MainWindow::loadDoc(QString thisFileName)
     if (isDebugMessage) qDebug() << "load(" << thisFileName << ")";
     //
     if (!this->fullPathFileNameExt.isEmpty()) { onFileSave(); fullPathFileNameExt.clear(); }
-    QString myFileName = QString("%1%2%3%4%5.%6").arg(qLoggerCommon->getFilelPath(), QDir::separator(), myCurrentBook, QDir::separator(), thisFileName, constWeBookEditorExt);
+    QString myFileName = QString("%1%2%3%4%5.%6").arg(weBookSettings->getFilelPath(), QDir::separator(), myCurrentBook, QDir::separator(), thisFileName, constWeBookEditorExt);
     QFile booksResourceFile(myFileName);
     if (!booksResourceFile.exists())
     {
-        QString myFolderName = QString("%1%2%3").arg(qLoggerCommon->getFilelPath(), QDir::separator(), myCurrentBook);
+        QString myFolderName = QString("%1%2%3").arg(weBookSettings->getFilelPath(), QDir::separator(), myCurrentBook);
         if (!QDir(myFolderName).exists()) { QDir().mkdir(myFolderName); }
         if (booksResourceFile.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text))
         {
@@ -1446,7 +1519,7 @@ void MainWindow::loadTOC()
         { statusBar()->showMessage(tr("Position: (%1,%2)").arg(row, column));  }
         else
         { statusBar()->showMessage(tr("Position: (%1,%2) in top level").arg(row, column)); }
-        QString myFileName = QString("%1%2%3.toc").arg(qLoggerCommon->getFilelPath(), QDir::separator(), getSetCurrentBook());
+        QString myFileName = QString("%1%2%3.toc").arg(weBookSettings->getFilelPath(), QDir::separator(), getSetCurrentBook());
         setTocTreeViewModel(myFileName);
     }
 } // end loadTOC
@@ -1460,18 +1533,18 @@ void MainWindow::writeSettings()
 {
     if (isDebugMessage) qDebug() << "writeSettings";
     // Current Tab
-    qLoggerCommon->setSetting(constCurrentTab, lastTab);
+    weBookSettings->setSetting(constCurrentTab, lastTab);
     // Current Book
-    qLoggerCommon->setSetting(constCurrentWeBook, getSetCurrentBook());
+    weBookSettings->setSetting(constCurrentWeBook, getSetCurrentBook());
     // Current Chapter
-    qLoggerCommon->setSetting(constCurrentWeChapter, getSetCurrentChapter());
+    weBookSettings->setSetting(constCurrentWeChapter, getSetCurrentChapter());
     // Geometry
-    qLoggerCommon->setGeometry(pos(), size(), isMaximized(), isMinimized());
+    weBookSettings->setGeometry(pos(), size(), isMaximized(), isMinimized());
     //
-    qLoggerCommon->setSetting(QLogger::ConstSettingsIniFileName, ui->editSettingsIniFileName->text());
-    qLoggerCommon->setSetting(QLogger::ConstSettingsApplicationName, ui->editSettingsApplicationName->text());
-    qLoggerCommon->setSetting(QLogger::ConstSettingsOrgName, ui->editSettingsOrgName->text());
-    qLoggerCommon->setSetting(QLogger::ConstSettingsOrgDomain, ui->editSettingsOrgDomain->text());
+    weBookSettings->setSetting(weBookSettings->ConstSettingsIniFileName, ui->editSettingsIniFileName->text());
+    weBookSettings->setSetting(weBookSettings->ConstSettingsApplicationName, ui->editSettingsApplicationName->text());
+    weBookSettings->setSetting(weBookSettings->ConstSettingsOrgName, ui->editSettingsOrgName->text());
+    weBookSettings->setSetting(weBookSettings->ConstSettingsOrgDomain, ui->editSettingsOrgDomain->text());
 
     bookListItemsReturned = weBookMan->getData(); // Returns a String
     QFile booksResourceFile(WeBooksCatFileFullPath);
@@ -1497,7 +1570,7 @@ void MainWindow::writeSettings()
     bookListItems = weBookMan->getStringList();
     for (int i = 0; i < bookListItems.count(); i++)
     {
-        saveTOC(QString("%1%2%3.%4").arg(qLoggerCommon->getFilelPath(), QDir::separator(), bookListItems[i], "toc"));
+        saveTOC(QString("%1%2%3.%4").arg(weBookSettings->getFilelPath(), QDir::separator(), bookListItems[i], "toc"));
     }
 } // end writeSettings
 /******************************************************************************
@@ -1513,21 +1586,21 @@ void MainWindow::readSettings()
 {
     if (isDebugMessage) qDebug() << "readSettings";
     // Current Tab
-    currentTab = qLoggerCommon->getSetting(constCurrentTab, TabSettings).toInt();  // Defaults to Settings Tab
+    currentTab = weBookSettings->getSetting(constCurrentTab, TabSettings).toInt();  // Defaults to Settings Tab
     // Current Book
-    myCurrentBook = qLoggerCommon->getSetting(constCurrentWeBook, QLogger::ConstDefaultAppFolder).toString(); // Defaults to the same as the default folder name
+    myCurrentBook = weBookSettings->getSetting(constCurrentWeBook, weBookSettings->ConstDefaultAppFolder).toString(); // Defaults to the same as the default folder name
     // Current Chapter
-    myCurrentChapter = qLoggerCommon->getSetting(constCurrentWeChapter, myCurrentChapter).toString();
+    myCurrentChapter = weBookSettings->getSetting(constCurrentWeChapter, myCurrentChapter).toString();
     // Geometry
-    QSize mySize = qLoggerCommon->getGeometrySize(QLogger::ConstDefaultGeometrySize);
-    QPoint myPos = qLoggerCommon->getGeometryPos(QLogger::ConstDefaultGeometryPos);
+    QSize mySize = weBookSettings->getGeometrySize(weBookSettings->ConstDefaultGeometrySize);
+    QPoint myPos = weBookSettings->getGeometryPos(weBookSettings->ConstDefaultGeometryPos);
     resize(mySize);
     move(myPos);
     //
     if (isUiSet)
     {
-        if(qLoggerCommon->getGeometryMax(isMaximized())) setWindowState(windowState() | Qt::WindowMaximized);
-        if(qLoggerCommon->getGeometryMin(isMinimized())) setWindowState(windowState() | Qt::WindowMinimized);
+        if(weBookSettings->getGeometryMax(isMaximized())) setWindowState(windowState() | Qt::WindowMaximized);
+        if(weBookSettings->getGeometryMin(isMinimized())) setWindowState(windowState() | Qt::WindowMinimized);
     }
     //
     // Set Book Active

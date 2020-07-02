@@ -8,7 +8,7 @@
 #include <QStringList>
 #include <QtGui>
 
-#include "QLogger/QLoggerCommon.h"
+#include "WeBookSettings.h"
 
 #include "TreeModel.h"
 
@@ -30,7 +30,7 @@ class TreeViewDragDropModel : public TreeModel
         QString getErrorMessage();
 
     private:
-        QLogger::QLoggerCommon  *qLoggerCommon       = nullptr;          //!< \c qLoggerCommon      \brief Logging and QtSettings
+        WeBookSettings          *weBookSettings      = nullptr;          //!< \c weBookSettings     \brief QtSettings
         QString                  myErrorMessage      = "";               //!< \c myErrorMessage     \brief my Error Message
         const QStringList        types               = { "text/plain" }; //!< \c types              \brief This only supports this type so make it const
         bool                     isDebugMessage      = true;             //!< \c isDebugMessage     \brief Set to true to show debug messages

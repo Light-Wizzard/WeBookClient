@@ -11,7 +11,7 @@
 #include <QModelIndex>
 #include <QVariant>
 
-#include "QLogger/QLoggerCommon.h"
+#include "WeBookSettings.h"
 
 #include "TreeItem.h"
 
@@ -59,7 +59,7 @@ class TreeModel : public QAbstractItemModel
         void setupModelData(const QStringList &lines, TreeItem *parent);
 
     private:
-        QLogger::QLoggerCommon  *qLoggerCommon     = nullptr;            //!< \c qLoggerCommon      \brief Logging and QtSettings.
+        WeBookSettings          *weBookSettings    = nullptr;            //!< \c weBookSettings     \brief QtSettings.
         QObject                 *myParent          = nullptr;            //!< \c myParent           \brief required by setData.
         QList<QVariant>          rootData          = { "ID", "Title" };  //!< \c rootData           \brief Root Data.
         bool                     isDebugMessage    = true;               //!< \c isDebugMessage     \brief Set to true to show debug messages.

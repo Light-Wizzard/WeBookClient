@@ -7,8 +7,8 @@
 #include <QNetworkRequest>
 #include <QNetworkReply>
 #include <QDebug>
-#include "QLogger/QLoggerCommon.h"
-#include "QLogger/QLoggerCrypto.h"
+#include "WeBookSettings.h"
+#include "WeBookCrypto.h"
 /******************************************************************************
 * class WeBookFtpClient : public QObject                                      *
 *******************************************************************************/
@@ -32,9 +32,9 @@ class WeBookFtpClient : public QObject
     private:
         QNetworkAccessManager networkAccessManager;
         QFile *fileHandle;
-        QNetworkReply *networkReply;
-        QLogger::QLoggerCommon  *qLoggerCommon      = nullptr;   //!< Logging and QtSettings
-        QLogger::QLoggerCrypto  *qLoggerCrypto      = nullptr;   //!< Crypto
+        QNetworkReply   *networkReply;
+        WeBookSettings  *weBookSettings      = nullptr;   //!< Logging and QtSettings
+        WeBookCrypto    *weBookCrypto        = nullptr;   //!< Crypto
 
 }; // end class WeBookFtpClient
 #endif // WEBOOKFTPCLIENT_H

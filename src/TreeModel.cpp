@@ -15,7 +15,7 @@
  */
 TreeModel::TreeModel(const QString &strings, QObject *parent) : QAbstractItemModel(parent), myParent(parent)
 {
-    qLoggerCommon = new QLogger::QLoggerCommon(true);
+    weBookSettings = new WeBookSettings(this);
 
     #ifndef QT_DEBUG
         isDebugMessage = isDebugAllMessage = false;

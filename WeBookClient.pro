@@ -52,6 +52,8 @@ HEADERS     *= src/TreeItem.h
 HEADERS     *= src/TreeModel.h
 HEADERS     *= src/TreeViewDragDropModel.h
 HEADERS     *= src/WeBookFtpClient.h
+HEADERS     += src/WeBookSettings.h
+HEADERS     += src/WeBookCrypto.h
 # Source files
 SOURCES     *= src/AboutDialog.cpp
 SOURCES     *= src/WeBookFtpClient.cpp
@@ -60,6 +62,8 @@ SOURCES     *= src/WeBookMan.cpp
 SOURCES     *= src/TreeItem.cpp
 SOURCES     *= src/TreeModel.cpp
 SOURCES     *= src/TreeViewDragDropModel.cpp
+SOURCES     += src/WeBookSettings.cpp
+SOURCES     += src/WeBookCrypto.cpp
 SOURCES     *= src/main.cpp
 # Ui Form(s)
 FORMS       += src/MainWindow.ui
@@ -75,24 +79,6 @@ DISTFILES   += data/WeBooks.cat
 DISTFILES   += README.md
 #
 RESOURCES   += WeBookClient.qrc
-###############################################################################
-# Fork: https://github.com/francescmm/QLogger                                 #
-# https://github.com/Light-Wizzard/QLogger                                    #
-###############################################################################
-HEADERS     *= src/QLogger/QLoggerLevel.h
-HEADERS     *= src/QLogger/QLoggerConstants.h
-# QLoggerManager
-HEADERS     *= src/QLogger/QLoggerManager.h
-SOURCES     *= src/QLogger/QLoggerManager.cpp
-# QLoggerWriter
-HEADERS     *= src/QLogger/QLoggerWriter.h
-SOURCES     *= src/QLogger/QLoggerWriter.cpp
-# QLoggerCommon
-HEADERS     *= src/QLogger/QLoggerCommon.h
-SOURCES     *= src/QLogger/QLoggerCommon.cpp
-# QLoggerCrypto
-HEADERS     *= src/QLogger/QLoggerCrypto.h
-SOURCES     *= src/QLogger/QLoggerCrypto.cpp
 ###############################################################################
 # Fork: https://github.com/bricke/Qt-AES                                      #
 # https://github.com/Light-Wizzard/Qt-AES                                     #

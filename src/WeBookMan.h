@@ -10,7 +10,7 @@
 #include <QStringList>
 #include <QtGui>
 
-#include "QLogger/QLoggerCommon.h"
+#include "WeBookSettings.h"
 
 /******************************************************************************
 * class WeBookMan : public QAbstractListModel                                *
@@ -38,7 +38,7 @@ class WeBookMan : public QAbstractListModel
     private:
         QObject                 *myParent         = nullptr;    //!< \c myParent                \brief Needed by QRegExpValidator
         QStringList              stringList;                    //!< \c stringList              \brief String List
-        QLogger::QLoggerCommon  *qLoggerCommon    = nullptr;    //!< \c qLoggerCommon           \brief Logging and QtSettings
+        WeBookSettings          *weBookSettings    = nullptr;   //!< \c weBookSettings          \brief QtSettings
         QString                  weBookListItemsReturned;       //!< \c weBookListItemsReturned \brief WeBook List Items Returned
         QList<QVariant>          rootData          = { "ID" };  //!< \c rootData                \brief Root Data
         bool                     isDebugMessage    = true;      //!< \c isDebugMessage          \brief Set to true to show debug messages
