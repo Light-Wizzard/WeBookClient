@@ -7,12 +7,15 @@
 
 #include <QAction>
 #include <QApplication>
+#include <QByteArray>
 #include <QClipboard>
 #include <QCloseEvent>
 #include <QColorDialog>
 #include <QComboBox>
 #include <QCommandLineParser>
 #include <QCommandLineOption>
+#include <QDataStream>
+#include <QDateTime>
 #include <QDataWidgetMapper>
 #include <QDir>
 #include <QFontComboBox>
@@ -20,6 +23,7 @@
 #include <QFileDialog>
 #include <QFileInfo>
 #include <QFontDatabase>
+#include <QHostAddress>
 #include <QMainWindow>
 #include <QMap>
 #include <QMenu>
@@ -27,6 +31,7 @@
 #include <QMessageBox>
 #include <QMimeData>
 #include <QMimeDatabase>
+#include <QtNetwork>
 #include <QObject>
 #include <QPointer>
 #include <QScreen>
@@ -133,6 +138,10 @@ class MainWindow : public QMainWindow
         // Public Functions
 
         bool load(const QString &f);                                                        //!< load HTML Document
+        void initTCP();
+        void newConnect();
+
+        qint64 sendToServer(QTcpSocket *socket, const QString &str);
 
     signals:
         void handelStatusMessage(const QString &message);                                   //!< onStatusMessage
@@ -187,6 +196,16 @@ class MainWindow : public QMainWindow
         void onTocInsertRow();                                                              //
         bool onTocRemoveColumn();                                                           //
         void onTocRemoveRow();                                                              //
+
+        void onConnectServer();
+        void onDisconnectServer();
+        void onServerDisconnect();
+        void onReceiveData();
+        void onSendData();
+        void onSelectFile();
+        void onSendFile();
+        void onUpdateFileProgressBytes(qint64);
+        void onUpdateFileProgress();
 
     private:
         // Track all Tab State Changes using this struct, for each bool is an action with its pattern name: actionCut = stateOfCut, action vs stateOf(action), I hate using the same name, confusing
@@ -271,6 +290,23 @@ class MainWindow : public QMainWindow
         QString getSetCurrentChapter();                                                     //!< Get the Current File from TOC
         bool openWeBookCat(QString thisFullPathFileName);                                   //!< Open File and Read into Model
         bool openWeBookTOC(QString thisFullPathFileName);                                   //!< Open File and Read into Model
+        QTcpSocket *tcpSocket = nullptr;
+        QTcpSocket *fileSocket = nullptr;
+        QString filename;
+        QByteArray inBlock;
+        QByteArray outBlock;
+
+        QDateTime theCurrentDateTime;
+        QString strDateTime;
+
+        QFile *localFile;
+        qint64 totalBytes       = 0;
+        qint64 bytesWritten     = 0;
+        qint64 bytestoWrite     = 0;
+        qint64 filenameSize     = 0;
+        qint64 bytesReceived    = 0;
+        qint64 perDataSize      = 64 * 1024;
+        quint16 nextBlockSize = 0;
 }; // end class MainWindow
 #endif // MAINWINDOW_H
 /******************************* End of File *********************************/

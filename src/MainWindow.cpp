@@ -104,6 +104,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     // Set up UI and set defaults just so we know all the ui conttrols we are working with
     ui->setupUi(this);
 
+    initTCP();
     // Connect Signals to Slots
     connect(this, &MainWindow::handelStatusMessage,      this, &MainWindow::onStatusMessage);
 
@@ -1677,5 +1678,262 @@ void MainWindow::onStatusMessage(const QString &message)
         onTocUpdateActions();
     }
 } // end onStatusMessage
+/**************************************************************************
+* initTCP
+* \fn void MainWindow::initTCP()
+***************************************************************************/
+void MainWindow::initTCP()
+{
+    tcpSocket = new QTcpSocket(this);
+    connect(ui->actionQuit, &QAction::triggered, this, &MainWindow::quitNow);
+    connect(ui->pushButtonOpenFile,   &QPushButton::clicked, this, &MainWindow::onSelectFile);
+    connect(ui->pushButtonSendFile,   &QPushButton::clicked, this, &MainWindow::onSendFile);
+    connect(ui->pushButtonConnect,    &QPushButton::clicked, this, &MainWindow::onConnectServer);
+    connect(ui->pushButtonSend,       &QPushButton::clicked, this, &MainWindow::onSendData);
+    connect(ui->pushButtonDisconnect, &QPushButton::clicked, this, &MainWindow::onDisconnectServer);
+    ui->pushButtonDisconnect->setEnabled(false);
+    ui->pushButtonSend->setEnabled(false);
+    ui->pushButtonOpenFile->setEnabled(false);
+    ui->pushButtonSendFile->setEnabled(false);
+
+} // end initTCP
+/**************************************************************************
+* onConnectServer
+* \fn void MainWindow::onConnectServer()
+***************************************************************************/
+void MainWindow::onConnectServer()
+{
+    tcpSocket->abort();
+    tcpSocket->connectToHost("127.0.0.1", 6666);
+    if (tcpSocket->waitForConnected(1000))
+    {
+        ui->pushButtonConnect->setEnabled(false);
+        connect(tcpSocket, &QTcpSocket::readyRead, this, &MainWindow::onReceiveData);
+        ui->pushButtonDisconnect->setEnabled(true);
+        ui->pushButtonSend->setEnabled(true);
+        ui->pushButtonOpenFile->setEnabled(true);
+        ui->pushButtonSendFile->setEnabled(true);
+        qDebug("Connected!");
+        ui->lineEditChat->setText("Connected");
+        onSendData();
+    }
+    else
+    {
+        ui->textEditMessages->append("Failed to connect to Server");
+    }
+} // end onConnectServer
+/**************************************************************************
+* onDisconnectServer
+* \fn void MainWindow::onDisconnectServer()
+***************************************************************************/
+void MainWindow::onDisconnectServer()
+{
+    ui->lineEditChat->setText("Disconnect");
+    onSendData();
+    // emit does not work, need to send message before disconnect
+    QTimer::singleShot(13, this, &MainWindow::onServerDisconnect);
+} // end onDisconnectServer
+/**************************************************************************
+* onServerDisconnect
+* \fn void MainWindow::onServerDisconnect()
+***************************************************************************/
+void MainWindow::onServerDisconnect()
+{
+    qDebug("onServerDisconnect!");
+    disconnect(tcpSocket, &QTcpSocket::readyRead, this, &MainWindow::onReceiveData);
+    tcpSocket->abort();
+    tcpSocket->close();
+    ui->pushButtonConnect->setEnabled(true);
+    ui->pushButtonDisconnect->setEnabled(false);
+    ui->pushButtonSend->setEnabled(false);
+    ui->pushButtonOpenFile->setEnabled(false);
+    ui->pushButtonSendFile->setEnabled(false);
+} // end onServerDisconnect
+/**************************************************************************
+* onReceiveData
+* \fn void MainWindow::onReceiveData()
+***************************************************************************/
+void MainWindow::onReceiveData()
+{
+    QString str;
+    QDataStream in(tcpSocket);
+    //in.setVersion(QDataStream::Qt_5_10);
+    for (;;)
+    {
+        if (!nextBlockSize)
+        {
+            if (tcpSocket->bytesAvailable() < (int)sizeof(quint16)) { break; }
+            in >> nextBlockSize;
+        }
+
+        if (tcpSocket->bytesAvailable() < nextBlockSize) { break; }
+
+        in >> str;
+
+        if (str == "0")
+        {
+            str = "Connection closed";
+            onDisconnectServer();
+        }
+
+        nextBlockSize = 0;
+    }
+
+    //str = "Server " + strDateTime + str;
+    ui->textEditMessages->append(QString("Server %1 %2 \n").arg(QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss"), str));
+} // end onReceiveData
+/**************************************************************************
+* onSendData
+* \fn void MainWindow::onSendData()
+***************************************************************************/
+void MainWindow::onSendData()
+{
+    tcpSocket->write(ui->lineEditChat->text().toLatin1());
+    //QString str = ui->lineEditChat->text();
+    //theCurrentDateTime = QDateTime::currentDateTime();
+    //strDateTime = theCurrentDateTime.toString("yyyy-MM-dd hh:mm:ss");
+    //str = "You " + strDateTime + "\n" + str;
+    //ui->textEditMessages->append(str);
+    ui->textEditMessages->append(QString("You %1 %2 \n").arg(QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss"), ui->lineEditChat->text()));
+} // end onSendData
+/**************************************************************************
+* onSelectFile
+* \fn void MainWindow::onSelectFile()
+***************************************************************************/
+void MainWindow::onSelectFile()
+{
+    fileSocket = new QTcpSocket(this);
+    fileSocket->abort();
+    fileSocket->connectToHost("127.0.0.1", 8888);
+    connect(fileSocket, &QTcpSocket::readyRead,    this, &MainWindow::onUpdateFileProgress);
+    connect(fileSocket, &QTcpSocket::bytesWritten, this, &MainWindow::onUpdateFileProgressBytes);
+    ui->progressBar->setValue(0);
+    filename = QFileDialog::getOpenFileName(this, "Open a file", "/", "files (*)");
+    ui->lineEditFileName->setText(filename);
+} // end onSelectFile
+/**************************************************************************
+* onSendFile
+* \fn void MainWindow::onSendFile()
+***************************************************************************/
+void MainWindow::onSendFile()
+{
+    localFile = new QFile(filename);
+    if (!localFile->open(QFile::ReadOnly))
+    {
+        ui->textEditMessages->append(tr("Open file error!"));
+        return;
+    }
+    totalBytes = localFile->size();
+    QDataStream sendout(&outBlock, QIODevice::WriteOnly);
+    sendout.setVersion(QDataStream::Qt_4_8);
+    QString currentFileName = filename.right(filename.size() - filename.lastIndexOf('/') - 1);
+
+    qDebug() << sizeof(currentFileName);
+    sendout << qint64(0) << qint64(0) << currentFileName;
+    totalBytes += outBlock.size();
+    sendout.device()->seek(0);
+    sendout << totalBytes << qint64((outBlock.size() - sizeof(qint64)* 2));
+
+    bytestoWrite = totalBytes - fileSocket->write(outBlock);
+    outBlock.resize(0);
+} // end onSendFile
+/**************************************************************************
+* onUpdateFileProgressBytes
+* \fn void MainWindow::onUpdateFileProgressBytes(qint64 numBytes)
+***************************************************************************/
+void MainWindow::onUpdateFileProgressBytes(qint64 numBytes)
+{
+    bytesWritten += (int)numBytes;
+
+    if (bytestoWrite > 0)
+    {
+        outBlock = localFile->read(qMin(bytestoWrite, perDataSize));
+        bytestoWrite -= ((int)fileSocket->write(outBlock));
+        outBlock.resize(0);
+    }
+    else
+    {
+        localFile->close();
+    }
+
+    ui->progressBar->setMaximum(totalBytes);
+    ui->progressBar->setValue(bytesWritten);
+
+    if (bytesWritten == totalBytes)
+    {
+        localFile->close();
+        //fileSocket->close();
+        sendToServer(tcpSocket, "Reply: Receive file successfully");
+    }
+} // end onUpdateFileProgressBytes
+/**************************************************************************
+* onUpdateFileProgress
+* \fn void MainWindow::onUpdateFileProgress()
+***************************************************************************/
+void MainWindow::onUpdateFileProgress()
+{
+    QDataStream inFile(fileSocket);
+    // Qt_4_9 Qt_5_0 Qt_5_15
+    inFile.setVersion(QDataStream::Qt_4_8);
+
+    if (bytesReceived <= (qint64)sizeof(qint64) * 2)
+    {
+        if ((fileSocket->bytesAvailable() >= ((qint64)sizeof(qint64)) * 2) && (filenameSize == 0))
+        {
+            inFile >> totalBytes >> filenameSize;
+            bytesReceived += sizeof(qint64) * 2;
+        }
+        if ((fileSocket->bytesAvailable() >= filenameSize) && (filenameSize != 0))
+        {
+            inFile >> filename;
+            bytesReceived += filenameSize;
+            localFile = new QFile(filename);
+            if (!localFile->open(QFile::WriteOnly))
+            {
+                qDebug() << "Server::open file error!";
+                return;
+            }
+        }
+        else
+        {
+            return;
+        }
+    }
+    if (bytesReceived < totalBytes)
+    {
+        bytesReceived += fileSocket->bytesAvailable();
+        inBlock = fileSocket->readAll();
+        localFile->write(inBlock);
+        inBlock.resize(0);
+    }
+
+    if (bytesReceived == totalBytes)
+    {
+        ui->textEditMessages->append("Receive file successfully!");
+        bytesReceived = 0;
+        totalBytes    = 0;
+        filenameSize  = 0;
+        localFile->close();
+        sendToServer(tcpSocket, "Reply: Receive file successfully");
+        //fileSocket->close();
+    }
+} // end onUpdateFileProgress
+/**************************************************************************
+* sendToServer
+* \fn qint64 MainWindow::sendToServer(QTcpSocket *socket, const QString &str)
+***************************************************************************/
+qint64 MainWindow::sendToServer(QTcpSocket *socket, const QString &str)
+{
+    QByteArray arrBlock;
+    QDataStream out(&arrBlock, QIODevice::WriteOnly);
+    //out.setVersion(QDataStream::Qt_5_10);
+    //out << quint16(0) << QTime::currentTime() << str;
+    out << quint16(0) << str;
+
+    out.device()->seek(0);
+    out << quint16(arrBlock.size() - sizeof(quint16));
+
+    return socket->write(arrBlock);
+} // end sendToServer
 /******************************* End of File *********************************/
 
