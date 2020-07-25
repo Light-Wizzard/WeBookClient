@@ -1686,15 +1686,15 @@ void MainWindow::initTCP()
 {
     tcpSocket = new QTcpSocket(this);
     connect(ui->actionQuit, &QAction::triggered, this, &MainWindow::quitNow);
-    connect(ui->pushButtonOpenFile,   &QPushButton::clicked, this, &MainWindow::onSelectFile);
-    connect(ui->pushButtonSendFile,   &QPushButton::clicked, this, &MainWindow::onSendFile);
-    connect(ui->pushButtonConnect,    &QPushButton::clicked, this, &MainWindow::onConnectServer);
-    connect(ui->pushButtonSend,       &QPushButton::clicked, this, &MainWindow::onSendData);
-    connect(ui->pushButtonDisconnect, &QPushButton::clicked, this, &MainWindow::onDisconnectServer);
-    ui->pushButtonDisconnect->setEnabled(false);
-    ui->pushButtonSend->setEnabled(false);
-    ui->pushButtonOpenFile->setEnabled(false);
-    ui->pushButtonSendFile->setEnabled(false);
+    connect(ui->pushButtonChatOpenFile,   &QPushButton::clicked, this, &MainWindow::onSelectFile);
+    connect(ui->pushButtonChatSendFile,   &QPushButton::clicked, this, &MainWindow::onSendFile);
+    connect(ui->pushButtonChatConnect,    &QPushButton::clicked, this, &MainWindow::onConnectServer);
+    connect(ui->pushButtonChatSend,       &QPushButton::clicked, this, &MainWindow::onSendData);
+    connect(ui->pushButtonChatDisconnect, &QPushButton::clicked, this, &MainWindow::onDisconnectServer);
+    ui->pushButtonChatDisconnect->setEnabled(false);
+    ui->pushButtonChatSend->setEnabled(false);
+    ui->pushButtonChatOpenFile->setEnabled(false);
+    ui->pushButtonChatSendFile->setEnabled(false);
 
 } // end initTCP
 /**************************************************************************
@@ -1707,19 +1707,19 @@ void MainWindow::onConnectServer()
     tcpSocket->connectToHost("127.0.0.1", 6666);
     if (tcpSocket->waitForConnected(1000))
     {
-        ui->pushButtonConnect->setEnabled(false);
+        ui->pushButtonChatConnect->setEnabled(false);
         connect(tcpSocket, &QTcpSocket::readyRead, this, &MainWindow::onReceiveData);
-        ui->pushButtonDisconnect->setEnabled(true);
-        ui->pushButtonSend->setEnabled(true);
-        ui->pushButtonOpenFile->setEnabled(true);
-        ui->pushButtonSendFile->setEnabled(true);
+        ui->pushButtonChatDisconnect->setEnabled(true);
+        ui->pushButtonChatSend->setEnabled(true);
+        ui->pushButtonChatOpenFile->setEnabled(true);
+        ui->pushButtonChatSendFile->setEnabled(true);
         qDebug("Connected!");
-        ui->lineEditChat->setText("Connected");
+        ui->lineEditChatText->setText("Connected");
         onSendData();
     }
     else
     {
-        ui->textEditMessages->append("Failed to connect to Server");
+        ui->textEditChatMessages->append("Failed to connect to Server");
     }
 } // end onConnectServer
 /**************************************************************************
@@ -1728,7 +1728,7 @@ void MainWindow::onConnectServer()
 ***************************************************************************/
 void MainWindow::onDisconnectServer()
 {
-    ui->lineEditChat->setText("Disconnect");
+    ui->lineEditChatText->setText("Disconnect");
     onSendData();
     // emit does not work, need to send message before disconnect
     QTimer::singleShot(13, this, &MainWindow::onServerDisconnect);
@@ -1743,11 +1743,11 @@ void MainWindow::onServerDisconnect()
     disconnect(tcpSocket, &QTcpSocket::readyRead, this, &MainWindow::onReceiveData);
     tcpSocket->abort();
     tcpSocket->close();
-    ui->pushButtonConnect->setEnabled(true);
-    ui->pushButtonDisconnect->setEnabled(false);
-    ui->pushButtonSend->setEnabled(false);
-    ui->pushButtonOpenFile->setEnabled(false);
-    ui->pushButtonSendFile->setEnabled(false);
+    ui->pushButtonChatConnect->setEnabled(true);
+    ui->pushButtonChatDisconnect->setEnabled(false);
+    ui->pushButtonChatSend->setEnabled(false);
+    ui->pushButtonChatOpenFile->setEnabled(false);
+    ui->pushButtonChatSendFile->setEnabled(false);
 } // end onServerDisconnect
 /**************************************************************************
 * onReceiveData
@@ -1780,7 +1780,7 @@ void MainWindow::onReceiveData()
     }
 
     //str = "Server " + strDateTime + str;
-    ui->textEditMessages->append(QString("Server %1 %2 \n").arg(QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss"), str));
+    ui->textEditChatMessages->append(QString("Server %1 %2 \n").arg(QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss"), str));
 } // end onReceiveData
 /**************************************************************************
 * onSendData
@@ -1788,13 +1788,13 @@ void MainWindow::onReceiveData()
 ***************************************************************************/
 void MainWindow::onSendData()
 {
-    tcpSocket->write(ui->lineEditChat->text().toLatin1());
+    tcpSocket->write(ui->lineEditChatText->text().toLatin1());
     //QString str = ui->lineEditChat->text();
     //theCurrentDateTime = QDateTime::currentDateTime();
     //strDateTime = theCurrentDateTime.toString("yyyy-MM-dd hh:mm:ss");
     //str = "You " + strDateTime + "\n" + str;
     //ui->textEditMessages->append(str);
-    ui->textEditMessages->append(QString("You %1 %2 \n").arg(QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss"), ui->lineEditChat->text()));
+    ui->textEditChatMessages->append(QString("You %1 %2 \n").arg(QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss"), ui->lineEditChatText->text()));
 } // end onSendData
 /**************************************************************************
 * onSelectFile
@@ -1807,9 +1807,9 @@ void MainWindow::onSelectFile()
     fileSocket->connectToHost("127.0.0.1", 8888);
     connect(fileSocket, &QTcpSocket::readyRead,    this, &MainWindow::onUpdateFileProgress);
     connect(fileSocket, &QTcpSocket::bytesWritten, this, &MainWindow::onUpdateFileProgressBytes);
-    ui->progressBar->setValue(0);
+    ui->progressBarChat->setValue(0);
     filename = QFileDialog::getOpenFileName(this, "Open a file", "/", "files (*)");
-    ui->lineEditFileName->setText(filename);
+    ui->lineEditChatFileName->setText(filename);
 } // end onSelectFile
 /**************************************************************************
 * onSendFile
@@ -1820,7 +1820,7 @@ void MainWindow::onSendFile()
     localFile = new QFile(filename);
     if (!localFile->open(QFile::ReadOnly))
     {
-        ui->textEditMessages->append(tr("Open file error!"));
+        ui->textEditChatMessages->append(tr("Open file error!"));
         return;
     }
     totalBytes = localFile->size();
@@ -1856,8 +1856,8 @@ void MainWindow::onUpdateFileProgressBytes(qint64 numBytes)
         localFile->close();
     }
 
-    ui->progressBar->setMaximum(totalBytes);
-    ui->progressBar->setValue(bytesWritten);
+    ui->progressBarChat->setMaximum(totalBytes);
+    ui->progressBarChat->setValue(bytesWritten);
 
     if (bytesWritten == totalBytes)
     {
@@ -1909,7 +1909,7 @@ void MainWindow::onUpdateFileProgress()
 
     if (bytesReceived == totalBytes)
     {
-        ui->textEditMessages->append("Receive file successfully!");
+        ui->textEditChatMessages->append("Receive file successfully!");
         bytesReceived = 0;
         totalBytes    = 0;
         filenameSize  = 0;

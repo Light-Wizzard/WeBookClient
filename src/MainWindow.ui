@@ -18,7 +18,7 @@
     <item>
      <widget class="QTabWidget" name="widgetTab">
       <property name="currentIndex">
-       <number>6</number>
+       <number>7</number>
       </property>
       <widget class="QWidget" name="tabSettings">
        <attribute name="title">
@@ -506,7 +506,115 @@
        <attribute name="title">
         <string>Contacts</string>
        </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout_5"/>
+       <layout class="QVBoxLayout" name="verticalLayout_5">
+        <item>
+         <widget class="QSplitter" name="splitter_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <widget class="QWidget" name="widgetContactsRight" native="true">
+           <layout class="QVBoxLayout" name="verticalLayout_11">
+            <item>
+             <layout class="QFormLayout" name="formLayout_4">
+              <item row="0" column="0">
+               <widget class="QLabel" name="labelContactsFirstName">
+                <property name="text">
+                 <string>First Name</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="0">
+               <widget class="QLabel" name="labelContactsPhone">
+                <property name="text">
+                 <string>Phone</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="labelContactsLastName">
+                <property name="text">
+                 <string>Last Name</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QLabel" name="labelContactsEmail">
+                <property name="text">
+                 <string>eMail</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="0">
+               <widget class="QLabel" name="labelContactsIpAddress">
+                <property name="text">
+                 <string>IP Address</string>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="0">
+               <widget class="QLabel" name="labelContactsNotes">
+                <property name="text">
+                 <string>Notes</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLineEdit" name="lineEditContactsFirstName"/>
+              </item>
+              <item row="1" column="1">
+               <widget class="QLineEdit" name="lineEditContactsLastName"/>
+              </item>
+              <item row="2" column="1">
+               <widget class="QLineEdit" name="lineEditContactsEmail"/>
+              </item>
+              <item row="3" column="1">
+               <widget class="QLineEdit" name="lineEditContactsPhone"/>
+              </item>
+              <item row="4" column="1">
+               <widget class="QLineEdit" name="lineEditContactsIpAddress"/>
+              </item>
+              <item row="5" column="1">
+               <widget class="QTextEdit" name="textEditContactsNotes"/>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QGridLayout" name="gridLayoutContactsButtons">
+              <item row="0" column="1">
+               <widget class="QPushButton" name="pushButtonContactsSave">
+                <property name="text">
+                 <string>Save</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QPushButton" name="pushButtonContactsNew">
+                <property name="text">
+                 <string>New</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="2">
+               <widget class="QPushButton" name="pushButtonContactsDelete">
+                <property name="text">
+                 <string>Delete</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="widgetContactsLeft" native="true">
+           <layout class="QVBoxLayout" name="verticalLayout_10">
+            <item>
+             <widget class="QListView" name="listViewContacts"/>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+        </item>
+       </layout>
       </widget>
       <widget class="QWidget" name="tabChat">
        <attribute name="title">
@@ -518,52 +626,52 @@
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
-          <widget class="QWidget" name="widgetRight" native="true">
+          <widget class="QWidget" name="widgetChatRight" native="true">
            <layout class="QVBoxLayout" name="verticalLayout_8">
             <item>
-             <layout class="QVBoxLayout" name="vlMainRight">
+             <layout class="QVBoxLayout" name="vlMainChatRight">
               <item>
-               <widget class="QTextEdit" name="textEditMessages"/>
+               <widget class="QTextEdit" name="textEditChatMessages"/>
               </item>
               <item>
-               <widget class="QLineEdit" name="lineEditChat"/>
+               <widget class="QLineEdit" name="lineEditChatText"/>
               </item>
              </layout>
             </item>
            </layout>
           </widget>
-          <widget class="QWidget" name="widgetLeft" native="true">
+          <widget class="QWidget" name="widgetChatLeft" native="true">
            <layout class="QVBoxLayout" name="verticalLayout_7">
             <item>
-             <layout class="QVBoxLayout" name="vlMainLeft">
+             <layout class="QVBoxLayout" name="vlMainChatLeft">
               <property name="sizeConstraint">
                <enum>QLayout::SetDefaultConstraint</enum>
               </property>
               <item>
-               <layout class="QGridLayout" name="gridLayoutMainButtons">
+               <layout class="QGridLayout" name="gridLayoutChatMainButtons">
                 <item row="0" column="0">
-                 <widget class="QPushButton" name="pushButtonConnect">
+                 <widget class="QPushButton" name="pushButtonChatConnect">
                   <property name="text">
                    <string>Connect</string>
                   </property>
                  </widget>
                 </item>
                 <item row="0" column="1">
-                 <widget class="QPushButton" name="pushButtonDisconnect">
+                 <widget class="QPushButton" name="pushButtonChatDisconnect">
                   <property name="text">
                    <string>Disconnect</string>
                   </property>
                  </widget>
                 </item>
                 <item row="1" column="0">
-                 <widget class="QPushButton" name="pushButtonOpenFile">
+                 <widget class="QPushButton" name="pushButtonChatOpenFile">
                   <property name="text">
                    <string>Select File</string>
                   </property>
                  </widget>
                 </item>
                 <item row="1" column="1">
-                 <widget class="QPushButton" name="pushButtonSendFile">
+                 <widget class="QPushButton" name="pushButtonChatSendFile">
                   <property name="text">
                    <string>Send File</string>
                   </property>
@@ -572,17 +680,17 @@
                </layout>
               </item>
               <item>
-               <widget class="QLineEdit" name="lineEditFileName"/>
+               <widget class="QLineEdit" name="lineEditChatFileName"/>
               </item>
               <item>
-               <widget class="QProgressBar" name="progressBar">
+               <widget class="QProgressBar" name="progressBarChat">
                 <property name="value">
                  <number>0</number>
                 </property>
                </widget>
               </item>
               <item>
-               <spacer name="verticalSpacer">
+               <spacer name="verticalSpacerChat">
                 <property name="orientation">
                  <enum>Qt::Vertical</enum>
                 </property>
@@ -595,7 +703,7 @@
                </spacer>
               </item>
               <item>
-               <widget class="QPushButton" name="pushButtonSend">
+               <widget class="QPushButton" name="pushButtonChatSend">
                 <property name="text">
                  <string>Send</string>
                 </property>
@@ -613,7 +721,48 @@
        <attribute name="title">
         <string>Files</string>
        </attribute>
-       <layout class="QGridLayout" name="gridLayout_2"/>
+       <layout class="QVBoxLayout" name="verticalLayout_12">
+        <item>
+         <widget class="QSplitter" name="splitter_3">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <widget class="QWidget" name="widgetFileManRight" native="true">
+           <widget class="QPushButton" name="pushButtonFileManUpload">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>10</y>
+              <width>96</width>
+              <height>28</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Upload</string>
+            </property>
+           </widget>
+          </widget>
+          <widget class="QWidget" name="widgetFileManLeft" native="true">
+           <layout class="QVBoxLayout" name="verticalLayout_13">
+            <item>
+             <widget class="QTreeView" name="treeViewFileMan"/>
+            </item>
+            <item>
+             <layout class="QGridLayout" name="gridLayoutFileManButtons">
+              <item row="0" column="0">
+               <widget class="QPushButton" name="pushButtonFileManDelete">
+                <property name="text">
+                 <string>Delete</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+        </item>
+       </layout>
       </widget>
       <widget class="QWidget" name="tabCalendarMan">
        <attribute name="title">

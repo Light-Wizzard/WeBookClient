@@ -38,7 +38,7 @@ Windows: [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/l
 I am posting this only so I can get the Travis and AppVeyor Builds to work.
 
 Currently it works somewhat, and missing a lot of features,
-it currently does not talk with the WeBookServer.
+currently Chat talks with the WeBookServer.
 
 ## Downloads
 
