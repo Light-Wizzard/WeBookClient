@@ -11,14 +11,15 @@ sudo apt-get update -qq && sudo apt-get install -qq;
 if [[ "$MY_UPGRADE_OS" = "true" ]]; then sudo apt-get upgrade -qqy; fi
 # Developer tools, some multimedia and libsqlite3
 # This is what I needed for all my projects to work, and is not optimized for any one of them.
-sudo apt install -qqy build-essential software-properties-common cmake zlib1g-dev;
+sudo apt install -qqy build-essential software-properties-common zlib1g-dev;
 sudo apt install -qqy mesa-common-dev libgl1-mesa-dev;
 sudo apt install -qqy flex bison gperf nodejs npm;
-sudo apt install -qqy x11-xserver-utils
-sudo apt install -qqy fontconfig x11-xkb-utils xkb-data;
+sudo apt install -qqy x11-xserver-utils unixodbc-bin
+sudo apt install -qqy cmake ninja-build openssl
+sudo apt install -qqy fontconfig x11-xkb-utils xkb-data xserver-xorg-input-mouse xserver-xorg-input-kbd;
 #sudo apt install -qqy yasm git checkinstall pkg-config;
 #sudo apt install -qqy libglu1-mesa-dev libegl1-mesa libgles2-mesa-dev;
-#sudo apt install -qqy libncurses5-dev libncursesw5-dev openssl libssl-dev;
+#sudo apt install -qqy libncurses5-dev libncursesw5-dev libssl-dev;
 #sudo apt install -qqy libffi-dev libgdbm-dev libdb5.3-dev libbz2-dev libexpat1-dev liblzma-dev tk-dev;
 #sudo apt install -qqy libreadline-dev libgl-dev libpulse-mainloop-glib0 libglfw3-dev freeglut3-dev;
 #sudo apt install -qqy libfreetype6-dev libfontconfig1-dev libdbus-1-dev libxi-dev libgstreamer-plugins-base1.0-0;
