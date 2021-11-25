@@ -104,22 +104,22 @@ set(PROJECT_SOURCES
 if(DEFINED USE_SQL_FLAG)
     if(MY_QML)
         # QML
-        find_package(QT NAMES Qt6 Qt5 COMPONENTS Core Sql Qml Quick QuickControls2 PrintSupport Network Multimedia Concurrent LinguistTools xml webenginewidgets REQUIRED)
-        find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Sql Qml Quick QuickControls2 PrintSupport Network Multimedia Concurrent LinguistTools xml webenginewidgets REQUIRED)
+        find_package(QT NAMES Qt6 Qt5 COMPONENTS Core Sql Qml Quick QuickControls2 PrintSupport Network Multimedia Concurrent LinguistTools Xml WebEngineWidgets REQUIRED)
+        find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Sql Qml Quick QuickControls2 PrintSupport Network Multimedia Concurrent LinguistTools Xml WebEngineWidgets REQUIRED)
     else()
         # C++
-        find_package(QT NAMES Qt6 Qt5 COMPONENTS Core Gui Widgets Sql PrintSupport Network Multimedia Concurrent LinguistTools xml webenginewidgets REQUIRED)
-        find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Gui Widgets Sql PrintSupport Network Multimedia Concurrent LinguistTools xml webenginewidgets REQUIRED)
+        find_package(QT NAMES Qt6 Qt5 COMPONENTS Core Gui Widgets Sql PrintSupport Network Multimedia Concurrent LinguistTools Xml WebEngineWidgets REQUIRED)
+        find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Gui Widgets Sql PrintSupport Network Multimedia Concurrent LinguistTools Xml WebEngineWidgets REQUIRED)
     endif()
 else()
     if(MY_QML)
         # QML
-        find_package(QT NAMES Qt6 Qt5 COMPONENTS Core Qml Quick QuickControls2 PrintSupport Network Multimedia Concurrent LinguistTools xml webenginewidgets REQUIRED)
-        find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Qml Quick QuickControls2 PrintSupport Network Multimedia Concurrent LinguistTools xml webenginewidgets REQUIRED)
+        find_package(QT NAMES Qt6 Qt5 COMPONENTS Core Qml Quick QuickControls2 PrintSupport Network Multimedia Concurrent LinguistTools Xml WebEngineWidgets REQUIRED)
+        find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Qml Quick QuickControls2 PrintSupport Network Multimedia Concurrent LinguistTools Xml WebEngineWidgets REQUIRED)
     else()
         # C++
-        find_package(QT NAMES Qt6 Qt5 COMPONENTS Core Gui Widgets PrintSupport Network Multimedia Concurrent LinguistTools xml webenginewidgets REQUIRED)
-        find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Gui Widgets PrintSupport Network Multimedia Concurrent LinguistTools xml webenginewidgets REQUIRED)
+        find_package(QT NAMES Qt6 Qt5 COMPONENTS Core Gui Widgets PrintSupport Network Multimedia Concurrent LinguistTools Xml WebEngineWidgets REQUIRED)
+        find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Gui Widgets PrintSupport Network Multimedia Concurrent LinguistTools Xml WebEngineWidgets REQUIRED)
     endif()
 endif()
 # You can turn these ON OFF individually for Translations
@@ -165,18 +165,18 @@ target_compile_definitions(${MY_TARGET} PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:
 if(DEFINED USE_SQL_FLAG)
     if(MY_QML)
         # QML
-        target_link_libraries(${MY_TARGET} PRIVATE Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Sql Qt${QT_VERSION_MAJOR}::PrintSupport Qt${QT_VERSION_MAJOR}::Network Qt${QT_VERSION_MAJOR}::Multimedia Qt${QT_VERSION_MAJOR}::Quick Qt${QT_VERSION_MAJOR}::QuickControls2)
+        target_link_libraries(${MY_TARGET} PRIVATE Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Sql Qt${QT_VERSION_MAJOR}::PrintSupport Qt${QT_VERSION_MAJOR}::Network Qt${QT_VERSION_MAJOR}::Multimedia Qt${QT_VERSION_MAJOR}::Quick Qt${QT_VERSION_MAJOR}::QuickControls2 Qt${QT_VERSION_MAJOR}::Xml Qt${QT_VERSION_MAJOR}::WebEngineWidgets)
     else()
         # C++
-        target_link_libraries(${MY_TARGET} PRIVATE Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Sql Qt${QT_VERSION_MAJOR}::Gui Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::PrintSupport Qt${QT_VERSION_MAJOR}::Network Qt${QT_VERSION_MAJOR}::Multimedia)
+        target_link_libraries(${MY_TARGET} PRIVATE Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Sql Qt${QT_VERSION_MAJOR}::Gui Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::PrintSupport Qt${QT_VERSION_MAJOR}::Network Qt${QT_VERSION_MAJOR}::Multimedia Qt${QT_VERSION_MAJOR}::Xml Qt${QT_VERSION_MAJOR}::WebEngineWidgets)
     endif()
 else()
     if(MY_QML)
         # QML
-        target_link_libraries(${MY_TARGET} PRIVATE Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::PrintSupport Qt${QT_VERSION_MAJOR}::Network Qt${QT_VERSION_MAJOR}::Multimedia Qt${QT_VERSION_MAJOR}::Quick Qt${QT_VERSION_MAJOR}::QuickControls2)
+        target_link_libraries(${MY_TARGET} PRIVATE Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::PrintSupport Qt${QT_VERSION_MAJOR}::Network Qt${QT_VERSION_MAJOR}::Multimedia Qt${QT_VERSION_MAJOR}::Quick Qt${QT_VERSION_MAJOR}::QuickControls2 Qt${QT_VERSION_MAJOR}::Xml Qt${QT_VERSION_MAJOR}::WebEngineWidgets)
     else()
         # C++
-        target_link_libraries(${MY_TARGET} PRIVATE Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Gui Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::PrintSupport Qt${QT_VERSION_MAJOR}::Network Qt${QT_VERSION_MAJOR}::Multimedia)
+        target_link_libraries(${MY_TARGET} PRIVATE Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Gui Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::PrintSupport Qt${QT_VERSION_MAJOR}::Network Qt${QT_VERSION_MAJOR}::Multimedia Qt${QT_VERSION_MAJOR}::Xml Qt${QT_VERSION_MAJOR}::WebEngineWidgets)
     endif()
 endif()
 # Set Target Properties to include MACOS
