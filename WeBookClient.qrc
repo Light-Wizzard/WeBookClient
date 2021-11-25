@@ -1,0 +1,22 @@
+<RCC>
+    <qresource prefix="/">
+        <file>bookmarks.xbel</file>
+        <file alias="AppLogoColor.png">images/AppLogoColor.png</file>
+        <file alias="ninja.png">images/ninja.png</file>
+        <file alias="dialog-error.png">images/dialog-error.png</file>
+        <file alias="edit-clear.png">images/edit-clear.png</file>
+        <file alias="go-bottom.png">images/go-bottom.png</file>
+        <file alias="go-next.png">images/go-next.png</file>
+        <file alias="go-previous.png">images/go-previous.png</file>
+        <file alias="process-stop.png">images/process-stop.png</file>
+        <file alias="text-html.png">images/text-html.png</file>
+        <file alias="view-refresh.png">images/view-refresh.png</file>
+        <file alias="exit.png">images/exit.png</file>
+        <file alias="help.png">images/help.png</file>
+        <file alias="gear.png">images/gear.png</file>
+        <file alias="handshake.png">images/handshake.png</file>
+        <file alias="logo.png">images/logo.png</file>
+        <file alias="addressbook.png">images/addressbook.png</file>
+        <file>bookmarks.xbel</file>        
+    </qresource>
+</RCC>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Installer>
+    <Name>WeBookClient</Name>
+    <Version>1.0.0</Version>
+    <Title>WeBookClient is Pronounce Web-Book-Clienct by Light Wizzard</Title>
+    <Publisher>Light-Wizzard</Publisher>
+    <!-- Directory name is used in component.xml -->
+    <StartMenuDir>WeBookClient</StartMenuDir>
+    <TargetDir>@HomeDir@/WeBookClient</TargetDir>
+</Installer>
