@@ -8,7 +8,8 @@ set(MY_QML OFF)
 # Set Target Name
 set(MY_TARGET ${CMAKE_PROJECT_NAME})
 # If you have a project that has an SQL verion for Desktops, and No SQL for WebAssempy set both below comments
-option(USE_SQL_FLAG "Feature description" OFF)
+#option(USE_SQL_FLAG "Feature description" OFF)
+set(USE_SQL_FLAG OFF)
 if(${CMAKE_VERSION} VERSION_GREATER "3.12.0") 
     add_compile_definitions(USE_SQL_FLAG)
 else()
