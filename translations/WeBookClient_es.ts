@@ -2,6 +2,14 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="es_ES">
 <context>
+    <name>Bookmarks</name>
+    <message>
+        <location filename="../src/Bookmarks.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>Browser</name>
     <message>
         <location filename="../src/browser.cpp" line="106"/>
@@ -432,6 +440,16 @@ Do you wish to override the security check and continue ?   </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/browserwindow.cpp" line="208"/>
+        <source>Open</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/browserwindow.cpp" line="209"/>
+        <source>Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/TreeWidgetView.cpp" line="10"/>
         <source>Title</source>
         <translation type="unfinished"></translation>
@@ -457,16 +475,6 @@ Line %2, column %3</source>
     <message>
         <location filename="../src/XbelTreeReader.cpp" line="177"/>
         <source>Unknown title</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/browserwindow.cpp" line="208"/>
-        <source>Open</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/browserwindow.cpp" line="209"/>
-        <source>Add</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

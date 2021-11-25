@@ -119,6 +119,7 @@ wget -c -nv https://github.com/linuxdeploy/linuxdeploy/releases/download/continu
 wget -c -nv https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/download/continuous/linuxdeploy-plugin-qt-x86_64.AppImage;
 # make them executable
 chmod +x linuxdeploy*.AppImage;
+# export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${HOME}/Qt/5.15.2/gcc_64/lib:AppDir";
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${HOME}/Qt/${MY_QT_VERSION}/gcc_64/lib:AppDir";
 # make sure Qt plugin finds QML sources so it can deploy the imported files
 if [ -d "${REPO_ROOT}/qml" ]; then
@@ -129,6 +130,7 @@ fi
 # QtQuickApp does support "make install", but we don't use it because we want to show the manual packaging approach in this example
 # initialize AppDir, bundle shared libraries, add desktop file and icon, use Qt plugin to bundle additional resources, and build AppImage, all in one command
 # env TARGET_APPIMAGE="${MY_BIN_PRO_RES_NAME}-$PLATFORM.AppImage" APPIMAGE_EXTRACT_AND_RUN=1
+# 
 ./linuxdeploy-x86_64.AppImage --appdir=AppDir -i "${REPO_ROOT}/desktop/${MY_BIN_PRO_RES_NAME}.svg" -d "${REPO_ROOT}/desktop/${MY_BIN_PRO_RES_NAME}.desktop" --plugin qt --output appimage;
 chmod +x "${MY_BIN_PRO_RES_NAME}"*.AppImage*;
 cp -v "${MY_BIN_PRO_RES_NAME}"*.AppImage* AppDir/usr/bin/;

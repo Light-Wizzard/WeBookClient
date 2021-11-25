@@ -23,14 +23,9 @@ I used the Qt Rich Text Editor Project and documentation.
 
 ## Status
 
-Unix: Linux & Mac: [![Travis Build Status](https://travis-ci.com/Light-Wizzard/WeBookClient.svg?branch=master)](https://travis-ci.com/Light-Wizzard/WeBookClient)
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/l72fncva61fru2h4?svg=true)](https://ci.appveyor.com/project/Light-Wizzard/WeBookClient)
 
-Windows: [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/l72fncva61fru2h4?svg=true)](https://ci.appveyor.com/project/Light-Wizzard/WeBookClient)
-
-I am posting this only so I can get the Travis and AppVeyor Builds to work.
-
-Currently it works somewhat, and missing a lot of features,
-currently Chat talks with the WeBookServer.
+Work in Progress, adding features, currently no CMS, just Bookmarks and Web Browser.
 
 ## Downloads
 
