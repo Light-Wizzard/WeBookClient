@@ -383,6 +383,12 @@ void TabWidget::closeTab(int index)
         removeTab(index);
         return;
     }
+    if (myHelpTab == index)
+    {
+        myHelpTab = -1;
+        removeTab(index);
+        return;
+    }
 
     if (WebView *view = webView(index))
     {
