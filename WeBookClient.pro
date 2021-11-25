@@ -69,6 +69,7 @@ TRANSLATIONS += translations/WeBookClient_ar.ts \
                 translations/WeBookClient_zh_CN.ts
 DISTFILES += bookmarks.xbel README.md \
     .appveyor.yml \
+    CMakeLists.txt \
     scripts/build_script.ps1 \
     scripts/build_script.sh \
     scripts/build_script_mac.sh \

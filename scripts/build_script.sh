@@ -126,6 +126,9 @@ if [ -d "${REPO_ROOT}/qml" ]; then
     export QML_SOURCES_PATHS="${REPO_ROOT}/qml";
 fi
 # MY_RELEASE_FOLDER="";
+#
+EXTRA_QT_PLUGINS=xml;webenginewidgets
+#
 # export UPDATE_INFORMATION="zsync|https://github.com/${APPVEYOR_REPO_NAME}/${MY_RELEASE_FOLDER}/${MY_BIN_PRO_RES_NAME}-latest.AppImage.zsync"
 #
 # ${MY_BIN_PRO_RES_NAME}-$PLATFORM.AppImage
@@ -134,7 +137,8 @@ fi
 # initialize AppDir, bundle shared libraries, add desktop file and icon, use Qt plugin to bundle additional resources, and build AppImage, all in one command
 # env TARGET_APPIMAGE="${MY_BIN_PRO_RES_NAME}-$PLATFORM.AppImage" APPIMAGE_EXTRACT_AND_RUN=1
 # 
-./linuxdeploy-x86_64.AppImage --appdir=AppDir -i "${REPO_ROOT}/desktop/${MY_BIN_PRO_RES_NAME}.svg" -d "${REPO_ROOT}/desktop/${MY_BIN_PRO_RES_NAME}.desktop" --plugin qt --output appimage;
+#./linuxdeploy-x86_64.AppImage --appdir=AppDir -i "${REPO_ROOT}/desktop/${MY_BIN_PRO_RES_NAME}.svg" -d "${REPO_ROOT}/desktop/${MY_BIN_PRO_RES_NAME}.desktop" --plugin qt --output appimage;
+./linuxdeploy-x86_64.AppImage --appdir=AppDir -i "${REPO_ROOT}/desktop/${MY_BIN_PRO_RES_NAME}.png" -d "${REPO_ROOT}/desktop/${MY_BIN_PRO_RES_NAME}.desktop" --plugin qt --output appimage;
 chmod +x "${MY_BIN_PRO_RES_NAME}"*.AppImage*;
 cp -v "${MY_BIN_PRO_RES_NAME}"*.AppImage* AppDir/usr/bin/;
 cp -v "${APPVEYOR_BUILD_FOLDER}/README.md" AppDir/usr/bin/;
