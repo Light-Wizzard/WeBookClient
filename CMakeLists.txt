@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.14)
+cmake_minimum_required(VERSION 3.10.2)
 # I tried to put stuff you need to exit at the top
 project(WeBookClient VERSION 0.1.0.0 DESCRIPTION "WeBookClient" LANGUAGES C CXX)
 # Set this to your URL
