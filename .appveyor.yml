@@ -7,7 +7,7 @@ version: '{branch}-{build}'
 
 branches:
   only:
-    - master
+    - main
 
 build: off
 
