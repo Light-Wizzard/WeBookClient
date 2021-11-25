@@ -25,6 +25,12 @@ sudo apt install -qqy mesa-common-dev libgl1-mesa-dev;
 #sudo apt install -qqy libtheora-dev libvorbis-dev libxvidcore-dev libopencore-amrnb-dev libopencore-amrwb-dev libavresample-dev;
 #sudo apt install -qqy x264 v4l-utils libprotobuf-dev protobuf-compiler libgoogle-glog-dev libgflags-dev libgphoto2-dev libeigen3-dev;
 sudo apt install -qqy postgresql postgresql-contrib mysql-server libmyodbc libfbclient2 freetds-bin sqlite3 libsqlite3-dev libsqlite3-dev
+sudo apt install -qqy libqt5webengine5
+sudo apt install -qqy qtbase5-dev libqt5svg5-dev
+sudo apt install -qqy qt5-default || true
+sudo apt install -qqy qtwebengine5-dev || export NO_QTWEBENGINE=true
+sudo apt install -qqy qml-module-qtwebengine || export NO_QMLWEBENGINE=true
+
 # npm install -g firebase-tools
 # Python
 if [[ "$MY_PYTHON_REQUIRED" = "true" ]]; then sudo apt-get install -qqy python3.9-dev python3-venv; fi
