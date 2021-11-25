@@ -86,7 +86,7 @@ bool WebPage::certificateError(const QWebEngineCertificateError &error)
 {
     QWidget *mainWindow = view()->window();
 
-    #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+    //#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
     QWebEngineCertificateError deferredError = error;
     deferredError.defer();
 
@@ -98,10 +98,12 @@ bool WebPage::certificateError(const QWebEngineCertificateError &error)
         }
         else
         {
-    #else
-    if (error.isOverridable())
-    {
-    #endif
+
+//    #else
+//    if (error.isOverridable())
+//    {
+//    #endif
+
         QDialog dialog(mainWindow);
         dialog.setModal(true);
         dialog.setWindowFlags(dialog.windowFlags() & ~Qt::WindowContextHelpButtonHint);
@@ -114,19 +116,19 @@ bool WebPage::certificateError(const QWebEngineCertificateError &error)
         certificateDialog.labelError->setText(error.errorDescription());
         dialog.setWindowTitle(tr("Certificate Error"));
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
-        if (dialog.exec() == QDialog::Accepted) { error.ignoreCertificateError(); }
-        else                                    { error.rejectCertificate(); }
+//#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+            if (dialog.exec() == QDialog::Accepted) { error.ignoreCertificateError(); }
+            else                                    { error.rejectCertificate(); }
         }
     });
     return true;
-#else
-        return dialog.exec() == QDialog::Accepted;
-    }
+//#else
+//        return dialog.exec() == QDialog::Accepted;
+//    }
 
-    QMessageBox::critical(mainWindow, tr("Certificate Error"), error.errorDescription());
-    return false;
-#endif
+//    QMessageBox::critical(mainWindow, tr("Certificate Error"), error.errorDescription());
+//    return false;
+//#endif
 }
 /*****************************************************************************/
 /**

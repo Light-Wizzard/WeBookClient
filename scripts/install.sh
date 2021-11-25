@@ -14,7 +14,7 @@ if [[ "$MY_UPGRADE_OS" = "true" ]]; then sudo apt-get upgrade -qqy; fi
 sudo apt install -qqy build-essential software-properties-common zlib1g-dev;
 sudo apt install -qqy mesa-common-dev libgl1-mesa-dev;
 sudo apt install -qqy flex bison gperf nodejs npm;
-sudo apt install -qqy x11-xserver-utils unixodbc-bin
+sudo apt install -qqy x11-xserver-utils
 sudo apt install -qqy cmake ninja-build openssl
 sudo apt install -qqy fontconfig x11-xkb-utils xkb-data xserver-xorg-input-mouse xserver-xorg-input-kbd;
 #sudo apt install -qqy yasm git checkinstall pkg-config;

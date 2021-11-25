@@ -64,8 +64,8 @@ OLD_CWD="$(readlink -f .)";
 # switch to build dir
 pushd "$BUILD_DIR";
 # Make AppDir folder at the BUILD_DIR level, I should not need to do this normally, but I am not able to get cmake to work
-if [ -d "AppDir" ]; then rm -r AppDir; fi
-mkdir AppDir;
+#if [ -d "AppDir" ]; then rm -r AppDir; fi
+#mkdir AppDir;
 # x86
 if [[ "$PLATFORM" == "x86" ]]; then
     # Matrix does not show a gcc_32 or 86
@@ -125,6 +125,9 @@ export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${HOME}/Qt/${MY_QT_VERSION}/gcc_64/lib:
 if [ -d "${REPO_ROOT}/qml" ]; then
     export QML_SOURCES_PATHS="${REPO_ROOT}/qml";
 fi
+# MY_RELEASE_FOLDER="";
+# export UPDATE_INFORMATION="zsync|https://github.com/${APPVEYOR_REPO_NAME}/${MY_RELEASE_FOLDER}/${MY_BIN_PRO_RES_NAME}-latest.AppImage.zsync"
+#
 # ${MY_BIN_PRO_RES_NAME}-$PLATFORM.AppImage
 #export TARGET_APPIMAGE="${MY_BIN_PRO_RES_NAME}-$PLATFORM.AppImage";
 # QtQuickApp does support "make install", but we don't use it because we want to show the manual packaging approach in this example

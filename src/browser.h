@@ -65,6 +65,7 @@ class BrowserWindow;
  */
 class Browser : public QWidget
 {
+        Q_OBJECT
     public:
         Browser(QWidget *parent = nullptr);
 
