@@ -15,10 +15,9 @@ configuration: Release
 
 platform:
   - x64
-  - x86
 
 image:
-  - Ubuntu
+  - Ubuntu2004
   - Visual Studio 2019
   - macos
 
@@ -26,7 +25,7 @@ for:
 -
   matrix:
     only:
-      - image: Ubuntu
+      - image: Ubuntu2004
   environment:
     MY_BIN_PRO_RES_NAME: WeBookClient
     MY_QIF_PACKAGE_URI: 'packages/com.appveyor.webookclient/data'

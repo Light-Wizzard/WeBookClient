@@ -11,12 +11,12 @@ sudo apt-get update -qq && sudo apt-get install -qq;
 if [[ "$MY_UPGRADE_OS" = "true" ]]; then sudo apt-get upgrade -qqy; fi
 # Developer tools, some multimedia and libsqlite3
 # This is what I needed for all my projects to work, and is not optimized for any one of them.
-sudo apt install -qqy build-essential cmake zlib1g-dev;
+sudo apt install -qqy build-essential software-properties-common cmake zlib1g-dev;
 sudo apt install -qqy mesa-common-dev libgl1-mesa-dev;
 #sudo apt install -qqy yasm git flex bison checkinstall pkg-config;
-#sudo apt install -qqy libglu1-mesa-dev libegl1-mesa libgles2-mesa-dev software-properties-common;
+#sudo apt install -qqy libglu1-mesa-dev libegl1-mesa libgles2-mesa-dev;
 #sudo apt install -qqy libncurses5-dev libncursesw5-dev openssl libssl-dev;
-#sudo apt install -qqy libffi-dev libgdbm-dev libdb5.3-dev libbz2-dev libexpat1-dev liblzma-dev tk-dev sqlite3 libsqlite3-dev libsqlite3-dev;
+#sudo apt install -qqy libffi-dev libgdbm-dev libdb5.3-dev libbz2-dev libexpat1-dev liblzma-dev tk-dev;
 #sudo apt install -qqy libreadline-dev libgl-dev libpulse-mainloop-glib0 libglfw3-dev freeglut3-dev;
 #sudo apt install -qqy libfreetype6-dev libfontconfig1-dev libdbus-1-dev libxi-dev libgstreamer-plugins-base1.0-0;
 #sudo apt install -qqy libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev libssl1.0.0 glibc patchelf inotify-tools;
@@ -24,7 +24,7 @@ sudo apt install -qqy mesa-common-dev libgl1-mesa-dev;
 #sudo apt install -qqy libswscale-dev libdc1394-22-dev libxine2-dev libv4l-dev libatlas-base-dev libfaac-dev libmp3lame-dev;
 #sudo apt install -qqy libtheora-dev libvorbis-dev libxvidcore-dev libopencore-amrnb-dev libopencore-amrwb-dev libavresample-dev;
 #sudo apt install -qqy x264 v4l-utils libprotobuf-dev protobuf-compiler libgoogle-glog-dev libgflags-dev libgphoto2-dev libeigen3-dev;
-sudo apt install -qqy postgresql postgresql-contrib mysql-server libmyodbc libfbclient2 freetds-bin
+sudo apt install -qqy postgresql postgresql-contrib mysql-server libmyodbc libfbclient2 freetds-bin sqlite3 libsqlite3-dev libsqlite3-dev
 # npm install -g firebase-tools
 # Python
 if [[ "$MY_PYTHON_REQUIRED" = "true" ]]; then sudo apt-get install -qqy python3.9-dev python3-venv; fi
