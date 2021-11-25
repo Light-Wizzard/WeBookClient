@@ -13,8 +13,9 @@ if [[ "$MY_UPGRADE_OS" = "true" ]]; then sudo apt-get upgrade -qqy; fi
 # This is what I needed for all my projects to work, and is not optimized for any one of them.
 sudo apt install -qqy build-essential software-properties-common cmake zlib1g-dev;
 sudo apt install -qqy mesa-common-dev libgl1-mesa-dev;
-sudo apt install -qqy flex bison gperf nodejs;
-sudo apt install -qqy fontconfig libdrm xcomposite xcursor xi xrandr xscrnsaver xtst khr libcap;
+sudo apt install -qqy flex bison gperf nodejs npm;
+sudo apt install -qqy x11-xserver-utils
+sudo apt install -qqy fontconfig x11-xkb-utils xkb-data;
 #sudo apt install -qqy yasm git checkinstall pkg-config;
 #sudo apt install -qqy libglu1-mesa-dev libegl1-mesa libgles2-mesa-dev;
 #sudo apt install -qqy libncurses5-dev libncursesw5-dev openssl libssl-dev;
@@ -26,13 +27,14 @@ sudo apt install -qqy fontconfig libdrm xcomposite xcursor xi xrandr xscrnsaver 
 #sudo apt install -qqy libswscale-dev libdc1394-22-dev libxine2-dev libv4l-dev libatlas-base-dev libfaac-dev libmp3lame-dev;
 #sudo apt install -qqy libtheora-dev libvorbis-dev libxvidcore-dev libopencore-amrnb-dev libopencore-amrwb-dev libavresample-dev;
 #sudo apt install -qqy x264 v4l-utils libprotobuf-dev protobuf-compiler libgoogle-glog-dev libgflags-dev libgphoto2-dev libeigen3-dev;
-sudo apt install -qqy postgresql postgresql-contrib mysql-server libmyodbc libfbclient2 freetds-bin sqlite3 libsqlite3-dev libsqlite3-dev;
+sudo apt install -qqy postgresql postgresql-contrib mysql-server libsqliteodbc unixodbc libfbclient2 freetds-bin sqlite3 libsqlite3-dev libsqlite3-dev;
+sudo apt install -qqy default-libmysqlclient-dev firebird-dev libpq-dev
 sudo apt install -qqy libqt5webengine5;
 sudo apt install -qqy qtbase5-dev libqt5svg5-dev;
 sudo apt install -qqy qt5-default || true;
 sudo apt install -qqy qtwebengine5-dev || export NO_QTWEBENGINE=true;
 sudo apt install -qqy qml-module-qtwebengine || export NO_QMLWEBENGINE=true;
-
+sudo apt install -qqy libqt5multimedia5-plugins qml-module-qtmultimedia
 # npm install -g firebase-tools
 # Python
 if [[ "$MY_PYTHON_REQUIRED" = "true" ]]; then sudo apt-get install -qqy python3.9-dev python3-venv; fi
