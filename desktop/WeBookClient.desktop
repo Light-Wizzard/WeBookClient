@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=WeBookClient
+GenericName=WeBookClient
+Comment=WeBookClient by the Light Wizzard
+Icon=WeBookClient
+Exec=WeBookClient
+Terminal=false
+Categories=Education;
+Keywords=CMS;
+Name[en_US]=WeBookClient.desktop

@@ -99,7 +99,7 @@ set(PROJECT_SOURCES
 #Concurrent              QuickCompiler           WebView
 #Core                    QuickControls2          Widgets
 #Gamepad                 QuickTemplates2         Xml
-#Gui                     QuickTest               XmlPatterns
+#Gui                     QuickTest               XmlPatterns        WebEngineWidgets
 # Find packages
 if(DEFINED USE_SQL_FLAG)
     if(MY_QML)
