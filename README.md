@@ -23,7 +23,7 @@ I used the Qt Rich Text Editor Project and documentation.
 
 ## Status
 
-Unix: Linux & Mac: [![Travis Build Status](https://travis-ci.org/Light-Wizzard/WeBookClient.svg?branch=master)](https://travis-ci.org/Light-Wizzard/WeBookClient)
+Unix: Linux & Mac: [![Travis Build Status](https://travis-ci.com/Light-Wizzard/WeBookClient.svg?branch=master)](https://travis-ci.com/Light-Wizzard/WeBookClient)
 
 Windows: [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/l72fncva61fru2h4?svg=true)](https://ci.appveyor.com/project/Light-Wizzard/WeBookClient)
 

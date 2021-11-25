@@ -48,9 +48,26 @@ FORMS += \
     src/downloadwidget.ui
 
 RESOURCES += WeBookClient.qrc
-
-DISTFILES += bookmarks.xbel \
-    README.md
+CONFIG += localize_deployment
+SYMBIAN_SUPPORTED_LANGUAGES += zh_CN
+SYMBIAN_LANG.zh_CN = 31
+CONFIG += lrelease
+CONFIG += embed_translations
+LRELEASE_DIR=./translations
+QM_FILES_RESOURCE_PREFIX=./translations
+# ar,de,en,es,fr,it,ja,no,ru,sv,zh_CN
+TRANSLATIONS += translations/WeBookClient_ar.ts \
+                translations/WeBookClient_de.ts \
+                translations/WeBookClient_en.ts \
+                translations/WeBookClient_es.ts \
+                translations/WeBookClient_fr.ts \
+                translations/WeBookClient_it.ts \
+                translations/WeBookClient_ja.ts \
+                translations/WeBookClient_no.ts \
+                translations/WeBookClient_ru.ts \
+                translations/WeBookClient_sv.ts \
+                translations/WeBookClient_zh_CN.ts
+DISTFILES += bookmarks.xbel README.md
 
 # install
 #target.path = $$[QT_INSTALL_EXAMPLES]/webenginewidgets/simplebrowser
