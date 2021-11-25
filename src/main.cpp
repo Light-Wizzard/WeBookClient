@@ -90,6 +90,9 @@ int main(int argc, char **argv)
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
     //
+    // Load Resource File WeBookClient.qrc before creating Application
+    Q_INIT_RESOURCE(WeBookClient);
+    //
     QApplication theApplication(argc, argv);
     theApplication.setWindowIcon(QIcon(QStringLiteral(":AppLogoColor.png")));
     // Setup the Application for MyOrgSettings

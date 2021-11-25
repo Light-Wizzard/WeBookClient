@@ -79,9 +79,9 @@ class Browser : public QWidget
         QMenu *createBookmarkMenu();
 
     private:
-        QVector<BrowserWindow*> myBrowserWindows;
-        DownloadManagerWidget myDownloadManagerWidget;
-        QScopedPointer<QWebEngineProfile> myOtrProfile;
+        QVector<BrowserWindow*>             myBrowserWindows;
+        DownloadManagerWidget               myDownloadManagerWidget;
+        QScopedPointer<QWebEngineProfile>   myOtrProfile;
 
 }; // end class Browser
 #endif // BROWSER_H

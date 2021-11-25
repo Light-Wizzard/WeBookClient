@@ -126,8 +126,8 @@ if [ -d "${REPO_ROOT}/qml" ]; then
     export QML_SOURCES_PATHS="${REPO_ROOT}/qml";
 fi
 # MY_RELEASE_FOLDER="";
-#
-EXTRA_QT_PLUGINS=xml;webenginewidgets
+# ;webenginewidgets
+EXTRA_QT_PLUGINS=xml
 #
 # export UPDATE_INFORMATION="zsync|https://github.com/${APPVEYOR_REPO_NAME}/${MY_RELEASE_FOLDER}/${MY_BIN_PRO_RES_NAME}-latest.AppImage.zsync"
 #

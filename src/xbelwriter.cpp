@@ -47,15 +47,7 @@
 ** $QT_END_LICENSE$
 **
 ****************************************************************************/
-
-#include <QtWidgets>
-
 #include "xbelwriter.h"
-#include "XbelTreeReader.h"
-
-static inline QString yesValue()     { return QStringLiteral("yes"); }
-static inline QString noValue()      { return QStringLiteral("no"); }
-static inline QString titleElement() { return QStringLiteral("title"); }
 
 /*****************************************************************************/
 /**

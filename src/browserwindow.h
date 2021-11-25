@@ -114,6 +114,7 @@ class BrowserWindow : public QMainWindow
         #endif
         //
         void onBookmarkUrl();
+        void onSetHelpTab();
 
     private slots:
         void handleNewWindowTriggered();

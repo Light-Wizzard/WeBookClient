@@ -1,6 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>bookmarks.xbel</file>
+        <file alias="Help_en.md">help/Help_en.md</file>
         <file alias="AppLogoColor.png">images/AppLogoColor.png</file>
         <file alias="ninja.png">images/ninja.png</file>
         <file alias="dialog-error.png">images/dialog-error.png</file>
@@ -17,6 +18,5 @@
         <file alias="handshake.png">images/handshake.png</file>
         <file alias="logo.png">images/logo.png</file>
         <file alias="addressbook.png">images/addressbook.png</file>
-        <file>bookmarks.xbel</file>        
     </qresource>
 </RCC>

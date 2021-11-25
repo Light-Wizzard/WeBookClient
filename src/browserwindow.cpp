@@ -369,7 +369,7 @@ QMenu *BrowserWindow::createWindowMenu(TabWidget *tabWidget)
 QMenu *BrowserWindow::createHelpMenu()
 {
     QMenu *helpMenu = new QMenu(tr("&Help"));
-    helpMenu->addAction(tr("About &Qt"), qApp, QApplication::aboutQt);
+    helpMenu->addAction(tr("About &Qt"), this, &BrowserWindow::onSetHelpTab);
     return helpMenu;
 }
 /*****************************************************************************/
@@ -626,6 +626,21 @@ void BrowserWindow::onBookmarkUrl()
         {
             myTabWidget->setCurrentIndex(myTabWidget->getBookmarkTab());
         }
+    }
+}
+/*****************************************************************************/
+/**
+ * @brief BrowserWindow::onSetHelpTab
+ */
+void BrowserWindow::onSetHelpTab()
+{
+    if (myTabWidget->getHelpTab() == -1)
+    {
+        myTabWidget->createHelpTab("qrc:Help_en.md");
+    }
+    else
+    {
+        myTabWidget->setCurrentIndex(myTabWidget->getHelpTab());
     }
 }
 /******************************* End of File *********************************/

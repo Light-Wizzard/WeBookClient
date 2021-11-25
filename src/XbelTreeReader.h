@@ -53,6 +53,7 @@
 
 #include <QIcon>
 #include <QXmlStreamReader>
+#include <QtWidgets>
 
 QT_BEGIN_NAMESPACE
 class QTreeWidget;
@@ -74,8 +75,8 @@ class XbelTreeReader
         QString errorString() const;
 
         static inline QString versionAttribute() { return QStringLiteral("version"); }
-        static inline QString hrefAttribute() { return QStringLiteral("href"); }
-        static inline QString foldedAttribute() { return QStringLiteral("folded"); }
+        static inline QString hrefAttribute()    { return QStringLiteral("href"); }
+        static inline QString foldedAttribute()  { return QStringLiteral("folded"); }
 
     private:
         void readXBEL();
@@ -87,10 +88,10 @@ class XbelTreeReader
         QTreeWidgetItem *createChildItem(QTreeWidgetItem *item);
 
         QXmlStreamReader xml;
-        QTreeWidget *treeWidget;
+        QTreeWidget     *treeWidget;
 
-        QIcon folderIcon;
-        QIcon bookmarkIcon;
+        QIcon           folderIcon;
+        QIcon           bookmarkIcon;
 }; // end class XbelTreeReader
 #endif
 /******************************* End of File *********************************/

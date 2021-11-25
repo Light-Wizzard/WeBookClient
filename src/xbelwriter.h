@@ -52,6 +52,8 @@
 #define XBELWRITER_H
 
 #include <QXmlStreamWriter>
+#include <QtWidgets>
+#include "XbelTreeReader.h"
 
 QT_BEGIN_NAMESPACE
 class QTreeWidget;
@@ -67,6 +69,9 @@ class XbelWriter
     public:
         explicit XbelWriter(const QTreeWidget *treeWidget);
         bool writeFile(QIODevice *device);
+        static inline QString yesValue()     { return QStringLiteral("yes"); }
+        static inline QString noValue()      { return QStringLiteral("no"); }
+        static inline QString titleElement() { return QStringLiteral("title"); }
 
     private:
         void writeItem(const QTreeWidgetItem *item);

@@ -54,6 +54,7 @@
 #include <QTabWidget>
 #include <QWebEnginePage>
 #include "BookmarkView.h"
+#include "HelpTab.h"
 
 QT_BEGIN_NAMESPACE
 class QUrl;
@@ -74,6 +75,7 @@ class TabWidget : public QTabWidget
 
         WebView *currentWebView() const;
         int getBookmarkTab();
+        int getHelpTab();
 
     signals:
         // current tab/page signals
@@ -92,6 +94,9 @@ class TabWidget : public QTabWidget
         // current tab/page slots
         void setUrl(const QUrl &url);
         void triggerWebPageAction(QWebEnginePage::WebAction action);
+        //
+        void createHelpTab(const QString &thisSource);
+        HelpTab *createBackgroundHelpTab();
         //
         WebView *createTab();
         WebView *createBackgroundTab();
@@ -116,9 +121,10 @@ class TabWidget : public QTabWidget
         WebView *webView(int index) const;
         void     setupView(WebView *webView);
         //
-        QMenu             *myMenuWidget;
-        QWebEngineProfile *myProfile;
-        int myBookmarkTab = -1;
+        QMenu              *myMenuWidget;
+        QWebEngineProfile  *myProfile;
+        int                 myBookmarkTab = -1;
+        int                 myHelpTab     = -1;
 
 }; // end class TabWidget
 #endif // TABWIDGET_H

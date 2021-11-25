@@ -11,6 +11,7 @@ CONFIG += c++17
 HEADERS += \
     src/BookmarkMenu.h \
     src/BookmarkView.h \
+    src/HelpTab.h \
     src/TreeWidgetView.h \
     src/XbelMenuReader.h \
     src/XbelTreeReader.h \
@@ -27,6 +28,7 @@ HEADERS += \
 SOURCES += \
     src/BookmarkMenu.cpp \
     src/BookmarkView.cpp \
+    src/HelpTab.cpp \
     src/TreeWidgetView.cpp \
     src/XbelMenuReader.cpp \
     src/XbelTreeReader.cpp \

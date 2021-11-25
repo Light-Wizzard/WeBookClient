@@ -234,6 +234,53 @@ int TabWidget::getBookmarkTab()
 }
 /*****************************************************************************/
 /**
+ * @brief TabWidget::getHelpTab
+ * @return
+ */
+int TabWidget::getHelpTab()
+{
+    return myHelpTab;
+}
+/*****************************************************************************/
+/**
+ * @brief TabWidget::createHelpTab
+ * @param thisSource
+ */
+void TabWidget::createHelpTab(const QString &thisSource)
+{
+    if (myHelpTab == -1)
+    {
+        HelpTab *myHelpView = createBackgroundHelpTab();
+        if (!thisSource.isEmpty()) { myHelpView->setPageSource(thisSource); }
+        setCurrentWidget(myHelpView);
+    }
+    else
+    {
+        setCurrentIndex(getHelpTab());
+    }
+}
+/*****************************************************************************/
+/**
+ * @brief TabWidget::createBackgroundHelpTab
+ * @return
+ */
+HelpTab *TabWidget::createBackgroundHelpTab()
+{
+    HelpTab *myHelpView = new HelpTab(this);
+    if (myHelpView->getPageSource().isEmpty())
+    {
+        myHelpView->setPageSource("qrc:Help_en.md");
+    }
+    int index = addTab(myHelpView, tr("Help"));
+    setTabIcon(index, myHelpView->favIcon());
+    // Workaround for QTBUG-61770
+    myHelpView->resize(currentWidget()->size());
+    myHelpView->show();
+    myHelpTab = index;
+    return myHelpView;
+}
+/*****************************************************************************/
+/**
  * @brief TabWidget::createBookmarkTabAdd
  * @param thisLink
  * @return
