@@ -103,10 +103,13 @@ if [[ "$PLATFORM" == "x64" ]]; then
 fi
 #
 if [ "${SHOW_PATH}" -eq 1 ]; then echo "PATH=$PATH"; fi
-
+# cmake
 declare -gx DESTDIR;
 DESTDIR=AppDir;
-
+# qmake
+declare -gx INSTALL_ROOT;
+INSTALL_ROOT=AppDir;
+#
 if [ "${MY_MAKE}" == "qmake" ]; then
     echo "qmake build";
     qmake "${REPO_ROOT}";
@@ -121,6 +124,11 @@ else
     make -j"$(nproc)";
     make install DESTDIR=AppDir
 fi
+echo "AppDir";
+ls -las;
+echo "/AppDir";
+ls -las /AppDir;
+
 #
 # now, build AppImage using linuxdeploy and linuxdeploy-plugin-qt
 # download linuxdeploy and its Qt plugin
