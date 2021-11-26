@@ -14,7 +14,7 @@ if [[ "$MY_UPGRADE_OS" = "true" ]]; then sudo apt-get upgrade -qqy; fi
 sudo apt install -qqy build-essential software-properties-common zlib1g-dev;
 sudo apt install -qqy mesa-common-dev libgl1-mesa-dev;
 sudo apt install -qqy flex bison gperf nodejs npm;
-sudo apt install -qqy x11-xserver-utils
+sudo apt install -qqy x11-xserver-utils xfonts-100dpi xfonts-scalable
 sudo apt install -qqy cmake ninja-build openssl
 sudo apt install -qqy fontconfig x11-xkb-utils xkb-data xserver-xorg-input-mouse xserver-xorg-input-kbd;
 #sudo apt install -qqy yasm git checkinstall pkg-config;
@@ -30,7 +30,7 @@ sudo apt install -qqy fontconfig x11-xkb-utils xkb-data xserver-xorg-input-mouse
 #sudo apt install -qqy x264 v4l-utils libprotobuf-dev protobuf-compiler libgoogle-glog-dev libgflags-dev libgphoto2-dev libeigen3-dev;
 sudo apt install -qqy postgresql postgresql-contrib mysql-server libsqliteodbc unixodbc libfbclient2 freetds-bin sqlite3 libsqlite3-dev libsqlite3-dev;
 sudo apt install -qqy default-libmysqlclient-dev firebird-dev libpq-dev
-sudo apt install -qqy libqt5webengine5;
+sudo apt install -qqy libqt5webengine5 qt5-qmltooling-plugins;
 sudo apt install -qqy qtbase5-dev libqt5svg5-dev;
 sudo apt install -qqy qt5-default || true;
 sudo apt install -qqy qtwebengine5-dev || export NO_QTWEBENGINE=true;

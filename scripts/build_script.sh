@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Last Update: 26 Auguest 2021
+# Last Update: 26 November 2021
 #
 # I use shell check, delete the ? to run it, but leave that in this files so it does not fail when it sees it.
 # shell?check -x scripts/build_script.sh
@@ -92,7 +92,7 @@ if [[ "$PLATFORM" == "x64" ]]; then
     # Check Qt
     if [ ! -d "${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin" ]; then echo "Qt x64 not found: ${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin"; fi
     if [ ! -f "${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin/qmake" ]; then echo "Qt x64 qmake not found: ${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin/qmake"; fi
-    if [[ "$MY_PYTHON_REQUIRED" = "true" ]]; then
+    if [[ "$MY_PYTHON_REQUIRED" == "true" ]]; then
         export PATH="/usr/lib/python${MY_PYTHON_VER}:/usr/include/python${MY_PYTHON_VER}:$PATH";
         # Check Python
         # source ${HOME}/venv${MY_PYTHON_VER}/bin/activate
@@ -110,15 +110,18 @@ DESTDIR=AppDir;
 if [ "${MY_MAKE}" == "qmake" ]; then
     echo "qmake build";
     qmake "${REPO_ROOT}";
+    # build project and install files into AppDir
+    make -j"$(nproc)";
+    make install INSTALL_ROOT=AppDir
 else
     echo "cmake build";
     # tired this without -DCMAKE_BUILD_TYPE=${CONFIGURATION} -DBUILD_SHARED_LIBS=OFF
     cmake "${REPO_ROOT}" -G "Unix Makefiles" -DBUILD_SHARED_LIBS:BOOL=ON -DCMAKE_BUILD_TYPE="${CONFIGURATION}" -DCMAKE_INSTALL_PREFIX="/usr";
+    # build project and install files into AppDir
+    make -j"$(nproc)";
+    make install DESTDIR=AppDir
 fi
 #
-# build project and install files into AppDir
-make -j"$(nproc)";
-make install DESTDIR=AppDir
 # now, build AppImage using linuxdeploy and linuxdeploy-plugin-qt
 # download linuxdeploy and its Qt plugin
 wget -c -nv https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage;
@@ -135,7 +138,9 @@ fi
 # ;webenginewidgets
 EXTRA_QT_PLUGINS=xml
 #
-# export UPDATE_INFORMATION="zsync|https://github.com/${APPVEYOR_REPO_NAME}/${MY_RELEASE_FOLDER}/${MY_BIN_PRO_RES_NAME}-latest.AppImage.zsync"
+if [[ "$MY_ZSYNC_UPDATE" == "true" ]]; then
+    export UPDATE_INFORMATION="zsync|https://github.com/${APPVEYOR_REPO_NAME}/releases/download/continuous/${MY_BIN_PRO_RES_NAME}-latest.AppImage.zsync"
+fi
 #
 # ${MY_BIN_PRO_RES_NAME}-$PLATFORM.AppImage
 #export TARGET_APPIMAGE="${MY_BIN_PRO_RES_NAME}-$PLATFORM.AppImage";

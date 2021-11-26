@@ -32,6 +32,7 @@ for:
     MY_OS: Ubuntu
     MY_COMPILER: "Qt"
     MY_MAKE: "qmake" # cmake
+    MY_ZSYNC_UPDATE: false
     MY_QT_VERSION: 5.15.2
     MY_VS_VERSION: 2019
     MY_QT_IF_VERSION: '4.1.1'
@@ -62,6 +63,7 @@ for:
     MY_OS: Windows # No Spaces
     MY_COMPILER: "Qt"
     MY_MAKE: "qmake" # cmake
+    MY_ZSYNC_UPDATE: false
     MY_QT_VERSION: 5.15.2
     MY_VS_VERSION: 2019
     MY_QT_MINGW32: mingw81_32
@@ -96,6 +98,7 @@ for:
     MY_OS: MacOs
     MY_COMPILER: "Qt"
     MY_MAKE: "qmake" # cmake
+    MY_ZSYNC_UPDATE: false
     MY_QT_VERSION: 5.15.2
     MY_VS_VERSION: 2019
     MY_QT_IF_VERSION: '4.1.1'
