@@ -15,6 +15,13 @@ if(${CMAKE_VERSION} VERSION_GREATER "3.12.0")
 else()
     add_compile_options(-D USE_SQL_FLAG)
 endif()
+# UI Files
+set(MY_UI_FILES
+    src/DownloadManagerWidget.ui
+    src/DownloadWidget.ui
+    src/certificateerrordialog.ui
+    src/passworddialog.ui
+)
 # TS Files
 set(MY_TS_FILES
     translations/${MY_TARGET}_ar.ts
@@ -82,6 +89,7 @@ set(PROJECT_SOURCES
     ${MY_TARGET}.qrc
     ${MY_TS_FILES}
     ${HEADERS}
+    ${MY_UI_FILES}
 )
 # All Qt includes
 #3DAnimation             Help                    QuickWidgets

@@ -64,8 +64,6 @@ BrowserWindow::BrowserWindow(QMenu *thisMenuWidget, Browser *browser, QWebEngine
     myBookmarkMenuWidgetView = new BookmarkMenu(myMenuWidget);
     // From bookmark menu
     QObject::connect(myBookmarkMenuWidgetView, &BookmarkMenu::handleOpenBookmark, myTabWidget, &TabWidget::setUrl);
-    // Delete handle
-    QObject::connect(myTabWidget, &TabWidget::handleDownloadTabClosed, this, &BrowserWindow::onDownloadTabClose);
     //
     if (!forDevTools)
     {
@@ -139,11 +137,24 @@ void BrowserWindow::closeEvent(QCloseEvent *event)
 {
     if (myTabWidget->count() > 1)
     {
-        int ret = QMessageBox::warning(this, tr("Confirm close"), tr("Are you sure you want to close the window ?\nThere are %1 tabs open.").arg(myTabWidget->count()), QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
-        if (ret == QMessageBox::No)
+        int theOpenFeatureTabs = 0;
+        if (myTabWidget->getBookmarkTab() != -1)
         {
-            event->ignore();
-            return;
+            theOpenFeatureTabs++;
+        }
+        if (myTabWidget->getHelpTab() != -1)
+        {
+            theOpenFeatureTabs++;
+        }
+        if (myTabWidget->getDownloadTab() != -1)
+        {
+            theOpenFeatureTabs++;
+        }
+        theOpenFeatureTabs = theOpenFeatureTabs - myTabWidget->count();
+        if (theOpenFeatureTabs > 1)
+        {
+            int ret = QMessageBox::warning(this, tr("Confirm close"), tr("Are you sure you want to close the window ?\nThere are %1 tabs open.").arg(myTabWidget->count()), QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
+            if (ret == QMessageBox::No) { event->ignore(); return; }
         }
     }
     event->accept();
@@ -634,7 +645,13 @@ void BrowserWindow::onBookmarkUrl()
         }
         else
         {
+            myTabWidget->getBookmarkView()->setUrl(myUrlLineEdit->text());
             myTabWidget->setCurrentIndex(myTabWidget->getBookmarkTab());
+            if (!myTabWidget->isTabVisible(myTabWidget->getBookmarkTab()))
+            {
+                myTabWidget->setTabVisible(myTabWidget->getBookmarkTab(), true);
+                myTabWidget->setCurrentIndex(myTabWidget->getBookmarkTab());
+            }
         }
     }
 }
@@ -650,22 +667,13 @@ void BrowserWindow::onSetHelpTab()
     }
     else
     {
+        myTabWidget->getHelpView()->setPageSource("qrc:Help_en.md");
         myTabWidget->setCurrentIndex(myTabWidget->getHelpTab());
+        if (!myTabWidget->isTabVisible(myTabWidget->getHelpTab()))
+        {
+            myTabWidget->setTabVisible(myTabWidget->getHelpTab(), true);
+        }
     }
-}
-/*****************************************************************************/
-/**
- * @brief BrowserWindow::onDownloadTabClose
- */
-void BrowserWindow::onDownloadTabClose()
-{
-    myDownloadManagerWidget = nullptr;
-//    if (myDownloadManagerWidget != nullptr)
-//    {
-//        //delete myDownloadManagerWidget; // this crashes
-//        myDownloadManagerWidget = nullptr;
-//    }
-
 }
 /*****************************************************************************/
 /**
@@ -675,7 +683,6 @@ void BrowserWindow::onDownloadTab()
 {
     if (myTabWidget->getDownloadTab() == -1)
     {
-        //myTabWidget->createDownloadTab(&myBrowser->downloadManagerWidget());
         myDownloadManagerWidget = &myBrowser->downloadManagerWidget();
         int index = myTabWidget->addTab(myDownloadManagerWidget, tr("Downloads"));
         myTabWidget->setTabIcon(index, myBrowser->downloadManagerWidget().favIcon());
@@ -688,6 +695,10 @@ void BrowserWindow::onDownloadTab()
     else
     {
         myTabWidget->setCurrentIndex(myTabWidget->getDownloadTab());
+        if (!myTabWidget->isTabVisible(myTabWidget->getDownloadTab()))
+        {
+            myTabWidget->setTabVisible(myTabWidget->getDownloadTab(), true);
+        }
     }
 }
 /******************************* End of File *********************************/

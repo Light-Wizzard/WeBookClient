@@ -1,5 +1,5 @@
-#ifndef HELPTAB_H
-#define HELPTAB_H
+#ifndef HELPVIEW_H
+#define HELPVIEW_H
 
 #include <QMainWindow>
 #include <QObject>
@@ -10,13 +10,13 @@
 
 /*****************************************************************************/
 /**
- * @brief The HelpTab class
+ * @brief The HelpView class
  */
-class HelpTab : public QWidget
+class HelpView : public QWidget
 {
         Q_OBJECT
     public:
-        explicit HelpTab(QWidget *parent = nullptr);
+        explicit HelpView(QWidget *parent = nullptr);
 
         void setPageSource(const QString &thisPageSource);
         QString getPageSource();
@@ -24,10 +24,10 @@ class HelpTab : public QWidget
         QIcon favIcon() const;
 
     private:
-        QVBoxLayout *verticalLayoutHelp;
+        QVBoxLayout    *verticalLayoutHelp;
         QTextBrowser   *myTextBrowser;
         QString         myPageSource;
 
-}; // end class HelpTab
-#endif // HELPTAB_H
+}; // end class HelpView
+#endif // HELPVIEW_H
 /******************************* End of File *********************************/

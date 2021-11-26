@@ -119,8 +119,6 @@ class BrowserWindow : public QMainWindow
         void onSetHelpTab();
         void onDownloadTab();
 
-        void onDownloadTabClose();
-
     private slots:
         void handleNewWindowTriggered();
         void handleNewIncognitoWindowTriggered();
@@ -143,21 +141,21 @@ class BrowserWindow : public QMainWindow
         QMenu    *createHelpMenu();
         QToolBar *createToolBar();
 
-        QMenu                   *myMenuWidget;
-        Browser                 *myBrowser;
-        QWebEngineProfile       *myProfile;
-        TabWidget               *myTabWidget;
-        QProgressBar            *myProgressBar;
-        TreeWidgetView          *myTreeWidget;
-        QAction                 *myHistoryBackAction;
-        QAction                 *myHistoryForwardAction;
-        QAction                 *myStopAction;
-        QAction                 *myReloadAction;
-        QAction                 *myStopReloadAction;
-        QAction                 *myFavAction;
-        QLineEdit               *myUrlLineEdit;
+        QMenu                   *myMenuWidget = nullptr;
+        Browser                 *myBrowser = nullptr;
+        QWebEngineProfile       *myProfile = nullptr;
+        TabWidget               *myTabWidget = nullptr;
+        QProgressBar            *myProgressBar = nullptr;
+        TreeWidgetView          *myTreeWidget = nullptr;
+        QAction                 *myHistoryBackAction = nullptr;
+        QAction                 *myHistoryForwardAction = nullptr;
+        QAction                 *myStopAction = nullptr;
+        QAction                 *myReloadAction = nullptr;
+        QAction                 *myStopReloadAction = nullptr;
+        QAction                 *myFavAction = nullptr;
+        QLineEdit               *myUrlLineEdit = nullptr;
         QString                  myLastSearch;
-        BookmarkMenu            *myBookmarkMenuWidgetView;
+        BookmarkMenu            *myBookmarkMenuWidgetView = nullptr;
         DownloadManagerWidget   *myDownloadManagerWidget = nullptr;
 
 }; // end class BrowserWindow

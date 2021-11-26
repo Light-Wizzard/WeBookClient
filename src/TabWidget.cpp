@@ -227,12 +227,30 @@ int TabWidget::getBookmarkTab()
 }
 /*****************************************************************************/
 /**
+ * @brief TabWidget::getBookmarkView
+ * @return
+ */
+BookmarkView *TabWidget::getBookmarkView()
+{
+    return myBookmarkView;
+}
+/*****************************************************************************/
+/**
  * @brief TabWidget::getHelpTab
  * @return
  */
 int TabWidget::getHelpTab()
 {
     return myHelpTab;
+}
+/*****************************************************************************/
+/**
+ * @brief TabWidget::getHelpView
+ * @return
+ */
+HelpView *TabWidget::getHelpView()
+{
+    return myHelpView;
 }
 /*****************************************************************************/
 /**
@@ -264,7 +282,7 @@ void TabWidget::createHelpTab(const QString &thisSource)
 {
     if (myHelpTab == -1)
     {
-        HelpTab *myHelpView = createBackgroundHelpTab();
+        myHelpView = createBackgroundHelpTab();
         if (!thisSource.isEmpty()) { myHelpView->setPageSource(thisSource); }
         setCurrentWidget(myHelpView);
     }
@@ -278,39 +296,19 @@ void TabWidget::createHelpTab(const QString &thisSource)
  * @brief TabWidget::createBackgroundHelpTab
  * @return
  */
-HelpTab *TabWidget::createBackgroundHelpTab()
+HelpView *TabWidget::createBackgroundHelpTab()
 {
-    HelpTab *myHelpView = new HelpTab(this);
+    HelpView *myHelpView = new HelpView(this);
     if (myHelpView->getPageSource().isEmpty())
     {
         myHelpView->setPageSource("qrc:Help_en.md");
     }
-    int index = addTab(myHelpView, tr("Help"));
-    setTabIcon(index, myHelpView->favIcon());
+    myHelpTab = addTab(myHelpView, tr("Help"));
+    setTabIcon(myHelpTab, myHelpView->favIcon());
     // Workaround for QTBUG-61770
     myHelpView->resize(currentWidget()->size());
     myHelpView->show();
-    myHelpTab = index;
     return myHelpView;
-}
-/*****************************************************************************/
-/**
- * @brief TabWidget::createBookmarkTabAdd
- * @param thisLink
- * @return
- */
-void TabWidget::createBookmarkTabAdd(const QString &thisLink)
-{
-    if (myBookmarkTab == -1)
-    {
-        BookmarkView *myBookmarkView = createBackgroundBookmarkTab();
-        if (!thisLink.isEmpty()) { myBookmarkView->setUrl(thisLink); }
-        setCurrentWidget(myBookmarkView);
-    }
-    else
-    {
-        setCurrentIndex(getBookmarkTab());
-    }
 }
 /*****************************************************************************/
 /**
@@ -323,18 +321,36 @@ void TabWidget::createBookmarkTab()
 }
 /*****************************************************************************/
 /**
+ * @brief TabWidget::createBookmarkTabAdd
+ * @param thisLink
+ * @return
+ */
+void TabWidget::createBookmarkTabAdd(const QString &thisLink)
+{
+    if (myBookmarkTab == -1)
+    {
+        myBookmarkView = createBackgroundBookmarkTab();
+        if (!thisLink.isEmpty()) { myBookmarkView->setUrl(thisLink); }
+        setCurrentWidget(myBookmarkView);
+    }
+    else
+    {
+        setCurrentIndex(getBookmarkTab());
+    }
+}
+/*****************************************************************************/
+/**
  * @brief TabWidget::createBackgroundBookmarkTab
  * @return
  */
 BookmarkView *TabWidget::createBackgroundBookmarkTab()
 {
     BookmarkView *myBookmarkView = new BookmarkView(this);
-    int index = addTab(myBookmarkView, tr("Bookmarks"));
-    setTabIcon(index, myBookmarkView->favIcon());
+    myBookmarkTab = addTab(myBookmarkView, tr("Bookmarks"));
+    setTabIcon(myBookmarkTab, myBookmarkView->favIcon());
     // Workaround for QTBUG-61770
     myBookmarkView->resize(currentWidget()->size());
     myBookmarkView->show();
-    myBookmarkTab = index;
     return myBookmarkView;
 }
 /*****************************************************************************/
@@ -393,27 +409,15 @@ void TabWidget::closeTab(int thisIndex)
 {
     if (myBookmarkTab == thisIndex)
     {
-        setCurrentWidget(nullptr);
-        setTabIcon(myBookmarkTab, QIcon());
-        removeTab(thisIndex);
-        myBookmarkTab = -1;
-        return;
+        setTabVisible(thisIndex, false); return;
     }
     if (myHelpTab == thisIndex)
     {
-        setCurrentWidget(nullptr);
-        setTabIcon(myHelpTab, QIcon());
-        removeTab(thisIndex);
-        myHelpTab = -1;
-        return;
+        setTabVisible(thisIndex, false); return;
     }
     if (myDownloadTab == thisIndex)
     {
-        setCurrentWidget(nullptr);
-        setTabIcon(myDownloadTab, QIcon());
-        removeTab(thisIndex);
-        myDownloadTab = -1;
-        emit handleDownloadTabClosed();
+        setTabVisible(thisIndex, false);
         return;
     }
 

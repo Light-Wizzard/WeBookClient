@@ -1,11 +1,11 @@
-#include "HelpTab.h"
+#include "HelpView.h"
 
 /*****************************************************************************/
 /**
- * @brief HelpTab::HelpTab
+ * @brief HelpView::HelpView
  * @param parent
  */
-HelpTab::HelpTab(QWidget *parent) : QWidget(parent)
+HelpView::HelpView(QWidget *parent) : QWidget(parent)
 {
     setAttribute(Qt::WA_DeleteOnClose);
     setAttribute(Qt::WA_GroupLeader);
@@ -20,10 +20,10 @@ HelpTab::HelpTab(QWidget *parent) : QWidget(parent)
 }
 /*****************************************************************************/
 /**
- * @brief HelpTab::setPageSource
+ * @brief HelpView::setPageSource
  * @param thisPageSource
  */
-void HelpTab::setPageSource(const QString &thisPageSource)
+void HelpView::setPageSource(const QString &thisPageSource)
 {
     if (myPageSource != thisPageSource)
     {
@@ -37,19 +37,19 @@ void HelpTab::setPageSource(const QString &thisPageSource)
 }
 /*****************************************************************************/
 /**
- * @brief HelpTab::getPageSource
+ * @brief HelpView::getPageSource
  * @return
  */
-QString HelpTab::getPageSource()
+QString HelpView::getPageSource()
 {
     return myPageSource;
 }
 /*****************************************************************************/
 /**
- * @brief HelpTab::favIcon
+ * @brief HelpView::favIcon
  * @return
  */
-QIcon HelpTab::favIcon() const
+QIcon HelpView::favIcon() const
 {
     // FIXME icon
     static QIcon favIcon(QStringLiteral(":help.png"));

@@ -70,6 +70,7 @@ class DownloadWidget;
 /**
  * @brief The DownloadManagerWidget class Displays a list of downloads.
  */
+//class DownloadManagerWidget : public QWidget
 class DownloadManagerWidget final : public QWidget
 {
         Q_OBJECT
@@ -88,7 +89,8 @@ class DownloadManagerWidget final : public QWidget
     private:
         void add(DownloadWidget *downloadWidget);
         void remove(DownloadWidget *downloadWidget);
-        Ui::DownloadManagerWidget     *ui;                                 //!< \c ui                      @brief ui.
+        // UI
+        Ui::DownloadManagerWidget *ui = nullptr; //!< \c ui  @brief ui.
 
         int myNumDownloads;
 

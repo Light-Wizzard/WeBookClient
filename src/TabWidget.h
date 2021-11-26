@@ -60,7 +60,7 @@
 #include "WebPage.h"
 #include "WebView.h"
 #include "BookmarkView.h"
-#include "HelpTab.h"
+#include "HelpView.h"
 #include "Browser.h"
 
 QT_BEGIN_NAMESPACE
@@ -82,8 +82,13 @@ class TabWidget : public QTabWidget
         TabWidget(QMenu *thisMenuWidget, QWebEngineProfile *profile, QWidget *parent = nullptr);
 
         WebView *currentWebView() const;
+        // Bookmark Tab
         int getBookmarkTab();
+        BookmarkView *getBookmarkView();
+        // Help Tab
         int getHelpTab();
+        HelpView *getHelpView();
+        // Download Tab
         int getDownloadTab();
         void setDownloadTab(int thisDownloadTab);
 
@@ -99,7 +104,6 @@ class TabWidget : public QTabWidget
         #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
         void findTextFinished(const QWebEngineFindTextResult &result);
         #endif
-        void handleDownloadTabClosed();
 
     public slots:
         // current tab/page slots
@@ -107,7 +111,7 @@ class TabWidget : public QTabWidget
         void triggerWebPageAction(QWebEnginePage::WebAction action);
         //
         void createHelpTab(const QString &thisSource);
-        HelpTab *createBackgroundHelpTab();
+        HelpView *createBackgroundHelpTab();
         //
         WebView *createTab();
         WebView *createBackgroundTab();
@@ -137,6 +141,8 @@ class TabWidget : public QTabWidget
         int                 myBookmarkTab = -1;
         int                 myHelpTab     = -1;
         int                 myDownloadTab = -1;
+        BookmarkView       *myBookmarkView;
+        HelpView           *myHelpView;
 
 }; // end class TabWidget
 #endif // TABWIDGET_H

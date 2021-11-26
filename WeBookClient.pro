@@ -15,7 +15,7 @@ HEADERS += \
     src/BrowserWindow.h \
     src/DownloadManagerWidget.h \
     src/DownloadWidget.h \
-    src/HelpTab.h \
+    src/HelpView.h \
     src/TabWidget.h \
     src/TreeWidgetView.h \
     src/WebPage.h \
@@ -32,7 +32,7 @@ SOURCES += \
     src/BrowserWindow.cpp \
     src/DownloadManagerWidget.cpp \
     src/DownloadWidget.cpp \
-    src/HelpTab.cpp \
+    src/HelpView.cpp \
     src/TabWidget.cpp \
     src/TreeWidgetView.cpp \
     src/WebPage.cpp \
