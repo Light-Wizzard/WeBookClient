@@ -115,20 +115,21 @@ if [ "${MY_MAKE}" == "qmake" ]; then
     qmake "${REPO_ROOT}";
     # build project and install files into AppDir
     make -j"$(nproc)";
-    make install INSTALL_ROOT=AppDir
+    make INSTALL_ROOT=AppDir install
 else
     echo "cmake build";
     # tired this without -DCMAKE_BUILD_TYPE=${CONFIGURATION} -DBUILD_SHARED_LIBS=OFF
     cmake "${REPO_ROOT}" -G "Unix Makefiles" -DBUILD_SHARED_LIBS:BOOL=ON -DCMAKE_BUILD_TYPE="${CONFIGURATION}" -DCMAKE_INSTALL_PREFIX="/usr";
     # build project and install files into AppDir
     make -j"$(nproc)";
-    make install DESTDIR=AppDir
+    make DESTDIR=AppDir install
 fi
 echo "AppDir";
 ls -las;
 echo "/AppDir";
-ls -las /AppDir;
-
+if [ -d AppDir ]; then
+    ls -las AppDir;
+fi
 #
 # now, build AppImage using linuxdeploy and linuxdeploy-plugin-qt
 # download linuxdeploy and its Qt plugin
