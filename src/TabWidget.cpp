@@ -81,6 +81,21 @@ TabWidget::TabWidget(QMenu *thisMenuWidget, QWebEngineProfile *profile, QWidget 
         icon->setPixmap(pixmap.scaledToHeight(tabBar->height()));
         setStyleSheet(QStringLiteral("QTabWidget::tab-bar { left: %1px; }").arg(icon->width()));
     }
+    addFeatureTabs();
+}
+/*****************************************************************************/
+/**
+ * @brief TabWidget::~TabWidget
+ */
+TabWidget::~TabWidget()
+{
+    //for (int i = 0; i < count(); ++i) { removeTab(i); }
+//    removeTab(getBookmarkTab());
+//    removeTab(getHelpTab());
+//    removeTab(getDownloadTab());
+//    delete myBookmarkView;
+//    delete myHelpView;
+//    delete myDownloadManagerWidget;
 }
 /*****************************************************************************/
 /**
@@ -275,6 +290,15 @@ void TabWidget::setDownloadTab(int thisDownloadTab)
 }
 /*****************************************************************************/
 /**
+ * @brief TabWidget::addFeatureTabs
+ */
+void TabWidget::addFeatureTabs()
+{
+    myHelpView = createBackgroundHelpTab();
+    myBookmarkView = createBackgroundBookmarkTab();
+}
+/*****************************************************************************/
+/**
  * @brief TabWidget::createHelpTab
  * @param thisSource
  */
@@ -284,10 +308,15 @@ void TabWidget::createHelpTab(const QString &thisSource)
     {
         myHelpView = createBackgroundHelpTab();
         if (!thisSource.isEmpty()) { myHelpView->setPageSource(thisSource); }
-        setCurrentWidget(myHelpView);
+        //setCurrentWidget(myHelpView);
     }
     else
     {
+        if (!thisSource.isEmpty()) { myHelpView->setPageSource(thisSource); }
+        if (!isTabVisible(getHelpTab()))
+        {
+            setTabVisible(getHelpTab(), true);
+        }
         setCurrentIndex(getHelpTab());
     }
 }
@@ -303,12 +332,43 @@ HelpView *TabWidget::createBackgroundHelpTab()
     {
         myHelpView->setPageSource("qrc:Help_en.md");
     }
+    setUpdatesEnabled(false);
     myHelpTab = addTab(myHelpView, tr("Help"));
+    setTabVisible(getHelpTab(), false);
     setTabIcon(myHelpTab, myHelpView->favIcon());
     // Workaround for QTBUG-61770
     myHelpView->resize(currentWidget()->size());
-    myHelpView->show();
+    //myHelpView->show();
+    setUpdatesEnabled(true);
     return myHelpView;
+}
+/*****************************************************************************/
+/**
+ * @brief TabWidget::createDownloadTab
+ * @param thisSource
+ */
+void TabWidget::createDownloadTab(DownloadManagerWidget *thisDownloadManagerWidget)
+{
+    if (myDownloadTab == -1)
+    {
+        myDownloadManagerWidget = thisDownloadManagerWidget;
+        setUpdatesEnabled(false);
+        setDownloadTab(addTab(myDownloadManagerWidget, tr("Downloads")));
+        setTabVisible(getDownloadTab(), false);
+        setTabIcon(getDownloadTab(), myDownloadManagerWidget->favIcon());
+        // Workaround for QTBUG-61770
+        myDownloadManagerWidget->resize(currentWidget()->size());
+        //setCurrentWidget(myDownloadManagerWidget);
+        setUpdatesEnabled(true);
+    }
+    else
+    {
+        if (!isTabVisible(getDownloadTab()))
+        {
+            setTabVisible(getDownloadTab(), true);
+        }
+        setCurrentIndex(getHelpTab());
+    }
 }
 /*****************************************************************************/
 /**
@@ -331,10 +391,14 @@ void TabWidget::createBookmarkTabAdd(const QString &thisLink)
     {
         myBookmarkView = createBackgroundBookmarkTab();
         if (!thisLink.isEmpty()) { myBookmarkView->setUrl(thisLink); }
-        setCurrentWidget(myBookmarkView);
+        //setCurrentWidget(myBookmarkView);
     }
     else
     {
+        if (!isTabVisible(getBookmarkTab()))
+        {
+            setTabVisible(getBookmarkTab(), true);
+        }
         setCurrentIndex(getBookmarkTab());
     }
 }
@@ -346,11 +410,14 @@ void TabWidget::createBookmarkTabAdd(const QString &thisLink)
 BookmarkView *TabWidget::createBackgroundBookmarkTab()
 {
     BookmarkView *myBookmarkView = new BookmarkView(this);
+    setUpdatesEnabled(false);
     myBookmarkTab = addTab(myBookmarkView, tr("Bookmarks"));
+    setTabVisible(getBookmarkTab(), false);
     setTabIcon(myBookmarkTab, myBookmarkView->favIcon());
     // Workaround for QTBUG-61770
     myBookmarkView->resize(currentWidget()->size());
-    myBookmarkView->show();
+    //myBookmarkView->show();
+    setUpdatesEnabled(true);
     return myBookmarkView;
 }
 /*****************************************************************************/
@@ -371,6 +438,9 @@ WebView *TabWidget::createTab()
  */
 WebView *TabWidget::createBackgroundTab()
 {
+    /*
+     * I need to make a pool of tabs
+    */
     WebView *webView = new WebView;
     WebPage *webPage = new WebPage(myProfile, webView);
     webView->setPage(webPage);
@@ -399,6 +469,31 @@ void TabWidget::closeOtherTabs(int index)
 {
     for (int i = count() - 1; i > index; --i) { closeTab(i); }
     for (int i = index - 1; i >= 0; --i)      { closeTab(i); }
+}
+/*****************************************************************************/
+/**
+ * @brief TabWidget::closeAllTabs
+ */
+void TabWidget::closeAllTabs()
+{
+    setCurrentIndex(getDownloadTab());
+    setTabIcon(getDownloadTab(), QIcon());
+    setCurrentWidget(nullptr);
+    for (int i = 0; i < count(); ++i)
+    {
+        removeTab(i);
+    }
+//    myBookmarkView = nullptr;
+//    myHelpView = nullptr;
+    myDownloadManagerWidget = nullptr;
+    //for (int i = 0; i < count(); ++i) { removeTab(i); }
+//    removeTab(getBookmarkTab());
+//    removeTab(getHelpTab());
+//    removeTab(getDownloadTab());
+    delete myBookmarkView;
+    delete myHelpView;
+//    delete myDownloadManagerWidget;
+
 }
 /*****************************************************************************/
 /**

@@ -51,7 +51,7 @@
 #ifndef DOWNLOADWIDGET_H
 #define DOWNLOADWIDGET_H
 
-#include "ui_downloadwidget.h"
+#include "ui_DownloadWidget.h"
 
 #include <QFrame>
 #include <QElapsedTimer>

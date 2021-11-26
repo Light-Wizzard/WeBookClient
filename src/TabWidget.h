@@ -80,7 +80,8 @@ class TabWidget : public QTabWidget
 
     public:
         TabWidget(QMenu *thisMenuWidget, QWebEngineProfile *profile, QWidget *parent = nullptr);
-
+        ~TabWidget();
+        //
         WebView *currentWebView() const;
         // Bookmark Tab
         int getBookmarkTab();
@@ -92,6 +93,9 @@ class TabWidget : public QTabWidget
         int getDownloadTab();
         void setDownloadTab(int thisDownloadTab);
 
+        void addFeatureTabs();
+
+        void closeAllTabs();
     signals:
         // current tab/page signals
         void linkHovered(const QString &thisLink);
@@ -109,16 +113,18 @@ class TabWidget : public QTabWidget
         // current tab/page slots
         void setUrl(const QUrl &url);
         void triggerWebPageAction(QWebEnginePage::WebAction action);
-        //
-        void createHelpTab(const QString &thisSource);
-        HelpView *createBackgroundHelpTab();
-        //
+        // Web Page Tab
         WebView *createTab();
         WebView *createBackgroundTab();
-        //
+        // Help Tab
+        void createHelpTab(const QString &thisSource);
+        HelpView *createBackgroundHelpTab();
+        // Bookmark Tab
         void createBookmarkTab();
         void createBookmarkTabAdd(const QString &thisLink);
         BookmarkView *createBackgroundBookmarkTab();
+        // Download Tab
+        void createDownloadTab(DownloadManagerWidget *thisDownloadManagerWidget);
         // Tabs
         void closeTab(int thisIndex);
         void nextTab();
@@ -136,14 +142,15 @@ class TabWidget : public QTabWidget
         WebView *webView(int index) const;
         void     setupView(WebView *webView);
         //
-        QMenu              *myMenuWidget;
-        QWebEngineProfile  *myProfile;
-        int                 myBookmarkTab = -1;
-        int                 myHelpTab     = -1;
-        int                 myDownloadTab = -1;
-        BookmarkView       *myBookmarkView;
-        HelpView           *myHelpView;
-
+        QMenu                   *myMenuWidget;
+        QWebEngineProfile       *myProfile;
+        // Tabs myBookmarkView myHelpView myDownloadManagerWidget
+        BookmarkView            *myBookmarkView = nullptr;
+        int                      myBookmarkTab = -1;
+        HelpView                *myHelpView = nullptr;
+        int                      myHelpTab     = -1;
+        DownloadManagerWidget   *myDownloadManagerWidget = nullptr;
+        int                      myDownloadTab = -1;
 }; // end class TabWidget
 #endif // TABWIDGET_H
 /******************************* End of File *********************************/

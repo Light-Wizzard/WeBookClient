@@ -119,14 +119,8 @@ BrowserWindow::BrowserWindow(QMenu *thisMenuWidget, Browser *browser, QWebEngine
     }
 
     handleWebViewTitleChanged(QString());
+    onDownloadTab();
     myTabWidget->createTab();
-}
-/*****************************************************************************/
-/**
- * @brief BrowserWindow::~BrowserWindow
- */
-BrowserWindow::~BrowserWindow()
-{
 }
 /*****************************************************************************/
 /**
@@ -141,14 +135,17 @@ void BrowserWindow::closeEvent(QCloseEvent *event)
         if (myTabWidget->getBookmarkTab() != -1)
         {
             theOpenFeatureTabs++;
+            //myTabWidget->removeTab(myTabWidget->getBookmarkTab());
         }
         if (myTabWidget->getHelpTab() != -1)
         {
             theOpenFeatureTabs++;
+            //myTabWidget->removeTab(myTabWidget->getHelpTab());
         }
         if (myTabWidget->getDownloadTab() != -1)
         {
             theOpenFeatureTabs++;
+            //myTabWidget->removeTab(myTabWidget->getDownloadTab());
         }
         theOpenFeatureTabs = theOpenFeatureTabs - myTabWidget->count();
         if (theOpenFeatureTabs > 1)
@@ -156,6 +153,7 @@ void BrowserWindow::closeEvent(QCloseEvent *event)
             int ret = QMessageBox::warning(this, tr("Confirm close"), tr("Are you sure you want to close the window ?\nThere are %1 tabs open.").arg(myTabWidget->count()), QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
             if (ret == QMessageBox::No) { event->ignore(); return; }
         }
+        myTabWidget->closeAllTabs();
     }
     event->accept();
     deleteLater();
@@ -683,14 +681,7 @@ void BrowserWindow::onDownloadTab()
 {
     if (myTabWidget->getDownloadTab() == -1)
     {
-        myDownloadManagerWidget = &myBrowser->downloadManagerWidget();
-        int index = myTabWidget->addTab(myDownloadManagerWidget, tr("Downloads"));
-        myTabWidget->setTabIcon(index, myBrowser->downloadManagerWidget().favIcon());
-        myTabWidget->setDownloadTab(index);
-        // Workaround for QTBUG-61770
-        myBrowser->downloadManagerWidget().resize(myTabWidget->currentWidget()->size());
-        myBrowser->downloadManagerWidget().show();
-        myTabWidget->setCurrentWidget(myDownloadManagerWidget);
+        myTabWidget->createDownloadTab(&myBrowser->downloadManagerWidget());
     }
     else
     {

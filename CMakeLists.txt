@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10.2)
+cmake_minimum_required(VERSION 3.16.2)
 # I tried to put stuff you need to exit at the top
 project(WeBookClient VERSION 0.1.0.0 DESCRIPTION "WeBookClient" LANGUAGES C CXX)
 # Set this to your URL
@@ -58,7 +58,7 @@ set(HEADERS
     src/BrowserWindow.h
     src/DownloadManagerWidget.h
     src/DownloadWidget.h
-    src/HelpTab.h
+    src/HelpView.h
     src/TabWidget.h
     src/TreeWidgetView.h
     src/WebPage.h
@@ -76,7 +76,7 @@ set(PROJECT_SOURCES
     src/BrowserWindow.cpp
     src/DownloadManagerWidget.cpp
     src/DownloadWidget.cpp
-    src/HelpTab.cpp
+    src/HelpView.cpp
     src/TabWidget.cpp
     src/TreeWidgetView.cpp
     src/WebPage.cpp
@@ -87,9 +87,8 @@ set(PROJECT_SOURCES
     src/XbelTreeWriter.cpp
     src/main.cpp
     ${MY_TARGET}.qrc
-    ${MY_TS_FILES}
+    #${MY_TS_FILES}
     ${HEADERS}
-    ${MY_UI_FILES}
 )
 # All Qt includes
 #3DAnimation             Help                    QuickWidgets
@@ -157,7 +156,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     set_property(TARGET ${MY_TARGET} APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/android)
     # For more information, see https://doc.qt.io/qt-6/qt-add-executable.html#target-creation
 
-    qt_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${MY_TS_FILES})
+    #qt_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${MY_TS_FILES})
 else()
     if(ANDROID)
         add_library(${MY_TARGET} SHARED ${PROJECT_SOURCES})
@@ -167,7 +166,7 @@ else()
         add_executable(${MY_TARGET} ${PROJECT_SOURCES})
     endif()
 
-    qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${MY_TS_FILES})
+    #qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${MY_TS_FILES})
 endif()
 # Set Definitions and Library
 target_compile_definitions(${MY_TARGET} PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
@@ -221,7 +220,7 @@ endfunction()
 set(MY_TS_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 set(MY_SOURCE_LOOKUP_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 # Generate Tralations
-generate_translations(${MY_TARGET} "${MY_TS_DIR}" "${MY_TS_FILES}" "${MY_SOURCE_LOOKUP_DIR}")
+#generate_translations(${MY_TARGET} "${MY_TS_DIR}" "${MY_TS_FILES}" "${MY_SOURCE_LOOKUP_DIR}")
 # Install QM files if not APPLE
 if(UNIX AND NOT APPLE)
     install(FILES ${MY_QM_FILES} DESTINATION ${CMAKE_SOURCE_DIR}/translations)

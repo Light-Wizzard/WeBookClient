@@ -65,11 +65,10 @@ DownloadManagerWidget::DownloadManagerWidget(QWidget *parent) : QWidget(parent),
 /*****************************************************************************/
 /**
  * @brief DownloadManagerWidget::~DownloadManagerWidget
- *
  */
 DownloadManagerWidget::~DownloadManagerWidget()
 {
-    //delete ui;
+    delete ui;
 }
 /*****************************************************************************/
 /**

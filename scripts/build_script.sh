@@ -103,12 +103,18 @@ if [[ "$PLATFORM" == "x64" ]]; then
 fi
 #
 if [ "${SHOW_PATH}" -eq 1 ]; then echo "PATH=$PATH"; fi
-#
-echo "cmake build";
+
 declare -gx DESTDIR;
 DESTDIR=AppDir;
-# tired this without -DCMAKE_BUILD_TYPE=${CONFIGURATION} -DBUILD_SHARED_LIBS=OFF
-cmake "${REPO_ROOT}" -G "Unix Makefiles" -DBUILD_SHARED_LIBS:BOOL=ON -DCMAKE_BUILD_TYPE="${CONFIGURATION}" -DCMAKE_INSTALL_PREFIX="/usr";
+
+if [ "${MY_MAKE}" == "qmake" ]; then
+    echo "qmake build";
+    qmake "${REPO_ROOT}";
+else
+    echo "cmake build";
+    # tired this without -DCMAKE_BUILD_TYPE=${CONFIGURATION} -DBUILD_SHARED_LIBS=OFF
+    cmake "${REPO_ROOT}" -G "Unix Makefiles" -DBUILD_SHARED_LIBS:BOOL=ON -DCMAKE_BUILD_TYPE="${CONFIGURATION}" -DCMAKE_INSTALL_PREFIX="/usr";
+fi
 #
 # build project and install files into AppDir
 make -j"$(nproc)";
@@ -120,7 +126,7 @@ wget -c -nv https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/downlo
 # make them executable
 chmod +x linuxdeploy*.AppImage;
 # export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${HOME}/Qt/5.15.2/gcc_64/lib:AppDir";
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${HOME}/Qt/${MY_QT_VERSION}/gcc_64/lib:AppDir";
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${HOME}/Qt/${MY_QT_VERSION}/gcc_64/lib:${REPO_ROOT}/build/AppDir/usr/lib/:AppDir";
 # make sure Qt plugin finds QML sources so it can deploy the imported files
 if [ -d "${REPO_ROOT}/qml" ]; then
     export QML_SOURCES_PATHS="${REPO_ROOT}/qml";

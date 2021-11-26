@@ -100,7 +100,6 @@ class BrowserWindow : public QMainWindow
 
     public:
         BrowserWindow(QMenu *thisMenuWidget, Browser *browser, QWebEngineProfile *profile, bool forDevTools = false);
-        ~BrowserWindow();
         //
         QSize sizeHint() const override;
         TabWidget *tabWidget() const;
@@ -156,7 +155,6 @@ class BrowserWindow : public QMainWindow
         QLineEdit               *myUrlLineEdit = nullptr;
         QString                  myLastSearch;
         BookmarkMenu            *myBookmarkMenuWidgetView = nullptr;
-        DownloadManagerWidget   *myDownloadManagerWidget = nullptr;
 
 }; // end class BrowserWindow
 #endif // BROWSERWINDOW_H

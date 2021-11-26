@@ -51,7 +51,7 @@
 #ifndef DOWNLOADMANAGERWIDGET_H
 #define DOWNLOADMANAGERWIDGET_H
 
-#include "ui_downloadmanagerwidget.h"
+#include "ui_DownloadManagerWidget.h"
 
 #include <QWidget>
 #include <QFileDialog>
@@ -70,7 +70,6 @@ class DownloadWidget;
 /**
  * @brief The DownloadManagerWidget class Displays a list of downloads.
  */
-//class DownloadManagerWidget : public QWidget
 class DownloadManagerWidget final : public QWidget
 {
         Q_OBJECT
