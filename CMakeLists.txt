@@ -47,36 +47,38 @@ set(MY_QM_FILES
 set(HEADERS
     src/BookmarkMenu.h
     src/BookmarkView.h
+    src/Browser.h
+    src/BrowserWindow.h
+    src/DownloadManagerWidget.h
+    src/DownloadWidget.h
+    src/HelpTab.h
+    src/TabWidget.h
     src/TreeWidgetView.h
+    src/WebPage.h
+    src/WebPopupWindow.h
+    src/WebView.h
     src/XbelMenuReader.h
     src/XbelTreeReader.h
-    src/browser.h
-    src/browserwindow.h
-    src/downloadmanagerwidget.h
-    src/downloadwidget.h
-    src/tabwidget.h
-    src/webpage.h
-    src/webpopupwindow.h
-    src/webview.h
-    src/xbelwriter.h
+    src/XbelTreeWriter.h
 )
 # Source Files
 set(PROJECT_SOURCES
     src/BookmarkMenu.cpp
     src/BookmarkView.cpp
+    src/Browser.cpp
+    src/BrowserWindow.cpp
+    src/DownloadManagerWidget.cpp
+    src/DownloadWidget.cpp
+    src/HelpTab.cpp
+    src/TabWidget.cpp
     src/TreeWidgetView.cpp
+    src/WebPage.cpp
+    src/WebPopupWindow.cpp
+    src/WebView.cpp
     src/XbelMenuReader.cpp
     src/XbelTreeReader.cpp
-    src/browser.cpp
-    src/browserwindow.cpp
-    src/downloadmanagerwidget.cpp
-    src/downloadwidget.cpp
+    src/XbelTreeWriter.cpp
     src/main.cpp
-    src/tabwidget.cpp
-    src/webpage.cpp
-    src/webpopupwindow.cpp
-    src/webview.cpp
-    src/xbelwriter.cpp
     ${MY_TARGET}.qrc
     ${MY_TS_FILES}
     ${HEADERS}

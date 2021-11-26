@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2016 The Qt Company Ltd.
+** Copyright (C) 2017 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of the examples of the Qt Toolkit.
@@ -48,65 +48,86 @@
 **
 ****************************************************************************/
 
-#include "browser.h"
-#include "browserwindow.h"
+#include "DownloadManagerWidget.h"
+#include "Browser.h"
+#include "BrowserWindow.h"
+#include "DownloadWidget.h"
 
 /*****************************************************************************/
 /**
- * @brief Browser::Browser
+ * @brief DownloadManagerWidget::DownloadManagerWidget
+ * @param parent
  */
-Browser::Browser(QWidget *parent) : QWidget(parent)
+DownloadManagerWidget::DownloadManagerWidget(QWidget *parent) : QWidget(parent), ui(new Ui::DownloadManagerWidget), myNumDownloads(0)
 {
-    // Quit application if the download manager window is the only remaining window
-    myDownloadManagerWidget.setAttribute(Qt::WA_QuitOnClose, false);
-    //
-    QObject::connect(QWebEngineProfile::defaultProfile(), &QWebEngineProfile::downloadRequested, &myDownloadManagerWidget, &DownloadManagerWidget::downloadRequested);
+    ui->setupUi(this);
 }
 /*****************************************************************************/
 /**
- * @brief Browser::createWindow
- * @param offTheRecord
- * @return
+ * @brief DownloadManagerWidget::~DownloadManagerWidget
  */
-BrowserWindow *Browser::createWindow(bool offTheRecord)
+DownloadManagerWidget::~DownloadManagerWidget()
 {
-    if (offTheRecord && !myOtrProfile)
-    {
-        myOtrProfile.reset(new QWebEngineProfile);
-        QObject::connect(myOtrProfile.get(), &QWebEngineProfile::downloadRequested, &myDownloadManagerWidget, &DownloadManagerWidget::downloadRequested);
-    }
-    auto profile = offTheRecord ? myOtrProfile.get() : QWebEngineProfile::defaultProfile();
-    auto mainWindow = new BrowserWindow(createBookmarkMenu(), this, profile, false);
-    myBrowserWindows.append(mainWindow);
-    QObject::connect(mainWindow, &QObject::destroyed, this, [this, mainWindow]() { myBrowserWindows.removeOne(mainWindow); });
-    mainWindow->show();
-    return mainWindow;
+    delete ui;
 }
 /*****************************************************************************/
 /**
- * @brief Browser::createDevToolsWindow
- * @return
+ * @brief DownloadManagerWidget::downloadRequested
+ * @param download
  */
-BrowserWindow *Browser::createDevToolsWindow()
+void DownloadManagerWidget::downloadRequested(QWebEngineDownloadItem *download)
 {
-    auto profile = QWebEngineProfile::defaultProfile();
-    auto mainWindow = new BrowserWindow(createBookmarkMenu(), this, profile, true);
-    myBrowserWindows.append(mainWindow);
-    QObject::connect(mainWindow, &QObject::destroyed, this, [this, mainWindow]() { myBrowserWindows.removeOne(mainWindow); });
-    mainWindow->show();
-    return mainWindow;
+    Q_ASSERT(download && download->state() == QWebEngineDownloadItem::DownloadRequested);
+
+    #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+    QString path = QFileDialog::getSaveFileName(this, tr("Save as"), QDir(download->downloadDirectory()).filePath(download->downloadFileName()));
+    #else
+    QString path = QFileDialog::getSaveFileName(this, tr("Save as"), download->path());
+    #endif
+    if (path.isEmpty()) { return; }
+
+    #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+    download->setDownloadDirectory(QFileInfo(path).path());
+    download->setDownloadFileName(QFileInfo(path).fileName());
+    #else
+    download->setPath(path);
+    #endif
+    download->accept();
+    add(new DownloadWidget(download));
+
+    show();
 }
 /*****************************************************************************/
 /**
- * @brief BrowserWindow::createBookmarkMenu
+ * @brief DownloadManagerWidget::add
+ * @param downloadWidget
+ */
+void DownloadManagerWidget::add(DownloadWidget *downloadWidget)
+{
+    connect(downloadWidget, &DownloadWidget::removeClicked, this, &DownloadManagerWidget::remove);
+    ui->layoutItems->insertWidget(0, downloadWidget, 0, Qt::AlignTop);
+    if (myNumDownloads++ == 0) { ui->labelZeroItems->hide(); }
+}
+/*****************************************************************************/
+/**
+ * @brief DownloadManagerWidget::remove
+ * @param downloadWidget
+ */
+void DownloadManagerWidget::remove(DownloadWidget *downloadWidget)
+{
+    ui->layoutItems->removeWidget(downloadWidget);
+    downloadWidget->deleteLater();
+    if (--myNumDownloads == 0) { ui->labelZeroItems->show(); }
+}
+/*****************************************************************************/
+/**
+ * @brief DownloadManagerWidget::favIcon
  * @return
  */
-QMenu *Browser::createBookmarkMenu()
+QIcon DownloadManagerWidget::favIcon() const
 {
-    auto *myMenuWidget = new QMenu(tr("&Bookmarks"));
-    //QAction *addAction = myMenuWidget->addAction(tr("&Add"));
-    //connect(addAction, &QAction::triggered, myTabWidget, &TabWidget::createBookmarkTab);
-    //myMenuWidget->addAction(tr("Add"), this, &TabWidget::createBookmarkTab);
-    return myMenuWidget;
+    // FIXME icon
+    static QIcon theFavIcon(QStringLiteral(":go-bottom.png"));
+    return theFavIcon;
 }
 /******************************* End of File *********************************/

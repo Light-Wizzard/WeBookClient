@@ -48,12 +48,12 @@
 **
 ****************************************************************************/
 
-#include "browser.h"
-#include "browserwindow.h"
-#include "tabwidget.h"
-#include "webpage.h"
-#include "webpopupwindow.h"
-#include "webview.h"
+#include "Browser.h"
+#include "BrowserWindow.h"
+#include "TabWidget.h"
+#include "WebPage.h"
+#include "WebPopupWindow.h"
+#include "WebView.h"
 #include <QContextMenuEvent>
 #include <QDebug>
 #include <QMenu>

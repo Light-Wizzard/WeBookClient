@@ -18,7 +18,7 @@
 #include <QMainWindow>
 
 #include "XbelMenuReader.h"
-#include "xbelwriter.h"
+#include "XbelTreeWriter.h"
 
 /*****************************************************************************/
 /**

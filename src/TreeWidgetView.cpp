@@ -320,7 +320,7 @@ void TreeWidgetView::save()
         QMessageBox::warning(this, tr("QXmlStream Bookmarks"), tr("Cannot write file %1:\n%2.").arg(QDir::toNativeSeparators(myBookmarkFile), file.errorString()));
         return;
     }
-    XbelWriter writer(this);
+    XbelTreeWriter writer(this);
     if (writer.writeFile(&file))
     {
         // FIXME

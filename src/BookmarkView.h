@@ -13,7 +13,7 @@
 #include <QtWidgets/QFormLayout>
 #include <QtWidgets/QHBoxLayout>
 #include "TreeWidgetView.h"
-#include "browserwindow.h"
+#include "BrowserWindow.h"
 
 /*****************************************************************************/
 /**

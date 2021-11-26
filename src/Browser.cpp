@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2017 The Qt Company Ltd.
+** Copyright (C) 2016 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of the examples of the Qt Toolkit.
@@ -47,44 +47,64 @@
 ** $QT_END_LICENSE$
 **
 ****************************************************************************/
+#include "Browser.h"
 
-#ifndef DOWNLOADWIDGET_H
-#define DOWNLOADWIDGET_H
-
-#include "ui_downloadwidget.h"
-
-#include <QFrame>
-#include <QElapsedTimer>
-
-QT_BEGIN_NAMESPACE
-class QWebEngineDownloadItem;
-QT_END_NAMESPACE
-
-// Displays one ongoing or finished download (QWebEngineDownloadItem).
 /*****************************************************************************/
 /**
- * @brief The DownloadWidget class
+ * @brief Browser::Browser
  */
-class DownloadWidget final : public QFrame, public Ui::DownloadWidget
+Browser::Browser(QWidget *parent) : QWidget(parent)
 {
-        Q_OBJECT
-    public:
-        // Precondition: The QWebEngineDownloadItem has been accepted.
-        explicit DownloadWidget(QWebEngineDownloadItem *download, QWidget *parent = nullptr);
-
-    signals:
-        // This signal is emitted when the user indicates that they want to remove
-        // this download from the downloads list.
-        void removeClicked(DownloadWidget *self);
-
-    private slots:
-        void updateWidget();
-
-    private:
-        QString withUnit(qreal bytes);
-
-        QWebEngineDownloadItem *myDownload;
-        QElapsedTimer           myTimeAdded;
-}; // end class DownloadWidget
-#endif // DOWNLOADWIDGET_H
+    // Quit application if the download manager window is the only remaining window
+    myDownloadManagerWidget.setAttribute(Qt::WA_QuitOnClose, false);
+    //
+    QObject::connect(QWebEngineProfile::defaultProfile(), &QWebEngineProfile::downloadRequested, &myDownloadManagerWidget, &DownloadManagerWidget::downloadRequested);
+}
+/*****************************************************************************/
+/**
+ * @brief Browser::createWindow
+ * @param offTheRecord
+ * @return
+ */
+BrowserWindow *Browser::createWindow(bool offTheRecord)
+{
+    if (offTheRecord && !myOtrProfile)
+    {
+        myOtrProfile.reset(new QWebEngineProfile);
+        QObject::connect(myOtrProfile.get(), &QWebEngineProfile::downloadRequested, &myDownloadManagerWidget, &DownloadManagerWidget::downloadRequested);
+    }
+    auto profile = offTheRecord ? myOtrProfile.get() : QWebEngineProfile::defaultProfile();
+    auto mainWindow = new BrowserWindow(createBookmarkMenu(), this, profile, false);
+    myBrowserWindows.append(mainWindow);
+    QObject::connect(mainWindow, &QObject::destroyed, this, [this, mainWindow]() { myBrowserWindows.removeOne(mainWindow); });
+    mainWindow->show();
+    return mainWindow;
+}
+/*****************************************************************************/
+/**
+ * @brief Browser::createDevToolsWindow
+ * @return
+ */
+BrowserWindow *Browser::createDevToolsWindow()
+{
+    auto profile = QWebEngineProfile::defaultProfile();
+    auto mainWindow = new BrowserWindow(createBookmarkMenu(), this, profile, true);
+    myBrowserWindows.append(mainWindow);
+    QObject::connect(mainWindow, &QObject::destroyed, this, [this, mainWindow]() { myBrowserWindows.removeOne(mainWindow); });
+    mainWindow->show();
+    return mainWindow;
+}
+/*****************************************************************************/
+/**
+ * @brief BrowserWindow::createBookmarkMenu
+ * @return
+ */
+QMenu *Browser::createBookmarkMenu()
+{
+    auto *myMenuWidget = new QMenu(tr("&Bookmarks"));
+    //QAction *addAction = myMenuWidget->addAction(tr("&Add"));
+    //connect(addAction, &QAction::triggered, myTabWidget, &TabWidget::createBookmarkTab);
+    //myMenuWidget->addAction(tr("Add"), this, &TabWidget::createBookmarkTab);
+    return myMenuWidget;
+}
 /******************************* End of File *********************************/

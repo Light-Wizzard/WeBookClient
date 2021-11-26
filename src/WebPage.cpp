@@ -48,12 +48,12 @@
 **
 ****************************************************************************/
 
-#include "browserwindow.h"
-#include "tabwidget.h"
+#include "BrowserWindow.h"
+#include "TabWidget.h"
 #include "ui_certificateerrordialog.h"
 #include "ui_passworddialog.h"
-#include "webpage.h"
-#include "webview.h"
+#include "WebPage.h"
+#include "WebView.h"
 #include <QAuthenticator>
 #include <QMessageBox>
 #include <QStyle>

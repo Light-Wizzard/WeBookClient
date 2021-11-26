@@ -48,9 +48,9 @@
 **
 ****************************************************************************/
 
-#include "browser.h"
-#include "browserwindow.h"
-#include "tabwidget.h"
+#include "Browser.h"
+#include "BrowserWindow.h"
+#include "TabWidget.h"
 #include <QApplication>
 #include <QWebEngineProfile>
 #include <QWebEngineSettings>

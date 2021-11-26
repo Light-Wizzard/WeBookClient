@@ -47,12 +47,7 @@
 ** $QT_END_LICENSE$
 **
 ****************************************************************************/
-
-#include "downloadwidget.h"
-
-#include <QFileInfo>
-#include <QUrl>
-#include <QWebEngineDownloadItem>
+#include "DownloadWidget.h"
 
 /*****************************************************************************/
 /**

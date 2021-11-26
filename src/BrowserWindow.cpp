@@ -47,7 +47,7 @@
 ** $QT_END_LICENSE$
 **
 ****************************************************************************/
-#include "browserwindow.h"
+#include "BrowserWindow.h"
 
 /*****************************************************************************/
 /**
@@ -64,7 +64,9 @@ BrowserWindow::BrowserWindow(QMenu *thisMenuWidget, Browser *browser, QWebEngine
     myBookmarkMenuWidgetView = new BookmarkMenu(myMenuWidget);
     // From bookmark menu
     QObject::connect(myBookmarkMenuWidgetView, &BookmarkMenu::handleOpenBookmark, myTabWidget, &TabWidget::setUrl);
-
+    // Delete handle
+    QObject::connect(myTabWidget, &TabWidget::handleDownloadTabClosed, this, &BrowserWindow::onDownloadTabClose);
+    //
     if (!forDevTools)
     {
         myProgressBar = new QProgressBar(this);
@@ -120,6 +122,13 @@ BrowserWindow::BrowserWindow(QMenu *thisMenuWidget, Browser *browser, QWebEngine
 
     handleWebViewTitleChanged(QString());
     myTabWidget->createTab();
+}
+/*****************************************************************************/
+/**
+ * @brief BrowserWindow::~BrowserWindow
+ */
+BrowserWindow::~BrowserWindow()
+{
 }
 /*****************************************************************************/
 /**
@@ -439,7 +448,8 @@ QToolBar *BrowserWindow::createToolBar()
     downloadsAction->setIcon(QIcon(QStringLiteral(":go-bottom.png")));
     downloadsAction->setToolTip(tr("Show downloads"));
     navigationBar->addAction(downloadsAction);
-    connect(downloadsAction, &QAction::triggered, [this]() { myBrowser->downloadManagerWidget().show(); });
+    //connect(downloadsAction, &QAction::triggered, [this]() { myBrowser->downloadManagerWidget().show(); });
+    connect(downloadsAction, &QAction::triggered, this, &BrowserWindow::onDownloadTab);
     //
     return navigationBar;
 }
@@ -641,6 +651,43 @@ void BrowserWindow::onSetHelpTab()
     else
     {
         myTabWidget->setCurrentIndex(myTabWidget->getHelpTab());
+    }
+}
+/*****************************************************************************/
+/**
+ * @brief BrowserWindow::onDownloadTabClose
+ */
+void BrowserWindow::onDownloadTabClose()
+{
+    myDownloadManagerWidget = nullptr;
+//    if (myDownloadManagerWidget != nullptr)
+//    {
+//        //delete myDownloadManagerWidget; // this crashes
+//        myDownloadManagerWidget = nullptr;
+//    }
+
+}
+/*****************************************************************************/
+/**
+ * @brief BrowserWindow::onDownloadTab
+ */
+void BrowserWindow::onDownloadTab()
+{
+    if (myTabWidget->getDownloadTab() == -1)
+    {
+        //myTabWidget->createDownloadTab(&myBrowser->downloadManagerWidget());
+        myDownloadManagerWidget = &myBrowser->downloadManagerWidget();
+        int index = myTabWidget->addTab(myDownloadManagerWidget, tr("Downloads"));
+        myTabWidget->setTabIcon(index, myBrowser->downloadManagerWidget().favIcon());
+        myTabWidget->setDownloadTab(index);
+        // Workaround for QTBUG-61770
+        myBrowser->downloadManagerWidget().resize(myTabWidget->currentWidget()->size());
+        myBrowser->downloadManagerWidget().show();
+        myTabWidget->setCurrentWidget(myDownloadManagerWidget);
+    }
+    else
+    {
+        myTabWidget->setCurrentIndex(myTabWidget->getDownloadTab());
     }
 }
 /******************************* End of File *********************************/

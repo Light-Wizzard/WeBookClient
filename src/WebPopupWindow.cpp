@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2017 The Qt Company Ltd.
+** Copyright (C) 2016 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of the examples of the Qt Toolkit.
@@ -48,72 +48,61 @@
 **
 ****************************************************************************/
 
-#include "downloadmanagerwidget.h"
-
-#include "browser.h"
-#include "browserwindow.h"
-#include "downloadwidget.h"
-
-#include <QFileDialog>
-#include <QDir>
-#include <QWebEngineDownloadItem>
+#include "WebPage.h"
+#include "WebPopupWindow.h"
+#include "WebView.h"
+#include <QAction>
+#include <QIcon>
+#include <QLineEdit>
+#include <QVBoxLayout>
+#include <QWindow>
 
 /*****************************************************************************/
 /**
- * @brief DownloadManagerWidget::DownloadManagerWidget
- * @param parent
+ * @brief WebPopupWindow::WebPopupWindow
+ * @param profile
  */
-DownloadManagerWidget::DownloadManagerWidget(QWidget *parent) : QWidget(parent), myNumDownloads(0)
+WebPopupWindow::WebPopupWindow(QWebEngineProfile *profile) : myUrlLineEdit(new QLineEdit(this)), myFavAction(new QAction(this)), myView(new WebView(this))
 {
-    setupUi(this);
+    setAttribute(Qt::WA_DeleteOnClose);
+    setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+
+    QVBoxLayout *layout = new QVBoxLayout;
+    layout->setContentsMargins(0, 0, 0, 0);
+    setLayout(layout);
+    layout->addWidget(myUrlLineEdit);
+    layout->addWidget(myView);
+
+    myView->setPage(new WebPage(profile, myView));
+    myView->setFocus();
+
+    myUrlLineEdit->setReadOnly(true);
+    myUrlLineEdit->addAction(myFavAction, QLineEdit::LeadingPosition);
+
+    connect(myView, &WebView::titleChanged, this, &QWidget::setWindowTitle);
+    connect(myView, &WebView::urlChanged, [this](const QUrl &url) { myUrlLineEdit->setText(url.toDisplayString()); });
+    connect(myView, &WebView::favIconChanged, myFavAction, &QAction::setIcon);
+    connect(myView->page(), &WebPage::geometryChangeRequested, this, &WebPopupWindow::handleGeometryChangeRequested);
+    connect(myView->page(), &WebPage::windowCloseRequested, this, &QWidget::close);
 }
 /*****************************************************************************/
 /**
- * @brief DownloadManagerWidget::downloadRequested
- * @param download
+ * @brief WebPopupWindow::view
+ * @return
  */
-void DownloadManagerWidget::downloadRequested(QWebEngineDownloadItem *download)
+WebView *WebPopupWindow::view() const
 {
-    Q_ASSERT(download && download->state() == QWebEngineDownloadItem::DownloadRequested);
-
-    #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
-    QString path = QFileDialog::getSaveFileName(this, tr("Save as"), QDir(download->downloadDirectory()).filePath(download->downloadFileName()));
-    #else
-    QString path = QFileDialog::getSaveFileName(this, tr("Save as"), download->path());
-    #endif
-    if (path.isEmpty()) { return; }
-
-    #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
-    download->setDownloadDirectory(QFileInfo(path).path());
-    download->setDownloadFileName(QFileInfo(path).fileName());
-    #else
-    download->setPath(path);
-    #endif
-    download->accept();
-    add(new DownloadWidget(download));
-
+    return myView;
+}
+/*****************************************************************************/
+/**
+ * @brief WebPopupWindow::handleGeometryChangeRequested
+ * @param newGeometry
+ */
+void WebPopupWindow::handleGeometryChangeRequested(const QRect &newGeometry)
+{
+    if (QWindow *window = windowHandle()) { setGeometry(newGeometry.marginsRemoved(window->frameMargins())); }
     show();
-}
-/*****************************************************************************/
-/**
- * @brief DownloadManagerWidget::add
- * @param downloadWidget
- */
-void DownloadManagerWidget::add(DownloadWidget *downloadWidget)
-{
-    connect(downloadWidget, &DownloadWidget::removeClicked, this, &DownloadManagerWidget::remove);
-    layoutItems->insertWidget(0, downloadWidget, 0, Qt::AlignTop);
-    if (myNumDownloads++ == 0) { labelZeroItems->hide(); }
-}
-/*****************************************************************************/
-/**
- * @brief DownloadManagerWidget::remove
- * @param downloadWidget
- */
-void DownloadManagerWidget::remove(DownloadWidget *downloadWidget)
-{
-    layoutItems->removeWidget(downloadWidget);
-    downloadWidget->deleteLater();
-    if (--myNumDownloads == 0) { labelZeroItems->show(); }
+    myView->setFocus();
 }
 /******************************* End of File *********************************/

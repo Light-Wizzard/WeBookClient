@@ -18,7 +18,7 @@
 #include <QMainWindow>
 
 #include "XbelTreeReader.h"
-#include "xbelwriter.h"
+#include "XbelTreeWriter.h"
 
 QT_BEGIN_NAMESPACE
 class QTreeWidget;

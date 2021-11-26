@@ -47,35 +47,66 @@
 ** $QT_END_LICENSE$
 **
 ****************************************************************************/
-
-#ifndef WEBPAGE_H
-#define WEBPAGE_H
-
-#include <QWebEnginePage>
-#include <QWebEngineRegisterProtocolHandlerRequest>
+#include "XbelTreeWriter.h"
 
 /*****************************************************************************/
 /**
- * @brief The WebPage class
+ * @brief XbelTreeWriter::XbelTreeWriter
+ * @param treeWidget
  */
-class WebPage : public QWebEnginePage
+XbelTreeWriter::XbelTreeWriter(const QTreeWidget *treeWidget) : myTreeWidget(treeWidget)
 {
-        Q_OBJECT
+    myXml.setAutoFormatting(true);
+}
+/*****************************************************************************/
+/**
+ * @brief XbelTreeWriter::writeFile
+ * @param device
+ * @return
+ */
+bool XbelTreeWriter::writeFile(QIODevice *device)
+{
+    myXml.setDevice(device);
 
-    public:
-        WebPage(QWebEngineProfile *profile, QObject *parent = nullptr);
+    myXml.writeStartDocument();
+    myXml.writeDTD(QStringLiteral("<!DOCTYPE xbel>"));
+    myXml.writeStartElement(QStringLiteral("xbel"));
+    myXml.writeAttribute(XbelTreeReader::versionAttribute(), QStringLiteral("1.0"));
+    for (int i = 0; i < myTreeWidget->topLevelItemCount(); ++i)
+       { writeItem(myTreeWidget->topLevelItem(i)); }
 
-    protected:
-        bool certificateError(const QWebEngineCertificateError &error) override;
-
-    private slots:
-        void handleAuthenticationRequired(const QUrl &requestUrl, QAuthenticator *auth);
-        void handleFeaturePermissionRequested(const QUrl &securityOrigin, Feature feature);
-        void handleProxyAuthenticationRequired(const QUrl &requestUrl, QAuthenticator *auth, const QString &proxyHost);
-        void handleRegisterProtocolHandlerRequested(QWebEngineRegisterProtocolHandlerRequest request);
-        #if !defined(QT_NO_SSL) || QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
-        void handleSelectClientCertificate(QWebEngineClientCertificateSelection clientCertSelection);
-        #endif
-}; // end class WebPage
-#endif // WEBPAGE_H
+    myXml.writeEndDocument();
+    return true;
+}
+/*****************************************************************************/
+/**
+ * @brief XbelTreeWriter::writeItem
+ * @param item
+ */
+void XbelTreeWriter::writeItem(const QTreeWidgetItem *item)
+{
+    QString tagName = item->data(0, Qt::UserRole).toString();
+    if (tagName == QLatin1String("folder"))
+    {
+        bool folded = !item->isExpanded();
+        myXml.writeStartElement(tagName);
+        myXml.writeAttribute(XbelTreeReader::foldedAttribute(), folded ? yesValue() : noValue());
+        myXml.writeTextElement(titleElement(), item->text(0));
+        for (int i = 0; i < item->childCount(); ++i)
+            { writeItem(item->child(i)); }
+        myXml.writeEndElement();
+    }
+    else if (tagName == QLatin1String("bookmark"))
+    {
+        myXml.writeStartElement(tagName);
+        if (!item->text(1).isEmpty())
+            { myXml.writeAttribute(XbelTreeReader::hrefAttribute(), item->text(1)); }
+        myXml.writeTextElement(titleElement(), item->text(0));
+        myXml.writeEndElement();
+    }
+    else if (tagName == QLatin1String("separator"))
+    {
+        myXml.writeEmptyElement(tagName);
+    }
+}
 /******************************* End of File *********************************/

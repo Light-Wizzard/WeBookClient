@@ -47,14 +47,7 @@
 ** $QT_END_LICENSE$
 **
 ****************************************************************************/
-
-#include "tabwidget.h"
-#include "webpage.h"
-#include "webview.h"
-#include <QLabel>
-#include <QMenu>
-#include <QTabBar>
-#include <QWebEngineProfile>
+#include "TabWidget.h"
 
 /*****************************************************************************/
 /**
@@ -243,6 +236,27 @@ int TabWidget::getHelpTab()
 }
 /*****************************************************************************/
 /**
+ * @brief TabWidget::getDownloadTab
+ * @return
+ */
+int TabWidget::getDownloadTab()
+{
+    return myDownloadTab;
+}
+/*****************************************************************************/
+/**
+ * @brief TabWidget::setDownloadTab
+ * @param thisDownloadTab
+ */
+void TabWidget::setDownloadTab(int thisDownloadTab)
+{
+    if (myDownloadTab != thisDownloadTab)
+    {
+        myDownloadTab = thisDownloadTab;
+    }
+}
+/*****************************************************************************/
+/**
  * @brief TabWidget::createHelpTab
  * @param thisSource
  */
@@ -373,27 +387,40 @@ void TabWidget::closeOtherTabs(int index)
 /*****************************************************************************/
 /**
  * @brief TabWidget::closeTab
- * @param index
+ * @param thisIndex must be greater then -1
  */
-void TabWidget::closeTab(int index)
+void TabWidget::closeTab(int thisIndex)
 {
-    if (myBookmarkTab == index)
+    if (myBookmarkTab == thisIndex)
     {
+        setCurrentWidget(nullptr);
+        setTabIcon(myBookmarkTab, QIcon());
+        removeTab(thisIndex);
         myBookmarkTab = -1;
-        removeTab(index);
         return;
     }
-    if (myHelpTab == index)
+    if (myHelpTab == thisIndex)
     {
+        setCurrentWidget(nullptr);
+        setTabIcon(myHelpTab, QIcon());
+        removeTab(thisIndex);
         myHelpTab = -1;
-        removeTab(index);
+        return;
+    }
+    if (myDownloadTab == thisIndex)
+    {
+        setCurrentWidget(nullptr);
+        setTabIcon(myDownloadTab, QIcon());
+        removeTab(thisIndex);
+        myDownloadTab = -1;
+        emit handleDownloadTabClosed();
         return;
     }
 
-    if (WebView *view = webView(index))
+    if (WebView *view = webView(thisIndex))
     {
         bool hasFocus = view->hasFocus();
-        removeTab(index);
+        removeTab(thisIndex);
         if (hasFocus && count() > 0) { currentWebView()->setFocus(); }
         if (count() == 0) { createTab(); }
         view->deleteLater();
