@@ -69,6 +69,7 @@ TRANSLATIONS += translations/WeBookClient_ar.ts \
                 translations/WeBookClient_ru.ts \
                 translations/WeBookClient_sv.ts \
                 translations/WeBookClient_zh_CN.ts
+
 DISTFILES += bookmarks.xbel README.md \
     .appveyor.yml \
     CMakeLists.txt \
@@ -78,9 +79,10 @@ DISTFILES += bookmarks.xbel README.md \
     scripts/install.ps1 \
     scripts/install.sh \
     scripts/install_mac.sh \
+    scripts/test.sh \
     scripts/testPS.ps1 \
     scripts/upload.sh
 
 # install
-#target.path = $$[QT_INSTALL_EXAMPLES]/webenginewidgets/simplebrowser
-#INSTALLS += target
+target.path = /usr/bin
+INSTALLS += target

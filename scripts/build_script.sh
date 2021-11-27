@@ -29,7 +29,7 @@ if [ -z "${MY_BIN_PRO_RES_NAME+x}" ]; then
     if [ "${EXIT_ON_UNDEFINED}" -eq 1 ]; then exit 1; fi
 fi
 # APPVEYOR_REPO_NAME should always have your GITHUB_USERNAME as the first part / GITHUB_PROJECT, so I split them to use later.
-if [ -z "${GITHUB_USERNAME+x}" ] || [ -z "${GITHUB_PROJECT}" ]; then
+if [ -z "${GITHUB_USERNAME+x}" ] || [ -z "${GITHUB_PROJECT+x}" ]; then
     OLD_IFS="$IFS"; IFS='/'; read -ra repo_parts <<< "$APPVEYOR_REPO_NAME"; IFS="$OLD_IFS";
     declare -x GITHUB_PROJECT;
     GITHUB_USERNAME="${repo_parts[0]}";  GITHUB_PROJECT="${repo_parts[1]}";
@@ -115,8 +115,8 @@ if [ "${MY_MAKE}" == "qmake" ]; then
     qmake "${REPO_ROOT}";
     # build project and install files into AppDir
     make -j"$(nproc)";
-    #make INSTALL_ROOT=AppDir install
-    INSTALL_ROOT=AppDir make install
+    make INSTALL_ROOT=AppDir install
+    #INSTALL_ROOT=AppDir make install
 else
     echo "cmake build";
     # tired this without -DCMAKE_BUILD_TYPE=${CONFIGURATION} -DBUILD_SHARED_LIBS=OFF
@@ -126,8 +126,11 @@ else
     make DESTDIR=AppDir install
 fi
 echo "AppDir";
-ls -dlas */;
-if [ -d AppDir ]; then
+ls -dlas "$PWD/"*;
+echo "./AppDir";
+ls -las "$PWD/"**;
+
+if [ -d ./AppDir ]; then
     echo "/AppDir";
     ls -las AppDir;
 fi

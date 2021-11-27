@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Last Update: 26 Auguest 2021
+# Last Update: 26 November 2021
 #
 # shell?check -x scripts/install.sh
 #
