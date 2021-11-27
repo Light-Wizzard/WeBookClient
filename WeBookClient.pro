@@ -1,12 +1,9 @@
 TEMPLATE = app
 TARGET   = WeBookClient
-QT      += core gui xml webenginewidgets
-
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+QT      += core gui xml widgets webenginewidgets
 requires(qtConfig(filedialog))
 
 CONFIG += c++17
-
 
 HEADERS += \
     src/BookmarkMenu.h \
@@ -50,6 +47,7 @@ FORMS += \
     src/passworddialog.ui
 
 RESOURCES += WeBookClient.qrc
+
 CONFIG += localize_deployment
 SYMBIAN_SUPPORTED_LANGUAGES += zh_CN
 SYMBIAN_LANG.zh_CN = 31
@@ -84,6 +82,7 @@ DISTFILES += bookmarks.xbel README.md \
     scripts/upload.sh
 
 # install
-#target.path = /usr/bin
-target.path = /usr
+# this does not work, nor does it work without the below target.path = /usr
+target.path = /usr/bin
 INSTALLS += target
+###############################################################################
