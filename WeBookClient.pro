@@ -84,5 +84,6 @@ DISTFILES += bookmarks.xbel README.md \
     scripts/upload.sh
 
 # install
-target.path = /usr/bin
+#target.path = /usr/bin
+target.path = /usr
 INSTALLS += target
