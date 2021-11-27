@@ -6,7 +6,7 @@ var searchData=
   ['xbeltreereader_3',['XbelTreeReader',['../classXbelTreeReader.html',1,'XbelTreeReader'],['../classXbelTreeReader.html#ac55769865d9c2fe01cf2e589b7f78209',1,'XbelTreeReader::XbelTreeReader()']]],
   ['xbeltreereader_2ecpp_4',['XbelTreeReader.cpp',['../XbelTreeReader_8cpp.html',1,'']]],
   ['xbeltreereader_2eh_5',['XbelTreeReader.h',['../XbelTreeReader_8h.html',1,'']]],
-  ['xbelwriter_6',['XbelWriter',['../classXbelWriter.html',1,'XbelWriter'],['../classXbelWriter.html#a6e0f0aeda82977e74229a53fb8167981',1,'XbelWriter::XbelWriter()']]],
-  ['xbelwriter_2ecpp_7',['xbelwriter.cpp',['../xbelwriter_8cpp.html',1,'']]],
-  ['xbelwriter_2eh_8',['xbelwriter.h',['../xbelwriter_8h.html',1,'']]]
+  ['xbeltreewriter_6',['XbelTreeWriter',['../classXbelTreeWriter.html',1,'XbelTreeWriter'],['../classXbelTreeWriter.html#a93e0601d86c88790c7bee2bb54a674ea',1,'XbelTreeWriter::XbelTreeWriter()']]],
+  ['xbeltreewriter_2ecpp_7',['XbelTreeWriter.cpp',['../XbelTreeWriter_8cpp.html',1,'']]],
+  ['xbeltreewriter_2eh_8',['XbelTreeWriter.h',['../XbelTreeWriter_8h.html',1,'']]]
 ];

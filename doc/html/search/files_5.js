@@ -1,9 +1,9 @@
 var searchData=
 [
-  ['xbelmenureader_2ecpp_0',['XbelMenuReader.cpp',['../XbelMenuReader_8cpp.html',1,'']]],
-  ['xbelmenureader_2eh_1',['XbelMenuReader.h',['../XbelMenuReader_8h.html',1,'']]],
-  ['xbeltreereader_2ecpp_2',['XbelTreeReader.cpp',['../XbelTreeReader_8cpp.html',1,'']]],
-  ['xbeltreereader_2eh_3',['XbelTreeReader.h',['../XbelTreeReader_8h.html',1,'']]],
-  ['xbelwriter_2ecpp_4',['xbelwriter.cpp',['../xbelwriter_8cpp.html',1,'']]],
-  ['xbelwriter_2eh_5',['xbelwriter.h',['../xbelwriter_8h.html',1,'']]]
+  ['webpage_2ecpp_0',['WebPage.cpp',['../WebPage_8cpp.html',1,'']]],
+  ['webpage_2eh_1',['WebPage.h',['../WebPage_8h.html',1,'']]],
+  ['webpopupwindow_2ecpp_2',['WebPopupWindow.cpp',['../WebPopupWindow_8cpp.html',1,'']]],
+  ['webpopupwindow_2eh_3',['WebPopupWindow.h',['../WebPopupWindow_8h.html',1,'']]],
+  ['webview_2ecpp_4',['WebView.cpp',['../WebView_8cpp.html',1,'']]],
+  ['webview_2eh_5',['WebView.h',['../WebView_8h.html',1,'']]]
 ];

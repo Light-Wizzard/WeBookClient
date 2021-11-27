@@ -47,18 +47,17 @@
 ** $QT_END_LICENSE$
 **
 ****************************************************************************/
-
 #ifndef BROWSER_H
 #define BROWSER_H
 
 #include <QVector>
 #include <QWebEngineProfile>
 #include <QtWidgets>
+
 #include "DownloadManagerWidget.h"
 #include "BrowserWindow.h"
 
 class BrowserWindow;
-
 /*****************************************************************************/
 /**
  * @brief The Browser class
@@ -74,14 +73,14 @@ class Browser : public QWidget
         BrowserWindow *createWindow(bool offTheRecord = false);
         BrowserWindow *createDevToolsWindow();
         // download Manager
-        DownloadManagerWidget &downloadManagerWidget() { return myDownloadManagerWidget; }
+        QPointer<DownloadManagerWidget> downloadManagerWidget() { return myDownloadManagerWidget; }
         // Create Bookmark Menu
         QMenu *createBookmarkMenu();
 
     private:
-        QVector<BrowserWindow*>             myBrowserWindows;
-        DownloadManagerWidget               myDownloadManagerWidget;
-        QScopedPointer<QWebEngineProfile>   myOtrProfile;
+        QVector<BrowserWindow*>           myBrowserWindows;
+        QPointer<DownloadManagerWidget>   myDownloadManagerWidget;
+        QScopedPointer<QWebEngineProfile> myOtrProfile;
 
 }; // end class Browser
 #endif // BROWSER_H

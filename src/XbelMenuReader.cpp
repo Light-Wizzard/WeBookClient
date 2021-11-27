@@ -3,7 +3,8 @@
 /*****************************************************************************/
 /**
  * @brief XbelMenuReader::XbelMenuReader
- * @param MenuWidget (QObject *parent) : QObject(parent)
+ * @param thisMenuWidget
+ * @param parent
  */
 XbelMenuReader::XbelMenuReader(QMenu *thisMenuWidget, QObject *parent) : QObject(parent), myMenuWidget(thisMenuWidget)
 {

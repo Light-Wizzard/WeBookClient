@@ -97,14 +97,13 @@ class WebView;
 class BrowserWindow : public QMainWindow
 {
         Q_OBJECT
-
     public:
         BrowserWindow(QMenu *thisMenuWidget, Browser *browser, QWebEngineProfile *profile, bool forDevTools = false);
         //
         QSize sizeHint() const override;
         TabWidget *tabWidget() const;
-        WebView *currentTab() const;
-        Browser *browser() { return myBrowser; }
+        WebView   *currentTab() const;
+        Browser   *browser() { return myBrowser; }
 
     protected:
         void closeEvent(QCloseEvent *event) override;
@@ -139,22 +138,21 @@ class BrowserWindow : public QMainWindow
         QMenu    *createWindowMenu(TabWidget *tabWidget);
         QMenu    *createHelpMenu();
         QToolBar *createToolBar();
-
-        QMenu                   *myMenuWidget = nullptr;
-        Browser                 *myBrowser = nullptr;
-        QWebEngineProfile       *myProfile = nullptr;
-        TabWidget               *myTabWidget = nullptr;
-        QProgressBar            *myProgressBar = nullptr;
-        TreeWidgetView          *myTreeWidget = nullptr;
-        QAction                 *myHistoryBackAction = nullptr;
-        QAction                 *myHistoryForwardAction = nullptr;
-        QAction                 *myStopAction = nullptr;
-        QAction                 *myReloadAction = nullptr;
-        QAction                 *myStopReloadAction = nullptr;
-        QAction                 *myFavAction = nullptr;
-        QLineEdit               *myUrlLineEdit = nullptr;
-        QString                  myLastSearch;
-        BookmarkMenu            *myBookmarkMenuWidgetView = nullptr;
+        QMenu                   *myMenuWidget               = nullptr;
+        Browser                 *myBrowser                  = nullptr;
+        QWebEngineProfile       *myProfile                  = nullptr;
+        TabWidget               *myTabWidget                = nullptr;
+        QProgressBar            *myProgressBar              = nullptr;
+        TreeWidgetView          *myTreeWidget               = nullptr;
+        QAction                 *myHistoryBackAction        = nullptr;
+        QAction                 *myHistoryForwardAction     = nullptr;
+        QAction                 *myStopAction               = nullptr;
+        QAction                 *myReloadAction             = nullptr;
+        QAction                 *myStopReloadAction         = nullptr;
+        QAction                 *myFavAction                = nullptr;
+        QLineEdit               *myUrlLineEdit              = nullptr;
+        BookmarkMenu            *myBookmarkMenuWidgetView   = nullptr;
+        QString                  myLastSearch               = "";
 
 }; // end class BrowserWindow
 #endif // BROWSERWINDOW_H

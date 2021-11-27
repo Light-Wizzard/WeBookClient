@@ -94,7 +94,7 @@ $(document).ready(function(){initNavTree('classWebPopupWindow.html',''); initRes
 <p>The <a class="el" href="classWebPopupWindow.html" title="The WebPopupWindow class.">WebPopupWindow</a> class.  
  <a href="classWebPopupWindow.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="webpopupwindow_8h_source.html">webpopupwindow.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="WebPopupWindow_8h_source.html">WebPopupWindow.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for WebPopupWindow:</div>
 <div class="dyncontent">
@@ -116,7 +116,7 @@ Public Member Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >The <a class="el" href="classWebPopupWindow.html" title="The WebPopupWindow class.">WebPopupWindow</a> class. </p>
 
-<p class="definition">Definition at line <a class="el" href="webpopupwindow_8h_source.html#l00068">68</a> of file <a class="el" href="webpopupwindow_8h_source.html">webpopupwindow.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="WebPopupWindow_8h_source.html#l00068">68</a> of file <a class="el" href="WebPopupWindow_8h_source.html">WebPopupWindow.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ab0861a9725ecd7f30a53e1554f6fa994" name="ab0861a9725ecd7f30a53e1554f6fa994"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab0861a9725ecd7f30a53e1554f6fa994">&#9670;&nbsp;</a></span>WebPopupWindow()</h2>
@@ -171,7 +171,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."</p>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="webpopupwindow_8cpp_source.html#l00065">65</a> of file <a class="el" href="webpopupwindow_8cpp_source.html">webpopupwindow.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="WebPopupWindow_8cpp_source.html#l00065">65</a> of file <a class="el" href="WebPopupWindow_8cpp_source.html">WebPopupWindow.cpp</a>.</p>
 <div class="fragment"><div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>                                                         : myUrlLineEdit(<span class="keyword">new</span> QLineEdit(<span class="keyword">this</span>)), myFavAction(<span class="keyword">new</span> QAction(<span class="keyword">this</span>)), myView(<span class="keyword">new</span> <a class="code hl_class" href="classWebView.html">WebView</a>(<span class="keyword">this</span>))</div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>{</div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    setAttribute(Qt::WA_DeleteOnClose);</div>
@@ -195,10 +195,10 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."</p>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    connect(myView-&gt;page(), &amp;WebPage::geometryChangeRequested, <span class="keyword">this</span>, &amp;WebPopupWindow::handleGeometryChangeRequested);</div>
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    connect(myView-&gt;page(), &amp;WebPage::windowCloseRequested, <span class="keyword">this</span>, &amp;QWidget::close);</div>
 <div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>}</div>
-<div class="ttc" id="aclassWebPage_html"><div class="ttname"><a href="classWebPage.html">WebPage</a></div><div class="ttdoc">The WebPage class.</div><div class="ttdef"><b>Definition:</b> <a href="webpage_8h_source.html#l00061">webpage.h:62</a></div></div>
-<div class="ttc" id="aclassWebView_html"><div class="ttname"><a href="classWebView.html">WebView</a></div><div class="ttdoc">The WebView class.</div><div class="ttdef"><b>Definition:</b> <a href="webview_8h_source.html#l00063">webview.h:64</a></div></div>
+<div class="ttc" id="aclassWebPage_html"><div class="ttname"><a href="classWebPage.html">WebPage</a></div><div class="ttdoc">The WebPage class.</div><div class="ttdef"><b>Definition:</b> <a href="WebPage_8h_source.html#l00061">WebPage.h:62</a></div></div>
+<div class="ttc" id="aclassWebView_html"><div class="ttname"><a href="classWebView.html">WebView</a></div><div class="ttdoc">The WebView class.</div><div class="ttdef"><b>Definition:</b> <a href="WebView_8h_source.html#l00063">WebView.h:64</a></div></div>
 <div class="ttc" id="aclassWebView_html_a01d98d692c2824238b476d82221ec15a"><div class="ttname"><a href="classWebView.html#a01d98d692c2824238b476d82221ec15a">WebView::favIconChanged</a></div><div class="ttdeci">void favIconChanged(const QIcon &amp;icon)</div></div>
-<div class="ttc" id="aclassWebView_html_a8dc87cc35a3327fb5d21c44874eeb0c8"><div class="ttname"><a href="classWebView.html#a8dc87cc35a3327fb5d21c44874eeb0c8">WebView::setPage</a></div><div class="ttdeci">void setPage(WebPage *page)</div><div class="ttdoc">WebView::setPage.</div><div class="ttdef"><b>Definition:</b> <a href="webview_8cpp_source.html#l00102">webview.cpp:102</a></div></div>
+<div class="ttc" id="aclassWebView_html_a8dc87cc35a3327fb5d21c44874eeb0c8"><div class="ttname"><a href="classWebView.html#a8dc87cc35a3327fb5d21c44874eeb0c8">WebView::setPage</a></div><div class="ttdeci">void setPage(WebPage *page)</div><div class="ttdoc">WebView::setPage.</div><div class="ttdef"><b>Definition:</b> <a href="WebView_8cpp_source.html#l00102">WebView.cpp:102</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -239,7 +239,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."</p>
 <p><a class="el" href="classWebPopupWindow.html#aa73f40fa4d0fc2025c75b33d22a80179" title="WebPopupWindow::view.">WebPopupWindow::view</a>. </p>
 <dl class="section return"><dt>Returns</dt><dd></dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="webpopupwindow_8cpp_source.html#l00093">93</a> of file <a class="el" href="webpopupwindow_8cpp_source.html">webpopupwindow.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="WebPopupWindow_8cpp_source.html#l00093">93</a> of file <a class="el" href="WebPopupWindow_8cpp_source.html">WebPopupWindow.cpp</a>.</p>
 <div class="fragment"><div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>{</div>
 <div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    <span class="keywordflow">return</span> myView;</div>
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>}</div>
@@ -247,8 +247,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."</p>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>src/<a class="el" href="webpopupwindow_8h_source.html">webpopupwindow.h</a></li>
-<li>src/<a class="el" href="webpopupwindow_8cpp_source.html">webpopupwindow.cpp</a></li>
+<li>src/<a class="el" href="WebPopupWindow_8h_source.html">WebPopupWindow.h</a></li>
+<li>src/<a class="el" href="WebPopupWindow_8cpp_source.html">WebPopupWindow.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['webpage_0',['WebPage',['../classWebPage.html',1,'']]],
-  ['webpopupwindow_1',['WebPopupWindow',['../classWebPopupWindow.html',1,'']]],
-  ['webview_2',['WebView',['../classWebView.html',1,'']]]
+  ['tabwidget_0',['TabWidget',['../classTabWidget.html',1,'']]],
+  ['treewidgetview_1',['TreeWidgetView',['../classTreeWidgetView.html',1,'']]]
 ];

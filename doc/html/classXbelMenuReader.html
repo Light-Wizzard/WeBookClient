@@ -183,16 +183,17 @@ Static Public Member Functions</h2></td></tr>
 <p ><a class="el" href="classXbelMenuReader.html#a2d250224f945b0d964e14fed1fef45c8" title="Constructor.">XbelMenuReader::XbelMenuReader</a>.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">MenuWidget</td><td>(QObject *parent) : QObject(parent) </td></tr>
+    <tr><td class="paramname">thisMenuWidget</td><td></td></tr>
+    <tr><td class="paramname">parent</td><td></td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="XbelMenuReader_8cpp_source.html#l00008">8</a> of file <a class="el" href="XbelMenuReader_8cpp_source.html">XbelMenuReader.cpp</a>.</p>
-<div class="fragment"><div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>                                                                     : QObject(parent), myMenuWidget(thisMenuWidget)</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>{</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>}</div>
+<p class="definition">Definition at line <a class="el" href="XbelMenuReader_8cpp_source.html#l00009">9</a> of file <a class="el" href="XbelMenuReader_8cpp_source.html">XbelMenuReader.cpp</a>.</p>
+<div class="fragment"><div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>                                                                     : QObject(parent), myMenuWidget(thisMenuWidget)</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>{</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -213,10 +214,10 @@ Static Public Member Functions</h2></td></tr>
 
 <p><a class="el" href="classXbelMenuReader.html#af7a70be04381de733c91eecef0f7e7c8" title="XbelMenuReader::~XbelMenuReader.">XbelMenuReader::~XbelMenuReader</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="XbelMenuReader_8cpp_source.html#l00016">16</a> of file <a class="el" href="XbelMenuReader_8cpp_source.html">XbelMenuReader.cpp</a>.</p>
-<div class="fragment"><div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>{</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>}</div>
+<p class="definition">Definition at line <a class="el" href="XbelMenuReader_8cpp_source.html#l00017">17</a> of file <a class="el" href="XbelMenuReader_8cpp_source.html">XbelMenuReader.cpp</a>.</p>
+<div class="fragment"><div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>{</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -239,10 +240,10 @@ Static Public Member Functions</h2></td></tr>
 <p><a class="el" href="classXbelMenuReader.html#a561f177068f3d4c9a26c5980c8f3d05e" title="XbelMenuReader::errorString.">XbelMenuReader::errorString</a>. </p>
 <dl class="section return"><dt>Returns</dt><dd></dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="XbelMenuReader_8cpp_source.html#l00049">49</a> of file <a class="el" href="XbelMenuReader_8cpp_source.html">XbelMenuReader.cpp</a>.</p>
-<div class="fragment"><div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>{</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <span class="keywordflow">return</span> QObject::tr(<span class="stringliteral">&quot;%1\nLine %2, column %3&quot;</span>).arg(myXml.errorString()).arg(myXml.lineNumber()).arg(myXml.columnNumber());</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>}</div>
+<p class="definition">Definition at line <a class="el" href="XbelMenuReader_8cpp_source.html#l00050">50</a> of file <a class="el" href="XbelMenuReader_8cpp_source.html">XbelMenuReader.cpp</a>.</p>
+<div class="fragment"><div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>{</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="keywordflow">return</span> QObject::tr(<span class="stringliteral">&quot;%1\nLine %2, column %3&quot;</span>).arg(myXml.errorString()).arg(myXml.lineNumber()).arg(myXml.columnNumber());</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -360,11 +361,11 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="XbelMenuReader_8cpp_source.html#l00167">167</a> of file <a class="el" href="XbelMenuReader_8cpp_source.html">XbelMenuReader.cpp</a>.</p>
-<div class="fragment"><div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>{</div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>    qDebug() &lt;&lt; <span class="stringliteral">&quot;onOpenBookmark(&quot;</span> &lt;&lt; thisUrl &lt;&lt; <span class="stringliteral">&quot;)&quot;</span>;</div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>    emit <a class="code hl_signal" href="classXbelMenuReader.html#a02aa1fe9a55d975b52ed97299c48f724">handleOpenBookmark</a>(thisUrl);</div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>}</div>
+<p class="definition">Definition at line <a class="el" href="XbelMenuReader_8cpp_source.html#l00168">168</a> of file <a class="el" href="XbelMenuReader_8cpp_source.html">XbelMenuReader.cpp</a>.</p>
+<div class="fragment"><div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>{</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>    qDebug() &lt;&lt; <span class="stringliteral">&quot;onOpenBookmark(&quot;</span> &lt;&lt; thisUrl &lt;&lt; <span class="stringliteral">&quot;)&quot;</span>;</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>    emit <a class="code hl_signal" href="classXbelMenuReader.html#a02aa1fe9a55d975b52ed97299c48f724">handleOpenBookmark</a>(thisUrl);</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>}</div>
 <div class="ttc" id="aclassXbelMenuReader_html_a02aa1fe9a55d975b52ed97299c48f724"><div class="ttname"><a href="classXbelMenuReader.html#a02aa1fe9a55d975b52ed97299c48f724">XbelMenuReader::handleOpenBookmark</a></div><div class="ttdeci">void handleOpenBookmark(const QString &amp;thisUrl)</div></div>
 </div><!-- fragment -->
 </div>
@@ -394,24 +395,24 @@ Static Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd></dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="XbelMenuReader_8cpp_source.html#l00026">26</a> of file <a class="el" href="XbelMenuReader_8cpp_source.html">XbelMenuReader.cpp</a>.</p>
-<div class="fragment"><div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>{</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    myXml.setDevice(device);</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keywordflow">if</span> (myXml.readNextStartElement())</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    {</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        <span class="keywordflow">if</span> (myXml.name() == QLatin1String(<span class="stringliteral">&quot;xbel&quot;</span>) &amp;&amp; myXml.attributes().value(<a class="code hl_function" href="classXbelMenuReader.html#a8e86ae4d1ddf5694915356ac3d49407c">versionAttribute</a>()) == QLatin1String(<span class="stringliteral">&quot;1.0&quot;</span>))</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        {</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>            readXBEL();</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        }</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        <span class="keywordflow">else</span></div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        {</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>            myXml.raiseError(QObject::tr(<span class="stringliteral">&quot;The file is not an XBEL version 1.0 file.&quot;</span>));</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        }</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    }</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keywordflow">return</span> !myXml.error();</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>}</div>
+<p class="definition">Definition at line <a class="el" href="XbelMenuReader_8cpp_source.html#l00027">27</a> of file <a class="el" href="XbelMenuReader_8cpp_source.html">XbelMenuReader.cpp</a>.</p>
+<div class="fragment"><div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>{</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    myXml.setDevice(device);</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keywordflow">if</span> (myXml.readNextStartElement())</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    {</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        <span class="keywordflow">if</span> (myXml.name() == QLatin1String(<span class="stringliteral">&quot;xbel&quot;</span>) &amp;&amp; myXml.attributes().value(<a class="code hl_function" href="classXbelMenuReader.html#a8e86ae4d1ddf5694915356ac3d49407c">versionAttribute</a>()) == QLatin1String(<span class="stringliteral">&quot;1.0&quot;</span>))</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        {</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>            readXBEL();</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        }</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        {</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>            myXml.raiseError(QObject::tr(<span class="stringliteral">&quot;The file is not an XBEL version 1.0 file.&quot;</span>));</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        }</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    }</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keywordflow">return</span> !myXml.error();</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>}</div>
 <div class="ttc" id="aclassXbelMenuReader_html_a8e86ae4d1ddf5694915356ac3d49407c"><div class="ttname"><a href="classXbelMenuReader.html#a8e86ae4d1ddf5694915356ac3d49407c">XbelMenuReader::versionAttribute</a></div><div class="ttdeci">static QString versionAttribute()</div><div class="ttdef"><b>Definition:</b> <a href="XbelMenuReader_8h_source.html#l00032">XbelMenuReader.h:32</a></div></div>
 </div><!-- fragment -->
 </div>

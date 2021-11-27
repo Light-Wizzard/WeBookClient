@@ -92,10 +92,10 @@ $(document).ready(function(){initNavTree('classDownloadWidget.html',''); initRes
 </div><!--header-->
 <div class="contents">
 
-<p>The <a class="el" href="classDownloadWidget.html" title="The DownloadWidget class.">DownloadWidget</a> class.  
+<p>The <a class="el" href="classDownloadWidget.html" title="The DownloadWidget class Displays one ongoing or finished download (QWebEngineDownloadItem).">DownloadWidget</a> class Displays one ongoing or finished download (QWebEngineDownloadItem).  
  <a href="classDownloadWidget.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="downloadwidget_8h_source.html">downloadwidget.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="DownloadWidget_8h_source.html">DownloadWidget.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for DownloadWidget:</div>
 <div class="dyncontent">
@@ -115,9 +115,9 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ac40eeae959b3fb95e7d2f1261f8de4fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >The <a class="el" href="classDownloadWidget.html" title="The DownloadWidget class.">DownloadWidget</a> class. </p>
+<div class="textblock"><p >The <a class="el" href="classDownloadWidget.html" title="The DownloadWidget class Displays one ongoing or finished download (QWebEngineDownloadItem).">DownloadWidget</a> class Displays one ongoing or finished download (QWebEngineDownloadItem). </p>
 
-<p class="definition">Definition at line <a class="el" href="downloadwidget_8h_source.html#l00068">68</a> of file <a class="el" href="downloadwidget_8h_source.html">downloadwidget.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="DownloadWidget_8h_source.html#l00070">70</a> of file <a class="el" href="DownloadWidget_8h_source.html">DownloadWidget.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ac40eeae959b3fb95e7d2f1261f8de4fe" name="ac40eeae959b3fb95e7d2f1261f8de4fe"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac40eeae959b3fb95e7d2f1261f8de4fe">&#9670;&nbsp;</a></span>DownloadWidget()</h2>
@@ -191,27 +191,27 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."</p>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="downloadwidget_8cpp_source.html#l00063">63</a> of file <a class="el" href="downloadwidget_8cpp_source.html">downloadwidget.cpp</a>.</p>
-<div class="fragment"><div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>                                                                                : QFrame(parent), myDownload(download), myTimeAdded()</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>{</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    myTimeAdded.start();</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    setupUi(<span class="keyword">this</span>);</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="preprocessor">    #if QT_VERSION &gt;= QT_VERSION_CHECK(5, 14, 0)</span></div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    lableDstName-&gt;setText(myDownload-&gt;downloadFileName());</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="preprocessor">    #else</span></div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    lableDstName-&gt;setText(QFileInfo(myDownload-&gt;path()).fileName());</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="preprocessor">    #endif</span></div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    lableSrcUrl-&gt;setText(myDownload-&gt;url().toDisplayString());</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    connect(buttonCancel, &amp;QPushButton::clicked, [<span class="keyword">this</span>](<span class="keywordtype">bool</span>)</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    {</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        <span class="keywordflow">if</span> (myDownload-&gt;state() == QWebEngineDownloadItem::DownloadInProgress)  { myDownload-&gt;cancel(); }</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        <span class="keywordflow">else</span> { emit removeClicked(this); }</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    });</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    connect(myDownload, &amp;QWebEngineDownloadItem::downloadProgress, <span class="keyword">this</span>, &amp;DownloadWidget::updateWidget);</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    connect(myDownload, &amp;QWebEngineDownloadItem::stateChanged, <span class="keyword">this</span>, &amp;DownloadWidget::updateWidget);</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    updateWidget();</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>}</div>
+<p class="definition">Definition at line <a class="el" href="DownloadWidget_8cpp_source.html#l00058">58</a> of file <a class="el" href="DownloadWidget_8cpp_source.html">DownloadWidget.cpp</a>.</p>
+<div class="fragment"><div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>                                                                                : QFrame(parent), myDownload(download), myTimeAdded()</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>{</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    myTimeAdded.start();</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    setupUi(<span class="keyword">this</span>);</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="preprocessor">    #if QT_VERSION &gt;= QT_VERSION_CHECK(5, 14, 0)</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    lableDstName-&gt;setText(myDownload-&gt;downloadFileName());</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="preprocessor">    #else</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    lableDstName-&gt;setText(QFileInfo(myDownload-&gt;path()).fileName());</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="preprocessor">    #endif</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    lableSrcUrl-&gt;setText(myDownload-&gt;url().toDisplayString());</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    connect(buttonCancel, &amp;QPushButton::clicked, [<span class="keyword">this</span>](<span class="keywordtype">bool</span>)</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    {</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        <span class="keywordflow">if</span> (myDownload-&gt;state() == QWebEngineDownloadItem::DownloadInProgress)  { myDownload-&gt;cancel(); }</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        <span class="keywordflow">else</span> { emit removeClicked(this); }</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    });</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    connect(myDownload, &amp;QWebEngineDownloadItem::downloadProgress, <span class="keyword">this</span>, &amp;DownloadWidget::updateWidget);</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    connect(myDownload, &amp;QWebEngineDownloadItem::stateChanged, <span class="keyword">this</span>, &amp;DownloadWidget::updateWidget);</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    updateWidget();</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -243,8 +243,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."</p>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>src/<a class="el" href="downloadwidget_8h_source.html">downloadwidget.h</a></li>
-<li>src/<a class="el" href="downloadwidget_8cpp_source.html">downloadwidget.cpp</a></li>
+<li>src/<a class="el" href="DownloadWidget_8h_source.html">DownloadWidget.h</a></li>
+<li>src/<a class="el" href="DownloadWidget_8cpp_source.html">DownloadWidget.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

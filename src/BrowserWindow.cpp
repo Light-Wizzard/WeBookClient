@@ -48,10 +48,10 @@
 **
 ****************************************************************************/
 #include "BrowserWindow.h"
-
 /*****************************************************************************/
 /**
  * @brief BrowserWindow::BrowserWindow
+ * @param thisMenuWidget
  * @param browser
  * @param profile
  * @param forDevTools
@@ -60,7 +60,7 @@ BrowserWindow::BrowserWindow(QMenu *thisMenuWidget, Browser *browser, QWebEngine
 {
     setAttribute(Qt::WA_DeleteOnClose, true);
     setFocusPolicy(Qt::ClickFocus);
-
+    // Create Bookmark Menu
     myBookmarkMenuWidgetView = new BookmarkMenu(myMenuWidget);
     // From bookmark menu
     QObject::connect(myBookmarkMenuWidgetView, &BookmarkMenu::handleOpenBookmark, myTabWidget, &TabWidget::setUrl);
@@ -132,21 +132,9 @@ void BrowserWindow::closeEvent(QCloseEvent *event)
     if (myTabWidget->count() > 1)
     {
         int theOpenFeatureTabs = 0;
-        if (myTabWidget->getBookmarkTab() != -1)
-        {
-            theOpenFeatureTabs++;
-            //myTabWidget->removeTab(myTabWidget->getBookmarkTab());
-        }
-        if (myTabWidget->getHelpTab() != -1)
-        {
-            theOpenFeatureTabs++;
-            //myTabWidget->removeTab(myTabWidget->getHelpTab());
-        }
-        if (myTabWidget->getDownloadTab() != -1)
-        {
-            theOpenFeatureTabs++;
-            //myTabWidget->removeTab(myTabWidget->getDownloadTab());
-        }
+        if (myTabWidget->getBookmarkTab() != -1) { theOpenFeatureTabs++; }
+        if (myTabWidget->getHelpTab()     != -1) { theOpenFeatureTabs++; }
+        if (myTabWidget->getDownloadTab() != -1) { theOpenFeatureTabs++; }
         theOpenFeatureTabs = theOpenFeatureTabs - myTabWidget->count();
         if (theOpenFeatureTabs > 1)
         {
@@ -457,7 +445,6 @@ QToolBar *BrowserWindow::createToolBar()
     downloadsAction->setIcon(QIcon(QStringLiteral(":go-bottom.png")));
     downloadsAction->setToolTip(tr("Show downloads"));
     navigationBar->addAction(downloadsAction);
-    //connect(downloadsAction, &QAction::triggered, [this]() { myBrowser->downloadManagerWidget().show(); });
     connect(downloadsAction, &QAction::triggered, this, &BrowserWindow::onDownloadTab);
     //
     return navigationBar;
@@ -681,7 +668,7 @@ void BrowserWindow::onDownloadTab()
 {
     if (myTabWidget->getDownloadTab() == -1)
     {
-        myTabWidget->createDownloadTab(&myBrowser->downloadManagerWidget());
+        myTabWidget->createDownloadTab(myBrowser->downloadManagerWidget());
     }
     else
     {

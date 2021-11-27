@@ -90,9 +90,9 @@ $(document).ready(function(){initNavTree('main_8cpp.html',''); initResizable(); 
   <div class="headertitle"><div class="title">main.cpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="browser_8h_source.html">browser.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="browserwindow_8h_source.html">browserwindow.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="tabwidget_8h_source.html">tabwidget.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="Browser_8h_source.html">Browser.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="BrowserWindow_8h_source.html">BrowserWindow.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="TabWidget_8h_source.html">TabWidget.h</a>&quot;</code><br />
 <code>#include &lt;QApplication&gt;</code><br />
 <code>#include &lt;QWebEngineProfile&gt;</code><br />
 <code>#include &lt;QWebEngineSettings&gt;</code><br />
@@ -236,33 +236,36 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."</p>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);</div>
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);</div>
 <div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    <span class="comment">//</span></div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    QApplication theApplication(argc, argv);</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    theApplication.setWindowIcon(QIcon(QStringLiteral(<span class="stringliteral">&quot;:AppLogoColor.png&quot;</span>)));</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    <span class="comment">// Setup the Application for MyOrgSettings</span></div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    theApplication.setOrganizationName(theAppName);</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    theApplication.setApplicationName(theAppName);</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    theApplication.setApplicationDisplayName(theAppDisplayName);</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    theApplication.setApplicationVersion(<a class="code hl_define" href="main_8cpp.html#a1c6d5de492ac61ad29aec7aa9a436bbf">VERSION</a>);</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    <span class="comment">//</span></div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    QWebEngineSettings::defaultSettings()-&gt;setAttribute(QWebEngineSettings::PluginsEnabled, <span class="keyword">true</span>);</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span><span class="preprocessor">    #if QT_VERSION &gt;= QT_VERSION_CHECK(5, 13, 0)</span></div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    QWebEngineSettings::defaultSettings()-&gt;setAttribute(QWebEngineSettings::DnsPrefetchEnabled, <span class="keyword">true</span>);</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    QWebEngineProfile::defaultProfile()-&gt;setUseForGlobalCertificateVerification();</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="preprocessor">    #endif</span></div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    <span class="comment">//</span></div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    QUrl url = <a class="code hl_function" href="main_8cpp.html#ab8fc16f3f0739be5e275751bd9dabc09">commandLineUrlArgument</a>();</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    <span class="comment">//</span></div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    <a class="code hl_class" href="classBrowser.html">Browser</a> browser;</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    <a class="code hl_class" href="classBrowserWindow.html">BrowserWindow</a> *window = browser.<a class="code hl_function" href="classBrowser.html#a3a67c0a65d79c751da9167121953671a">createWindow</a>();</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    window-&gt;<a class="code hl_function" href="classBrowserWindow.html#a3c7a529031a97def4dc4905e64e0aa9f">tabWidget</a>()-&gt;<a class="code hl_slot" href="classTabWidget.html#ad33e7662394295fedc205e1b582a6de8">setUrl</a>(url);</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    <span class="keywordflow">return</span> theApplication.exec();</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>}</div>
-<div class="ttc" id="aclassBrowserWindow_html"><div class="ttname"><a href="classBrowserWindow.html">BrowserWindow</a></div><div class="ttdoc">The BrowserWindow class.</div><div class="ttdef"><b>Definition:</b> <a href="browserwindow_8h_source.html#l00097">browserwindow.h:98</a></div></div>
-<div class="ttc" id="aclassBrowserWindow_html_a3c7a529031a97def4dc4905e64e0aa9f"><div class="ttname"><a href="classBrowserWindow.html#a3c7a529031a97def4dc4905e64e0aa9f">BrowserWindow::tabWidget</a></div><div class="ttdeci">TabWidget * tabWidget() const</div><div class="ttdoc">BrowserWindow::tabWidget.</div><div class="ttdef"><b>Definition:</b> <a href="browserwindow_8cpp_source.html#l00537">browserwindow.cpp:537</a></div></div>
-<div class="ttc" id="aclassBrowser_html"><div class="ttname"><a href="classBrowser.html">Browser</a></div><div class="ttdoc">The Browser class.</div><div class="ttdef"><b>Definition:</b> <a href="browser_8h_source.html#l00066">browser.h:67</a></div></div>
-<div class="ttc" id="aclassBrowser_html_a3a67c0a65d79c751da9167121953671a"><div class="ttname"><a href="classBrowser.html#a3a67c0a65d79c751da9167121953671a">Browser::createWindow</a></div><div class="ttdeci">BrowserWindow * createWindow(bool offTheRecord=false)</div><div class="ttdoc">Browser::createWindow.</div><div class="ttdef"><b>Definition:</b> <a href="browser_8cpp_source.html#l00071">browser.cpp:71</a></div></div>
-<div class="ttc" id="aclassTabWidget_html_ad33e7662394295fedc205e1b582a6de8"><div class="ttname"><a href="classTabWidget.html#ad33e7662394295fedc205e1b582a6de8">TabWidget::setUrl</a></div><div class="ttdeci">void setUrl(const QUrl &amp;url)</div><div class="ttdoc">TabWidget::setUrl.</div><div class="ttdef"><b>Definition:</b> <a href="tabwidget_8cpp_source.html#l00367">tabwidget.cpp:367</a></div></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    <span class="comment">// Load Resource File WeBookClient.qrc before creating Application</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    Q_INIT_RESOURCE(WeBookClient);</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    <span class="comment">//</span></div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    QApplication theApplication(argc, argv);</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    theApplication.setWindowIcon(QIcon(QStringLiteral(<span class="stringliteral">&quot;:AppLogoColor.png&quot;</span>)));</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    <span class="comment">// Setup the Application for MyOrgSettings</span></div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    theApplication.setOrganizationName(theAppName);</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    theApplication.setApplicationName(theAppName);</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    theApplication.setApplicationDisplayName(theAppDisplayName);</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    theApplication.setApplicationVersion(<a class="code hl_define" href="main_8cpp.html#a1c6d5de492ac61ad29aec7aa9a436bbf">VERSION</a>);</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    <span class="comment">//</span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    QWebEngineSettings::defaultSettings()-&gt;setAttribute(QWebEngineSettings::PluginsEnabled, <span class="keyword">true</span>);</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="preprocessor">    #if QT_VERSION &gt;= QT_VERSION_CHECK(5, 13, 0)</span></div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    QWebEngineSettings::defaultSettings()-&gt;setAttribute(QWebEngineSettings::DnsPrefetchEnabled, <span class="keyword">true</span>);</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    QWebEngineProfile::defaultProfile()-&gt;setUseForGlobalCertificateVerification();</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span><span class="preprocessor">    #endif</span></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    <span class="comment">//</span></div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    QUrl url = <a class="code hl_function" href="main_8cpp.html#ab8fc16f3f0739be5e275751bd9dabc09">commandLineUrlArgument</a>();</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    <span class="comment">//</span></div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    <a class="code hl_class" href="classBrowser.html">Browser</a> browser;</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    <a class="code hl_class" href="classBrowserWindow.html">BrowserWindow</a> *window = browser.<a class="code hl_function" href="classBrowser.html#a3a67c0a65d79c751da9167121953671a">createWindow</a>();</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    window-&gt;<a class="code hl_function" href="classBrowserWindow.html#a3c7a529031a97def4dc4905e64e0aa9f">tabWidget</a>()-&gt;<a class="code hl_slot" href="classTabWidget.html#ad33e7662394295fedc205e1b582a6de8">setUrl</a>(url);</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    <span class="keywordflow">return</span> theApplication.exec();</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>}</div>
+<div class="ttc" id="aclassBrowserWindow_html"><div class="ttname"><a href="classBrowserWindow.html">BrowserWindow</a></div><div class="ttdoc">The BrowserWindow class.</div><div class="ttdef"><b>Definition:</b> <a href="BrowserWindow_8h_source.html#l00097">BrowserWindow.h:98</a></div></div>
+<div class="ttc" id="aclassBrowserWindow_html_a3c7a529031a97def4dc4905e64e0aa9f"><div class="ttname"><a href="classBrowserWindow.html#a3c7a529031a97def4dc4905e64e0aa9f">BrowserWindow::tabWidget</a></div><div class="ttdeci">TabWidget * tabWidget() const</div><div class="ttdoc">BrowserWindow::tabWidget.</div><div class="ttdef"><b>Definition:</b> <a href="BrowserWindow_8cpp_source.html#l00543">BrowserWindow.cpp:543</a></div></div>
+<div class="ttc" id="aclassBrowser_html"><div class="ttname"><a href="classBrowser.html">Browser</a></div><div class="ttdoc">The Browser class.</div><div class="ttdef"><b>Definition:</b> <a href="Browser_8h_source.html#l00065">Browser.h:66</a></div></div>
+<div class="ttc" id="aclassBrowser_html_a3a67c0a65d79c751da9167121953671a"><div class="ttname"><a href="classBrowser.html#a3a67c0a65d79c751da9167121953671a">Browser::createWindow</a></div><div class="ttdeci">BrowserWindow * createWindow(bool offTheRecord=false)</div><div class="ttdoc">Browser::createWindow.</div><div class="ttdef"><b>Definition:</b> <a href="Browser_8cpp_source.html#l00072">Browser.cpp:72</a></div></div>
+<div class="ttc" id="aclassTabWidget_html_ad33e7662394295fedc205e1b582a6de8"><div class="ttname"><a href="classTabWidget.html#ad33e7662394295fedc205e1b582a6de8">TabWidget::setUrl</a></div><div class="ttdeci">void setUrl(const QUrl &amp;url)</div><div class="ttdoc">TabWidget::setUrl.</div><div class="ttdef"><b>Definition:</b> <a href="TabWidget_8cpp_source.html#l00506">TabWidget.cpp:506</a></div></div>
 <div class="ttc" id="amain_8cpp_html_a1c6d5de492ac61ad29aec7aa9a436bbf"><div class="ttname"><a href="main_8cpp.html#a1c6d5de492ac61ad29aec7aa9a436bbf">VERSION</a></div><div class="ttdeci">#define VERSION</div><div class="ttdef"><b>Definition:</b> <a href="main_8cpp_source.html#l00062">main.cpp:62</a></div></div>
 <div class="ttc" id="amain_8cpp_html_ab8fc16f3f0739be5e275751bd9dabc09"><div class="ttname"><a href="main_8cpp.html#ab8fc16f3f0739be5e275751bd9dabc09">commandLineUrlArgument</a></div><div class="ttdeci">QUrl commandLineUrlArgument()</div><div class="ttdoc">commandLineUrlArgument</div><div class="ttdef"><b>Definition:</b> <a href="main_8cpp_source.html#l00069">main.cpp:69</a></div></div>
 </div><!-- fragment -->

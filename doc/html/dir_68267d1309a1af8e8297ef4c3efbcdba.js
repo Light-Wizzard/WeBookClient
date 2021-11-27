@@ -12,41 +12,45 @@ var dir_68267d1309a1af8e8297ef4c3efbcdba =
     [ "BookmarkView.h", "BookmarkView_8h.html", [
       [ "BookmarkView", "classBookmarkView.html", "classBookmarkView" ]
     ] ],
-    [ "browser.cpp", "browser_8cpp.html", null ],
-    [ "browser.h", "browser_8h.html", [
+    [ "Browser.cpp", "Browser_8cpp.html", null ],
+    [ "Browser.h", "Browser_8h.html", [
       [ "Browser", "classBrowser.html", "classBrowser" ]
     ] ],
-    [ "browserwindow.cpp", "browserwindow_8cpp.html", null ],
-    [ "browserwindow.h", "browserwindow_8h.html", [
+    [ "BrowserWindow.cpp", "BrowserWindow_8cpp.html", null ],
+    [ "BrowserWindow.h", "BrowserWindow_8h.html", [
       [ "BrowserWindow", "classBrowserWindow.html", "classBrowserWindow" ]
     ] ],
-    [ "downloadmanagerwidget.cpp", "downloadmanagerwidget_8cpp.html", null ],
-    [ "downloadmanagerwidget.h", "downloadmanagerwidget_8h.html", [
+    [ "DownloadManagerWidget.cpp", "DownloadManagerWidget_8cpp.html", null ],
+    [ "DownloadManagerWidget.h", "DownloadManagerWidget_8h.html", [
       [ "DownloadManagerWidget", "classDownloadManagerWidget.html", "classDownloadManagerWidget" ]
     ] ],
-    [ "downloadwidget.cpp", "downloadwidget_8cpp.html", null ],
-    [ "downloadwidget.h", "downloadwidget_8h.html", [
+    [ "DownloadWidget.cpp", "DownloadWidget_8cpp.html", null ],
+    [ "DownloadWidget.h", "DownloadWidget_8h.html", [
       [ "DownloadWidget", "classDownloadWidget.html", "classDownloadWidget" ]
     ] ],
+    [ "HelpView.cpp", "HelpView_8cpp.html", null ],
+    [ "HelpView.h", "HelpView_8h.html", [
+      [ "HelpView", "classHelpView.html", "classHelpView" ]
+    ] ],
     [ "main.cpp", "main_8cpp.html", "main_8cpp" ],
-    [ "tabwidget.cpp", "tabwidget_8cpp.html", null ],
-    [ "tabwidget.h", "tabwidget_8h.html", [
+    [ "TabWidget.cpp", "TabWidget_8cpp.html", null ],
+    [ "TabWidget.h", "TabWidget_8h.html", [
       [ "TabWidget", "classTabWidget.html", "classTabWidget" ]
     ] ],
     [ "TreeWidgetView.cpp", "TreeWidgetView_8cpp.html", null ],
     [ "TreeWidgetView.h", "TreeWidgetView_8h.html", [
       [ "TreeWidgetView", "classTreeWidgetView.html", "classTreeWidgetView" ]
     ] ],
-    [ "webpage.cpp", "webpage_8cpp.html", "webpage_8cpp" ],
-    [ "webpage.h", "webpage_8h.html", [
+    [ "WebPage.cpp", "WebPage_8cpp.html", "WebPage_8cpp" ],
+    [ "WebPage.h", "WebPage_8h.html", [
       [ "WebPage", "classWebPage.html", "classWebPage" ]
     ] ],
-    [ "webpopupwindow.cpp", "webpopupwindow_8cpp.html", null ],
-    [ "webpopupwindow.h", "webpopupwindow_8h.html", [
+    [ "WebPopupWindow.cpp", "WebPopupWindow_8cpp.html", null ],
+    [ "WebPopupWindow.h", "WebPopupWindow_8h.html", [
       [ "WebPopupWindow", "classWebPopupWindow.html", "classWebPopupWindow" ]
     ] ],
-    [ "webview.cpp", "webview_8cpp.html", null ],
-    [ "webview.h", "webview_8h.html", [
+    [ "WebView.cpp", "WebView_8cpp.html", null ],
+    [ "WebView.h", "WebView_8h.html", [
       [ "WebView", "classWebView.html", "classWebView" ]
     ] ],
     [ "XbelMenuReader.cpp", "XbelMenuReader_8cpp.html", null ],
@@ -57,8 +61,8 @@ var dir_68267d1309a1af8e8297ef4c3efbcdba =
     [ "XbelTreeReader.h", "XbelTreeReader_8h.html", [
       [ "XbelTreeReader", "classXbelTreeReader.html", "classXbelTreeReader" ]
     ] ],
-    [ "xbelwriter.cpp", "xbelwriter_8cpp.html", null ],
-    [ "xbelwriter.h", "xbelwriter_8h.html", [
-      [ "XbelWriter", "classXbelWriter.html", "classXbelWriter" ]
+    [ "XbelTreeWriter.cpp", "XbelTreeWriter_8cpp.html", null ],
+    [ "XbelTreeWriter.h", "XbelTreeWriter_8h.html", [
+      [ "XbelTreeWriter", "classXbelTreeWriter.html", "classXbelTreeWriter" ]
     ] ]
 ];

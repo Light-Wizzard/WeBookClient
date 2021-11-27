@@ -11,9 +11,9 @@ var searchData=
   ['bookmarkview_2eh_8',['BookmarkView.h',['../BookmarkView_8h.html',1,'']]],
   ['browser_9',['Browser',['../classBrowser.html',1,'Browser'],['../classBrowser.html#a7c0277b22a5bd47c88e3c658fab258b7',1,'Browser::Browser()']]],
   ['browser_10',['browser',['../classBrowserWindow.html#a83eea4773335b353ef8ade1858f572e1',1,'BrowserWindow']]],
-  ['browser_2ecpp_11',['browser.cpp',['../browser_8cpp.html',1,'']]],
-  ['browser_2eh_12',['browser.h',['../browser_8h.html',1,'']]],
+  ['browser_2ecpp_11',['Browser.cpp',['../Browser_8cpp.html',1,'']]],
+  ['browser_2eh_12',['Browser.h',['../Browser_8h.html',1,'']]],
   ['browserwindow_13',['BrowserWindow',['../classBrowserWindow.html',1,'BrowserWindow'],['../classBrowserWindow.html#a8ee90e50ef845a4b0594f87883997e06',1,'BrowserWindow::BrowserWindow()']]],
-  ['browserwindow_2ecpp_14',['browserwindow.cpp',['../browserwindow_8cpp.html',1,'']]],
-  ['browserwindow_2eh_15',['browserwindow.h',['../browserwindow_8h.html',1,'']]]
+  ['browserwindow_2ecpp_14',['BrowserWindow.cpp',['../BrowserWindow_8cpp.html',1,'']]],
+  ['browserwindow_2eh_15',['BrowserWindow.h',['../BrowserWindow_8h.html',1,'']]]
 ];

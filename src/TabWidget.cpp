@@ -52,13 +52,14 @@
 /*****************************************************************************/
 /**
  * @brief TabWidget::TabWidget
+ * @param thisMenuWidget
  * @param profile
  * @param parent
  */
 TabWidget::TabWidget(QMenu *thisMenuWidget, QWebEngineProfile *profile, QWidget *parent) : QTabWidget(parent), myMenuWidget(thisMenuWidget), myProfile(profile)
 {
-    // Bookmark Add Menu
-    myMenuWidget->addAction(tr("Add"), this, &TabWidget::createBookmarkTab);
+    // Manage Bookmarks Menu
+    myMenuWidget->addAction(tr("Manage Bookmarks"), this, &TabWidget::createBookmarkTab);
     //
     QTabBar *tabBar = this->tabBar();
     tabBar->setTabsClosable(true);
@@ -85,20 +86,6 @@ TabWidget::TabWidget(QMenu *thisMenuWidget, QWebEngineProfile *profile, QWidget 
 }
 /*****************************************************************************/
 /**
- * @brief TabWidget::~TabWidget
- */
-TabWidget::~TabWidget()
-{
-    //for (int i = 0; i < count(); ++i) { removeTab(i); }
-//    removeTab(getBookmarkTab());
-//    removeTab(getHelpTab());
-//    removeTab(getDownloadTab());
-//    delete myBookmarkView;
-//    delete myHelpView;
-//    delete myDownloadManagerWidget;
-}
-/*****************************************************************************/
-/**
  * @brief TabWidget::handleCurrentChanged
  * @param index
  */
@@ -118,10 +105,6 @@ void TabWidget::handleCurrentChanged(int index)
             emit webActionEnabledChanged(QWebEnginePage::Forward, view->isWebActionEnabled(QWebEnginePage::Forward));
             emit webActionEnabledChanged(QWebEnginePage::Stop,    view->isWebActionEnabled(QWebEnginePage::Stop));
             emit webActionEnabledChanged(QWebEnginePage::Reload,  view->isWebActionEnabled(QWebEnginePage::Reload));
-        }
-        else
-        {
-            // FIXME
         }
     }
     else
@@ -345,19 +328,18 @@ HelpView *TabWidget::createBackgroundHelpTab()
 /*****************************************************************************/
 /**
  * @brief TabWidget::createDownloadTab
- * @param thisSource
+ * @param thisDownloadManagerWidget
  */
-void TabWidget::createDownloadTab(DownloadManagerWidget *thisDownloadManagerWidget)
+void TabWidget::createDownloadTab(QPointer<DownloadManagerWidget> thisDownloadManagerWidget)
 {
     if (myDownloadTab == -1)
     {
-        myDownloadManagerWidget = thisDownloadManagerWidget;
         setUpdatesEnabled(false);
-        setDownloadTab(addTab(myDownloadManagerWidget, tr("Downloads")));
+        setDownloadTab(addTab(thisDownloadManagerWidget.data(), tr("Downloads")));
         setTabVisible(getDownloadTab(), false);
-        setTabIcon(getDownloadTab(), myDownloadManagerWidget->favIcon());
+        setTabIcon(getDownloadTab(), thisDownloadManagerWidget->favIcon());
         // Workaround for QTBUG-61770
-        myDownloadManagerWidget->resize(currentWidget()->size());
+        thisDownloadManagerWidget->resize(currentWidget()->size());
         //setCurrentWidget(myDownloadManagerWidget);
         setUpdatesEnabled(true);
     }
@@ -438,9 +420,6 @@ WebView *TabWidget::createTab()
  */
 WebView *TabWidget::createBackgroundTab()
 {
-    /*
-     * I need to make a pool of tabs
-    */
     WebView *webView = new WebView;
     WebPage *webPage = new WebPage(myProfile, webView);
     webView->setPage(webPage);
@@ -483,17 +462,8 @@ void TabWidget::closeAllTabs()
     {
         removeTab(i);
     }
-//    myBookmarkView = nullptr;
-//    myHelpView = nullptr;
-    myDownloadManagerWidget = nullptr;
-    //for (int i = 0; i < count(); ++i) { removeTab(i); }
-//    removeTab(getBookmarkTab());
-//    removeTab(getHelpTab());
-//    removeTab(getDownloadTab());
     delete myBookmarkView;
     delete myHelpView;
-//    delete myDownloadManagerWidget;
-
 }
 /*****************************************************************************/
 /**
@@ -502,26 +472,16 @@ void TabWidget::closeAllTabs()
  */
 void TabWidget::closeTab(int thisIndex)
 {
-    if (myBookmarkTab == thisIndex)
-    {
-        setTabVisible(thisIndex, false); return;
-    }
-    if (myHelpTab == thisIndex)
-    {
-        setTabVisible(thisIndex, false); return;
-    }
-    if (myDownloadTab == thisIndex)
-    {
-        setTabVisible(thisIndex, false);
-        return;
-    }
+    if (myBookmarkTab == thisIndex) { setTabVisible(thisIndex, false); return; }
+    if (myHelpTab     == thisIndex) { setTabVisible(thisIndex, false); return; }
+    if (myDownloadTab == thisIndex) { setTabVisible(thisIndex, false); return; }
 
     if (WebView *view = webView(thisIndex))
     {
         bool hasFocus = view->hasFocus();
         removeTab(thisIndex);
         if (hasFocus && count() > 0) { currentWebView()->setFocus(); }
-        if (count() == 0) { createTab(); }
+        if (count() == 0)            { createTab(); }
         view->deleteLater();
     }
 }

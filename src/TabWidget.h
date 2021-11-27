@@ -77,10 +77,8 @@ class Browser;
 class TabWidget : public QTabWidget
 {
         Q_OBJECT
-
     public:
         TabWidget(QMenu *thisMenuWidget, QWebEngineProfile *profile, QWidget *parent = nullptr);
-        ~TabWidget();
         //
         WebView *currentWebView() const;
         // Bookmark Tab
@@ -124,7 +122,7 @@ class TabWidget : public QTabWidget
         void createBookmarkTabAdd(const QString &thisLink);
         BookmarkView *createBackgroundBookmarkTab();
         // Download Tab
-        void createDownloadTab(DownloadManagerWidget *thisDownloadManagerWidget);
+        void createDownloadTab(QPointer<DownloadManagerWidget> thisDownloadManagerWidget);
         // Tabs
         void closeTab(int thisIndex);
         void nextTab();
@@ -144,13 +142,13 @@ class TabWidget : public QTabWidget
         //
         QMenu                   *myMenuWidget;
         QWebEngineProfile       *myProfile;
-        // Tabs myBookmarkView myHelpView myDownloadManagerWidget
+        // Tabs myBookmarkView myHelpView
         BookmarkView            *myBookmarkView = nullptr;
-        int                      myBookmarkTab = -1;
-        HelpView                *myHelpView = nullptr;
-        int                      myHelpTab     = -1;
-        DownloadManagerWidget   *myDownloadManagerWidget = nullptr;
-        int                      myDownloadTab = -1;
+        HelpView                *myHelpView     = nullptr;
+        int                      myBookmarkTab  = -1;
+        int                      myHelpTab      = -1;
+        int                      myDownloadTab  = -1;
+
 }; // end class TabWidget
 #endif // TABWIDGET_H
 /******************************* End of File *********************************/

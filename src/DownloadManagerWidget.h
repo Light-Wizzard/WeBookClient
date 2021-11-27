@@ -75,7 +75,7 @@ class DownloadManagerWidget final : public QWidget
         Q_OBJECT
     public:
         explicit DownloadManagerWidget(QWidget *parent = nullptr);
-        ~DownloadManagerWidget();
+        virtual ~DownloadManagerWidget();
         /*
          * Prompts user with a "Save As" dialog.
          * If the user doesn't cancel it,

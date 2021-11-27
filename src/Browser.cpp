@@ -48,17 +48,20 @@
 **
 ****************************************************************************/
 #include "Browser.h"
-
 /*****************************************************************************/
 /**
  * @brief Browser::Browser
  */
 Browser::Browser(QWidget *parent) : QWidget(parent)
 {
+    if (!myDownloadManagerWidget)
+    {
+        myDownloadManagerWidget = new DownloadManagerWidget(this);
+    }
     // Quit application if the download manager window is the only remaining window
-    myDownloadManagerWidget.setAttribute(Qt::WA_QuitOnClose, false);
+    myDownloadManagerWidget->setAttribute(Qt::WA_QuitOnClose, false);
     //
-    QObject::connect(QWebEngineProfile::defaultProfile(), &QWebEngineProfile::downloadRequested, &myDownloadManagerWidget, &DownloadManagerWidget::downloadRequested);
+    QObject::connect(QWebEngineProfile::defaultProfile(), &QWebEngineProfile::downloadRequested, myDownloadManagerWidget.data(), &DownloadManagerWidget::downloadRequested);
 }
 /*****************************************************************************/
 /**
@@ -71,7 +74,7 @@ BrowserWindow *Browser::createWindow(bool offTheRecord)
     if (offTheRecord && !myOtrProfile)
     {
         myOtrProfile.reset(new QWebEngineProfile);
-        QObject::connect(myOtrProfile.get(), &QWebEngineProfile::downloadRequested, &myDownloadManagerWidget, &DownloadManagerWidget::downloadRequested);
+        QObject::connect(myOtrProfile.get(), &QWebEngineProfile::downloadRequested, myDownloadManagerWidget.data(), &DownloadManagerWidget::downloadRequested);
     }
     auto profile = offTheRecord ? myOtrProfile.get() : QWebEngineProfile::defaultProfile();
     auto mainWindow = new BrowserWindow(createBookmarkMenu(), this, profile, false);
@@ -80,6 +83,7 @@ BrowserWindow *Browser::createWindow(bool offTheRecord)
     mainWindow->show();
     return mainWindow;
 }
+
 /*****************************************************************************/
 /**
  * @brief Browser::createDevToolsWindow
@@ -101,10 +105,6 @@ BrowserWindow *Browser::createDevToolsWindow()
  */
 QMenu *Browser::createBookmarkMenu()
 {
-    auto *myMenuWidget = new QMenu(tr("&Bookmarks"));
-    //QAction *addAction = myMenuWidget->addAction(tr("&Add"));
-    //connect(addAction, &QAction::triggered, myTabWidget, &TabWidget::createBookmarkTab);
-    //myMenuWidget->addAction(tr("Add"), this, &TabWidget::createBookmarkTab);
-    return myMenuWidget;
+    return new QMenu(tr("&Bookmarks"));
 }
 /******************************* End of File *********************************/

@@ -7,6 +7,7 @@ var annotated_dup =
     [ "BrowserWindow", "classBrowserWindow.html", "classBrowserWindow" ],
     [ "DownloadManagerWidget", "classDownloadManagerWidget.html", "classDownloadManagerWidget" ],
     [ "DownloadWidget", "classDownloadWidget.html", "classDownloadWidget" ],
+    [ "HelpView", "classHelpView.html", "classHelpView" ],
     [ "TabWidget", "classTabWidget.html", "classTabWidget" ],
     [ "TreeWidgetView", "classTreeWidgetView.html", "classTreeWidgetView" ],
     [ "WebPage", "classWebPage.html", "classWebPage" ],
@@ -14,5 +15,5 @@ var annotated_dup =
     [ "WebView", "classWebView.html", "classWebView" ],
     [ "XbelMenuReader", "classXbelMenuReader.html", "classXbelMenuReader" ],
     [ "XbelTreeReader", "classXbelTreeReader.html", "classXbelTreeReader" ],
-    [ "XbelWriter", "classXbelWriter.html", "classXbelWriter" ]
+    [ "XbelTreeWriter", "classXbelTreeWriter.html", "classXbelTreeWriter" ]
 ];

@@ -1,8 +1,5 @@
 var hierarchy =
 [
-    [ "Ui::DownloadManagerWidget", null, [
-      [ "DownloadManagerWidget", "classDownloadManagerWidget.html", null ]
-    ] ],
     [ "Ui::DownloadWidget", null, [
       [ "DownloadWidget", "classDownloadWidget.html", null ]
     ] ],
@@ -33,8 +30,9 @@ var hierarchy =
       [ "Bookmarks", "classBookmarks.html", null ],
       [ "Browser", "classBrowser.html", null ],
       [ "DownloadManagerWidget", "classDownloadManagerWidget.html", null ],
+      [ "HelpView", "classHelpView.html", null ],
       [ "WebPopupWindow", "classWebPopupWindow.html", null ]
     ] ],
     [ "XbelTreeReader", "classXbelTreeReader.html", null ],
-    [ "XbelWriter", "classXbelWriter.html", null ]
+    [ "XbelTreeWriter", "classXbelTreeWriter.html", null ]
 ];

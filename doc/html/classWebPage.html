@@ -95,7 +95,7 @@ $(document).ready(function(){initNavTree('classWebPage.html',''); initResizable(
 <p>The <a class="el" href="classWebPage.html" title="The WebPage class.">WebPage</a> class.  
  <a href="classWebPage.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="webpage_8h_source.html">webpage.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="WebPage_8h_source.html">WebPage.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for WebPage:</div>
 <div class="dyncontent">
@@ -148,7 +148,7 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."</p>
 <p >$QT_END_LICENSE$ </p>
 
-<p class="definition">Definition at line <a class="el" href="webpage_8h_source.html#l00061">61</a> of file <a class="el" href="webpage_8h_source.html">webpage.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="WebPage_8h_source.html#l00061">61</a> of file <a class="el" href="WebPage_8h_source.html">WebPage.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a3e0dc35145cadec2111fc624f7664a27" name="a3e0dc35145cadec2111fc624f7664a27"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3e0dc35145cadec2111fc624f7664a27">&#9670;&nbsp;</a></span>WebPage()</h2>
@@ -214,7 +214,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."</p>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="webpage_8cpp_source.html#l00069">69</a> of file <a class="el" href="webpage_8cpp_source.html">webpage.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="WebPage_8cpp_source.html#l00069">69</a> of file <a class="el" href="WebPage_8cpp_source.html">WebPage.cpp</a>.</p>
 <div class="fragment"><div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>                                                            : QWebEnginePage(profile, parent)</div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>{</div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    connect(<span class="keyword">this</span>, &amp;QWebEnginePage::authenticationRequired, <span class="keyword">this</span>, &amp;WebPage::handleAuthenticationRequired);</div>
@@ -262,11 +262,11 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."</p>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd></dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="webpage_8cpp_source.html#l00085">85</a> of file <a class="el" href="webpage_8cpp_source.html">webpage.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="WebPage_8cpp_source.html#l00085">85</a> of file <a class="el" href="WebPage_8cpp_source.html">WebPage.cpp</a>.</p>
 <div class="fragment"><div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>{</div>
 <div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    QWidget *mainWindow = view()-&gt;window();</div>
 <div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="preprocessor">    #if QT_VERSION &gt;= QT_VERSION_CHECK(5, 14, 0)</span></div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    <span class="comment">//#if QT_VERSION &gt;= QT_VERSION_CHECK(5, 14, 0)</span></div>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    QWebEngineCertificateError deferredError = error;</div>
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    deferredError.defer();</div>
 <div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
@@ -278,42 +278,44 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."</p>
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        }</div>
 <div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        <span class="keywordflow">else</span></div>
 <div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        {</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    #else</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    if (error.isOverridable())</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    {</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    #endif</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        QDialog dialog(mainWindow);</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>        dialog.setModal(true);</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>        dialog.setWindowFlags(dialog.windowFlags() &amp; ~Qt::WindowContextHelpButtonHint);</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>        Ui::CertificateErrorDialog certificateDialog;</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>        certificateDialog.setupUi(&amp;dialog);</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>        certificateDialog.labelIcon-&gt;setText(QString());</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>        QIcon icon(mainWindow-&gt;style()-&gt;standardIcon(QStyle::SP_MessageBoxWarning, 0, mainWindow));</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>        certificateDialog.labelIcon-&gt;setPixmap(icon.pixmap(32, 32));</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>        certificateDialog.labelError-&gt;setText(error.errorDescription());</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>        dialog.setWindowTitle(tr(<span class="stringliteral">&quot;Certificate Error&quot;</span>));</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>#if QT_VERSION &gt;= QT_VERSION_CHECK(5, 14, 0)</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>        if (dialog.exec() == QDialog::Accepted) { error.ignoreCertificateError(); }</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>        else                                    { error.rejectCertificate(); }</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>        }</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    });</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span><span class="preprocessor">#else</span></div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>        <span class="keywordflow">return</span> dialog.exec() == QDialog::Accepted;</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    }</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    QMessageBox::critical(mainWindow, tr(<span class="stringliteral">&quot;Certificate Error&quot;</span>), error.errorDescription());</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>}</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span><span class="comment">//    #else</span></div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="comment">//    if (error.isOverridable())</span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="comment">//    {</span></div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="comment">//    #endif</span></div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>        QDialog dialog(mainWindow);</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>        dialog.setModal(true);</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>        dialog.setWindowFlags(dialog.windowFlags() &amp; ~Qt::WindowContextHelpButtonHint);</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>        Ui::CertificateErrorDialog certificateDialog;</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>        certificateDialog.setupUi(&amp;dialog);</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>        certificateDialog.labelIcon-&gt;setText(QString());</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>        QIcon icon(mainWindow-&gt;style()-&gt;standardIcon(QStyle::SP_MessageBoxWarning, 0, mainWindow));</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>        certificateDialog.labelIcon-&gt;setPixmap(icon.pixmap(32, 32));</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>        certificateDialog.labelError-&gt;setText(error.errorDescription());</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>        dialog.setWindowTitle(tr(<span class="stringliteral">&quot;Certificate Error&quot;</span>));</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span><span class="comment">//#if QT_VERSION &gt;= QT_VERSION_CHECK(5, 14, 0)</span></div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>            if (dialog.exec() == QDialog::Accepted) { error.ignoreCertificateError(); }</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>            <span class="keywordflow">else</span>                                    { error.rejectCertificate(); }</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>        }</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    });</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span><span class="comment">//#else</span></div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span><span class="comment">//        return dialog.exec() == QDialog::Accepted;</span></div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span><span class="comment">//    }</span></div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span> </div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span><span class="comment">//    QMessageBox::critical(mainWindow, tr(&quot;Certificate Error&quot;), error.errorDescription());</span></div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span><span class="comment">//    return false;</span></div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span><span class="comment">//#endif</span></div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>src/<a class="el" href="webpage_8h_source.html">webpage.h</a></li>
-<li>src/<a class="el" href="webpage_8cpp_source.html">webpage.cpp</a></li>
+<li>src/<a class="el" href="WebPage_8h_source.html">WebPage.h</a></li>
+<li>src/<a class="el" href="WebPage_8cpp_source.html">WebPage.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
